@@ -32,6 +32,11 @@ $color5: #FFFFFF;
     right: $right;
 }
 
+.wrapper {
+    @include position($pos: fixed);
+    padding: 15px;
+}
+
 .card {
     background-color: $color2;
     padding: 25px;

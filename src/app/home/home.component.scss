@@ -1,0 +1,12 @@
+@import '../library.scss';
+
+.wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+.side-menu {
+    height: 100%;
+    width: 200px;
+    gap: 15px;
+}
