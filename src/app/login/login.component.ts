@@ -25,7 +25,8 @@ export class LoginComponent  {
   }
 
   guestLogin(){
-    this.ms.errorLog("Bitte Daten eingeben")
+     
+    
   }
 
 
