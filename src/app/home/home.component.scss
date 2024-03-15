@@ -1,12 +1,122 @@
 @import '../library.scss';
 
-.wrapper {
+.header {
+    @include center($jc: space-between);
+    padding-bottom: 15px;
+
+    .card {
+        padding: 10px;
+    }
+}
+
+.search {
+
+    input {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+    }
+}
+
+.home-wrapper {
     display: flex;
     gap: 15px;
+    height: calc(100% - 56px);
+
+    .card {
+        width: 100%;
+    }
 }
 
 .side-menu {
     height: 100%;
-    width: 200px;
+    max-width: 400px;
+    min-width: 400px;
+    @include center-column();
     gap: 15px;
+    height: fit-content;
+}
+
+.msg-preview {
+    @include center();
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+
+    .img {
+        min-height: 50px;
+        min-width: 50px;
+        background-color: $color3;
+    }
+
+    .text-wrapper {
+        @include center-column($ai: flex-start);
+        gap: 10px;
+        width: 100%;
+    }
+
+    .upper-text {
+        @include center($jc: space-between);
+        width: 100%;
+
+        .name {
+            @extend .white-space;
+        }
+    }
+
+    .msg {
+        @extend .small-font;
+        @extend .white-space;
+        max-width: 260px;
+        color: rgb(190, 190, 190);
+        overflow: hidden;
+    }
+}
+
+.chat-wrapper {
+    @include center-column($jc: space-between, $ai: unset);
+}
+
+.chat-messages-wrapper {
+    @include center-column($ai: flex-start);
+    gap: 15px;
+
+    .msg {
+        background-color: $color1 !important;
+        width: fit-content;
+    }
+}
+
+.input-wrapper {
+    @include center($jc: space-between);
+    gap: 25px;
+
+    .msg-input {
+        background-color: $color5;
+        height: 50px;
+        width: 100%;
+        border-radius: 25px;
+        padding: 10px;
+
+        input {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            outline: 0;
+            color: grey;
+        }
+    }
+
+    .sendbutton {
+        min-height: 50px;
+        min-width: 50px;
+        max-height: 50px;
+        max-width: 50px;
+        background-color: $color4;
+        border-radius: 50%;
+    }
 }

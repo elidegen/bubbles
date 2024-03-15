@@ -1,9 +1,123 @@
 <div class="wrapper">
-    <div class="side-menu">
-        <div class="card"></div>
-        <div class="card"></div>
+    <div class="header">
+        <div class="card search">
+            <input type="text">Search
+        </div>
+
+        <div class="card chat-name">
+            Max Mustermann
+        </div>
+
     </div>
-    
-    <div class="card"></div>
+    <div class="home-wrapper">
+        <div class="side-menu">
+            <div class="card">
+                <p>Messages</p>
+
+                <!-- eigener component? -->
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Max Mustermann</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist meine persönliche Nachricht an dich.</span>
+                    </div>
+                </div>
+                <!-- bis hier -->
+
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Joshua Trefzer</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist meine persönliche Nachricht an dich.</span>
+                    </div>
+                </div>
+
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Elijah Degen</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist meine persönliche Nachricht an dich.</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card">
+                <p>Channels</p>
+
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Gruppenchat</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist die neuste Nachricht aus dem Gruppenchat. Diese nachricht ist leider
+                            ziemlich lang also brauchen wir den whitespace nowrap</span>
+                    </div>
+                </div>
+
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Entwicklerteam</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist die neuste Nachricht aus dem Gruppenchat. Diese nachricht ist leider
+                            ziemlich lang also brauchen wir den whitespace nowrap</span>
+                    </div>
+                </div>
+
+                <div class="msg-preview card">
+                    <div class="img"></div>
+                    <div class="text-wrapper">
+                        <div class="upper-text">
+                            <span class="name">Allgemein</span>
+                            <div class="time"> 9:00</div>
+                        </div>
+                        <span class="msg">Das ist die neuste Nachricht aus dem Gruppenchat. Diese nachricht ist leider
+                            ziemlich lang also brauchen wir den whitespace nowrap</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card chat-wrapper">
+            <div class="chat-messages-wrapper">
+                <!-- eigener component? -->
+                <div class="msg card">
+                    <p>Das ist eine nachricht</p>
+                </div>
+                
+                <div class="msg card">
+                    <p>Das ist eine nachricht</p>
+                </div>
+                
+                <div class="msg card">
+                    <p>Das ist eine nachricht</p>
+                </div>
+                <!-- bis hier -->
+            </div>
+
+            <!-- eigener component? -->
+            <div class="input-wrapper">
+                <div class="msg-input">
+                    <input type="text">
+                </div>
+                <div class="sendbutton"></div>
+            </div>
+            <!-- bis hier -->
+        </div>
+    </div>
 
 </div>

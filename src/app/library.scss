@@ -41,7 +41,6 @@ $color5: #FFFFFF;
     background-color: $color2;
     padding: 25px;
     @extend .border-radius;
-    color: $color4;
 }
 
 .button {
@@ -79,7 +78,7 @@ $color5: #FFFFFF;
 }
 
 .small-font {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .row {
@@ -88,3 +87,11 @@ $color5: #FFFFFF;
 }
 
 // neues
+.img {    
+    border-radius: 100%;
+}
+
+.white-space {
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+}
