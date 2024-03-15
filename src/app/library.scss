@@ -54,6 +54,31 @@ $color5: #FFFFFF;
     }
 }
 
+input {
+    background-color: $color1;
+    border: 1px solid $color1;
+    width: 90%;
+    height: 50px;
+    padding: 15px;
+    @extend .border-radius;
+    opacity: 0.7;
+}
+
+input:focus {
+    border: 1px solid $color1;
+    outline: 0;
+    opacity: 1;
+}
+
+input::placeholder {
+    color: $color5;
+    opacity: 0.4;
+}
+
+
+
+
+
 .button1 {
     @extend .button;
     background-color: $color3;
@@ -66,6 +91,29 @@ $color5: #FFFFFF;
     background-color: $color4;
     border: 2px solid $color3;
     color: $color3;
+}
+
+.button3 {
+    @extend .button;
+    font-size: 10px;
+    padding: 8px;
+    border-radius: 25px;
+    background-color: inherit;
+    color: rgba(255, 255, 255, 0.441);
+    border: 1px solid rgba(255, 255, 255, 0.413);
+    &:hover {
+        color: $color5;
+        border: 1px solid $color5;
+    }
+}
+
+.text-button {
+    color: $color4;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+    @extend .small-font;
 }
 
 .border-radius {
@@ -83,7 +131,7 @@ $color5: #FFFFFF;
 
 .row {
     width: 100%;
-    @include center($jc: flex-start);
+    @include center($jc: center);
 }
 
 // neues

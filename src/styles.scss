@@ -17,8 +17,3 @@
 body {
     background-color: $color1;
 }
-
-#fullscreen {
-    @include position($pos: fixed);
-    backdrop-filter: blur(3px);
-}
