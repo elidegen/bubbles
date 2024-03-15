@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class MainService {
   showPopup = false;
-  errorMessage:string | undefined = 'Heeeey';
+  errorMessage:string | undefined;
 
   constructor() { }
 
