@@ -1,0 +1,37 @@
+@import "../library.scss";
+
+
+#fullscreen {
+    @include position($pos: fixed);
+    backdrop-filter: blur(10px);
+}
+
+.error-popup {
+    animation: slide-in 300ms ease-in-out;
+    height: 200px;
+    @include position($pos:absolute, $left:50%, $top: 50%);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: $color1;
+    border: 2px solid red;
+    @extend .border-radius;
+    @include center();
+}
+
+.error {
+    color:red;
+    
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+
+    100%{
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    
+}

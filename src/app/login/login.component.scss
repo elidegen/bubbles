@@ -1,0 +1,32 @@
+@import "../library.scss";
+
+.wrapper {
+    @include center();
+}
+
+.card {
+    animation: slide-in 200ms ease-in-out;
+    @include center-column();
+    min-width: 450px;
+    gap: 20px;
+    transition: all 300ms ease-in-out;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(-200%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.row {
+    gap: 10px;
+}
+
+.hide {
+    transform: translateY(200%);
+}
+
