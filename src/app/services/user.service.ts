@@ -4,7 +4,6 @@ export interface User {
   id?:number, 
   name: string,
   email: string, 
-  password?: string, 
   channels: number[], //Array of ID's with channels, direct chats
 }
 
@@ -15,4 +14,6 @@ export interface User {
 export class UserService {
 
   constructor() { }
+
+  
 }
