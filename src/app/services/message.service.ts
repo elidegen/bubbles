@@ -16,4 +16,3 @@ export interface Message {
 
 export class MessageService {
   constructor() { }
-}
