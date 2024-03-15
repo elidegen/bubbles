@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Channel {
@@ -13,5 +14,7 @@ export interface Channel {
 })
 export class ChannelService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+
 }
