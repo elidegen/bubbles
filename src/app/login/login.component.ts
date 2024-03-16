@@ -30,12 +30,12 @@ export class LoginComponent  {
   }
 
   guestLogin(){
-     
+     this.ms.loader = true;
     
   }
 
   submit(){
-    
+
   }
 
 
