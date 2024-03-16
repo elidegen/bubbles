@@ -13,6 +13,8 @@ import { ChannelPreviewComponent } from '../channel-preview/channel-preview.comp
 })
 export class HomeComponent {
   constructor(public ds: DummyService) {
+    let id = crypto.randomUUID();
 
+    
   }
 }
