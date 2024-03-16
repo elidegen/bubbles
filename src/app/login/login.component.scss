@@ -26,6 +26,12 @@
     gap: 10px;
 }
 
+.input-container {
+    @extend .row;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .hide {
     transform: translateY(200%);
 }
