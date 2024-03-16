@@ -15,7 +15,7 @@
                 <p>Messages</p>
 
                 <!-- platzhalter für den dm array -->
-                @for (channel of this.channelService.channels; track $index) {
+                @for (channel of this.channelService.directMessages; track $index) {
                 <app-channel-preview [channel]="channel"></app-channel-preview>
                 }
 
