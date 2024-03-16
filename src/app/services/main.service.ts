@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class MainService {
   showPopup = false;
   errorMessage:string | undefined;
+  loader:boolean = false;
 
   constructor() { }
 
