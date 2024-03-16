@@ -3,6 +3,8 @@ $color2: #5c4f82;
 $color3: #efa985;
 $color4: #3cc6b7;
 $color5: #FFFFFF;
+$error-color:red;
+$valid-color:rgb(29, 209, 137);
 
 @mixin center($display: flex, $jc: center, $ai: center) {
     display: $display;
@@ -130,3 +132,25 @@ $color5: #FFFFFF;
     white-space: nowrap;
     text-overflow: ellipsis;    
 }
+
+.valid {
+    border: #3cc6b7 1px solid !important;
+    background-color: $valid-color;
+}
+
+.invalid {
+    border: $error-color 1px solid !important;
+}
+
+.error-container {
+    height: 14px;
+}
+.errors {
+    font-size: 12px;
+    color: $error-color;
+}
+
+.valid-form-button {
+    background-color: $valid-color;
+}
+
