@@ -37,8 +37,6 @@
     height: fit-content;
 }
 
-
-
 .chat-wrapper {
     @include center-column($jc: space-between, $ai: unset);
 }
@@ -46,6 +44,10 @@
 .chat-messages-wrapper {
     @include center-column($ai: flex-start);
     gap: 15px;
+}
+
+app-message {
+    width: 100%;
 }
 
 .input-wrapper {

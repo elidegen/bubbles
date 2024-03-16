@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Channel } from '../services/channel.service';
 
 @Component({
   selector: 'app-channel-preview',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './channel-preview.component.scss'
 })
 export class ChannelPreviewComponent {
+
+  @Input() channel: Channel | undefined;
 
 }

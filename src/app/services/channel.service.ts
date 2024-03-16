@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Channel {
-  id:number, 
+  id: number,
   name: string,
   users: number[], // Array of user ID's inside the channel
-  messages: number[], // Array of message ID's inside the channel
 }
 
 
@@ -14,7 +13,25 @@ export interface Channel {
 })
 export class ChannelService {
 
-  constructor(private http: HttpClient) { }
+  channels = [
+    {
+      id: 20,
+      name: 'testchannel1',
+      users: [10, 11, 12, 13, 14],
+    },
+    {
+      id: 21,
+      name: 'testchannel2',
+      users: [10, 11, 12, 13, 14],
+    },
+    {
+      id: 22,
+      name: 'testchannel3',
+      users: [10, 11, 12, 13, 14],
+    }
+  ];
+
+  constructor() { }
 
 
 

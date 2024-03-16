@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { DummyService } from '../services/dummy.service';
 import { MessageComponent } from '../message/message.component';
 import { ChannelPreviewComponent } from '../channel-preview/channel-preview.component';
+import { ChannelService } from '../services/channel.service';
+import { MessageService } from '../services/message.service';
+import { AuthService, CurrentUser } from '../services/auth.service';
 
 
 @Component({
@@ -12,9 +14,12 @@ import { ChannelPreviewComponent } from '../channel-preview/channel-preview.comp
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  constructor(public ds: DummyService) {
-    let id = crypto.randomUUID();
-
-    
+  currentUser: CurrentUser;
+  constructor(
+    public channelService: ChannelService,
+    public messageService: MessageService,
+    public authService: AuthService,
+  ) {
+    this.currentUser = authService.currentUser;
   }
 }

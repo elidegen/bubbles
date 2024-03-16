@@ -1,6 +1,25 @@
 @import '../library.scss';
 
+
+
 .msg {
-    background-color: $color1 !important;
-    width: fit-content;
+    @include d-flex($jc: flex-start);
+    width: 100%;
+
+    .card {
+        background-color: $color1;
+        width: fit-content;
+    }
+}
+
+.my-msg {
+    @include d-flex($jc: flex-end);
+    .card {
+        background-color: $color3;
+        width: fit-content;
+    }
+}
+
+.text-red {
+    border: 2px solid red;
 }

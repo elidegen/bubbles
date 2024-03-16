@@ -14,28 +14,29 @@
             <div class="card">
                 <p>Messages</p>
 
-                <!-- eigener component? -->
-                <app-channel-preview></app-channel-preview>
-                <app-channel-preview></app-channel-preview>
-                <app-channel-preview></app-channel-preview>
-                <!-- bis hier -->
+                <!-- platzhalter für den dm array -->
+                @for (channel of this.channelService.channels; track $index) {
+                <app-channel-preview [channel]="channel"></app-channel-preview>
+                }
 
             </div>
             <div class="card">
                 <p>Channels</p>
 
-                <app-channel-preview></app-channel-preview>
-                <app-channel-preview></app-channel-preview>
-                <app-channel-preview></app-channel-preview>
+                @for (channel of this.channelService.channels; track $index) {
+                <app-channel-preview [channel]="channel"></app-channel-preview>
+                }
 
             </div>
         </div>
 
         <div class="card chat-wrapper">
             <div class="chat-messages-wrapper">
-                <app-message></app-message>
-                <app-message></app-message>
-                <app-message></app-message>
+
+                @for (message of messageService.filterByChannel(20); track $index) {
+                <app-message [message]="message"></app-message>
+                }
+
             </div>
 
             <!-- eigener component? -->

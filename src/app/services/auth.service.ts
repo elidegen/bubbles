@@ -17,7 +17,7 @@ export class AuthService {
   constructor() { }
 
   currentUser: CurrentUser = {
-    id: 1,
+    id: 10,
     username: "GuestUser",
     email: "guestuser@mailinator.com",
   }

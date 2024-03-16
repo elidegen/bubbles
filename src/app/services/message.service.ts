@@ -7,7 +7,6 @@ export interface Message {
   source: number, //ID from Channel
   content: string,
   created_at: Date,
-  thread_messages: number[]; // Array with ID's from threadmessages
 }
 
 @Injectable({
@@ -15,190 +14,143 @@ export interface Message {
 })
 
 export class MessageService {
-  constructor() { }
 
   messages: Message[] = [
     {
-      id: 1,
-      author: 123,
+      id: 30,
+      author: 10,
       isThread: false,
-      source: 456,
+      source: 20,
       content: "Hello, how are you?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 2,
-      author: 456,
+      id: 31,
+      author: 11,
       isThread: false,
-      source: 789,
+      source: 20,
       content: "I'm doing great, thanks!",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 3,
-      author: 789,
-      isThread: true,
-      source: 2,
+      id: 32,
+      author: 12,
+      isThread: false,
+      source: 20,
       content: "That's awesome to hear!",
       created_at: new Date(),
-      thread_messages: [4]
     },
     {
-      id: 4,
-      author: 123,
-      isThread: true,
-      source: 3,
+      id: 33,
+      author: 13,
+      isThread: false,
+      source: 20,
       content: "Yeah, it really is!",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 5,
-      author: 789,
+      id: 34,
+      author: 14,
       isThread: false,
-      source: 101,
+      source: 20,
       content: "Hey, what's up?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 6,
-      author: 101,
-      isThread: true,
-      source: 5,
+      id: 35,
+      author: 10,
+      isThread: false,
+      source: 21,
       content: "Not much, just chilling.",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 7,
-      author: 123,
+      id: 36,
+      author: 11,
       isThread: false,
-      source: 456,
+      source: 21,
       content: "Anyone here?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 8,
-      author: 456,
+      id: 37,
+      author: 12,
       isThread: false,
-      source: 789,
+      source: 21,
       content: "Yes, I'm here!",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 9,
-      author: 789,
-      isThread: true,
-      source: 8,
+      id: 38,
+      author: 13,
+      isThread: false,
+      source: 21,
       content: "What's going on?",
       created_at: new Date(),
-      thread_messages: [10]
     },
     {
-      id: 10,
-      author: 123,
-      isThread: true,
-      source: 9,
+      id: 39,
+      author: 14,
+      isThread: false,
+      source: 21,
       content: "Just hanging out.",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 11,
-      author: 789,
+      id: 40,
+      author: 10,
       isThread: false,
-      source: 101,
+      source: 22,
       content: "Good morning!",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 12,
-      author: 101,
+      id: 41,
+      author: 11,
       isThread: false,
-      source: 123,
+      source: 22,
       content: "Morning! How are you?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 13,
-      author: 123,
-      isThread: true,
-      source: 12,
+      id: 42,
+      author: 12,
+      isThread: false,
+      source: 22,
       content: "I'm good, thanks!",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 14,
-      author: 101,
+      id: 43,
+      author: 13,
       isThread: false,
-      source: 123,
+      source: 22,
       content: "Hey, are you free tonight?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 15,
-      author: 123,
-      isThread: true,
-      source: 14,
+      id: 44,
+      author: 14,
+      isThread: false,
+      source: 22,
       content: "Yes, I am. What's up?",
       created_at: new Date(),
-      thread_messages: []
     },
     {
-      id: 16,
-      author: 101,
+      id: 45,
+      author: 10,
       isThread: false,
-      source: 123,
+      source: 22,
       content: "Let's grab dinner together!",
       created_at: new Date(),
-      thread_messages: []
-    },
-    {
-      id: 17,
-      author: 123,
-      isThread: true,
-      source: 16,
-      content: "Sounds great! Where should we meet?",
-      created_at: new Date(),
-      thread_messages: []
-    },
-    {
-      id: 18,
-      author: 101,
-      isThread: false,
-      source: 123,
-      content: "How about that Italian place downtown?",
-      created_at: new Date(),
-      thread_messages: []
-    },
-    {
-      id: 19,
-      author: 123,
-      isThread: true,
-      source: 18,
-      content: "Perfect! What time?",
-      created_at: new Date(),
-      thread_messages: []
-    },
-    {
-      id: 20,
-      author: 101,
-      isThread: false,
-      source: 123,
-      content: "Let's aim for 7 PM.",
-      created_at: new Date(),
-      thread_messages: []
     }
   ];
 
+  constructor() { }
+
+  filterByChannel(channelId: number) {
+    const filteredArray = this.messages.filter(obj => obj.source == channelId);
+    return filteredArray;
+  }
 
 }

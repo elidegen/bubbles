@@ -1,3 +1,5 @@
-<div class="msg card">
-    <p>Das ist eine nachricht</p>
+<div class="msg" [ngClass]="{'my-msg': myMessage()}">
+    <div class="card">
+        <p>{{message!.content}}</p>
+    </div>
 </div>
