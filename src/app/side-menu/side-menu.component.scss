@@ -1,0 +1,27 @@
+@import '../library.scss';
+
+.side-menu {
+    height: 100%;
+    max-width: 400px;
+    min-width: 400px;
+    @include center-column();
+    gap: 15px;
+    height: fit-content;
+
+    .card {
+        width: 100%;
+    }
+}
+
+.section-header {
+    @include d-flex($jc: space-between);
+
+    img {
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color1;
+        }
+    }
+}

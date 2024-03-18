@@ -1,0 +1,26 @@
+@import '../library.scss';
+
+.chat-wrapper {
+    @include d-flex($jc: space-between, $ai: unset, $fd: column);
+    height: 100%;
+    padding-right: 5px;
+}
+
+.chat-messages-wrapper {
+    @include d-flex($jc: flex-start, $fd: column);
+    gap: 5px;
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+    padding-right: 10px;
+    padding-bottom: 15px;
+
+    .no-msg-to-display {
+        position: absolute;
+        bottom: 50%;
+    }
+}
+
+app-message {
+    width: 100%;
+}

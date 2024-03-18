@@ -11,7 +11,7 @@ import { MainService } from '../services/main.service';
 })
 export class PopupComponent {
   
-  constructor(public ms:MainService){
+  constructor(public mainService:MainService){
 
   }
 }

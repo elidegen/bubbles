@@ -3,8 +3,9 @@ $color2: #5c4f82;
 $color3: #efa985;
 $color4: #3cc6b7;
 $color5: #FFFFFF;
-$error-color:red;
-$valid-color:rgb(29, 209, 137);
+$error-color: red;
+$valid-color: rgb(29, 209, 137);
+$text-color: $color5;
 
 @mixin center($display: flex, $jc: center, $ai: center) {
     display: $display;
@@ -25,6 +26,13 @@ $valid-color:rgb(29, 209, 137);
     align-items: $ai;
     flex-direction: $fd;
     gap: $g;
+}
+
+@mixin pos-center($pos: fixed) {
+    position: $pos;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @mixin full-width($padding: 0px, $margin: 0px, $height: 50px) {
@@ -90,6 +98,7 @@ $valid-color:rgb(29, 209, 137);
     background-color: inherit;
     color: rgba(255, 255, 255, 0.441);
     border: 1px solid rgba(255, 255, 255, 0.413);
+
     &:hover {
         color: $color5;
         border: 1px solid $color5;
@@ -98,10 +107,12 @@ $valid-color:rgb(29, 209, 137);
 
 .text-button {
     color: $color4;
+
     &:hover {
         cursor: pointer;
         opacity: 0.8;
     }
+
     @extend .small-font;
 }
 
@@ -124,13 +135,11 @@ $valid-color:rgb(29, 209, 137);
 }
 
 // neues
-.img {    
+.img {
     border-radius: 100%;
 }
 
 .white-space {
     white-space: nowrap;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
 }
-
-

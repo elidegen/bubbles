@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
-import { MessageComponent } from '../message/message.component';
-import { ChannelPreviewComponent } from '../channel-preview/channel-preview.component';
+import { ChatWindowComponent } from '../chat-window/chat-window.component';
 import { ChannelService } from '../services/channel.service';
-import { Message, MessageService } from '../services/message.service';
+import { MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { SideMenuComponent } from '../side-menu/side-menu.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MessageComponent, ChannelPreviewComponent, FormsModule],
+  imports: [ChatWindowComponent, FormsModule, SideMenuComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   currentUser: CurrentUser;
-  inputContent: string = '';
 
   constructor(
     public channelService: ChannelService,
@@ -24,20 +23,5 @@ export class HomeComponent {
     public authService: AuthService,
   ) {
     this.currentUser = authService.currentUser;
-  }
-
-  sendMsg() {
-    let newMessage: Message = {
-      author: this.currentUser.id,
-      reactions: [],
-      in_Thread: this.channelService.currentChannel.isChannel,
-      source: this.channelService.currentChannel.id,
-      content: this.inputContent,
-      created_at: new Date()
-    }
-
-    console.log(newMessage);
-    this.messageService.messages.push(newMessage);
-    this.inputContent = '';
   }
 }

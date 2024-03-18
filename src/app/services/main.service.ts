@@ -5,21 +5,23 @@ import { Injectable } from '@angular/core';
 })
 export class MainService {
   showPopup = false;
-  errorMessage:string | undefined;
-  loader:boolean = false;
+  errorMessage: string | undefined;
+  loader: boolean = false;
+  addChannelPopup: boolean = false;
 
   constructor() { }
 
-  closePopups(){
+  closePopups() {
     this.showPopup = false;
     this.errorMessage = undefined;
+    this.addChannelPopup = false
   }
 
-  openPopup(){
+  openPopup() {
     this.showPopup = true;
   }
 
-  errorLog(message:string) {
+  errorLog(message: string) {
     this.openPopup();
     this.errorMessage = message;
     setTimeout(() => {

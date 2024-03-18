@@ -1,0 +1,10 @@
+<div class="input-wrapper">
+    <div class="msg-input">
+        <input type="text" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent" placeholder="Type a message...">
+    </div>
+    <div class="sendbutton" (click)="sendMsg()">
+        <img src="assets/img/send.png" alt="">
+    </div>
+</div>
+
+<app-emoji-picker></app-emoji-picker>

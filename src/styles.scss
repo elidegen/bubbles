@@ -11,9 +11,29 @@
     transition: all 125ms ease-in-out;
     font-size: 16px;
     margin: 0;
-    color: $color5;
+    color: $text-color;
 }
 
 body {
     background-color: $color1;
+}
+
+app-emoji-picker {
+    @include pos-center();
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: $color1; 
+    border-radius: 10px;
 }
