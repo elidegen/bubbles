@@ -1,5 +1,5 @@
-<div class="msg-preview card" [ngClass]="{'currentChannel': channel.id === channelService.currentChannel.id}">
-    <!-- <div class="img"></div> -->
+<div class="msg-preview card"
+    [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}">
     <img src="/assets/img/profile_placeholder.svg" alt="">
     <div class="text-wrapper">
         <div class="upper-text">

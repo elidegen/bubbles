@@ -51,9 +51,11 @@
             <!-- eigener component? -->
             <div class="input-wrapper">
                 <div class="msg-input">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="inputContent" placeholder="Type a message...">
                 </div>
-                <div class="sendbutton"></div>
+                <div class="sendbutton" (click)="sendMsg()">
+                    <img src="assets/img/send.png" alt="">
+                </div>
             </div>
             <!-- bis hier -->
         </div>

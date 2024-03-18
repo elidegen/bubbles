@@ -19,13 +19,9 @@ export class ChannelPreviewComponent implements OnInit {
   ) {
 
   }
-  ngOnInit(): void {
-    // console.log(this.messageService.filterByChannel(this.channelService.currentChannel.id)[0].content);
-
-  }
+  ngOnInit(): void { }
 
   getLatestMsg() {
-    console.log('latestmsg', this.messageService.filterByChannel(this.channel.id)[0]);
     if (this.messageService.filterByChannel(this.channel.id).length > 0) {
       return this.messageService.filterByChannel(this.channel.id)[this.messageService.filterByChannel(this.channel.id).length - 1].content;
     } else {
