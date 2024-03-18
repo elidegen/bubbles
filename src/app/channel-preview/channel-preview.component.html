@@ -1,10 +1,11 @@
-<div class="msg-preview card">
-    <div class="img"></div>
+<div class="msg-preview card" [ngClass]="{'currentChannel': channel.id === channelService.currentChannel.id}">
+    <!-- <div class="img"></div> -->
+    <img src="/assets/img/profile_placeholder.svg" alt="">
     <div class="text-wrapper">
         <div class="upper-text">
-            <span class="name">{{channel!.name}}</span>
+            <span class="name">{{channel.name}}</span>
             <div class="time"> 9:00</div>
         </div>
-        <span class="msg">Das ist meine persönliche Nachricht an dich.</span>
+        <span class="msg">{{getLatestMsg()}}</span>
     </div>
 </div>

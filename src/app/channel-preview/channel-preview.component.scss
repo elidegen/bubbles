@@ -10,10 +10,10 @@
         filter: brightness(0.9);
     }
 
-    .img {
-        min-height: 50px;
-        min-width: 50px;
-        background-color: $color3;
+    img {
+        height: 50px;
+        width: 50px;
+        // background-color: $color3;
     }
 
     .text-wrapper {
@@ -38,4 +38,8 @@
         color: rgb(190, 190, 190);
         overflow: hidden;
     }
+}
+
+.currentChannel {
+    filter: brightness(1.1);
 }

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent implements OnInit{
+export class MessageComponent {
   @Input() message!: Message;
   currentUser: CurrentUser;
 
@@ -19,12 +19,8 @@ export class MessageComponent implements OnInit{
   ) {
     this.currentUser = authService.currentUser;
   }
-  ngOnInit(): void {
-    console.log(this.currentUser.id == this.message!.author);
-    
-  }
 
-  myMessage(){
+  myMessage() {
     return this.message!.author === this.currentUser.id;
   }
 

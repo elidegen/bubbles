@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { filter } from 'rxjs';
 
 export interface Message {
   id: number,
@@ -152,5 +153,4 @@ export class MessageService {
     const filteredArray = this.messages.filter(obj => obj.source == channelId);
     return filteredArray;
   }
-
 }

@@ -38,12 +38,21 @@
 }
 
 .chat-wrapper {
-    @include center-column($jc: space-between, $ai: unset);
+    @include d-flex($jc: space-between, $ai: unset, $fd: column);
 }
 
 .chat-messages-wrapper {
-    @include center-column($ai: flex-start);
-    gap: 15px;
+    @include d-flex($jc: flex-start, $fd: column);
+    gap: 5px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    .no-msg-to-display {
+        position: absolute;
+        bottom: 50%;
+
+    }
 }
 
 app-message {
