@@ -28,7 +28,6 @@ export class HomeComponent {
 
   sendMsg() {
     let newMessage: Message = {
-      id: 0,
       author: this.currentUser.id,
       reactions: [],
       in_Thread: this.channelService.currentChannel.isChannel,
@@ -37,6 +36,8 @@ export class HomeComponent {
       created_at: new Date()
     }
 
-    console.log(newMessage);    
+    console.log(newMessage);
+    this.messageService.messages.push(newMessage);
+    this.inputContent = '';
   }
 }

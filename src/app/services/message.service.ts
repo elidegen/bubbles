@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { filter } from 'rxjs';
 
 export interface Message {
-  id: number,
+  id?: number,
   author: number, //ID from User
   reactions: [],
   in_Thread: boolean,
