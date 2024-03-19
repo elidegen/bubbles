@@ -1,0 +1,79 @@
+@import "../library.scss";
+
+.card {
+    @include d-flex($fd: column, $ai: flex-start, $g: 25px)
+}
+
+.header {
+    width: 100%;
+    @include d-flex($jc: space-between);
+
+    p {
+        @extend .large-font
+    }
+}
+
+.content {
+    @include d-flex($fd: column, $ai: flex-start, $g: 25px);
+}
+
+.new-channel-input {
+    width: 100%;
+
+    p {
+        font-size: 20px;
+    }
+}
+
+.input {
+    background-color: $color1;
+    border: 0;
+    outline: 0;
+    padding: 15px;
+    margin-top: 10px;
+    width: 100%;
+    @extend .border-radius;
+}
+
+label {
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+
+    input {
+        appearance: none;
+        // background-color: #fff;
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.15em;
+        height: 1.15em;
+        border: 0.15em solid $text-color;
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+    }
+
+    input::before {
+        content: "";
+        width: 0.65em;
+        height: 0.65em;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1em 1em $color3;
+    }
+
+    input:checked::before {
+        transform: scale(1);
+    }
+}
+
+.button-wrapper {
+    width: 100%;
+    @include d-flex($jc: flex-end);
+}
+
+.circle {
+    border-radius: 50%;
+}

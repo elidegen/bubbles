@@ -1,1 +1,40 @@
-<p>new-channel-dialog works!</p>
+<div class="card" [ngSwitch]="addMembers">
+    <div class="header">
+        <p *ngSwitchCase="false">Create a channel</p>
+        <p *ngSwitchCase="true">Add members</p>
+        <img class="img-button" src="assets/img/close_icon.svg" alt="">
+    </div>
+
+    <div class="content" *ngSwitchCase="false">
+        <p>
+            Channels serve your team for communication. Ideally, they should be topic-specific, for example, #marketing.
+        </p>
+
+        <div class="new-channel-input">
+            <p>Channel Name</p>
+            <input type="text" class="input" placeholder="e.g. Development Team">
+        </div>
+
+        <div class="new-channel-input">
+            <p>Description</p>
+            <input type="text" class="input" placeholder="Your description">
+        </div>
+    </div>
+
+    <div class="content" *ngSwitchCase="true">
+        <label>
+            <input type="radio" name="radio" [checked]="true">
+            Add all members of chat app
+        </label>
+        <label>
+            <input type="radio" name="radio" [checked]="false">
+            Add certain members
+        </label>
+        <input *ngIf="!addAllMembers" type="text" class="input" placeholder="Search members">
+    </div>
+
+    <div class="button-wrapper">
+        <button class="button1" *ngSwitchCase="false">Next</button>
+        <button class="button1" *ngSwitchCase="true">Create</button>
+    </div>
+</div>

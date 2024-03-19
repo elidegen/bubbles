@@ -15,13 +15,4 @@
 
 .section-header {
     @include d-flex($jc: space-between);
-
-    img {
-        border-radius: 50%;
-        cursor: pointer;
-
-        &:hover {
-            background-color: $color1;
-        }
-    }
 }

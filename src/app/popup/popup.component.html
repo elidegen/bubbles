@@ -1,5 +1,13 @@
-<div id="fullscreen" (click)="mainService.closePopups()" ></div>
+<div id="fullscreen" (click)="mainService.closePopups()"></div>
 
-<div class="error-popup" *ngIf="mainService.errorMessage">
-    <span class="error">{{ mainService.errorMessage }}</span>
+
+
+<div class="popup-content">
+    
+    <div class="error-popup card" *ngIf="false">
+        <span class="error">{{ mainService.errorMessage }}</span>
+    </div>
+
+    <app-new-channel-dialog *ngIf="true"></app-new-channel-dialog>
+
 </div>

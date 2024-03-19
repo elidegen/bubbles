@@ -72,22 +72,18 @@ $text-color: $color5;
     }
 }
 
-
-
-
-
 .button1 {
     @extend .button;
     background-color: $color3;
     border: 2px solid $color3;
-    color: $color4;
+    color: $text-color;
 }
 
 .button2 {
     @extend .button;
-    background-color: $color4;
+    background-color: $color1;
     border: 2px solid $color3;
-    color: $color3;
+    color: $color1;
 }
 
 .button3 {
@@ -105,24 +101,22 @@ $text-color: $color5;
     }
 }
 
-.text-button {
-    color: $color4;
+// .img-button .text-button {
+//     color: $color4;
+//     @extend .small-font;
 
-    &:hover {
-        cursor: pointer;
-        opacity: 0.8;
-    }
-
-    @extend .small-font;
-}
+//     &:hover {
+//         cursor: pointer;
+//         opacity: 0.8;
+//     }
+// } habe kein element mit der klasse gefunden...? ED
 
 .border-radius {
     border-radius: 10px;
 }
 
 .large-font {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 30px;
 }
 
 .small-font {
@@ -142,4 +136,14 @@ $text-color: $color5;
 .white-space {
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.img-button {
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 3px;
+
+    &:hover {
+        background-color: $color1;
+    }
 }

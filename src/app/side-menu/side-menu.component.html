@@ -16,7 +16,7 @@
     <div class="card">
         <div class="section-header">
             <p>Channels</p>
-            <img (click)="newChannelDialog()" src="assets/img/plus_icon.svg" alt="">
+            <img class="img-button" (click)="newChannelDialog()" src="assets/img/plus_icon.svg" alt="">
         </div>
         @for (channel of this.channelService.channels; track $index) {
         <app-channel-preview (click)="channelService.openChannel(channel.id)"

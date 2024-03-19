@@ -3,6 +3,7 @@ import { ChannelPreviewComponent } from '../channel-preview/channel-preview.comp
 import { ChannelService } from '../services/channel.service';
 import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -17,9 +18,10 @@ export class SideMenuComponent {
     public channelService: ChannelService,
     public messageService: MessageService,
     public authService: AuthService,
+    public mainService: MainService
   ) { }
 
   newChannelDialog() {
-    
+    this.mainService.showPopup = true;
   }
 }
