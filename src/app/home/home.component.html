@@ -4,8 +4,18 @@
             <input type="text">Search
         </div>
 
-        <div class="card chat-name">
+        <div class="card chat-name" (click)="toggleMenu()">
             Max Mustermann
+        </div>
+
+        
+        <div [ngClass]="openMenu ? 'menu-open' : 'menu-close'" class="popup-menu">
+            <div class="option" (click)="openProfile()">
+                Profile
+            </div>
+            <div class="option" (click)="logout()">
+                Logout
+            </div>
         </div>
 
     </div>
@@ -14,5 +24,4 @@
 
         <app-chat-window></app-chat-window>
     </div>
-
 </div>

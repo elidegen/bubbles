@@ -1,0 +1,53 @@
+@import "../library.scss";
+
+.card {
+    width: 350px;
+}
+
+.header {
+    @include d-flex($jc: space-between);
+}
+
+.img-wrapper {
+    width: 100%;
+    @include d-flex();
+    padding: 25px;
+
+    img {
+        height: 150px;
+    }
+}
+
+.details {
+    @include d-flex($fd: column, $g: 25px, $ai: flex-start)
+}
+
+.online-status {
+    @include d-flex($jc: flex-start, $g: 15px)
+}
+
+.online-circle {
+    height: 20px;
+    width: 20px;
+    background-color: $valid-color;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+
+.upper {
+    @include d-flex($jc: flex-start, $g: 15px);
+
+    img {
+        width: 25px;
+    }
+}
+
+.e-mail {
+    margin-left: 40px;
+    color: $color4;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

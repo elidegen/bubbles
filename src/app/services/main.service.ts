@@ -8,13 +8,15 @@ export class MainService {
   errorMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
+  profilePopup: boolean = false;
 
   constructor() { }
 
   closePopups() {
     this.showPopup = false;
     this.errorMessage = undefined;
-    this.addChannelPopup = false
+    this.addChannelPopup = false;
+    this.profilePopup = false;
   }
 
   openPopup() {
