@@ -54,13 +54,12 @@ export class ChannelService {
       isChannel: false
     }
   ];
-  channels: Channel[];
-  directMessages: Channel[];
+  channels: Channel[] = [];
+  directMessages: Channel[] = [];
   currentChannel!: Channel;
 
   constructor() {
-    this.channels = this.chats.filter(obj => obj.isChannel === true);
-    this.directMessages = this.chats.filter(obj => obj.isChannel === false);
+    this.filterChats();
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
   }
@@ -68,5 +67,10 @@ export class ChannelService {
   openChannel(id: number) {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
+  }
+
+  filterChats() {
+    this.channels = this.chats.filter(obj => obj.isChannel === true);
+    this.directMessages = this.chats.filter(obj => obj.isChannel === false);
   }
 }
