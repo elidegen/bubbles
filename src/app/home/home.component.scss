@@ -71,8 +71,10 @@ app-chat-window {
 
 @keyframes panel-open {
     0% {
-        transform: translateX(-100%);
-        margin-right: -400px;
+        transform: translateX(-110%);
+        margin-right: -415px;
+        // transform: translateX(-100%);
+        // margin-right: -400px;
     }
 
     100% {
@@ -86,8 +88,10 @@ app-chat-window {
     }
 
     100% {
-        transform: translateX(-100%);
-        margin-right: -400px;
+        transform: translateX(-110%);
+        margin-right: -415px;
+        // transform: translateX(-100%);
+        // margin-right: -400px;
     }
 }
 

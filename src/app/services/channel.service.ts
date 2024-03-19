@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 export interface Channel {
   id: number,
   name: string,
-  description?: string,
+  description?: string, // optional because direct messages doesnt have
   members: number[], // Array of user ID's inside the channel
   isChannel: boolean
 }
@@ -32,20 +32,6 @@ export class ChannelService {
     {
       id: 22,
       name: 'testchannel3',
-      description: 'this is description',
-      members: [10, 11, 12, 13, 14],
-      isChannel: true
-    },
-    {
-      id: 29,
-      name: 'testchannel4',
-      description: 'this is description',
-      members: [10, 11, 12, 13, 14],
-      isChannel: true
-    },
-    {
-      id: 30,
-      name: 'testchannel5',
       description: 'this is description',
       members: [10, 11, 12, 13, 14],
       isChannel: true
@@ -85,6 +71,20 @@ export class ChannelService {
       name: 'Claudia',
       members: [10, 11],
       isChannel: false
+    },
+    {
+      id: 29,
+      name: 'testchannel4',
+      description: 'this is description',
+      members: [10, 11, 12, 13, 14],
+      isChannel: true
+    },
+    {
+      id: 30,
+      name: 'testchannel5',
+      description: 'this is description',
+      members: [10, 11, 12, 13, 14],
+      isChannel: true
     }
   ];
   channels: Channel[] = [];

@@ -26,7 +26,7 @@ export class NewChannelDialogComponent {
 
   constructor(
     private userService: UserService,
-    private mainService: MainService,
+    public mainService: MainService,
     private channelService: ChannelService,
   ) { }
 

@@ -16,6 +16,11 @@ export class UserService {
 
   users = [
     {
+      id: 10,
+      username: "CurrentUser",
+      email: "joshua@mail.com",
+    },
+    {
       id: 11,
       username: "Joshua",
       email: "joshua@mail.com",
