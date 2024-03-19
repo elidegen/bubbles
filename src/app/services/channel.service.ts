@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 
 export interface Channel {
   id: number,
@@ -36,6 +37,20 @@ export class ChannelService {
       isChannel: true
     },
     {
+      id: 29,
+      name: 'testchannel4',
+      description: 'this is description',
+      members: [10, 11, 12, 13, 14],
+      isChannel: true
+    },
+    {
+      id: 30,
+      name: 'testchannel5',
+      description: 'this is description',
+      members: [10, 11, 12, 13, 14],
+      isChannel: true
+    },
+    {
       id: 23,
       name: 'Joshua',
       members: [10, 11],
@@ -52,13 +67,33 @@ export class ChannelService {
       name: 'Anna',
       members: [10, 11],
       isChannel: false
+    },
+    {
+      id: 26,
+      name: 'Moritz',
+      members: [10, 11],
+      isChannel: false
+    },
+    {
+      id: 27,
+      name: 'Sabine',
+      members: [10, 11],
+      isChannel: false
+    },
+    {
+      id: 28,
+      name: 'Claudia',
+      members: [10, 11],
+      isChannel: false
     }
   ];
   channels: Channel[] = [];
   directMessages: Channel[] = [];
   currentChannel!: Channel;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+  ) {
     this.filterChats();
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
@@ -70,7 +105,12 @@ export class ChannelService {
   }
 
   filterChats() {
-    this.channels = this.chats.filter(obj => obj.isChannel === true);
-    this.directMessages = this.chats.filter(obj => obj.isChannel === false);
+    this.channels = this.chats.filter(channel => {
+      return channel.isChannel === true && channel.members.includes(this.authService.currentUser.id)
+    }); //filters only channels that have currentuser as member
+
+    this.directMessages = this.chats.filter(channel => {
+      return channel.isChannel === false && channel.members.includes(this.authService.currentUser.id)
+    });
   }
 }

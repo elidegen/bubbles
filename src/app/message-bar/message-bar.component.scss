@@ -28,12 +28,8 @@
         max-width: 50px;
         background-color: $color4;
         border-radius: 50%;
-        cursor: pointer;
         @include d-flex();
-
-        &:hover {
-            filter: brightness(.9);
-        }
+        @extend .hover;
 
         img {
             filter: invert(1);

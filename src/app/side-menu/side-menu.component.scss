@@ -1,16 +1,22 @@
 @import '../library.scss';
 
 .side-menu {
-    height: 100%;
+    max-height: 100%;
     max-width: 400px;
     min-width: 400px;
     @include center-column();
     gap: 15px;
     height: fit-content;
+    overflow-y: scroll;
+    @extend .border-radius;
 
     .card {
         width: 100%;
     }
+}
+
+.side-menu::-webkit-scrollbar {
+    display: none;
 }
 
 .section-header {

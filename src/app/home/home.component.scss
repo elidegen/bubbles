@@ -9,6 +9,15 @@
     }
 }
 
+.left-side {
+    @include d-flex($g: 15px);
+
+    .close-side-menu {
+        @include d-flex();
+        @extend .hover;
+    }
+}
+
 .search {
 
     input {
@@ -19,10 +28,7 @@
 }
 
 .chat-name {
-    cursor: pointer;
-    &:hover {
-        filter: brightness(.9);
-    }
+    @extend .hover;
 }
 
 .home-wrapper {
@@ -49,13 +55,39 @@ app-chat-window {
 
     .option {
         padding: 10px;
-        cursor: pointer;
         background-color: $color2;
         border-radius: 10px;
+        @extend .hover;
+    }
+}
 
-        &:hover {
-            filter: brightness(.9);
-        }
+.side-menu-open {
+    animation: panel-open .5s forwards;
+}
+
+.side-menu-close {
+    animation: panel-close .5s forwards;
+}
+
+@keyframes panel-open {
+    0% {
+        transform: translateX(-100%);
+        margin-right: -400px;
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes panel-close {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+        margin-right: -400px;
     }
 }
 

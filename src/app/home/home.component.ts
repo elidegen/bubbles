@@ -19,6 +19,7 @@ import { MainService } from '../services/main.service';
 export class HomeComponent {
   currentUser: CurrentUser;
   openMenu: boolean = false;
+  sideMenuOpen: boolean = true;
 
   constructor(
     public channelService: ChannelService,
@@ -41,5 +42,9 @@ export class HomeComponent {
   openProfile() {
     this.mainService.showPopup = true;
     this.mainService.profilePopup = true;
+  }
+
+  toggleSideMenu(){
+    this.sideMenuOpen = !this.sideMenuOpen;
   }
 }

@@ -1,14 +1,20 @@
 <div class="wrapper">
     <div class="header">
-        <div class="card search">
-            <input type="text">Search
+        <div class="left-side">
+            <div class="close-side-menu card" (click)="toggleSideMenu()">
+                <img *ngIf="sideMenuOpen" src="assets/img/close_side_menu.svg" alt="">
+                <img *ngIf="!sideMenuOpen" src="assets/img/open_side_menu.svg" alt="">
+            </div>
+            <div class="card search">
+                <input type="text">Search
+            </div>
         </div>
 
         <div class="card chat-name" (click)="toggleMenu()">
             Max Mustermann
         </div>
 
-        
+
         <div [ngClass]="openMenu ? 'menu-open' : 'menu-close'" class="popup-menu">
             <div class="option" (click)="openProfile()">
                 Profile
@@ -20,7 +26,7 @@
 
     </div>
     <div class="home-wrapper">
-        <app-side-menu></app-side-menu>
+        <app-side-menu [ngClass]="sideMenuOpen ? 'side-menu-open': 'side-menu-close'"></app-side-menu>
 
         <app-chat-window></app-chat-window>
     </div>

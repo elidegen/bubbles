@@ -65,11 +65,7 @@ $text-color: $color5;
     border: 0;
     border-radius: 7px;
     padding: 10px 20px;
-    cursor: pointer;
-
-    &:hover {
-        filter: brightness(0.8);
-    }
+    @extend .hover;
 }
 
 .button1 {
@@ -99,11 +95,6 @@ $text-color: $color5;
         color: $color5;
         border: 1px solid $color5;
     }
-}
-
-.disabled {
-    filter: brightness(.6) !important;
-    cursor: not-allowed;
 }
 
 // .img-button .text-button {
@@ -145,10 +136,17 @@ $text-color: $color5;
 
 .img-button {
     border-radius: 50%;
-    cursor: pointer;
     padding: 3px;
+    background-color: $color2;
+    @extend .hover;
+}
 
-    &:hover {
-        background-color: $color1;
-    }
+.hover:hover {
+    filter: brightness(.9);
+    cursor: pointer;
+}
+
+.disabled {
+    filter: brightness(.6) !important;
+    cursor: not-allowed;
 }
