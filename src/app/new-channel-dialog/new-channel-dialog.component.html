@@ -12,29 +12,33 @@
 
         <div class="new-channel-input">
             <p>Channel Name</p>
-            <input type="text" class="input" placeholder="e.g. Development Team">
+            <input type="text" class="input" required placeholder="e.g. Development Team" [(ngModel)]="newChannel.name">
         </div>
 
         <div class="new-channel-input">
             <p>Description</p>
-            <input type="text" class="input" placeholder="Your description">
+            <input type="text" class="input" placeholder="Your description" [(ngModel)]="newChannel.description">
         </div>
     </div>
 
     <div class="content" *ngSwitchCase="true">
         <label>
-            <input type="radio" name="radio" [checked]="true">
+            <input type="radio" name="radio" [value]="true" [(ngModel)]="addAllMembers">
             Add all members of chat app
         </label>
         <label>
-            <input type="radio" name="radio" [checked]="false">
+            <input type="radio" name="radio" [value]="false" [(ngModel)]="addAllMembers">
             Add certain members
         </label>
         <input *ngIf="!addAllMembers" type="text" class="input" placeholder="Search members">
     </div>
 
     <div class="button-wrapper">
-        <button class="button1" *ngSwitchCase="false">Next</button>
-        <button class="button1" *ngSwitchCase="true">Create</button>
+        <button class="button1" (click)="addMembers = true" *ngSwitchCase="false" [disabled]="!newChannel.name"
+            [class.disabled]="!newChannel.name">Next</button>
+
+        <button class="button1" *ngSwitchCase="true" (click)="addMemberToChannel()"
+            [class.disabled]="!addAllMembers || selectedMembers.length > 0"
+            [disabled]="!addAllMembers || selectedMembers.length > 0">Create</button>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 export interface Channel {
   id: number,
   name: string,
+  description?: string,
   members: number[], // Array of user ID's inside the channel
   isChannel: boolean
 }
@@ -16,18 +17,21 @@ export class ChannelService {
     {
       id: 20,
       name: 'testchannel1',
+      description: 'this is description',
       members: [10, 11, 12, 13, 14],
       isChannel: true
     },
     {
       id: 21,
       name: 'testchannel2',
+      description: 'this is description',
       members: [10, 11, 12, 13, 14],
       isChannel: true
     },
     {
       id: 22,
       name: 'testchannel3',
+      description: 'this is description',
       members: [10, 11, 12, 13, 14],
       isChannel: true
     },

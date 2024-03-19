@@ -101,6 +101,11 @@ $text-color: $color5;
     }
 }
 
+.disabled {
+    filter: brightness(.6) !important;
+    cursor: not-allowed;
+}
+
 // .img-button .text-button {
 //     color: $color4;
 //     @extend .small-font;

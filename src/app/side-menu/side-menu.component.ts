@@ -23,5 +23,6 @@ export class SideMenuComponent {
 
   newChannelDialog() {
     this.mainService.showPopup = true;
+    this.mainService.addChannelPopup = true;
   }
 }
