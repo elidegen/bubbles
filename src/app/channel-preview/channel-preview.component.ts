@@ -30,7 +30,7 @@ export class ChannelPreviewComponent implements OnInit {
       return {
         author: 0,
         reactions: [],
-        in_Thread: false,
+        in_thread: false,
         source: 0,
         content: 'Empty chat', // Placeholder in case there is no message in Channel
         created_at: new Date,

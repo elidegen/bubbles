@@ -1,8 +1,8 @@
 <div class="input-wrapper">
     <div class="msg-input">
-        <input type="text" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent" placeholder="Type a message...">
+        <input type="text" [disabled]="currentChat == undefined" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent" placeholder="Type a message...">
     </div>
-    <div class="sendbutton" (click)="sendMsg()">
+    <div class="sendbutton" [ngClass]="{'disabled': currentChat == undefined}" (click)="sendMsg()">
         <img src="assets/img/send_icon.png" alt="">
     </div>
 </div>

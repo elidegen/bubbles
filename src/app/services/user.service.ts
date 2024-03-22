@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Channel } from './channel.service';
+import { AuthService } from './auth.service';
 
 export interface User {
   id?: number,
@@ -42,6 +44,17 @@ export class UserService {
     }
   ]
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+  ) { }
 
+  getUser(userId: number) {
+    return this.users.find(obj => obj.id === userId);
+  }
+
+  getInterlocutor(chatToCheck: Channel) {
+    const interlocutorId = chatToCheck!.members.find(obj => obj !== this.authService.currentUser.id);
+    const interlocutor = this.getUser(interlocutorId!);
+    return interlocutor;
+  }
 }

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Message } from '../services/message.service';
+import { Component, Input } from '@angular/core';
+import { Message, MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,8 @@ export class MessageComponent {
   currentUser: CurrentUser;
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public messageService: MessageService,
   ) {
     this.currentUser = authService.currentUser;
   }

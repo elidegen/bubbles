@@ -1,0 +1,22 @@
+<div class="header-wrapper">
+    <div class="chat-name-wrapper">
+        <img src="{{pictureUrl}}" *ngIf="isChannel()">
+        <p>{{getName()}}</p>
+    </div>
+
+    <div class="group-members-wrapper" *ngIf="isChannel()">
+        <div class="group-members">
+            <div class="member-pics">
+                <div class="pic">
+                    H
+                </div>
+            </div>
+            <div class="member-count">
+
+            </div>
+        </div>
+        <div class="add-member">
+            <img src="assets/img/add_member_icon.svg" alt="">
+        </div>
+    </div>
+</div>

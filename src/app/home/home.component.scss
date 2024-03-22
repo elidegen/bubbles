@@ -15,11 +15,11 @@
     .close-side-menu {
         @include d-flex();
         @extend .hover;
+        min-width: 40px; // avoids twitch of search bar
     }
 }
 
 .search {
-
     input {
         background-color: transparent;
         border: 0;

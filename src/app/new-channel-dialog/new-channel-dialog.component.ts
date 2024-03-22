@@ -21,7 +21,8 @@ export class NewChannelDialogComponent {
     name: '',
     description: '',
     members: [],
-    isChannel: true,
+    is_channel: true,
+    picture: '',
   };
 
   constructor(

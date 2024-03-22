@@ -29,6 +29,6 @@
         <app-side-menu [ngClass]="sideMenuOpen ? 'side-menu-open': 'side-menu-close'"></app-side-menu>
 
         <app-chat-window [channelToDisplay]="channelService.currentChannel"></app-chat-window>
-        <app-chat-window></app-chat-window>
+        <app-chat-window [channelToDisplay]="messageService.currentThread" *ngIf="messageService.currentThread"></app-chat-window>
     </div>
 </div>

@@ -1,22 +1,82 @@
 @import '../library.scss';
 
-
-
 .msg {
     @include d-flex($jc: flex-start);
     width: 100%;
+    border: 1px solid red;
+    position: relative;
 
     .card {
         background-color: $color1;
         width: fit-content;
+        padding: 15px;
+    }
+
+    .reaction {
+        opacity: 0;
+        border-radius: 25px 25px 0 25px;
+        padding: 3px;
+        background-color: $color2;
+        border: 1px solid $color1;
+        position: absolute;
+        top: -30px;
+        right: 0;
+        @include d-flex();
+
+        .img-wrapper {
+            @extend .img-button;
+            @include d-flex();
+            padding: 5px;
+
+            img {
+                height: 25px;
+                width: 25px;
+            }
+        }
+    }
+
+    &:hover {
+        .reaction {
+            right: 30px;
+            opacity: 1;
+            transition: 225ms all;
+        }
     }
 }
 
 .my-msg {
     @include d-flex($jc: flex-end);
+
     .card {
         background-color: $color3;
         width: fit-content;
+    }
+
+    .reaction {
+        border-radius: 25px 25px 25px 0;
+        top: -30px;
+        left: 0;
+        right: unset;
+
+        .img-wrapper {
+            @extend .img-button;
+            @include d-flex();
+            padding: 5px;
+
+            img {
+                height: 25px;
+                width: 25px;
+            }
+        }
+    }
+
+    &:hover {
+        .reaction {
+            left: 30px;
+            right: unset;
+            opacity: 1;
+            transition: 225ms all;
+        }
     }
 }
 

@@ -5,21 +5,21 @@ import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { MessageBarComponent } from '../message-bar/message-bar.component';
+import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 
 @Component({
   selector: 'app-chat-window',
   standalone: true,
-  imports: [MessageComponent, FormsModule, MessageBarComponent],
+  imports: [MessageComponent, FormsModule, MessageBarComponent, ChatHeaderComponent],
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })
 export class ChatWindowComponent {
-  @Input() channelToDisplay!: Channel;
+  @Input() channelToDisplay!: Channel | Message;
 
   constructor(
     public channelService: ChannelService,
     public messageService: MessageService,
     public authService: AuthService,
   ) { }
-
 }

@@ -1,0 +1,34 @@
+@import '../library.scss';
+
+.header-wrapper {
+    @include d-flex($jc: space-between);
+    padding-right: 15px;
+}
+
+.chat-name-wrapper {
+    @include d-flex($g: 25px);
+
+    img {
+        height: 50px;
+        width: 50px;
+    }
+
+}
+
+.group-members-wrapper {
+    @include d-flex();
+
+    .group-members {
+        @include d-flex();
+    }
+
+    .add-member {
+        @extend .img-button;
+        @include d-flex;
+        padding: 7px;
+
+        img {
+            height: 30px;
+        }
+    }
+}
