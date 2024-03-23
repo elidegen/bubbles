@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { CommonModule } from '@angular/common';
 import { Message, MessageService } from '../services/message.service';
+import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-channel-preview',
@@ -16,7 +18,9 @@ export class ChannelPreviewComponent implements OnInit {
 
   constructor(
     public channelService: ChannelService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    public userService: UserService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +29,7 @@ export class ChannelPreviewComponent implements OnInit {
 
   getLatestMsg() {
     if (this.messageService.filterByChannel(this.channel.id).length > 0) {
-      return this.messageService.filterByChannel(this.channel.id)[this.messageService.filterByChannel(this.channel.id).length - 1];
+      return this.messageService.sortChannel(this.channel.id)[this.messageService.filterByChannel(this.channel.id).length - 1];
     } else {
       return {
         author: 0,
@@ -41,5 +45,18 @@ export class ChannelPreviewComponent implements OnInit {
   isToday(date: Date) {
     let dummy = date;
     return dummy.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)
+  }
+
+  getPreview() {
+    if (this.getLatestMsg().author !== 0) {
+      return this.getAuthor() + ': ' + this.getLatestMsg().content
+    } else {
+      return 'Empty conversation'
+    }
+  }
+
+  getAuthor() {
+    const author = this.userService.getUser(this.getLatestMsg().author)
+    return author.name === this.authService.currentUser.name ? 'You' : author.name
   }
 }
