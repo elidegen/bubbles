@@ -16,7 +16,7 @@ export class SignupComponent {
   
   constructor(private router: Router){
     this.signUpForm = new FormGroup({
-      username: new FormControl('' , [Validators.required, Validators.minLength(4)]),
+      name: new FormControl('' , [Validators.required, Validators.minLength(4)]),
       email: new FormControl('' , [Validators.required, Validators.email]),
       password: new FormControl('' , [Validators.required, Validators.minLength(8)]),
     });

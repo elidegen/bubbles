@@ -33,7 +33,7 @@ export class NewChannelDialogComponent {
 
   addMemberToChannel() {
     if (this.addAllMembers) {
-      this.selectedMembers = this.userService.users.map(obj => obj.id);
+      this.selectedMembers = this.userService.users.map(obj => obj.id) as number[];
       this.newChannel.members = this.selectedMembers;
     } else {
       this.newChannel.members = this.selectedMembers;

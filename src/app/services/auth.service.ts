@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 export interface CurrentUser {
   id: number,
-  username: string,
+  name: string,
   email: string,
   profile_img?: string
 }
@@ -16,7 +16,7 @@ export class AuthService {
 
   currentUser: CurrentUser = {
     id: 10,
-    username: "GuestUser",
+    name: "GuestUser",
     email: "guestuser@mailinator.com",
   }
 }

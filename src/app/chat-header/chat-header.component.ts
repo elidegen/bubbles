@@ -11,27 +11,31 @@ import { UserService } from '../services/user.service';
   templateUrl: './chat-header.component.html',
   styleUrl: './chat-header.component.scss'
 })
-export class ChatHeaderComponent implements OnInit {
+export class ChatHeaderComponent {
   @Input() currentChat!: Channel | Message;
-  pictureUrl!: string;
+  userImgArray: string[] = [];
+  groupMemberCount: number = 0;
 
   constructor(
     private userService: UserService
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.currentChat);    
-    this.prepareVariables();
-  }
-
-  prepareVariables(){
-    if('is_channel' in this.currentChat && this.currentChat.is_channel === true){
-      this.pictureUrl = this.currentChat.picture;
+  renderGroupMember() {
+    this.userImgArray = [];
+    this.groupMemberCount = 0;
+    if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
+      this.currentChat.members.forEach((memberId) => {
+        const userImg = this.userService.getUser(memberId).picture;
+        if (this.userImgArray.length < 3){
+          this.userImgArray.push(userImg);
+        } else {
+          this.groupMemberCount++;
+        }
+      })
+      return this.userImgArray
+    } else {
+      return []
     }
-  }
-
-  renderGroupMemberInfo() {
-
   }
 
   isChannel() {
@@ -42,7 +46,7 @@ export class ChatHeaderComponent implements OnInit {
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
       return this.currentChat.name;
     } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
-      return this.userService.getInterlocutor(this.currentChat)?.username
+      return this.userService.getInterlocutor(this.currentChat)?.name
     } else if ('in_thread' in this.currentChat) {
       return 'Thread'
     } else {
@@ -54,10 +58,7 @@ export class ChatHeaderComponent implements OnInit {
     // console.log(this.currentChat);
 
     if ('is_channel' in this.currentChat && this.currentChat.picture !== '') {
-      // return this.currentChat.picture;
-      console.log('supü mate');
-
-      return 'assets/img/thumb_up_icon.svg'
+      return this.currentChat.picture;
     } else {
       return 'assets/img/profile_placeholder.svg'
     }

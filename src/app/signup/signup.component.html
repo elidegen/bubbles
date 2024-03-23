@@ -3,12 +3,12 @@
         <div class="row"><span class="large-font">SIGN UP</span></div>
 
         <div class="input-container">
-            <input placeholder="username" type="text" formControlName="username"
-                [ngClass]="{'invalid': isInvalid('username'), 'valid': isValidInput('username') }">
+            <input placeholder="name" type="text" formControlName="name"
+                [ngClass]="{'invalid': isInvalid('name'), 'valid': isValidInput('name') }">
 
             <div class="error-container">
-                <div *ngIf="requiredErrors('username')" class="errors">firstname is required</div>
-                <div *ngIf="minLengthError('username')" class="errors">firstname must have a minimum of 4 characters
+                <div *ngIf="requiredErrors('name')" class="errors">firstname is required</div>
+                <div *ngIf="minLengthError('name')" class="errors">firstname must have a minimum of 4 characters
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ export interface User {
   id?: number,
   name: string,
   email: string,
-  profile_pic?: string,
+  picture: string,
   password?: string
 }
 
@@ -16,31 +16,36 @@ export interface User {
 })
 export class UserService {
 
-  users = [
+  users: User[] = [
     {
       id: 10,
-      username: "CurrentUser",
+      name: "CurrentUser",
       email: "joshua@mail.com",
+      picture: 'assets/img/profile_placeholder_blue.svg',
     },
     {
       id: 11,
-      username: "Joshua",
+      name: "Joshua",
       email: "joshua@mail.com",
+      picture: 'assets/img/profile_placeholder_red.svg',
     },
     {
       id: 12,
-      username: "Elijah",
+      name: "Elijah",
       email: "elijah@mail.com",
+      picture: 'assets/img/profile_placeholder_green.svg',
     },
     {
       id: 13,
-      username: "Max",
+      name: "Max",
       email: "max@mail.com",
+      picture: 'assets/img/profile_placeholder.svg',
     },
     {
       id: 14,
-      username: "Anna",
+      name: "Anna",
       email: "anna@mail.com",
+      picture: 'assets/img/profile_placeholder_blue.svg',
     }
   ]
 
@@ -49,7 +54,7 @@ export class UserService {
   ) { }
 
   getUser(userId: number) {
-    return this.users.find(obj => obj.id === userId);
+    return this.users.find(obj => obj.id === userId) as User;
   }
 
   getInterlocutor(chatToCheck: Channel) {
