@@ -22,13 +22,33 @@ export class ChatWindowComponent {
     public channelService: ChannelService,
     public messageService: MessageService,
     public authService: AuthService,
-  ) { 
+  ) {
     messageService.groupMsgByAuthor(20);
   }
 
-  isThread(){
-    if('in_thread' in this.channelToDisplay)
-    this.threadMessage = this.channelToDisplay.content;
+  isThread() {
+    if ('in_thread' in this.channelToDisplay)
+      this.threadMessage = this.channelToDisplay.content;
     return 'in_thread' in this.channelToDisplay
+  }
+
+  isSeperator(obj: any) {
+    return obj instanceof Date
+  }
+
+  checkGroupedMsg(messages: any) {
+    return messages as Message[];
+  }
+
+  createSeperator(date: any) {
+    const weekday = date.toLocaleDateString("en-EN", { weekday: 'long' });
+    const dateString = date.toLocaleDateString();
+    return weekday + ' ' + dateString;
+
+  }
+
+  getDayName(dateStr: string | number | Date) {
+    var date = new Date(dateStr);
+    return date.toLocaleDateString("en-EN", { weekday: 'long' });
   }
 }

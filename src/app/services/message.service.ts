@@ -61,7 +61,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Yeah, it really is!",
-      created_at: 1641423777777,
+      created_at: 1700000000000,
     },
     {
       id: 34,
@@ -70,7 +70,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Guten Tag",
-      created_at: 1641333333333,
+      created_at: 1641333333332,
     },
     {
       id: 35,
@@ -79,7 +79,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Moin",
-      created_at: 1641423777777,
+      created_at: 1641333333334,
     },
     {
       id: 36,
@@ -88,7 +88,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Hieg Seil",
-      created_at: 1641333333333,
+      created_at: 1641423777775,
     },
     {
       id: 37,
@@ -97,7 +97,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Servus",
-      created_at: 1641423777777,
+      created_at: 1641423777774,
     },
     {
       id: 38,
@@ -106,7 +106,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Hallöchen",
-      created_at: 1641333333333,
+      created_at: 1641333333331,
     },
     {
       id: 39,
@@ -115,7 +115,7 @@ export class MessageService {
       in_thread: false,
       source: 21,
       content: "Not much, just chilling.",
-      created_at: 1641564444444,
+      created_at: 1641564444443,
     },
     {
       id: 40,
@@ -215,28 +215,59 @@ export class MessageService {
   constructor() {
     let localStorageAsString = localStorage.getItem('currentThread');
     this.currentThread = JSON.parse(localStorageAsString as string);
+    this.seperateChannelByDay(20);
   }
 
   groupMsgByAuthor(channelId: number) {
+    // debugger;
     let groupedArray = [];
-    let currentGroup: Message[] = [];
-    const sortedArray = this.sortChannel(channelId);
-    for (let i = 0; i < sortedArray.length; i++) {
-      if (currentGroup.length != 0 && currentGroup[0].author !== sortedArray[i].author) {
+    let currentGroup: any[] = [];
+    const seperatedArray = this.seperateChannelByDay(channelId);
+    for (let i = 0; i < seperatedArray.length; i++) {
+      if ('author' in seperatedArray[i]) {
+        const message = seperatedArray[i] as Message;
+        if (currentGroup.length != 0 && currentGroup[0].author !== message.author) {
+          groupedArray.push(currentGroup);
+          currentGroup = [];
+        }
+        currentGroup.push(message);
+      } else {
+        if(currentGroup.length > 0)
         groupedArray.push(currentGroup);
         currentGroup = [];
+        groupedArray.push(seperatedArray[i]);
       }
-      currentGroup.push(sortedArray[i]);
     }
     groupedArray.push(currentGroup);
     return groupedArray;
   }
 
+  seperateChannelByDay(channelId: number) {
+    const sortedArray = this.sortChannel(channelId);
+    let seperatedArray = [];
+    let currentDay;
+    for (let i = 0; i < sortedArray.length; i++) {
+      const compareDate = new Date(sortedArray[i].created_at)
+      if (!currentDay || !this.sameDay(currentDay, compareDate)) {
+        currentDay = compareDate;
+        seperatedArray.push(currentDay);
+      }
+      seperatedArray.push(sortedArray[i])
+    }
+    return seperatedArray;
+  }
+
+  sameDay(date1: Date, date2: Date) {
+    return (
+      date1.getDate() === date2.getDate() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear()
+    )
+  }
+
   sortChannel(channelId: number) {
     const filteredArray = this.filterByChannel(channelId);
     const sortedArray = filteredArray.sort((a, b) => a.created_at - b.created_at);
-    // console.log(sortedArray);
-
     return sortedArray;
   }
 
