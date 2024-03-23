@@ -16,10 +16,17 @@ import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 })
 export class ChatWindowComponent {
   @Input() channelToDisplay!: Channel | Message;
+  threadMessage: string = '';
 
   constructor(
     public channelService: ChannelService,
     public messageService: MessageService,
     public authService: AuthService,
   ) { }
+
+  isThread(){
+    if('in_thread' in this.channelToDisplay)
+    this.threadMessage = this.channelToDisplay.content;
+    return 'in_thread' in this.channelToDisplay
+  }
 }

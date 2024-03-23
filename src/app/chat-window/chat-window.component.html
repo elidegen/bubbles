@@ -3,29 +3,20 @@
     <app-chat-header [currentChat]="channelToDisplay"></app-chat-header>
 
     <div class="chat-messages-wrapper" id="chat-messages-wrapper">
-        <!-- @if (channelService.currentChannel){
-        @if (messageService.filterByChannel(channelService.currentChannel.id).length > 0) {
-        @for (message of messageService.filterByChannel(channelService.currentChannel.id); track $index) {
-        <app-message [message]="message"></app-message>
-        }
-        } @else {
-        <span class="no-msg-to-display">No messages in this channel</span>
-        }
-        } @else {
-        <span class="no-msg-to-display">Please select a channel to display messages</span>
-        } -->
         @if (channelToDisplay){
-        @if (messageService.filterByChannel(channelToDisplay.id).length > 0) {
-        @for (message of messageService.filterByChannel(channelToDisplay.id); track $index) {
-        <app-message [message]="message"></app-message>
-        }
+            @if (isThread()) {
+                <div>{{threadMessage}}</div>
+            }
+            @if (messageService.filterByChannel(channelToDisplay.id).length > 0) {
+                @for (message of messageService.filterByChannel(channelToDisplay.id); track $index) {
+                    <app-message [message]="message"></app-message>
+                }
+            } @else {
+                <span class="no-msg-to-display">No messages here</span>
+            }
         } @else {
-        <span class="no-msg-to-display">No messages here</span>
+            <span class="no-msg-to-display">Please select a channel to display messages</span>
         }
-        } @else {
-        <span class="no-msg-to-display">Please select a channel to display messages</span>
-        }
-
     </div>
 
     <app-message-bar [currentChat]="channelToDisplay"></app-message-bar>
