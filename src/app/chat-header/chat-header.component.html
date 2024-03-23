@@ -19,4 +19,8 @@
             <img src="assets/img/add_member_icon.svg" alt="">
         </div>
     </div>
+
+    <div class="close-thread" *ngIf="isThread()" (click)="closeThread()">
+        <img src="assets/img/close_icon.svg">
+    </div>
 </div>

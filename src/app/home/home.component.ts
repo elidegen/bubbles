@@ -20,6 +20,7 @@ export class HomeComponent {
   currentUser: CurrentUser;
   openMenu: boolean = false;
   sideMenuOpen: boolean = true;
+  threadOpen: boolean = false;
 
   constructor(
     public channelService: ChannelService,
@@ -31,10 +32,6 @@ export class HomeComponent {
     this.currentUser = authService.currentUser;
   }
 
-  toggleMenu() {
-    this.openMenu = !this.openMenu;
-  }
-
   logout() {
     this.router.navigate(['/login']);
   }
@@ -42,6 +39,10 @@ export class HomeComponent {
   openProfile() {
     this.mainService.showPopup = true;
     this.mainService.profilePopup = true;
+  }
+
+  toggleMenu() {
+    this.openMenu = !this.openMenu;
   }
 
   toggleSideMenu(){

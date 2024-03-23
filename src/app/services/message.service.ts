@@ -210,6 +210,7 @@ export class MessageService {
   ];
 
   currentThread!: Message;
+  threadOpen: boolean = false;
 
   constructor() {
     let localStorageAsString = localStorage.getItem('currentThread');
@@ -250,5 +251,6 @@ export class MessageService {
   openThread(id: number) {
     this.currentThread = this.messages.find(obj => obj.id === id) as Message;
     localStorage.setItem('currentThread', JSON.stringify(this.currentThread));
+    this.threadOpen = true;
   }
 }

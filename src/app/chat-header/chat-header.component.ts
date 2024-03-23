@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Channel } from '../services/channel.service';
-import { Message } from '../services/message.service';
+import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
+import { publishFacade } from '@angular/compiler';
 
 @Component({
   selector: 'app-chat-header',
@@ -17,7 +18,8 @@ export class ChatHeaderComponent {
   groupMemberCount: number = 0;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    public messageService: MessageService
   ) { }
 
   renderGroupMember() {
@@ -42,6 +44,10 @@ export class ChatHeaderComponent {
     return 'is_channel' in this.currentChat && this.currentChat.is_channel === true;
   }
 
+  isThread() {
+    return 'in_thread' in this.currentChat;
+  }
+
   getName() {
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
       return this.currentChat.name;
@@ -55,8 +61,6 @@ export class ChatHeaderComponent {
   }
 
   getPicture() {
-    // console.log(this.currentChat);
-
     if ('is_channel' in this.currentChat && this.currentChat.picture !== '') {
       return this.currentChat.picture;
     } else {
@@ -64,7 +68,7 @@ export class ChatHeaderComponent {
     }
   }
 
-  noThread() {
-    return 'is_channel' in this.currentChat;
+  closeThread(){
+    this.messageService.threadOpen = false;
   }
 }

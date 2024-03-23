@@ -14,7 +14,6 @@
             Max Mustermann
         </div>
 
-
         <div [ngClass]="openMenu ? 'menu-open' : 'menu-close'" class="popup-menu">
             <div class="option" (click)="openProfile()">
                 Profile
@@ -27,8 +26,7 @@
     </div>
     <div class="home-wrapper">
         <app-side-menu [ngClass]="sideMenuOpen ? 'side-menu-open': 'side-menu-close'"></app-side-menu>
-
-        <app-chat-window [channelToDisplay]="channelService.currentChannel"></app-chat-window>
-        <app-chat-window [channelToDisplay]="messageService.currentThread" *ngIf="messageService.currentThread"></app-chat-window>
+        <app-chat-window class="main-chat" [channelToDisplay]="channelService.currentChannel"></app-chat-window>
+        <app-chat-window class="thread" [channelToDisplay]="messageService.currentThread" [ngClass]="messageService.threadOpen ? 'thread-open': 'thread-close'"></app-chat-window>
     </div>
 </div>
