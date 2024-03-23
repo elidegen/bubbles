@@ -1,9 +1,10 @@
 @import '../library.scss';
 
 .msg {
-    @include d-flex($jc: flex-start);
+    @include d-flex($jc: flex-start, $g: 10px);
+    margin: 2px 0;
     width: 100%;
-    border: 1px solid red;
+    // border: 1px solid red;
     position: relative;
 
     .card {
@@ -45,7 +46,7 @@
 }
 
 .my-msg {
-    @include d-flex($jc: flex-end);
+    flex-direction: row-reverse;
 
     .card {
         background-color: $color3;
@@ -70,6 +71,10 @@
         }
     }
 
+    .quick-thread-img {
+        transform: translate(1px, -1px) rotateY(180deg);
+    }
+
     &:hover {
         .reaction {
             left: 30px;
@@ -82,4 +87,16 @@
 
 .text-red {
     border: 2px solid red;
+}
+
+.quick-thread {
+    padding: 5px;
+    background-color: $color1;
+    border-radius: 50%;
+    @include d-flex();
+    @extend .hover;
+
+    img {
+        transform: translate(-1px, -1px);
+    }
 }

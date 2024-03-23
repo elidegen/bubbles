@@ -32,7 +32,7 @@ export class MessageBarComponent {
         in_thread: this.channelService.currentChannel.is_channel,
         source: this.currentChat!.id,
         content: this.inputContent,
-        created_at: new Date()
+        created_at: new Date().getTime(),
       }
       this.messageService.messages.push(newMessage); //send newMessage to backend
 

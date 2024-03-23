@@ -1,0 +1,10 @@
+<div class="grouped-msg-wrapper" [ngClass]="{'my-msg': myMessage(groupedMessages[0])}">
+    <div class="img-wrapper">
+        <img src="assets/img/profile_placeholder.svg" alt="">
+        <p>9:00</p>
+    </div>
+    <div class="msg-wrapper">
+        <p>elijah degen</p>
+        <app-message [message]="message" [myMessage]="myMessage(message)" *ngFor="let message of groupedMessages"></app-message>
+    </div>
+</div>

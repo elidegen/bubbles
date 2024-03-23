@@ -33,21 +33,9 @@ export class ChannelPreviewComponent implements OnInit {
         in_thread: false,
         source: 0,
         content: 'Empty chat', // Placeholder in case there is no message in Channel
-        created_at: new Date,
+        created_at: 0,
       } as Message
     }
-  }
-
-  getDate() {
-    let date = this.latestMsg.created_at;
-    // console.log(new Date().toISOString().split('T'));
-
-    console.log(date.getHours() + ':' + date.getMinutes());
-
-
-      let time = this.latestMsg.created_at.toISOString().split('T')[1];
-      console.log(time);
-      return time.substring(0, 5)
   }
 
   isToday(date: Date) {

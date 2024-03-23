@@ -8,8 +8,8 @@
                 <div>{{threadMessage}}</div>
             }
             @if (messageService.filterByChannel(channelToDisplay.id).length > 0) {
-                @for (message of messageService.filterByChannel(channelToDisplay.id); track $index) {
-                    <app-message [message]="message"></app-message>
+                @for (groupedMessages of messageService.groupMsgByAuthor(channelToDisplay.id); track $index) {
+                    <app-grouped-messages [groupedMessages]="groupedMessages"></app-grouped-messages>
                 }
             } @else {
                 <span class="no-msg-to-display">No messages here</span>

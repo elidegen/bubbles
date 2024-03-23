@@ -7,7 +7,7 @@ export class Message {
   in_thread: boolean;
   source: number; //ID from Channel
   content: string;
-  created_at: Date;
+  created_at: number;
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
@@ -16,7 +16,7 @@ export class Message {
     this.in_thread = obj ? obj.in_thread : false;
     this.source = obj ? obj.source : null;
     this.content = obj ? obj.content : '';
-    this.created_at = obj ? obj.created_at : new Date();
+    this.created_at = obj ? obj.created_at : null;
   }
 }
 
@@ -34,7 +34,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Hello, how are you?",
-      created_at: new Date(),
+      created_at: 1641415700000,
     },
     {
       id: 31,
@@ -43,7 +43,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "I'm doing great, thanks!",
-      created_at: new Date(),
+      created_at: 1641666855555,
     },
     {
       id: 32,
@@ -52,7 +52,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "That's awesome to hear!",
-      created_at: new Date(),
+      created_at: 1641510666666,
     },
     {
       id: 33,
@@ -61,7 +61,7 @@ export class MessageService {
       in_thread: false,
       source: 20,
       content: "Yeah, it really is!",
-      created_at: new Date(),
+      created_at: 1641423777777,
     },
     {
       id: 34,
@@ -69,109 +69,146 @@ export class MessageService {
       reactions: [],
       in_thread: false,
       source: 20,
-      content: "Hey, what's up?",
-      created_at: new Date(),
+      content: "Guten Tag",
+      created_at: 1641333333333,
     },
     {
       id: 35,
+      author: 13,
+      reactions: [],
+      in_thread: false,
+      source: 20,
+      content: "Moin",
+      created_at: 1641423777777,
+    },
+    {
+      id: 36,
+      author: 14,
+      reactions: [],
+      in_thread: false,
+      source: 20,
+      content: "Hieg Seil",
+      created_at: 1641333333333,
+    },
+    {
+      id: 37,
+      author: 13,
+      reactions: [],
+      in_thread: false,
+      source: 20,
+      content: "Servus",
+      created_at: 1641423777777,
+    },
+    {
+      id: 38,
+      author: 14,
+      reactions: [],
+      in_thread: false,
+      source: 20,
+      content: "Hallöchen",
+      created_at: 1641333333333,
+    },
+    {
+      id: 39,
       author: 10,
       reactions: [],
       in_thread: false,
       source: 21,
       content: "Not much, just chilling.",
-      created_at: new Date(),
+      created_at: 1641564444444,
     },
     {
-      id: 36,
+      id: 40,
       author: 11,
       reactions: [],
       in_thread: false,
       source: 21,
       content: "Anyone here?",
-      created_at: new Date(),
+      created_at: 1641488888540,
     },
     {
-      id: 37,
+      id: 41,
       author: 12,
       reactions: [],
       in_thread: false,
       source: 21,
       content: "Yes, I'm here!",
-      created_at: new Date(),
+      created_at: 1641587777770,
     },
     {
-      id: 38,
+      id: 42,
       author: 13,
       reactions: [],
       in_thread: false,
       source: 21,
       content: "What's going on?",
-      created_at: new Date(),
+      created_at: 1641604444440,
     },
     {
-      id: 39,
+      id: 43,
       author: 14,
       reactions: [],
       in_thread: false,
       source: 21,
       content: "Just hanging out.",
-      created_at: new Date(),
+      created_at: 1641458555550,
     },
     {
-      id: 40,
+      id: 44,
       author: 10,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "Good morning!",
-      created_at: new Date(),
+      created_at: 1641611116540,
     },
     {
-      id: 41,
+      id: 45,
       author: 11,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "Morning! How are you?",
-      created_at: new Date(),
+      created_at: 1641444461540,
     },
     {
-      id: 42,
+      id: 46,
       author: 12,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "I'm good, thanks!",
-      created_at: new Date(),
+      created_at: 1641444444440,
     },
     {
-      id: 43,
+      id: 47,
       author: 13,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "Hey, are you free tonight?",
-      created_at: new Date(),
+      created_at: 1641595747470,
     },
     {
-      id: 44,
+      id: 48,
       author: 14,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "Yes, I am. What's up?",
-      created_at: new Date(),
+      created_at: 1641658826540,
     },
     {
-      id: 45,
+      id: 49,
       author: 10,
       reactions: [],
       in_thread: false,
       source: 22,
       content: "Let's grab dinner together!",
-      created_at: new Date(),
+      created_at: 1641495626540,
     }
   ];
+
   currentThread!: Message;
 
   constructor() {
@@ -179,18 +216,38 @@ export class MessageService {
     this.currentThread = JSON.parse(localStorageAsString as string);
   }
 
-  filterByChannel(channelId: number) {
-    const filteredArray = this.messages.filter(obj => obj.source == channelId);
-    return filteredArray;
+  groupMsgByAuthor(channelId: number) {
+    let groupedArray = [];
+    let currentGroup: Message[] = [];
+    const sortedArray = this.sortChannel(channelId);
+    for (let i = 0; i < sortedArray.length; i++) {
+      if (currentGroup.length != 0 && currentGroup[0].author !== sortedArray[i].author) {
+        groupedArray.push(currentGroup);
+        currentGroup = [];
+      }
+      currentGroup.push(sortedArray[i]);
+    }
+    groupedArray.push(currentGroup);
+    return groupedArray;
   }
 
-  getMessage(messageId: number){
+  sortChannel(channelId: number) {
+    const filteredArray = this.filterByChannel(channelId);
+    const sortedArray = filteredArray.sort((a, b) => a.created_at - b.created_at);
+    // console.log(sortedArray);
+
+    return sortedArray;
+  }
+
+  filterByChannel(channelId: number) {
+    return this.messages.filter(obj => obj.source == channelId);
+  }
+
+  getMessage(messageId: number) {
     return this.messages.find(obj => obj.id === messageId);
   }
 
   openThread(id: number) {
-    console.log(id);
-
     this.currentThread = this.messages.find(obj => obj.id === id) as Message;
     localStorage.setItem('currentThread', JSON.stringify(this.currentThread));
   }

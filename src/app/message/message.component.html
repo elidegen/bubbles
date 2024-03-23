@@ -1,4 +1,4 @@
-<div class="msg" [ngClass]="{'my-msg': myMessage()}">
+<div class="msg" [ngClass]="{'my-msg': myMessage}">
     <div class="reaction">
         <div class="img-wrapper">
             <img src="assets/img/thumb_up_icon.svg" alt="">
@@ -9,14 +9,19 @@
         <div class="img-wrapper" (click)="messageService.openThread(message.id)">
             <img src="assets/img/respond_icon.svg" alt="">
         </div>
-        <div class="img-wrapper" *ngIf="myMessage()">
+        <div class="img-wrapper" *ngIf="myMessage">
             <img src="assets/img/edit_document_icon.svg" alt="">
         </div>
-        <div class="img-wrapper" *ngIf="myMessage()">
+        <div class="img-wrapper" *ngIf="myMessage">
             <img src="assets/img/delete_icon.svg" alt="">
         </div>
     </div>
+
     <div class="card">
         <p>{{message!.content}}</p>
+    </div>
+
+    <div class="quick-thread" (click)="messageService.openThread(message.id)" *ngIf="thread()">
+        <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
     </div>
 </div>

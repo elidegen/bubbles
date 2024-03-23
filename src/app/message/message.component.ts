@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MessageComponent {
   @Input() message!: Message;
+  @Input() myMessage!: Boolean;
   currentUser: CurrentUser;
 
   constructor(
@@ -21,8 +22,8 @@ export class MessageComponent {
     this.currentUser = authService.currentUser;
   }
 
-  myMessage() {
-    return this.message!.author === this.currentUser.id;
+  thread() {
+    const threadMsg = this.messageService.messages.find(obj => obj.source === this.message.id)
+    return threadMsg != undefined;
   }
-
 }
