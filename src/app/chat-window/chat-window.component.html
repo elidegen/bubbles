@@ -10,7 +10,7 @@
             @if (messageService.filterByChannel(channelToDisplay.id).length > 0) {
                 @for (groupedMessages of messageService.groupMsgByAuthor(channelToDisplay.id); track $index) {
                     @if (isSeperator(groupedMessages)) {
-                        <div>{{createSeperator(groupedMessages)}}</div>
+                        <div class="seperator">{{createSeperator(groupedMessages)}}</div>
                     } @else {
                         <app-grouped-messages [groupedMessages]="checkGroupedMsg(groupedMessages)"></app-grouped-messages>
                     }

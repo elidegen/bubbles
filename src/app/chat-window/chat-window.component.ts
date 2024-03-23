@@ -44,11 +44,5 @@ export class ChatWindowComponent {
     const weekday = date.toLocaleDateString("en-EN", { weekday: 'long' });
     const dateString = date.toLocaleDateString();
     return weekday + ' ' + dateString;
-
-  }
-
-  getDayName(dateStr: string | number | Date) {
-    var date = new Date(dateStr);
-    return date.toLocaleDateString("en-EN", { weekday: 'long' });
   }
 }

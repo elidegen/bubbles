@@ -25,3 +25,10 @@
 app-grouped-messages {
     width: 100%;
 }
+
+.seperator {
+    @extend .small-font;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: $color1;
+}
