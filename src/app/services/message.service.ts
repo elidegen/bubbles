@@ -87,7 +87,7 @@ export class MessageService {
       reactions: [],
       in_thread: false,
       source: 20,
-      content: "Hieg Seil",
+      content: "Grüeziwohl",
       created_at: 1641423777775,
     },
     {
@@ -205,7 +205,52 @@ export class MessageService {
       in_thread: false,
       source: 22,
       content: "Let's grab dinner together!",
-      created_at: 1641495626540,
+      created_at: 1711154458965,
+    },
+    {
+      id: 50,
+      author: 10,
+      reactions: [],
+      in_thread: false,
+      source: 23,
+      content: "Hey magst du pizza?",
+      created_at: 1711154815648,
+    },
+    {
+      id: 51,
+      author: 11,
+      reactions: [],
+      in_thread: false,
+      source: 23,
+      content: "Lieber döner",
+      created_at: 1641495456789,
+    },
+    {
+      id: 52,
+      author: 10,
+      reactions: [],
+      in_thread: false,
+      source: 23,
+      content: "das coolste wäre ein burger",
+      created_at: 1711154834589,
+    },
+    {
+      id: 53,
+      author: 10,
+      reactions: [],
+      in_thread: false,
+      source: 23,
+      content: "ich würde gerne mexikanisch essen!",
+      created_at: 1711154458965,
+    },
+    {
+      id: 54,
+      author: 10,
+      reactions: [],
+      in_thread: false,
+      source: 23,
+      content: "Hallo ich bin auf diät nehmt ein bisschen rücksicht!",
+      created_at: 1641495695684,
     }
   ];
 
@@ -219,7 +264,6 @@ export class MessageService {
   }
 
   groupMsgByAuthor(channelId: number) {
-    // debugger;
     let groupedArray = [];
     let currentGroup: any[] = [];
     const seperatedArray = this.seperateChannelByDay(channelId);
@@ -232,8 +276,8 @@ export class MessageService {
         }
         currentGroup.push(message);
       } else {
-        if(currentGroup.length > 0)
-        groupedArray.push(currentGroup);
+        if (currentGroup.length > 0)
+          groupedArray.push(currentGroup);
         currentGroup = [];
         groupedArray.push(seperatedArray[i]);
       }

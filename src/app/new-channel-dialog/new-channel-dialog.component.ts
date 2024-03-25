@@ -23,6 +23,7 @@ export class NewChannelDialogComponent {
     members: [],
     is_channel: true,
     picture: '',
+    read_by: []
   };
 
   constructor(

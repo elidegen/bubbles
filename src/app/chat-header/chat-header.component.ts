@@ -3,7 +3,6 @@ import { Channel } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
-import { publishFacade } from '@angular/compiler';
 
 @Component({
   selector: 'app-chat-header',

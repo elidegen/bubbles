@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { MessageService } from './message.service';
 
 export class Channel {
   id: number;
@@ -8,6 +9,7 @@ export class Channel {
   members: number[]; // Array of user ID's inside the channel
   is_channel: boolean;
   picture: string;
+  read_by: number[];
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
@@ -16,6 +18,7 @@ export class Channel {
     this.members = obj ? obj.members : [];
     this.is_channel = obj ? obj.is_channel : false;
     this.picture = obj ? obj.picture : '';
+    this.read_by = obj ? obj.read_by : [];
   }
 }
 
@@ -32,6 +35,7 @@ export class ChannelService {
       members: [10, 11, 12],
       is_channel: true,
       picture: 'assets/img/profile_placeholder_green.svg',
+      read_by: [],
     },
     {
       id: 21,
@@ -40,6 +44,7 @@ export class ChannelService {
       members: [11, 13, 12, 10, 14],
       is_channel: true,
       picture: 'assets/img/profile_placeholder_blue.svg',
+      read_by: [],
     },
     {
       id: 22,
@@ -48,6 +53,7 @@ export class ChannelService {
       members: [11, 12, 10, 13],
       is_channel: true,
       picture: 'assets/img/profile_placeholder_red.svg',
+      read_by: [],
     },
     {
       id: 23,
@@ -55,6 +61,7 @@ export class ChannelService {
       members: [10, 11],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 24,
@@ -62,6 +69,7 @@ export class ChannelService {
       members: [12, 10],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 25,
@@ -69,6 +77,7 @@ export class ChannelService {
       members: [10, 14],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 26,
@@ -76,6 +85,7 @@ export class ChannelService {
       members: [10, 13],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 27,
@@ -83,6 +93,7 @@ export class ChannelService {
       members: [10, 12],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 28,
@@ -90,6 +101,7 @@ export class ChannelService {
       members: [10, 11],
       is_channel: false,
       picture: '',
+      read_by: [],
     },
     {
       id: 29,
@@ -98,6 +110,7 @@ export class ChannelService {
       members: [10, 11, 12, 13, 14],
       is_channel: true,
       picture: '',
+      read_by: [],
     },
     {
       id: 30,
@@ -106,6 +119,7 @@ export class ChannelService {
       members: [10, 11, 12, 13, 14],
       is_channel: true,
       picture: '',
+      read_by: [],
     }
   ];
   channels: Channel[] = [];
@@ -114,6 +128,7 @@ export class ChannelService {
 
   constructor(
     private authService: AuthService,
+    private messageService: MessageService,
   ) {
     this.filterChats();
     let localStorageAsString = localStorage.getItem('currentChannel');
@@ -127,15 +142,41 @@ export class ChannelService {
 
   filterChats() {
     this.channels = this.chats.filter(channel => {
-      return channel.is_channel === true && channel.members.includes(this.authService.currentUser.id)
+      return channel.is_channel === true && channel.members.includes(this.authService.currentUser.id) && this.checkMsg(channel.id)
     }); //filters only channels that have currentuser as member
 
     this.directMessages = this.chats.filter(channel => {
-      return channel.is_channel === false && channel.members.includes(this.authService.currentUser.id)
+      return channel.is_channel === false && channel.members.includes(this.authService.currentUser.id) && this.checkMsg(channel.id)
     });
   }
 
+  checkMsg(chatId: number) { // only render channels with messages?
+    let messagesOfChat = this.messageService.messages.filter(obj => obj.source === chatId);
+    return messagesOfChat.length > 0
+  }
+
+  sortChats(arrayToSort: Channel[]) {
+    let chatLastMsgSorted = [];
+    for (let i = 0; i < arrayToSort.length; i++) {
+      let msgsOfChat = this.messageService.messages.filter(obj => obj.source === arrayToSort[i].id);
+      msgsOfChat.sort((a, b) => a.created_at - b.created_at);
+      let lastMsg = msgsOfChat[msgsOfChat.length - 1];
+      if (lastMsg)
+        chatLastMsgSorted.push(lastMsg);
+    }
+    chatLastMsgSorted.sort((a, b) => a.created_at - b.created_at);
+    return chatLastMsgSorted;
+  }
+
   getChannel(channelId: number) {
-    return this.channels.find(obj => obj.id === channelId);
+    console.log('getchannel', this.channels.find(obj => obj.id === channelId));
+    return this.channels.find(obj => obj.id === channelId) as Channel;
+  }
+
+  setUnread(channelId: number) {
+    const index = this.chats.findIndex(obj => obj.id === channelId);
+    this.chats[index].read_by = [this.authService.currentUser.id];
+    console.log(this.chats);
+    
   }
 }

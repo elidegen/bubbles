@@ -23,19 +23,20 @@ export class MessageBarComponent {
     private authService: AuthService,
   ) { }
 
-  sendMsg() {    
+  sendMsg() {
     if (this.inputContent.trim()) {
       let newMessage: Message = {
         id: 0,
         author: this.authService.currentUser.id,
         reactions: [],
-        in_thread: this.channelService.currentChannel.is_channel,
+        in_thread: 'in_thread' in this.currentChat!,
         source: this.currentChat!.id,
         content: this.inputContent,
         created_at: new Date().getTime(),
       }
       this.messageService.messages.push(newMessage); //send newMessage to backend
-
+      if ('is_channel' in this.currentChat!)
+        this.channelService.setUnread(this.currentChat!.id);
       this.inputContent = '';
     }
   }

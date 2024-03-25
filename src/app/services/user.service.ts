@@ -7,7 +7,8 @@ export interface User {
   name: string,
   email: string,
   picture: string,
-  password?: string
+  password?: string,
+  is_online: boolean,
 }
 
 
@@ -22,30 +23,35 @@ export class UserService {
       name: "CurrentUser",
       email: "joshua@mail.com",
       picture: 'assets/img/profile_placeholder_blue.svg',
+      is_online: false,
     },
     {
       id: 11,
       name: "Joshua",
       email: "joshua@mail.com",
       picture: 'assets/img/profile_placeholder_red.svg',
+      is_online: false,
     },
     {
       id: 12,
       name: "Elijah",
       email: "elijah@mail.com",
       picture: 'assets/img/profile_placeholder_green.svg',
+      is_online: false,
     },
     {
       id: 13,
       name: "Max",
       email: "max@mail.com",
       picture: 'assets/img/profile_placeholder.svg',
+      is_online: false,
     },
     {
       id: 14,
       name: "Anna",
       email: "anna@mail.com",
       picture: 'assets/img/profile_placeholder_blue.svg',
+      is_online: false,
     }
   ]
 
