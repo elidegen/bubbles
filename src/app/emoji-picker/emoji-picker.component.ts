@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class EmojiPickerComponent {
 
-  constructor() { }
+  constructor() {
+    this.getEmojis();
+  }
 
   @Output() newEmoji = new EventEmitter<string>();
 
@@ -25,15 +27,7 @@ export class EmojiPickerComponent {
   allEmojis: Array<any> = [];
   filteredEmojiList = [];
 
-  url = 'https://emoji-api.com/emojis?access_key=60ede231f07183acd1dbb4bdd7dde0797f62e95e'
-
-
-  /**
-   * Lifecycle hook called after Angular initializes the component.
-   */
-  ngOnInit(): void {
-    this.getEmojis();
-  }
+  url = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
 
   /**
   * Fetches emojis from the API.
@@ -50,8 +44,10 @@ export class EmojiPickerComponent {
   */
   loadEmoji(data: []) {
     data.forEach(emoji => {
-      this.emojiList.push(emoji);
-      this.allEmojis.push(emoji);
+      if(this.allEmojis.length < 70){
+        this.emojiList.push(emoji);
+        this.allEmojis.push(emoji);
+      }
     });
   }
 

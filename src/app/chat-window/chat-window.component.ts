@@ -27,9 +27,9 @@ export class ChatWindowComponent {
   }
 
   isThread() {
-    if ('in_thread' in this.channelToDisplay)
+    if ('reactions' in this.channelToDisplay)
       this.threadMessage = this.channelToDisplay.content;
-    return 'in_thread' in this.channelToDisplay
+    return 'reactions' in this.channelToDisplay
   }
 
   isSeperator(obj: any) {

@@ -29,7 +29,6 @@ export class MessageBarComponent {
         id: 0,
         author: this.authService.currentUser.id,
         reactions: [],
-        in_thread: 'in_thread' in this.currentChat!,
         source: this.currentChat!.id,
         content: this.inputContent,
         created_at: new Date().getTime(),

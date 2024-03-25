@@ -9,7 +9,6 @@
     img {
         height: 50px;
         width: 50px;
-        // background-color: $color3;
     }
 
     .text-wrapper {
@@ -31,11 +30,20 @@
         @extend .small-font;
         @extend .white-space;
         max-width: 260px;
-        color: rgb(190, 190, 190);
         overflow: hidden;
     }
 }
 
 .currentChannel {
     filter: brightness(1.1);
+}
+
+p {
+    color: rgb(190, 190, 190);
+}
+
+.unread {
+    p{
+        color: white;
+    }
 }

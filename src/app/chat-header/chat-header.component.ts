@@ -44,7 +44,7 @@ export class ChatHeaderComponent {
   }
 
   isThread() {
-    return 'in_thread' in this.currentChat;
+    return 'reactions' in this.currentChat;
   }
 
   getName() {
@@ -52,7 +52,7 @@ export class ChatHeaderComponent {
       return this.currentChat.name;
     } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
       return this.userService.getInterlocutor(this.currentChat)?.name
-    } else if ('in_thread' in this.currentChat) {
+    } else if ('reactions' in this.currentChat) {
       return 'Thread'
     } else {
       return 'Select a Thread'

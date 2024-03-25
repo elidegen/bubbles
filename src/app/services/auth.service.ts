@@ -4,7 +4,7 @@ export interface CurrentUser {
   id: number,
   name: string,
   email: string,
-  profile_img?: string
+  picture: string
 }
 
 @Injectable({
@@ -18,5 +18,6 @@ export class AuthService {
     id: 10,
     name: "CurrentUser",
     email: "guestuser@mailinator.com",
+    picture: '',
   }
 }

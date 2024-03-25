@@ -1,11 +1,12 @@
 <div class="msg-preview card"
-    [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}">
+    [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}"
+    [class.unread]="!channel.read_by.includes(authService.currentUser.id)">
     <img src="{{channel.picture || 'assets/img/profile_placeholder.svg'}}" alt="">
     <div class="text-wrapper">
         <div class="upper-text">
-            <span class="name">{{channel.name}}</span>
-            <div class="time">{{ getLatestMsg().created_at| date:"HH:mm"}}</div>
+            <p class="name">{{channel.name}}</p>
+            <p class="time">{{ getLatestMsg().created_at| date:"HH:mm"}}</p>
         </div>
-        <span class="msg">{{getPreview()}}</span>
+        <p class="msg">{{getPreview()}}</p>
     </div>
 </div>

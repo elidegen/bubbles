@@ -138,6 +138,7 @@ export class ChannelService {
   openChannel(id: number) {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
+    this.setRead(id);
   }
 
   filterChats() {
@@ -176,7 +177,12 @@ export class ChannelService {
   setUnread(channelId: number) {
     const index = this.chats.findIndex(obj => obj.id === channelId);
     this.chats[index].read_by = [this.authService.currentUser.id];
-    console.log(this.chats);
-    
+  }
+
+  setRead(channelId: number) {
+    const index = this.chats.findIndex(obj => obj.id === channelId);
+    if(!this.chats[index].read_by.includes(this.authService.currentUser.id)){
+      this.chats[index].read_by = [this.authService.currentUser.id];
+    }
   }
 }

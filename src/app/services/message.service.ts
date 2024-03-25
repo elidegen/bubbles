@@ -4,7 +4,6 @@ export class Message {
   id: number;
   author: number; //ID from User
   reactions: [];
-  in_thread: boolean;
   source: number; //ID from Channel
   content: string;
   created_at: number;
@@ -13,7 +12,6 @@ export class Message {
     this.id = obj ? obj.id : null;
     this.author = obj ? obj.author : null;
     this.reactions = obj ? obj.reactions : [];
-    this.in_thread = obj ? obj.in_thread : false;
     this.source = obj ? obj.source : null;
     this.content = obj ? obj.content : '';
     this.created_at = obj ? obj.created_at : null;
@@ -31,7 +29,6 @@ export class MessageService {
       id: 30,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Hello, how are you?",
       created_at: 1641415700000,
@@ -40,7 +37,6 @@ export class MessageService {
       id: 31,
       author: 11,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "I'm doing great, thanks!",
       created_at: 1641666855555,
@@ -49,7 +45,6 @@ export class MessageService {
       id: 32,
       author: 12,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "That's awesome to hear!",
       created_at: 1641510666666,
@@ -58,7 +53,6 @@ export class MessageService {
       id: 33,
       author: 13,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Yeah, it really is!",
       created_at: 1700000000000,
@@ -67,7 +61,6 @@ export class MessageService {
       id: 34,
       author: 14,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Guten Tag",
       created_at: 1641333333332,
@@ -76,7 +69,6 @@ export class MessageService {
       id: 35,
       author: 13,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Moin",
       created_at: 1641333333334,
@@ -85,7 +77,6 @@ export class MessageService {
       id: 36,
       author: 14,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Grüeziwohl",
       created_at: 1641423777775,
@@ -94,7 +85,6 @@ export class MessageService {
       id: 37,
       author: 13,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Servus",
       created_at: 1641423777774,
@@ -103,7 +93,6 @@ export class MessageService {
       id: 38,
       author: 14,
       reactions: [],
-      in_thread: false,
       source: 20,
       content: "Hallöchen",
       created_at: 1641333333331,
@@ -112,7 +101,6 @@ export class MessageService {
       id: 39,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 21,
       content: "Not much, just chilling.",
       created_at: 1641564444443,
@@ -121,7 +109,6 @@ export class MessageService {
       id: 40,
       author: 11,
       reactions: [],
-      in_thread: false,
       source: 21,
       content: "Anyone here?",
       created_at: 1641488888540,
@@ -130,7 +117,6 @@ export class MessageService {
       id: 41,
       author: 12,
       reactions: [],
-      in_thread: false,
       source: 21,
       content: "Yes, I'm here!",
       created_at: 1641587777770,
@@ -139,7 +125,6 @@ export class MessageService {
       id: 42,
       author: 13,
       reactions: [],
-      in_thread: false,
       source: 21,
       content: "What's going on?",
       created_at: 1641604444440,
@@ -148,7 +133,6 @@ export class MessageService {
       id: 43,
       author: 14,
       reactions: [],
-      in_thread: false,
       source: 21,
       content: "Just hanging out.",
       created_at: 1641458555550,
@@ -157,7 +141,6 @@ export class MessageService {
       id: 44,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "Good morning!",
       created_at: 1641611116540,
@@ -166,7 +149,6 @@ export class MessageService {
       id: 45,
       author: 11,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "Morning! How are you?",
       created_at: 1641444461540,
@@ -175,7 +157,6 @@ export class MessageService {
       id: 46,
       author: 12,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "I'm good, thanks!",
       created_at: 1641444444440,
@@ -184,7 +165,6 @@ export class MessageService {
       id: 47,
       author: 13,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "Hey, are you free tonight?",
       created_at: 1641595747470,
@@ -193,7 +173,6 @@ export class MessageService {
       id: 48,
       author: 14,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "Yes, I am. What's up?",
       created_at: 1641658826540,
@@ -202,7 +181,6 @@ export class MessageService {
       id: 49,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 22,
       content: "Let's grab dinner together!",
       created_at: 1711154458965,
@@ -211,7 +189,6 @@ export class MessageService {
       id: 50,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 23,
       content: "Hey magst du pizza?",
       created_at: 1711154815648,
@@ -220,7 +197,6 @@ export class MessageService {
       id: 51,
       author: 11,
       reactions: [],
-      in_thread: false,
       source: 23,
       content: "Lieber döner",
       created_at: 1641495456789,
@@ -229,7 +205,6 @@ export class MessageService {
       id: 52,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 23,
       content: "das coolste wäre ein burger",
       created_at: 1711154834589,
@@ -238,7 +213,6 @@ export class MessageService {
       id: 53,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 23,
       content: "ich würde gerne mexikanisch essen!",
       created_at: 1711154458965,
@@ -247,7 +221,6 @@ export class MessageService {
       id: 54,
       author: 10,
       reactions: [],
-      in_thread: false,
       source: 23,
       content: "Hallo ich bin auf diät nehmt ein bisschen rücksicht!",
       created_at: 1641495695684,
@@ -260,7 +233,6 @@ export class MessageService {
   constructor() {
     let localStorageAsString = localStorage.getItem('currentThread');
     this.currentThread = JSON.parse(localStorageAsString as string);
-    this.seperateChannelByDay(20);
   }
 
   groupMsgByAuthor(channelId: number) {
