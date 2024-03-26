@@ -3,7 +3,7 @@
 .input-wrapper {
     @include center($jc: space-between);
     gap: 25px;
-    padding-right: 15px;
+    padding-right: 10px;
 
     .msg-input {
         @include d-flex($jc: space-between);

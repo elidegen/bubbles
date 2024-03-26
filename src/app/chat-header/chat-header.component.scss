@@ -2,7 +2,7 @@
 
 .header-wrapper {
     @include d-flex($jc: space-between);
-    padding-right: 15px;
+    padding-right: 10px;
     min-height: 50px;
 }
 
