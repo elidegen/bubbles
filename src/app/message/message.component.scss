@@ -4,7 +4,6 @@
     @include d-flex($jc: flex-start, $g: 10px);
     margin: 2px 0;
     width: 100%;
-    // border: 1px solid red;
     position: relative;
 
     .card {
@@ -86,8 +85,9 @@
     }
 
     .reactions-wrapper {
-        right: unset;
-        left: 5px;
+        left: unset;
+        right: 5px;
+        flex-direction: row;
     }
 }
 
@@ -100,23 +100,5 @@
 
     img {
         transform: translate(-1px, -1px);
-    }
-}
-
-.reactions-wrapper {
-    @include d-flex();
-    position: absolute;
-    bottom: -15px;
-    right: 5px;
-    background-color: white;
-    padding: 2px;
-    border-radius: 15px;
-
-    div {
-        @include d-flex();
-
-        p {
-            color: black !important;
-        }
     }
 }

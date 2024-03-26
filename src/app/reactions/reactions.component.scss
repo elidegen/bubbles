@@ -1,0 +1,40 @@
+@import '../library.scss';
+
+.reactions-wrapper {
+    @include d-flex($fd: row-reverse);
+    @extend .hover;
+    position: absolute;
+    bottom: -15px;
+    left: 5px;
+    background-color: rgb(226, 226, 226);
+    padding: 2px;
+    border-radius: 15px;
+
+    .reaction-preview {
+        @include d-flex();
+    }
+
+    p {
+        color: black !important;
+    }
+
+    &:hover p {
+        font-size: 20px;
+    }
+}
+
+.reactions-detail {
+    @include d-flex($jc: flex-start, $fd: column, $g: 5px);
+    padding: 5px;
+    max-height: 100px !important;
+    overflow-y: scroll;
+
+    .reaction-detail {
+        @include d-flex($jc: flex-start, $g: 5px);
+        width: 100%;
+    }
+}
+
+.reactions-detail::-webkit-scrollbar {
+    display: none;
+}

@@ -1,33 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Message, MessageService } from '../services/message.service';
+import { Message, MessageService, Reaction } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
+import { UserService } from '../services/user.service';
+import { ReactionsComponent } from '../reactions/reactions.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, EmojiPickerComponent],
+  imports: [CommonModule, EmojiPickerComponent, ReactionsComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent {
   @Input() message!: Message;
   @Input() myMessage!: Boolean;
   currentUser: CurrentUser;
   showEmojiPicker: boolean = false;
   allReactions: any[] = [];
+  reactionsPreview: any[] = [];
+  expandReaction: boolean = true;
+
+  addedReaction: Subject<void> = new Subject<void>();
 
   constructor(
     public authService: AuthService,
     public messageService: MessageService,
+    public userService: UserService,
   ) {
     this.currentUser = authService.currentUser;
     this.setupClickListener();
-  }
-
-  ngOnInit(): void {
-    this.prepareReactions();
   }
 
   thread() {
@@ -60,30 +64,10 @@ export class MessageComponent implements OnInit {
       this.message.reactions.push(reaction);
     }
     this.messageService.messages[index] = this.message;
-    this.prepareReactions();
+    this.addedReaction.next();
   }
 
   sourceIsChannel() {
     return !this.messageService.getMessage(this.message.source)
-  }
-
-  prepareReactions() {
-    this.allReactions = [];
-    this.message.reactions.forEach((reaction) => {
-      if (this.allReactions.some(obj => obj.reaction === reaction.emoji)) {
-        const index = this.allReactions.findIndex(obj => obj.reaction === reaction.emoji);
-        this.allReactions[index].count++;
-      } else {
-        this.allReactions.push({
-          reaction: reaction.emoji,
-          count: 1,
-        });
-      }
-    })
-  }
-
-  async getReactions() {
-    await this.prepareReactions();
-    return this.allReactions;
   }
 }

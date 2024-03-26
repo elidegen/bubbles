@@ -24,14 +24,7 @@
     <div class="card">
         <p>{{message!.content}}</p>
         @if (message.reactions.length > 0) {
-        <div class="reactions-wrapper">
-            @for (reaction of allReactions; track $index) {
-            <div>
-                <p>{{reaction.reaction}}</p>
-                <p>{{reaction.count}}</p>
-            </div>
-            }
-        </div>
+        <app-reactions [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions" ></app-reactions>
         }
     </div>
 
