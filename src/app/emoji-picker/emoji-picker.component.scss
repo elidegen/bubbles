@@ -1,5 +1,12 @@
 @import "../library.scss";
 
+.fullscreen {
+    @include position($pos: fixed);
+    @include d-flex();
+    background-color: rgba($color: #000000, $alpha: .2);
+
+}
+
 .emoji-wrapper {
     display: flex;
     flex-direction: column;
@@ -7,7 +14,6 @@
     width: 350px;
     background-color: rgb(231, 231, 231);
     padding: 5px;
-    // border-radius: 15px;
     @extend .border-radius;
 
     input {
@@ -15,45 +21,55 @@
         padding: 10px;
         outline: none;
         color: black;
-        // border-radius: 15px;
         @extend .border-radius;
+        margin-bottom: 5px;
     }
 }
 
 .emoji-display {
-    @include d-flex($jc: space-between, $g: 5px);
-    padding: 5px 0;
+    @include d-flex($jc: flex-start, $g: 7px);
     flex-wrap: wrap;
     overflow-y: scroll;
     overflow-x: hidden;
-    // display: flex;
-    // justify-content: flex-start;
-    // flex-wrap: wrap;
-    // margin-top: 60px;
-    // margin-left: 10px;
-    // margin-right: 10px;
-    // height: 350px;
-    // width: calc(100% - 20px);
-    // overflow-y: scroll;
-    // overflow-x: hidden;
+    height: 100%;
 }
 
-.emoji-display::-webkit-scrollbar{
+.emoji-display::-webkit-scrollbar {
     display: none;
 }
-
 
 .emoji {
     scale: 2;
     margin: 8px;
-    // height: 30px;
-    // width: 30px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     cursor: pointer;
 
     &:hover {
         transform: scale(1.2);
+    }
+}
+
+.menu {
+    @include d-flex($jc: space-around);
+    margin-top: 5px;
+
+    .menu-point {
+        background-color: rgb(231, 231, 231);
+        padding: 5px;
+        @include d-flex();
+        @extend .hover;
+
+        &:hover {
+            @extend .border-radius;
+        }
+
+    }
+}
+
+.currentCat {
+    background-color: $color3 !important;
+    @extend .border-radius;
+
+    img {
+        filter: brightness(0%);
     }
 }

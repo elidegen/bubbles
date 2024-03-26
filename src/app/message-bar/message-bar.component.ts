@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
@@ -38,5 +38,9 @@ export class MessageBarComponent {
         this.channelService.setUnread(this.currentChat!.id);
       this.inputContent = '';
     }
+  }
+
+  typeEmoji($event: any){
+    this.inputContent += $event.character;
   }
 }

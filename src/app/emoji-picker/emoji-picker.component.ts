@@ -17,15 +17,24 @@ export class EmojiPickerComponent {
 
   @Output() newEmoji = new EventEmitter<string>();
 
-  public typedEmoji: string = '';
-
-  searchValue: string = '';
-  myEmojis: any;
-  emojiSelectorIcon = document.getElementById('emojiSelectorIcon');
-  emojiSelector = document.getElementById('emojiSelector');
   emojiList: Array<any> = [];
   allEmojis: Array<any> = [];
+  categoryList: Array<any> = [];
   filteredEmojiList = [];
+  searchValue: string = '';
+  currentCategory: string = 'smileys-emotion';
+  categoryIcons = [
+    'assets/img/smile_icon.svg',
+    'assets/img/hand_icon.svg',
+    '',
+    'assets/img/raven_icon.svg',
+    'assets/img/burger_icon.svg',
+    'assets/img/car_icon.svg',
+    'assets/img/football_icon.svg',
+    'assets/img/lightbulb_icon.svg',
+    'assets/img/heart_icon.svg',
+    'assets/img/flag_icon.svg',
+  ];
 
   url = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
 
@@ -36,6 +45,10 @@ export class EmojiPickerComponent {
     fetch(this.url)
       .then(res => res.json())
       .then(data => this.loadEmoji(data));
+
+    fetch('https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65')
+      .then(res => res.json())
+      .then(data => this.loadCategorys(data));
   }
 
   /**
@@ -44,11 +57,16 @@ export class EmojiPickerComponent {
   */
   loadEmoji(data: []) {
     data.forEach(emoji => {
-      if(this.allEmojis.length < 70){
-        this.emojiList.push(emoji);
-        this.allEmojis.push(emoji);
-      }
+      this.allEmojis.push(emoji);
     });
+    this.showCategory('smileys-emotion');
+  }
+
+  loadCategorys(data: []) {
+    data.forEach(category => {
+      this.categoryList.push(category);
+    });
+    console.log(this.categoryList);
   }
 
   /**
@@ -67,5 +85,10 @@ export class EmojiPickerComponent {
       return emoji.unicodeName.toLowerCase().includes(this.searchValue.toLowerCase());
     });
     this.emojiList = filteredList;
+  }
+
+  showCategory(category: string) {
+    this.emojiList = this.allEmojis.filter(emoji => emoji.group == category);
+    this.currentCategory = category;
   }
 }
