@@ -23,6 +23,16 @@
 
     <div class="card">
         <p>{{message!.content}}</p>
+        @if (message.reactions.length > 0) {
+        <div class="reactions-wrapper">
+            @for (reaction of allReactions; track $index) {
+            <div>
+                <p>{{reaction.reaction}}</p>
+                <p>{{reaction.count}}</p>
+            </div>
+            }
+        </div>
+        }
     </div>
 
     @if (thread()) {
@@ -30,14 +40,6 @@
         <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
     </div>
     }
-
-    <div class="reactions-wrapper">
-        @for (reaction of message.reactions; track $index) {
-        <div>
-            {{reaction.reaction}}
-        </div>
-        }
-    </div>
 </div>
 
 <app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction($event)"></app-emoji-picker>

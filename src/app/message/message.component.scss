@@ -11,6 +11,7 @@
         background-color: $color1;
         width: fit-content;
         padding: 15px;
+        position: relative;
     }
 
     .reaction {
@@ -83,10 +84,11 @@
             transition: 225ms all;
         }
     }
-}
 
-.text-red {
-    border: 2px solid red;
+    .reactions-wrapper {
+        right: unset;
+        left: 5px;
+    }
 }
 
 .quick-thread {
@@ -98,5 +100,23 @@
 
     img {
         transform: translate(-1px, -1px);
+    }
+}
+
+.reactions-wrapper {
+    @include d-flex();
+    position: absolute;
+    bottom: -15px;
+    right: 5px;
+    background-color: white;
+    padding: 2px;
+    border-radius: 15px;
+
+    div {
+        @include d-flex();
+
+        p {
+            color: black !important;
+        }
     }
 }

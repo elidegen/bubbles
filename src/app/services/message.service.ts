@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 export interface Reaction {
   user: number,
-  reaction: string,
+  emoji: string,
 }
 
 export class Message {
@@ -105,7 +105,12 @@ export class MessageService {
     {
       id: 39,
       author: 10,
-      reactions: [],
+      reactions: [
+        {
+          user: 10,
+          emoji: '😆',
+        }
+      ],
       source: 21,
       content: "Not much, just chilling.",
       created_at: 1641564444443,
@@ -113,7 +118,43 @@ export class MessageService {
     {
       id: 40,
       author: 11,
-      reactions: [],
+      reactions: [
+        {
+          user: 10,
+          emoji: '😆',
+        },
+        {
+          user: 11,
+          emoji: '😆',
+        },
+        {
+          user: 13,
+          emoji: '😀',
+        },
+        {
+          user: 10,
+          emoji: '😁',
+        },
+        {
+          user: 11,
+          emoji: '😂',
+        },
+        {
+          user: 13,
+          emoji: '😃',
+        },
+        {
+          user: 10,
+          emoji: '🤣',
+        },
+        {
+          user: 11,
+          emoji: '😆',
+        },
+        {
+          user: 13,
+          emoji: '😆',
+        }],
       source: 21,
       content: "Anyone here?",
       created_at: 1641488888540,
