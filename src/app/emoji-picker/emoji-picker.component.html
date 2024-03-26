@@ -6,7 +6,7 @@
       <span class="emoji" *ngFor="let emoji of emojiList" (click)="showInInput(emoji)">{{ emoji['character'] }}</span>
     </div>
     <div class="menu">
-      @for (category of categoryList; track $index) {
+      @for (category of mainService.categoryList; track $index) {
         @if (category.slug != 'component') {
           <div class="menu-point" [class.currentCat]="category.slug === currentCategory" (click)="showCategory(category.slug)">
             <img src="{{categoryIcons[$index]}}" alt="">

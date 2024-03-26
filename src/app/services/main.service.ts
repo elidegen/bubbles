@@ -10,8 +10,44 @@ export class MainService {
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
+  allEmojis: Array<any> = [];
+  categoryList: Array<any> = [];
+  url = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
 
-  constructor() { }
+
+  constructor() {
+    this.getEmojis();
+  }
+
+  /**
+  * Fetches emojis from the API.
+  */
+  getEmojis() {
+    fetch(this.url)
+      .then(res => res.json())
+      .then(data => this.loadEmoji(data));
+
+    fetch('https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65')
+      .then(res => res.json())
+      .then(data => this.loadCategorys(data));
+  }
+
+
+  /**
+  * Loads emojis from the API response into the emojiList and allEmojis arrays.
+  * @param {[]} data - The data containing emojis from the API response.
+  */
+  loadEmoji(data: []) {
+    data.forEach(emoji => {
+      this.allEmojis.push(emoji);
+    });
+  }
+
+  loadCategorys(data: []) {
+    data.forEach(category => {
+      this.categoryList.push(category);
+    });
+  }
 
   closePopups() {
     this.showPopup = false;

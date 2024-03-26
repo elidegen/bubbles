@@ -25,3 +25,5 @@
         <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
     </div>
 </div>
+
+<app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction($event)"></app-emoji-picker>

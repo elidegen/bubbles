@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
@@ -56,8 +56,9 @@ export class MessageBarComponent {
     });
   }
 
-  openEmojiPicker($event: { stopPropagation: () => void; }){
-    $event.stopPropagation();
-    this.showEmojiPicker = true;
+  openEmojiPicker(){
+    setTimeout(() => {
+      this.showEmojiPicker = true;      
+    }, 1);
   }
 }
