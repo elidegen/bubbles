@@ -12,8 +12,8 @@ export class MainService {
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
   categoryList: Array<any> = [];
-  url = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
-
+  emojiUrl:string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+  categoryUrl: string = 'https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
 
   constructor() {
     this.getEmojis();
@@ -23,11 +23,11 @@ export class MainService {
   * Fetches emojis from the API.
   */
   getEmojis() {
-    fetch(this.url)
+    fetch(this.emojiUrl)
       .then(res => res.json())
       .then(data => this.loadEmoji(data));
 
-    fetch('https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65')
+    fetch(this.categoryUrl)
       .then(res => res.json())
       .then(data => this.loadCategorys(data));
   }

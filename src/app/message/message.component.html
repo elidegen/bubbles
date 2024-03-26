@@ -3,26 +3,40 @@
         <div class="img-wrapper">
             <img src="assets/img/thumb_up_icon.svg" alt="">
         </div>
-        <div class="img-wrapper">
+        <div class="img-wrapper" (click)="openEmojiPicker()">
             <img src="assets/img/add_reaction_icon.svg" alt="">
         </div>
+        @if (sourceIsChannel()) {
         <div class="img-wrapper" (click)="messageService.openThread(message.id)">
             <img src="assets/img/respond_icon.svg" alt="">
         </div>
-        <div class="img-wrapper" *ngIf="myMessage">
+        }
+        @if (myMessage) {
+        <div class="img-wrapper">
             <img src="assets/img/edit_document_icon.svg" alt="">
         </div>
-        <div class="img-wrapper" *ngIf="myMessage">
+        <div class="img-wrapper">
             <img src="assets/img/delete_icon.svg" alt="">
         </div>
+        }
     </div>
 
     <div class="card">
         <p>{{message!.content}}</p>
     </div>
 
-    <div class="quick-thread" (click)="messageService.openThread(message.id)" *ngIf="thread()">
+    @if (thread()) {
+    <div class="quick-thread" (click)="messageService.openThread(message.id)">
         <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
+    </div>
+    }
+
+    <div class="reactions-wrapper">
+        @for (reaction of message.reactions; track $index) {
+        <div>
+            {{reaction.reaction}}
+        </div>
+        }
     </div>
 </div>
 

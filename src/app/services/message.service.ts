@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
+export interface Reaction {
+  user: number,
+  reaction: string,
+}
+
 export class Message {
   id: number;
   author: number; //ID from User
-  reactions: [];
+  reactions: Reaction[];
   source: number; //ID from Channel
   content: string;
   created_at: number;

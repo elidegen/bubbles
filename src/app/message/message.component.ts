@@ -22,6 +22,7 @@ export class MessageComponent {
     public messageService: MessageService,
   ) {
     this.currentUser = authService.currentUser;
+    this.setupClickListener();
   }
 
   thread() {
@@ -29,11 +30,34 @@ export class MessageComponent {
     return threadMsg != undefined;
   }
 
-  addReaction($event: any){
-    
-    // this.message.reactions.push({
-    //   user: this.currentUser.id,
-    //   emoji: $event.character,
-    // })
+  private setupClickListener() {
+    document.addEventListener('click', () => {
+      this.showEmojiPicker = false;
+    });
+  }
+
+  openEmojiPicker() {
+    setTimeout(() => {
+      this.showEmojiPicker = true;
+    }, 1);
+  }
+
+  addReaction($event: any) {
+    const index = this.messageService.messages.findIndex(obj => obj === this.message);
+    const reaction = {
+      user: this.currentUser.id,
+      reaction: $event.character,
+    };
+    if (this.message.reactions.some(obj => obj.reaction === reaction.reaction && obj.user === reaction.user)) {
+      const reactionIndex = this.message.reactions.findIndex(obj => obj.reaction === reaction.reaction && obj.user === reaction.user)
+      this.message.reactions.splice(reactionIndex, 1);
+    } else {
+      this.message.reactions.push(reaction);
+    }
+    this.messageService.messages[index] = this.message;
+  }
+
+  sourceIsChannel(){
+    return !this.messageService.getMessage(this.message.source)
   }
 }

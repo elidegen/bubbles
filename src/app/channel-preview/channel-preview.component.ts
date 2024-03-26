@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { CommonModule } from '@angular/common';
-import { Message, MessageService } from '../services/message.service';
+import { Message, Reaction, MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
@@ -32,6 +32,7 @@ export class ChannelPreviewComponent implements OnInit {
       return this.messageService.sortChannel(this.channel.id)[this.messageService.filterByChannel(this.channel.id).length - 1];
     } else {
       return {
+        id: 0,
         author: 0,
         reactions: [],
         source: 0,

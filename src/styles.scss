@@ -38,3 +38,8 @@ body {
     background-color: $color1;
     border-radius: 10px;
 }
+
+app-emoji-picker {
+    @include pos-center();
+    z-index: 99;
+}
