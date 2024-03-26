@@ -21,4 +21,5 @@
 
 .section-header {
     @include d-flex($jc: space-between);
+    margin-bottom: 5px;
 }
