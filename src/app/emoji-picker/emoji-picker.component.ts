@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-emoji-picker',
@@ -11,7 +12,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class EmojiPickerComponent {
 
-  constructor() {
+  constructor(
+    public mainService: MainService,
+  ) {
     this.getEmojis();
   }
 
@@ -66,7 +69,6 @@ export class EmojiPickerComponent {
     data.forEach(category => {
       this.categoryList.push(category);
     });
-    console.log(this.categoryList);
   }
 
   /**
@@ -90,5 +92,9 @@ export class EmojiPickerComponent {
   showCategory(category: string) {
     this.emojiList = this.allEmojis.filter(emoji => emoji.group == category);
     this.currentCategory = category;
+  }
+
+  stopProp($event: { stopPropagation: () => void; }){
+    $event.stopPropagation();
   }
 }

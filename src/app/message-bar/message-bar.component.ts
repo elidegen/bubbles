@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
 import { Message, MessageService } from '../services/message.service';
 import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
 import { CommonModule } from '@angular/common';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-message-bar',
@@ -15,13 +16,18 @@ import { CommonModule } from '@angular/common';
 })
 export class MessageBarComponent {
   @Input() currentChat: Channel | Message | undefined;
+  @ViewChild('picker') picker!: ElementRef;
   inputContent: string = '';
+  showEmojiPicker: boolean = false;
 
   constructor(
     private channelService: ChannelService,
     private messageService: MessageService,
     private authService: AuthService,
-  ) { }
+    public mainService: MainService,
+  ) {
+    this.setupClickListener();
+   }
 
   sendMsg() {
     if (this.inputContent.trim()) {
@@ -40,7 +46,18 @@ export class MessageBarComponent {
     }
   }
 
-  typeEmoji($event: any){
+  typeEmoji($event: any) {
     this.inputContent += $event.character;
+  }
+
+  private setupClickListener() {
+    document.addEventListener('click', () => {
+      this.showEmojiPicker = false;
+    });
+  }
+
+  openEmojiPicker($event: { stopPropagation: () => void; }){
+    $event.stopPropagation();
+    this.showEmojiPicker = true;
   }
 }

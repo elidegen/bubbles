@@ -9,6 +9,7 @@ export class MainService {
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
+  showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
 
   constructor() { }
 

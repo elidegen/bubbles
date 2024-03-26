@@ -39,14 +39,10 @@ export class NewChannelDialogComponent {
     } else {
       this.newChannel.members = this.selectedMembers;
     }
-    console.log(this.newChannel);
     
     // sende newChannel ans Backend
     this.channelService.chats.push(this.newChannel as Channel);
     this.channelService.filterChats();
-
-    console.log(this.channelService.chats);
-
     this.mainService.closePopups();
   }
 }

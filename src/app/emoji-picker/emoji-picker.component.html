@@ -1,6 +1,5 @@
 <!-- https://emoji-api.com/ -->
-<div class="fullscreen">
-  <div class="emoji-wrapper" *ngIf="true">
+  <div class="emoji-wrapper" (click)="stopProp($event)">
     <input placeholder="search your emoji" [(ngModel)]="searchValue" (keyup)="search()" class="input-for-emoji"
       type="text">
     <div class="emoji-display">
@@ -16,4 +15,3 @@
       }
     </div>
   </div>
-</div>

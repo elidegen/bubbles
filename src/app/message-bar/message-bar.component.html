@@ -1,10 +1,12 @@
 <div class="input-wrapper">
     <div class="msg-input">
-        <input type="text" [disabled]="currentChat == undefined" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent" placeholder="Type a message...">
+        <input type="text" [disabled]="currentChat == undefined" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
+            placeholder="Type a message...">
+        <img class="img-button" (click)="openEmojiPicker($event)" src="assets/img/smile_icon.svg" alt="">
     </div>
     <div class="sendbutton" [ngClass]="{'disabled': currentChat == undefined}" (click)="sendMsg()">
         <img src="assets/img/send_icon.png" alt="">
     </div>
 </div>
 
-<app-emoji-picker (newEmoji)="typeEmoji($event)"></app-emoji-picker>
+<app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="typeEmoji($event)"></app-emoji-picker>

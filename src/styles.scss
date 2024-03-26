@@ -4,13 +4,14 @@
     font-family: 'roboto';
     src: url('assets/fonts/roboto/Roboto-Regular.ttf');
 }
+
 @font-face {
     font-family: 'noto-emoji';
     src: url('assets/fonts/noto-emoji/NotoColorEmoji-Regular.ttf');
 }
 
 * {
-    font-family: 'Roboto','noto-emoji', sans-serif !important;
+    font-family: 'Roboto', 'noto-emoji', sans-serif !important;
     box-sizing: border-box;
     transition: all 125ms ease-in-out;
     font-size: 16px;
@@ -21,10 +22,6 @@
 body {
     background-color: $color1;
 }
-
-// app-emoji-picker {
-//     @include pos-center();
-// }
 
 /* width */
 ::-webkit-scrollbar {
@@ -38,6 +35,6 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: $color1; 
+    background-color: $color1;
     border-radius: 10px;
 }

@@ -170,7 +170,6 @@ export class ChannelService {
   }
 
   getChannel(channelId: number) {
-    console.log('getchannel', this.channels.find(obj => obj.id === channelId));
     return this.channels.find(obj => obj.id === channelId) as Channel;
   }
 

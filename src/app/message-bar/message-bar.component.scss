@@ -6,6 +6,7 @@
     padding-right: 15px;
 
     .msg-input {
+        @include d-flex($jc: space-between);
         background-color: $color5;
         height: 50px;
         width: 100%;
@@ -38,4 +39,14 @@
             max-width: 25px;
         }
     }
+}
+
+.img-button {
+    background-color: white;
+    height: 35px;
+    margin-right: -5px;
+}
+
+app-emoji-picker {
+    @include pos-center();
 }
