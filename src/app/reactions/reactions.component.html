@@ -1,4 +1,4 @@
-<div class="reactions-wrapper" (click)="expandReaction = !expandReaction">
+<div class="reactions-wrapper" [class.my-msg]="myMessage" (click)="expandReaction = !expandReaction">
     @if (expandReaction) {
         <div class="reactions-detail">
             @for (reaction of msgReactions; track $index) {

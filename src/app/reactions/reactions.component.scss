@@ -7,7 +7,7 @@
     bottom: -15px;
     left: 5px;
     background-color: rgb(226, 226, 226);
-    padding: 2px;
+    padding: 2px 5px;
     border-radius: 15px;
 
     .reaction-preview {
@@ -16,10 +16,6 @@
 
     p {
         color: black !important;
-    }
-
-    &:hover p {
-        font-size: 20px;
     }
 }
 
@@ -37,4 +33,10 @@
 
 .reactions-detail::-webkit-scrollbar {
     display: none;
+}
+
+.my-msg {
+    flex-direction: row;
+    left: unset;
+    right: 5px;
 }

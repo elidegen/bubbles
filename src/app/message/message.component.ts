@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Message, MessageService, Reaction } from '../services/message.service';
+import { Component, Input } from '@angular/core';
+import { Message, MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 })
 export class MessageComponent {
   @Input() message!: Message;
-  @Input() myMessage!: Boolean;
+  @Input() myMessage!: boolean;
   currentUser: CurrentUser;
   showEmojiPicker: boolean = false;
   allReactions: any[] = [];
@@ -51,11 +51,11 @@ export class MessageComponent {
     }, 1);
   }
 
-  addReaction($event: any) {
+  addReaction(character: string) {    
     const index = this.messageService.messages.findIndex(obj => obj === this.message);
     const reaction = {
       user: this.currentUser.id,
-      emoji: $event.character,
+      emoji: character,
     };
     if (this.message.reactions.some(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)) {
       const reactionIndex = this.message.reactions.findIndex(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)
@@ -65,6 +65,10 @@ export class MessageComponent {
     }
     this.messageService.messages[index] = this.message;
     this.addedReaction.next();
+  }
+
+  getCharater($event: any){
+    return $event.character
   }
 
   sourceIsChannel() {

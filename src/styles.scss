@@ -43,3 +43,13 @@ app-emoji-picker {
     @include pos-center();
     z-index: 99;
 }
+
+.message:hover {
+    .reactions-wrapper {
+        transform: translate(7px, 13px) scale(1.2);
+    }
+
+    .my-msg {
+        transform: translate(-7px, 13px) scale(1.2);
+    }
+}

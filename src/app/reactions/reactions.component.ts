@@ -10,14 +10,13 @@ import { Observable, Subscription } from 'rxjs';
   styleUrl: './reactions.component.scss'
 })
 export class ReactionsComponent implements OnInit {
+  private addedReactionSubscription!: Subscription;
+  @Input() addedReaction!: Observable<void>;
   @Input() msgReactions!: any[];
+  @Input() myMessage!: boolean;
   allReactions: any[] = [];
   reactionsPreview: any[] = [];
   expandReaction: boolean = false;
-
-  private addedReactionSubscription!: Subscription;
-
-  @Input() addedReaction!: Observable<void>;
 
   ngOnDestroy() {
     this.addedReactionSubscription.unsubscribe();
