@@ -143,11 +143,11 @@ export class ChannelService {
 
   filterChats() {
     this.channels = this.chats.filter(channel => {
-      return channel.is_channel === true && channel.members.includes(this.authService.currentUser.id) && this.checkMsg(channel.id)
+      return channel.is_channel === true && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
     }); //filters only channels that have currentuser as member
 
     this.directMessages = this.chats.filter(channel => {
-      return channel.is_channel === false && channel.members.includes(this.authService.currentUser.id) && this.checkMsg(channel.id)
+      return channel.is_channel === false && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
     });
   }
 

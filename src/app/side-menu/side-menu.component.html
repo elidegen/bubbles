@@ -6,15 +6,11 @@
             <img src="assets/img/plus_icon.svg" alt="">
         </div>
 
-        <!-- platzhalter für den dm array -->
-        <!-- @for (message of this.channelService.sortChats(channelService.directMessages); track $index) {
-        <app-channel-preview (click)="channelService.openChannel(message.source)" [channel]="channelService.getChannel(message.source)"></app-channel-preview>
-        } -->
         @for (channel of this.channelService.directMessages; track $index) {
         <app-channel-preview (click)="channelService.openChannel(channel.id)" [channel]="channel"></app-channel-preview>
         }
-
     </div>
+    
     <div class="card">
         <div class="section-header">
             <p>Channels</p>
