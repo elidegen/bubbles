@@ -6,18 +6,24 @@
             <img src="assets/img/plus_icon.svg" alt="">
         </div>
 
-        @for (channel of this.channelService.directMessages; track $index) {
-        <app-channel-preview (click)="channelService.openChannel(channel.id)" [channel]="channel"></app-channel-preview>
-        }
+        <div class="channel-preview-wrapper">
+            @for (channel of this.channelService.directMessages; track $index) {
+            <app-channel-preview (click)="channelService.openChannel(channel.id)"
+                [channel]="channel"></app-channel-preview>
+            }
+        </div>
     </div>
-    
+
     <div class="card">
         <div class="section-header">
             <p>Channels</p>
             <img class="img-button" (click)="newChannelDialog()" src="assets/img/plus_icon.svg" alt="">
         </div>
-        @for (channel of this.channelService.channels; track $index) {
-        <app-channel-preview (click)="channelService.openChannel(channel.id)" [channel]="channel"></app-channel-preview>
-        }
+        <div class="channel-preview-wrapper">
+            @for (channel of this.channelService.channels; track $index) {
+            <app-channel-preview (click)="channelService.openChannel(channel.id)"
+                [channel]="channel"></app-channel-preview>
+            }
+        </div>
     </div>
 </div>

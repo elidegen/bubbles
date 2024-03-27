@@ -13,6 +13,10 @@
     .card {
         width: 100%;
         padding-top: 0px !important;
+
+        .channel-preview-wrapper {
+            @include d-flex($g: 5px, $fd: column, $ai: unset);
+        }
     }
 }
 

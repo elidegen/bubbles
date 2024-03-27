@@ -1,38 +1,39 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
-    <div class="reaction">
-        <div class="img-wrapper">
-            <img src="assets/img/thumb_up_icon.svg" alt="">
-        </div>
-        <div class="img-wrapper" (click)="openEmojiPicker()">
-            <img src="assets/img/add_reaction_icon.svg" alt="">
-        </div>
-        @if (sourceIsChannel()) {
-        <div class="img-wrapper" (click)="messageService.openThread(message.id)">
-            <img src="assets/img/respond_icon.svg" alt="">
-        </div>
-        }
-        @if (myMessage) {
-        <div class="img-wrapper">
-            <img src="assets/img/edit_document_icon.svg" alt="">
-        </div>
-        <div class="img-wrapper">
-            <img src="assets/img/delete_icon.svg" alt="">
-        </div>
-        }
-    </div>
 
     <div class="card">
         <p>{{message!.content}}</p>
         @if (message.reactions.length > 0) {
-        <app-reactions [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions" ></app-reactions>
+        <app-reactions [addedReaction]="addedReaction.asObservable()"
+            [msgReactions]="this.message.reactions"></app-reactions>
+        }
+
+        <div class="reaction">
+            <div class="img-wrapper">
+                <img src="assets/img/thumb_up_icon.svg" alt="">
+            </div>
+            <div class="img-wrapper" (click)="openEmojiPicker()">
+                <img src="assets/img/add_reaction_icon.svg" alt="">
+            </div>
+            <!-- <div class="img-wrapper" (click)="messageService.openThread(message.id)">
+                <img src="assets/img/respond_icon.svg" alt="">
+            </div> -->
+            @if (myMessage) {
+            <div class="img-wrapper">
+                <img src="assets/img/edit_document_icon.svg" alt="">
+            </div>
+            <div class="img-wrapper">
+                <img src="assets/img/delete_icon.svg" alt="">
+            </div>
+            }
+        </div>
+
+        @if (sourceIsChannel()) {
+        <div class="quick-thread" [class.show-quick-thread]="thread()" (click)="messageService.openThread(message.id)">
+            <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
+
+        </div>
         }
     </div>
-
-    @if (thread()) {
-    <div class="quick-thread" (click)="messageService.openThread(message.id)">
-        <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
-    </div>
-    }
 </div>
 
 <app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction($event)"></app-emoji-picker>
