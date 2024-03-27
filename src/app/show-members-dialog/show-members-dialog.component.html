@@ -1,0 +1,22 @@
+<div class="show-members-wrapper card">
+    <div class="header">
+        <p>Members</p>
+        <img src="assets/img/close_icon.svg">
+    </div>
+
+    <div class="display-members">
+        @for (member of currentMembers; track $index) {
+        <div class="member-wrapper">
+            <img src="{{member.picture}}">
+            <p>{{member.name}}</p>
+        </div>
+        }
+    </div>
+
+    <div class="add-members-wrapper">
+        <button class="button1" (click)="openAddMembers()">
+            <img src="assets/img/add_member_icon.svg">
+            <p>Add members</p>
+        </button>
+    </div>
+</div>

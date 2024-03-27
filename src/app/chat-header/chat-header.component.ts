@@ -28,6 +28,11 @@ export class ChatHeaderComponent {
     this.mainService.addMembersPopup = true;
   }
 
+  showMemberDialog(){
+    this.mainService.showPopup = true;
+    this.mainService.showMembersPopup = true;
+  }
+
   renderGroupMember() {
     this.userImgArray = [];
     this.groupMemberCount = 0;

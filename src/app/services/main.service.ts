@@ -4,12 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  showPopup: boolean = true;
+  showPopup: boolean = false;
   errorMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
-  addMembersPopup: boolean = true;
+  addMembersPopup: boolean = false;
+  showMembersPopup: boolean = false;
+  sideMenuOpen: boolean = true;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
   categoryList: Array<any> = [];
@@ -55,6 +57,7 @@ export class MainService {
     this.addChannelPopup = false;
     this.profilePopup = false;
     this.addMembersPopup = false;
+    this.showMembersPopup = false;
   }
 
   openPopup() {

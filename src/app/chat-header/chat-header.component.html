@@ -6,7 +6,7 @@
 
     <div class="group-members-wrapper" *ngIf="isChannel()">
 
-        <div class="group-members">
+        <div class="group-members" (click)="showMemberDialog()">
             <div class="member-pics">
                     <img src="{{member}}" *ngFor="let member of renderGroupMember()">
             </div>

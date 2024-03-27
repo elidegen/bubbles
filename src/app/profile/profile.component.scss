@@ -4,9 +4,7 @@
     width: 350px;
 }
 
-.header {
-    @include d-flex($jc: space-between);
-}
+
 
 .img-wrapper {
     width: 100%;

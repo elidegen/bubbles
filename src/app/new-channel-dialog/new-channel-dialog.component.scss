@@ -4,15 +4,6 @@
     @include d-flex($fd: column, $ai: flex-start, $g: 25px)
 }
 
-.header {
-    width: 100%;
-    @include d-flex($jc: space-between);
-
-    p {
-        @extend .large-font
-    }
-}
-
 .content {
     @include d-flex($fd: column, $ai: flex-start, $g: 25px);
 }

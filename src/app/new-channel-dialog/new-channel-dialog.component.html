@@ -2,7 +2,7 @@
     <div class="header">
         <p *ngSwitchCase="false">Create a channel</p>
         <p *ngSwitchCase="true">Add members</p>
-        <img class="img-button" (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
+        <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
     </div>
 
     <div class="content" *ngSwitchCase="false">

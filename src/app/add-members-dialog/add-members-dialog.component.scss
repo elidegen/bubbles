@@ -5,15 +5,6 @@
     width: 400px;
     height: fit-content;
 
-    .header {
-        @include d-flex($jc: space-between);
-        width: 100%;
-
-        img {
-            @extend .img-button;
-        }
-    }
-
     .input {
         width: 100%;
     }

@@ -1,0 +1,25 @@
+<div class="header-wrapper">
+    <div class="left-side">
+        <div class="close-side-menu card" (click)="toggleSideMenu()">
+            @if (mainService.sideMenuOpen) {
+                <img src="assets/img/close_side_menu.svg" alt="">
+            } @else {
+                <img src="assets/img/open_side_menu.svg" alt="">
+            }
+        </div>
+            <input placeholder="Search" class="input" type="text">
+    </div>
+
+    <div class="card chat-name" (click)="toggleMenu()">
+        Max Mustermann
+    </div>
+
+    <div [ngClass]="openMenu ? 'menu-open' : 'menu-close'" class="popup-menu">
+        <div class="option" (click)="openProfile()">
+            Profile
+        </div>
+        <div class="option" (click)="logout()">
+            Logout
+        </div>
+    </div>
+</div>
