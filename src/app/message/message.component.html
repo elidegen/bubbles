@@ -1,7 +1,11 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
     <div class="card message">
-        <p>{{message!.content}}</p>
+        @if (!editState) {
+            <p>{{message!.content}}</p>
+        } @else {
+            <input type="text" class="input">
+        }
         @if (message.reactions.length > 0) {
         <app-reactions [addedReaction]="addedReaction.asObservable()"
             [msgReactions]="this.message.reactions" [myMessage]="myMessage"></app-reactions>
@@ -27,10 +31,10 @@
                 <img src="assets/img/respond_icon.svg" alt="">
             </div> -->
             @if (myMessage) {
-            <div class="img-wrapper">
+            <div class="img-wrapper" (click)="editMessage()">
                 <img src="assets/img/edit_document_icon.svg" alt="">
             </div>
-            <div class="img-wrapper">
+            <div class="img-wrapper" (click)="deleteMessage()">
                 <img src="assets/img/delete_icon.svg" alt="">
             </div>
             }

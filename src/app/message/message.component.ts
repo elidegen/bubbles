@@ -22,6 +22,7 @@ export class MessageComponent {
   allReactions: any[] = [];
   reactionsPreview: any[] = [];
   expandReaction: boolean = true;
+  editState: boolean = false;
 
   addedReaction: Subject<void> = new Subject<void>();
 
@@ -51,7 +52,7 @@ export class MessageComponent {
     }, 1);
   }
 
-  addReaction(character: string) {    
+  addReaction(character: string) {
     const index = this.messageService.messages.findIndex(obj => obj === this.message);
     const reaction = {
       user: this.currentUser.id,
@@ -67,11 +68,20 @@ export class MessageComponent {
     this.addedReaction.next();
   }
 
-  getCharater($event: any){
+  getCharater($event: any) {
     return $event.character
   }
 
   sourceIsChannel() {
     return !this.messageService.getMessage(this.message.source)
+  }
+
+  deleteMessage() {
+    const index = this.messageService.messages.findIndex(obj => obj.id === this.message.id);
+    this.messageService.messages.splice(index, 1);
+  }
+
+  editMessage() {
+    this.editState = true
   }
 }
