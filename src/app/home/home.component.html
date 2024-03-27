@@ -5,9 +5,7 @@
                 <img *ngIf="sideMenuOpen" src="assets/img/close_side_menu.svg" alt="">
                 <img *ngIf="!sideMenuOpen" src="assets/img/open_side_menu.svg" alt="">
             </div>
-            <div class="card search">
-                <input placeholder="Search" type="text">
-            </div>
+                <input placeholder="Search" class="input" type="text">
         </div>
 
         <div class="card chat-name" (click)="toggleMenu()">

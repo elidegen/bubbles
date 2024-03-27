@@ -25,14 +25,9 @@
     }
 }
 
-.input {
-    background-color: $color1;
-    border: 0;
-    outline: 0;
-    padding: 15px;
+.input {    
     margin-top: 10px;
     width: 100%;
-    @extend .border-radius;
 }
 
 label {

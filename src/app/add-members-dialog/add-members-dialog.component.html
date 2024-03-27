@@ -1,0 +1,30 @@
+<div class="add-members-wrapper card">
+    <div class="header">
+        <p>Add members</p>
+        <img src="assets/img/close_icon.svg" (click)="mainService.closePopups()">
+    </div>
+    <p>{{currentChannel.name}}</p>
+    <input type="text" class="input" placeholder="Enter name">
+    <div class="selected-users">
+
+        <div class="selected-user">
+            <img src="assets/img/profile_placeholder.svg" alt="">
+            <p>Elijah</p>
+            <img class="img-button" src="assets/img/close_icon.svg" alt="">
+        </div>
+        <div class="selected-user">
+            <img src="assets/img/profile_placeholder.svg" alt="">
+            <p>Joshua</p>
+            <img class="img-button" src="assets/img/close_icon.svg" alt="">
+        </div>
+        <div class="selected-user">
+            <img src="assets/img/profile_placeholder.svg" alt="">
+            <p>Anna</p>
+            <img class="img-button" src="assets/img/close_icon.svg" alt="">
+        </div>
+
+    </div>
+    <div class="button-wrapper">
+        <button [disabled]="selectedUsers.length < 1" [class.disabled]="selectedUsers.length < 1" class="button1">Add</button>
+    </div>
+</div>

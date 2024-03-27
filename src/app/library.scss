@@ -139,3 +139,13 @@ $text-color: $color5;
     filter: brightness(.6) !important;
     cursor: not-allowed !important;
 }
+
+
+
+.input {
+    background-color: $color1;
+    border: 0;
+    outline: 0;
+    padding: 15px;
+    @extend .border-radius;
+}

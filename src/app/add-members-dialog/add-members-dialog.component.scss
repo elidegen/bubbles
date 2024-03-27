@@ -1,0 +1,46 @@
+@import "../library.scss";
+
+.add-members-wrapper {
+    @include d-flex($ai: flex-start, $fd: column, $g: 15px);
+    width: 400px;
+    height: fit-content;
+
+    .header {
+        @include d-flex($jc: space-between);
+        width: 100%;
+
+        img {
+            @extend .img-button;
+        }
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .selected-users {
+        @include d-flex($jc: flex-start, $g: 5px);
+        flex-wrap: wrap;
+
+        .selected-user {
+            @include d-flex($g: 5px);
+            background-color: $color1;
+            border-radius: 23px;
+            padding: 5px;
+
+            img {
+                height: 25px;
+            }
+
+            .img-button {
+                background-color: $color1;
+            }
+        }
+    }
+
+}
+
+.button-wrapper {
+    @include d-flex($jc: flex-end);
+    width: 100%;
+}
