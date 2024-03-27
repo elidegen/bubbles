@@ -3,6 +3,7 @@ import { Channel } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-chat-header',
@@ -18,8 +19,14 @@ export class ChatHeaderComponent {
 
   constructor(
     private userService: UserService,
-    public messageService: MessageService
-  ) { }
+    public messageService: MessageService,
+    private mainService: MainService,
+    ) { }
+
+  addMemberDialog(){
+    this.mainService.showPopup = true;
+    this.mainService.addMembersPopup = true;
+  }
 
   renderGroupMember() {
     this.userImgArray = [];

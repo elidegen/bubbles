@@ -1,0 +1,14 @@
+@import "../library.scss";
+
+.add-members-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        @include d-flex($jc: space-between);
+
+        img{
+            @extend .img-button;
+        }
+    }
+}

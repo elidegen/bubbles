@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  showPopup = false;
+  showPopup: boolean = true;
   errorMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
+  addMembersPopup: boolean = true;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
   categoryList: Array<any> = [];
@@ -32,7 +33,6 @@ export class MainService {
       .then(data => this.loadCategorys(data));
   }
 
-
   /**
   * Loads emojis from the API response into the emojiList and allEmojis arrays.
   * @param {[]} data - The data containing emojis from the API response.
@@ -54,6 +54,7 @@ export class MainService {
     this.errorMessage = undefined;
     this.addChannelPopup = false;
     this.profilePopup = false;
+    this.addMembersPopup = false;
   }
 
   openPopup() {
@@ -67,5 +68,4 @@ export class MainService {
       this.closePopups();
     }, 3000);
   }
-
 }
