@@ -57,6 +57,6 @@ export class ChannelPreviewComponent implements OnInit {
 
   getAuthor() {
     const author = this.userService.getUser(this.getLatestMsg().author)
-    return author.name === this.authService.currentUser.name ? 'You' : author.name
+    return author.name === this.authService.currentUser.username ? 'You' : author.name
   }
 }
