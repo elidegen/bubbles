@@ -8,7 +8,7 @@ export class Channel {
   description?: string; // optional because direct messages doesnt have
   members: number[]; // Array of user ID's inside the channel
   is_channel: boolean;
-  picture: string;
+  picture?: string;
   read_by: number[];
 
   constructor(obj?: any) {

@@ -12,6 +12,7 @@ export class Message {
   source: number; //ID from Channel
   content: string;
   created_at: number;
+  attachment?: string[];
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
