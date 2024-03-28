@@ -4,7 +4,7 @@ export interface CurrentUser {
   id: number,
   username: string,
   email: string,
-  picture: string
+  picture: null | string
 }
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
   constructor() { }
 
   currentUser: CurrentUser = {
-    id: 10,
+    id: 2,
     username: "CurrentUser",
     email: "guestuser@mailinator.com",
     picture: '',

@@ -19,6 +19,13 @@ export class UserService {
 
   users: User[] = [
     {
+      id: 1,
+      name: "USER1",
+      email: "joshua@mail.com",
+      picture: 'assets/img/profile_placeholder_blue.svg',
+      is_online: false,
+    },
+    {
       id: 10,
       name: "CurrentUser",
       email: "joshua@mail.com",

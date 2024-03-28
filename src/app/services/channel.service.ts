@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
+import { environment } from '../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 export class Channel {
   id: number;
@@ -8,7 +11,7 @@ export class Channel {
   description?: string; // optional because direct messages doesnt have
   members: number[]; // Array of user ID's inside the channel
   is_channel: boolean;
-  picture: string;
+  picture: null | string;
   read_by: number[];
 
   constructor(obj?: any) {
@@ -26,6 +29,28 @@ export class Channel {
   providedIn: 'root'
 })
 export class ChannelService {
+
+  getChannelsUrl: string = environment.baseUrl + 'channels-for-user/' + this.authService.currentUser.id;
+
+  getChatsForUser() {
+    this.http.get<Channel[]>(this.getChannelsUrl).subscribe(response => {
+      this.$chats.next(response);
+      this.updateChats();
+    }, error => {
+      
+    });
+  }
+
+  updateChats(){
+    this.$chats.subscribe( data => {
+      this.chats = data;
+      this.filterChats();
+    });
+  }
+
+
+
+  $chats: BehaviorSubject<Channel[]> = new BehaviorSubject<Channel[]>([]);
 
   chats: Channel[] = [
     {
@@ -122,6 +147,7 @@ export class ChannelService {
       read_by: [],
     }
   ];
+
   channels: Channel[] = [];
   directMessages: Channel[] = [];
   currentChannel!: Channel;
@@ -129,8 +155,9 @@ export class ChannelService {
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
+    private http: HttpClient,
   ) {
-    this.filterChats();
+    
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
   }
@@ -143,7 +170,7 @@ export class ChannelService {
 
   filterChats() {
     this.channels = this.chats.filter(channel => {
-      return channel.is_channel === true && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
+      return channel.is_channel === true; // && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
     }); //filters only channels that have currentuser as member
 
     this.directMessages = this.chats.filter(channel => {
@@ -180,7 +207,7 @@ export class ChannelService {
 
   setRead(channelId: number) {
     const index = this.chats.findIndex(obj => obj.id === channelId);
-    if(!this.chats[index].read_by.includes(this.authService.currentUser.id)){
+    if (!this.chats[index].read_by.includes(this.authService.currentUser.id)) {
       this.chats[index].read_by = [this.authService.currentUser.id];
     }
   }
