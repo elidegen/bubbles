@@ -10,16 +10,7 @@
             <input placeholder="Search" class="input" type="text">
     </div>
 
-    <div class="card chat-name" (click)="toggleMenu()">
+    <div class="card chat-name" (click)="openProfile()">
         Max Mustermann
-    </div>
-
-    <div [ngClass]="openMenu ? 'menu-open' : 'menu-close'" class="popup-menu">
-        <div class="option" (click)="openProfile()">
-            Profile
-        </div>
-        <div class="option" (click)="logout()">
-            Logout
-        </div>
     </div>
 </div>

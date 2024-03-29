@@ -55,11 +55,6 @@ label {
     }
 }
 
-.button-wrapper {
-    width: 100%;
-    @include d-flex($jc: flex-end);
-}
-
 .circle {
     border-radius: 50%;
 }

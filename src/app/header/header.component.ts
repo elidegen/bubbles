@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 
 @Component({
@@ -15,13 +13,8 @@ export class HeaderComponent {
   openMenu: boolean = false;
 
   constructor(
-    private router: Router,
     public mainService: MainService,
     ) { }
-
-  logout() {
-    this.router.navigate(['/login']);
-  }
 
   openProfile() {
     this.mainService.showPopup = true;

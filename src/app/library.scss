@@ -97,6 +97,11 @@ $text-color: $color5;
     }
 }
 
+.button-wrapper {
+    width: 100%;
+    @include d-flex($jc: flex-end);
+}
+
 .border-radius {
     border-radius: 10px;
 }

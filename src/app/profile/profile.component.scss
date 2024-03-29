@@ -4,8 +4,6 @@
     width: 350px;
 }
 
-
-
 .img-wrapper {
     width: 100%;
     @include d-flex();
@@ -48,4 +46,8 @@
     &:hover {
         text-decoration: underline;
     }
+}
+
+.button-wrapper {
+    margin-top: 15px;
 }
