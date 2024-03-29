@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, of, shareReplay, take } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, firstValueFrom, map, of, shareReplay, take } from 'rxjs';
 import { UserService } from './user.service';
 import { MainService } from './main.service';
 
@@ -34,27 +34,36 @@ export class ChannelService {
 
   getChannelsUrl: string = environment.baseUrl + 'channels-for-user/' + this.authService.currentUser.id;
 
-  getChatsForUser() {
-    this.fetchChatsForUser().pipe(take(1)).subscribe(
-      {
-        next: (data: Channel[]) => {
-          this.$chats.next(data);
-          this.updateChats();
-        },
-        error: error => {
-          this.mainService.errorLog('Error by fetching channels')
-        }
-      });
+  // getChatsForUserOld() {
+  //   this.fetchChatsForUser().pipe(take(1)).subscribe(
+  //     {
+  //       next: (data: Channel[]) => {
+  //         this.$chats.next(data);
+  //         this.updateChats();
+
+  //       },
+  //       error: () => {
+  //         this.mainService.errorLog('Error by fetching channels')
+  //       }
+  //     });
+  // }
+
+  async getChatsForUser() {
+    const data = await firstValueFrom(this.fetchChatsForUser());
+    this.$chats.next(data);
+    this.updateChats();
+
+    console.log('chats', this.chats);
   }
 
 
-  fetchChatsForUser():Observable<Channel[]> {
+  fetchChatsForUser(): Observable<Channel[]> {
     return this.http.get<Channel[]>(this.getChannelsUrl);
   }
 
 
-  updateChats(){
-    this.$chats.subscribe( data => {
+  updateChats() {
+    this.$chats.subscribe(data => {
       this.chats = data;
       this.filterChats();
       this.collectData();
@@ -64,18 +73,18 @@ export class ChannelService {
   }
 
 
-/**
- * For each chat, we collect the members to fetch the userdata from. 
- * this.userService.collectUsers(member) : We collect an sort the members to prevent fetching userdata twice.
- */
- collectData(){
-  this.chats.forEach(chat => {
-    for(let member of chat.members){
-      this.userService.collectChatMembers(member);
-    }
-    this.messageService.chatCollection.push(chat.id);
-  });
- }
+  /**
+   * For each chat, we collect the members to fetch the userdata from. 
+   * this.userService.collectUsers(member) : We collect an sort the members to prevent fetching userdata twice.
+   */
+  collectData() {
+    this.chats.forEach(chat => {
+      for (let member of chat.members) {
+        this.userService.collectChatMembers(member);
+      }
+      this.messageService.chatCollection.push(chat.id);
+    });
+  }
 
 
 
@@ -188,9 +197,8 @@ export class ChannelService {
     private messageService: MessageService,
     private http: HttpClient,
     private userService: UserService,
-    private mainService:MainService
+    private mainService: MainService
   ) {
-    
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
   }

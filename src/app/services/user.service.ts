@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Channel } from './channel.service';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment.development';
-import { HttpBackend, HttpClient } from '@angular/common/http';
-import { Observable, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, firstValueFrom, take } from 'rxjs';
 
 export interface User {
   id?: number,
@@ -27,40 +27,42 @@ export class UserService {
   collectChatMembers(member: number) {
     if (!this.chatMembers.includes(member)) {
       this.chatMembers.push(member);
-    } 
+    }
   }
 
+  // getUsers() {
+  //   this.users = [];
+  //   console.log('chatmembers', this.chatMembers);
+  //   this.chatMembers.forEach(member => {
+  //     this.fetchUser(member).pipe(take(1)).subscribe(
+  //       {
+  //         next: (data: User) => {
+  //           console.log('getUsers Data', data);
 
-  getUsers() {
-    const userCollection:User[] = [];
+  //           this.users.push(data);
+  //         },
 
-    this.chatMembers.forEach(member => {
-      this.fetchUser(member).pipe(take(1)).subscribe(
-        { 
-          next: (data: User) => {
-            userCollection.push(data);
-          },
-          error: e => {
-            console.log(e);
-            
-          }
-        }
-      )
-    });
-    this.users = userCollection;
-    console.log(this.users);
+  //         complete: () => {
+  //           console.log('users:', this.users);
+  //         }
+  //       }
+  //     )
+  //   });
+  // }
+
+  async getUsers() {
+    this.users = [];
+    for (const member of this.chatMembers) {
+        const user = await firstValueFrom(this.fetchUser(member));
+        this.users.push(user)
+    }
+    console.log('users', this.users);    
   }
-
 
   fetchUser(member: number): Observable<User> {
-    const url = this.userUrl + member + '/';
+    const url = this.userUrl + member;
     return this.http.get<User>(url);
   }
-
-
-
-
-
 
   users: User[] = [
     {

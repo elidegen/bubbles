@@ -27,7 +27,6 @@ export class HomeComponent {
     public authService: AuthService,
   ) {
     this.currentUser = authService.currentUser;
-    this.channelService.getChatsForUser();
-    
+    this.channelService.getChatsForUser();    
   }
 }

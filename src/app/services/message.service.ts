@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable, take } from 'rxjs';
+import { Observable, firstValueFrom, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 export interface Reaction {
@@ -33,35 +33,37 @@ export class Message {
 
 export class MessageService {
 
-  messagesFromChatUrl:string = environment.baseUrl + 'messages-from-channel/'
-  chatCollection:number[] = [];
+  messagesFromChatUrl: string = environment.baseUrl + 'messages-from-channel/'
+  chatCollection: number[] = [];
 
-  getMessages(){  
-    let messageCollection:Message[] = [];
-    this.chatCollection.forEach(chatId => {
-      this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
-        {
-          next:(data: Message[]) =>{
-          console.log(data);
-            
-          messageCollection = messageCollection.concat(data);
-          //concat klappt noch nicht
-          }
-        }
-      )
-    });
+  // getMessagesOld() {
+  //   this.messages = [];
+  //   this.chatCollection.forEach(chatId => {
+  //     this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
+  //       {
+  //         next: (data: Message[]) => {
+  //           console.log('data', data);
+  //           this.messages = this.messages.concat(data);
+  //           console.log('messages', this.messages);
+  //         }
+  //       }
+  //     )
+  //   });
+  // }
 
-    this.messages = messageCollection;
-    console.log(this.messages);
-    
+  async getMessages() {
+    this.messages = [];
+    for (const chatId of this.chatCollection) {
+      const message = await firstValueFrom(this.fetchMessagesForChats(chatId));
+      this.messages = this.messages.concat(message)
+    }
+    console.log('messages', this.messages);
   }
 
-  fetchMessagesForChats(chatId:number):Observable<Message[]>{
+  fetchMessagesForChats(chatId: number): Observable<Message[]> {
     const url = this.messagesFromChatUrl + chatId + '/'
-    return this.http.get<Message[]>(url) 
+    return this.http.get<Message[]>(url)
   }
-
-
 
   messages: Message[] = [
     {
@@ -311,7 +313,7 @@ export class MessageService {
   threadOpen: boolean = false;
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
   ) {
     let localStorageAsString = localStorage.getItem('currentThread');
     this.currentThread = JSON.parse(localStorageAsString as string);
@@ -377,8 +379,8 @@ export class MessageService {
     return this.messages.find(obj => obj.id === messageId);
   }
 
-  openThread(id: number) {
-    this.currentThread = this.messages.find(obj => obj.id === id) as Message;
+  openThread(threadId: number) {
+    this.currentThread = this.messages.find(obj => obj.id === threadId) as Message;
     localStorage.setItem('currentThread', JSON.stringify(this.currentThread));
     this.threadOpen = true;
   }
