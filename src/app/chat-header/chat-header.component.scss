@@ -29,7 +29,8 @@
             @include d-flex();
             img{
                 height: 35px;
-                margin-right: -10px
+                margin-right: -10px;
+                border-radius: 50%;
             }
         }
     }

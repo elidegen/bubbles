@@ -1,3 +1,4 @@
+@if (currentChat) {
 <div class="header-wrapper">
     <div class="chat-name-wrapper">
         <img src="{{getPicture()}}" *ngIf="isChannel()">
@@ -8,7 +9,7 @@
 
         <div class="group-members" (click)="showMemberDialog()">
             <div class="member-pics">
-                    <img src="{{member}}" *ngFor="let member of renderGroupMember()">
+                <img src="{{member}}" *ngFor="let member of userImgArray">
             </div>
             <div class="member-count" *ngIf="groupMemberCount > 0">
                 +{{groupMemberCount}}
@@ -24,3 +25,4 @@
         <img src="assets/img/close_icon.svg">
     </div>
 </div>
+}

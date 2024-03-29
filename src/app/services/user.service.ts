@@ -118,6 +118,10 @@ export class UserService {
   ) { }
 
   getUser(userId: number) {
+    console.log('userid', userId);
+    console.log('userobj',this.users.find(obj => obj.id === userId) as User);
+    
+    
     return this.users.find(obj => obj.id === userId) as User;
   }
 

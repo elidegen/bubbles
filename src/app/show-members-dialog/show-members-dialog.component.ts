@@ -17,7 +17,7 @@ export class ShowMembersDialogComponent {
   constructor(
     private channelService: ChannelService,
     private userService: UserService,
-    private mainService: MainService,
+    public mainService: MainService,
   ) { 
     this.currentChannel = this.channelService.currentChannel;
     this.getMembers();

@@ -57,7 +57,18 @@ export class MessageService {
       const message = await firstValueFrom(this.fetchMessagesForChats(chatId));
       this.messages = this.messages.concat(message)
     }
-    console.log('messages', this.messages);
+    this.setReaction();
+  }
+
+  setReaction(){
+    let messageArray =[];
+    for (const message of this.messages) {
+      message.reactions = [];
+      messageArray.push(message);
+    }
+    this.messages = messageArray;
+    console.log('msg with reaction',this.messages);
+    
   }
 
   fetchMessagesForChats(chatId: number): Observable<Message[]> {

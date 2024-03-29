@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Channel } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { MainService } from '../services/main.service';
   templateUrl: './chat-header.component.html',
   styleUrl: './chat-header.component.scss'
 })
-export class ChatHeaderComponent {
+export class ChatHeaderComponent implements OnInit {
   @Input() currentChat!: Channel | Message;
   userImgArray: string[] = [];
   groupMemberCount: number = 0;
@@ -22,6 +22,9 @@ export class ChatHeaderComponent {
     public messageService: MessageService,
     private mainService: MainService,
   ) { }
+  ngOnInit(): void {
+    this.renderGroupMember();
+  }
 
   addMemberDialog() {
     this.mainService.showPopup = true;
@@ -34,24 +37,24 @@ export class ChatHeaderComponent {
   }
 
   renderGroupMember() {
+    // debugger;
     this.userImgArray = [];
     this.groupMemberCount = 0;
-    console.log('currentchat', this.currentChat);
-    // debugger;
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
       this.currentChat.members.forEach((memberId) => {
-        console.log('get User', this.userService.getUser(memberId));
-
         const userImg = this.userService.getUser(memberId).picture;
+
         if (this.userImgArray.length < 3) {
-          this.userImgArray.push(userImg);
+          // if(userImg != null)
+          this.userImgArray.push(userImg || 'assets/img/profile_placeholder.svg');
         } else {
           this.groupMemberCount++;
         }
       })
-      return this.userImgArray
-    } else {
-      return []
+      //   return this.userImgArray;
+      // } else {
+      //   return []
+      // }
     }
   }
 
@@ -76,7 +79,8 @@ export class ChatHeaderComponent {
   }
 
   getPicture() {
-    if ('is_channel' in this.currentChat && this.currentChat.picture !== '') {
+    // debugger;
+    if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
       return this.currentChat.picture;
     } else {
       return 'assets/img/profile_placeholder.svg'
