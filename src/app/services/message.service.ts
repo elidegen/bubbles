@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
+import { Observable, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface Reaction {
   user: number,
@@ -29,6 +32,36 @@ export class Message {
 })
 
 export class MessageService {
+
+  messagesFromChatUrl:string = environment.baseUrl + 'messages-from-channel/'
+  chatCollection:number[] = [];
+
+  getMessages(){  
+    let messageCollection:Message[] = [];
+    this.chatCollection.forEach(chatId => {
+      this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
+        {
+          next:(data: Message[]) =>{
+          console.log(data);
+            
+          messageCollection = messageCollection.concat(data);
+          //concat klappt noch nicht
+          }
+        }
+      )
+    });
+
+    this.messages = messageCollection;
+    console.log(this.messages);
+    
+  }
+
+  fetchMessagesForChats(chatId:number):Observable<Message[]>{
+    const url = this.messagesFromChatUrl + chatId + '/'
+    return this.http.get<Message[]>(url) 
+  }
+
+
 
   messages: Message[] = [
     {
@@ -277,7 +310,9 @@ export class MessageService {
   currentThread!: Message;
   threadOpen: boolean = false;
 
-  constructor() {
+  constructor(
+    private http:HttpClient,
+  ) {
     let localStorageAsString = localStorage.getItem('currentThread');
     this.currentThread = JSON.parse(localStorageAsString as string);
   }

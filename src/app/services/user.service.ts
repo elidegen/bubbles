@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Channel } from './channel.service';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment.development';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Observable, take } from 'rxjs';
 
 export interface User {
   id?: number,
@@ -16,6 +19,48 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
+
+  userUrl: string = environment.baseUrl + 'users/';
+
+  chatMembers: number[] = [];
+
+  collectChatMembers(member: number) {
+    if (!this.chatMembers.includes(member)) {
+      this.chatMembers.push(member);
+    } 
+  }
+
+
+  getUsers() {
+    const userCollection:User[] = [];
+
+    this.chatMembers.forEach(member => {
+      this.fetchUser(member).pipe(take(1)).subscribe(
+        { 
+          next: (data: User) => {
+            userCollection.push(data);
+          },
+          error: e => {
+            console.log(e);
+            
+          }
+        }
+      )
+    });
+    this.users = userCollection;
+    console.log(this.users);
+  }
+
+
+  fetchUser(member: number): Observable<User> {
+    const url = this.userUrl + member + '/';
+    return this.http.get<User>(url);
+  }
+
+
+
+
+
 
   users: User[] = [
     {
@@ -64,6 +109,7 @@ export class UserService {
 
   constructor(
     private authService: AuthService,
+    private http: HttpClient
   ) { }
 
   getUser(userId: number) {
