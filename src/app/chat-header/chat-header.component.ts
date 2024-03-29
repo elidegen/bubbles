@@ -22,6 +22,7 @@ export class ChatHeaderComponent implements OnInit {
     public messageService: MessageService,
     private mainService: MainService,
   ) { }
+
   ngOnInit(): void {
     this.renderGroupMember();
   }
@@ -37,7 +38,6 @@ export class ChatHeaderComponent implements OnInit {
   }
 
   renderGroupMember() {
-    // debugger;
     this.userImgArray = [];
     this.groupMemberCount = 0;
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
@@ -45,16 +45,11 @@ export class ChatHeaderComponent implements OnInit {
         const userImg = this.userService.getUser(memberId).picture;
 
         if (this.userImgArray.length < 3) {
-          // if(userImg != null)
           this.userImgArray.push(userImg || 'assets/img/profile_placeholder.svg');
         } else {
           this.groupMemberCount++;
         }
       })
-      //   return this.userImgArray;
-      // } else {
-      //   return []
-      // }
     }
   }
 
@@ -79,7 +74,6 @@ export class ChatHeaderComponent implements OnInit {
   }
 
   getPicture() {
-    // debugger;
     if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
       return this.currentChat.picture;
     } else {

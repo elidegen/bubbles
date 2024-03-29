@@ -1,10 +1,10 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
     <div class="card message">
-        @if (!editState) {
-            <p>{{message!.content}}</p>
-        } @else {
+        @if (editState) {
             <input type="text" class="input">
+        } @else {
+            <p>{{message!.content}}</p>
         }
         @if (message.reactions.length > 0) {
         <app-reactions [addedReaction]="addedReaction.asObservable()"

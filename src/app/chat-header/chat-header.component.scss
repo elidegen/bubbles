@@ -16,7 +16,7 @@
 }
 
 .group-members-wrapper {
-    @include d-flex($g: 25px);
+    @include d-flex($g: 15px);
 
     .group-members {
         @include d-flex($g: 20px);

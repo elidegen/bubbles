@@ -1,6 +1,6 @@
 <div class="grouped-msg-wrapper" [ngClass]="{'my-msg': myMessage(groupedMessages[0])}">
     <div class="img-wrapper">
-        <img src="{{getAuthor().picture}}" alt="">
+        <img src="{{getAuthor().picture || 'assets/img/profile_placeholder.svg'}}" alt="">
         <p>{{ getTime() | date:"HH:mm"}}</p>
     </div>
     <div class="msg-wrapper">
