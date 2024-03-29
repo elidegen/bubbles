@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
@@ -15,33 +15,21 @@ import { MainService } from '../services/main.service';
   styleUrl: './message-bar.component.scss'
 })
 export class MessageBarComponent {
-  @Input() currentChat: Channel | Message | undefined;
+  @Input() disabled!: boolean;
+  @Output() messageContent = new EventEmitter<string>();
   @ViewChild('picker') picker!: ElementRef;
   inputContent: string = '';
   showEmojiPicker: boolean = false;
 
   constructor(
-    private channelService: ChannelService,
-    private messageService: MessageService,
-    private authService: AuthService,
     public mainService: MainService,
   ) {
     this.setupClickListener();
    }
 
   sendMsg() {
-    if (this.inputContent.trim()) {
-      let newMessage: Message = {
-        id: 0,
-        author: this.authService.currentUser.id,
-        reactions: [],
-        source: this.currentChat!.id,
-        content: this.inputContent,
-        created_at: new Date().getTime(),
-      }
-      this.messageService.messages.push(newMessage); //send newMessage to backend
-      if ('is_channel' in this.currentChat!)
-        this.channelService.setUnread(this.currentChat!.id);
+    if(this.inputContent.trim()){
+      this.messageContent.emit(this.inputContent);
       this.inputContent = '';
     }
   }

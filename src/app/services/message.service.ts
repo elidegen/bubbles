@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable, firstValueFrom, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Channel, ChannelService } from './channel.service';
+import { AuthService } from './auth.service';
 
 export interface Reaction {
   user: number,
@@ -32,50 +34,10 @@ export class Message {
 })
 
 export class MessageService {
-
   messagesFromChatUrl: string = environment.baseUrl + 'messages-from-channel/'
   chatCollection: number[] = [];
-
-  // getMessagesOld() {
-  //   this.messages = [];
-  //   this.chatCollection.forEach(chatId => {
-  //     this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
-  //       {
-  //         next: (data: Message[]) => {
-  //           console.log('data', data);
-  //           this.messages = this.messages.concat(data);
-  //           console.log('messages', this.messages);
-  //         }
-  //       }
-  //     )
-  //   });
-  // }
-
-  async getMessages() {
-    this.messages = [];
-    for (const chatId of this.chatCollection) {
-      const message = await firstValueFrom(this.fetchMessagesForChats(chatId));
-      this.messages = this.messages.concat(message)
-    }
-    this.setReaction();
-  }
-
-  setReaction(){
-    let messageArray =[];
-    for (const message of this.messages) {
-      message.reactions = [];
-      messageArray.push(message);
-    }
-    this.messages = messageArray;
-    console.log('msg with reaction',this.messages);
-    
-  }
-
-  fetchMessagesForChats(chatId: number): Observable<Message[]> {
-    const url = this.messagesFromChatUrl + chatId + '/'
-    return this.http.get<Message[]>(url)
-  }
-
+  currentThread!: Message;
+  threadOpen: boolean = false;
   messages: Message[] = [
     {
       id: 30,
@@ -320,19 +282,63 @@ export class MessageService {
     }
   ];
 
-  currentThread!: Message;
-  threadOpen: boolean = false;
-
   constructor(
     private http: HttpClient,
+    private authService: AuthService,
+    // private channelService: ChannelService,
   ) {
+
     let localStorageAsString = localStorage.getItem('currentThread');
     this.currentThread = JSON.parse(localStorageAsString as string);
   }
 
+  async getMessages() {
+    this.messages = [];
+    for (const chatId of this.chatCollection) {
+      const message = await firstValueFrom(this.fetchMessagesForChats(chatId));
+      this.messages = this.messages.concat(message)
+    }
+    this.setReaction();
+  }
+
+  updateMessage(message: Message){
+    const index = this.messages.findIndex(obj => obj === message);
+    this.messages[index] = message;
+  }
+
+  // getMessagesOld() {
+  //   this.messages = [];
+  //   this.chatCollection.forEach(chatId => {
+  //     this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
+  //       {
+  //         next: (data: Message[]) => {
+  //           console.log('data', data);
+  //           this.messages = this.messages.concat(data);
+  //           console.log('messages', this.messages);
+  //         }
+  //       }
+  //     )
+  //   });
+  // }
+
+  setReaction() {
+    let messageArray = [];
+    for (const message of this.messages) {
+      message.reactions = [];
+      messageArray.push(message);
+    }
+    this.messages = messageArray;
+    console.log('msg with reaction', this.messages);
+  } //funktion löschen sobald reactions array im backend!
+
+  fetchMessagesForChats(chatId: number): Observable<Message[]> {
+    const url = this.messagesFromChatUrl + chatId + '/'
+    return this.http.get<Message[]>(url)
+  }
+
   groupMsgByAuthor(channelId: number) {
     let groupedArray = [];
-    let currentGroup: any[] = [];
+    let currentGroup: Message[] = [];
     const seperatedArray = this.seperateChannelByDay(channelId);
     for (let i = 0; i < seperatedArray.length; i++) {
       if ('author' in seperatedArray[i]) {

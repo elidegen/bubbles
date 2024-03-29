@@ -6,11 +6,12 @@ import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
 import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
 import { Subject } from 'rxjs';
+import { MessageBarComponent } from '../message-bar/message-bar.component';
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, EmojiPickerComponent, ReactionsComponent],
+  imports: [CommonModule, EmojiPickerComponent, ReactionsComponent, MessageBarComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -53,7 +54,6 @@ export class MessageComponent {
   }
 
   addReaction(character: string) {
-    const index = this.messageService.messages.findIndex(obj => obj === this.message);
     const reaction = {
       user: this.currentUser.id,
       emoji: character,
@@ -64,7 +64,7 @@ export class MessageComponent {
     } else {
       this.message.reactions.push(reaction);
     }
-    this.messageService.messages[index] = this.message;
+    this.messageService.updateMessage(this.message);
     this.addedReaction.next();
   }
 
@@ -73,7 +73,7 @@ export class MessageComponent {
   }
 
   sourceIsChannel() {
-    return !this.messageService.getMessage(this.message.source)
+    return !this.messageService.getMessage(this.message.source);
   }
 
   deleteMessage() {
@@ -81,7 +81,9 @@ export class MessageComponent {
     this.messageService.messages.splice(index, 1);
   }
 
-  editMessage() {
-    this.editState = true
+  editMessage(messageContent: string) {
+    this.message.content = messageContent;
+    this.messageService.updateMessage(this.message);
+    this.editState = false;
   }
 }

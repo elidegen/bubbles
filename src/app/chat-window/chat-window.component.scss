@@ -24,6 +24,11 @@ app-grouped-messages {
     width: 100%;
 }
 
+app-message-bar {
+    
+    padding-right: 10px;
+}
+
 .seperator {
     @extend .small-font;
     padding: 5px;

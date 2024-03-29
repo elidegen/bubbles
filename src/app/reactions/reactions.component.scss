@@ -9,6 +9,7 @@
     background-color: rgb(226, 226, 226);
     padding: 2px 5px;
     border-radius: 15px;
+    z-index: 44;
 
     .reaction-preview {
         @include d-flex();
