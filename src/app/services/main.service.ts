@@ -12,10 +12,11 @@ export class MainService {
   addMembersPopup: boolean = false;
   showMembersPopup: boolean = false;
   sideMenuOpen: boolean = true;
+  fetchingDone: number = 0;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
   categoryList: Array<any> = [];
-  emojiUrl:string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+  emojiUrl: string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
   categoryUrl: string = 'https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
 
   constructor() {
@@ -70,5 +71,11 @@ export class MainService {
     setTimeout(() => {
       this.closePopups();
     }, 3000);
+  }
+
+  deactivateLoader() {
+    this.fetchingDone++;
+    if (this.fetchingDone === 3)
+      this.loader = false;
   }
 }

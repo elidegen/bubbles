@@ -20,52 +20,8 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-
   userUrl: string = environment.baseUrl + 'users/';
-
   chatMembers: number[] = [];
-
-  collectChatMembers(member: number) {
-    if (!this.chatMembers.includes(member)) {
-      this.chatMembers.push(member);
-    }
-  }
-
-  // getUsers() {
-  //   this.users = [];
-  //   console.log('chatmembers', this.chatMembers);
-  //   this.chatMembers.forEach(member => {
-  //     this.fetchUser(member).pipe(take(1)).subscribe(
-  //       {
-  //         next: (data: User) => {
-  //           console.log('getUsers Data', data);
-
-  //           this.users.push(data);
-  //         },
-
-  //         complete: () => {
-  //           console.log('users:', this.users);
-  //         }
-  //       }
-  //     )
-  //   });
-  // }
-
-  async getUsers() {
-    this.users = [];
-    for (const member of this.chatMembers) {
-        const user = await firstValueFrom(this.fetchUser(member));
-        this.users.push(user)
-    }
-    console.log('users', this.users);    
-    this.mainService.loader = false;
-  }
-
-  fetchUser(member: number): Observable<User> {
-    const url = this.userUrl + member;
-    return this.http.get<User>(url);
-  }
-
   users: User[] = [
     {
       id: 1,
@@ -116,6 +72,47 @@ export class UserService {
     private mainService: MainService,
     private http: HttpClient
   ) { }
+
+  // getUsers() {
+  //   this.users = [];
+  //   console.log('chatmembers', this.chatMembers);
+  //   this.chatMembers.forEach(member => {
+  //     this.fetchUser(member).pipe(take(1)).subscribe(
+  //       {
+  //         next: (data: User) => {
+  //           console.log('getUsers Data', data);
+
+  //           this.users.push(data);
+  //         },
+
+  //         complete: () => {
+  //           console.log('users:', this.users);
+  //         }
+  //       }
+  //     )
+  //   });
+  // }
+
+  async getUsers() {
+    this.users = [];
+    for (const member of this.chatMembers) {
+      const user = await firstValueFrom(this.fetchUser(member));
+      this.users.push(user)
+    }
+    console.log('users', this.users);
+    this.mainService.deactivateLoader();
+  }
+
+  fetchUser(member: number): Observable<User> {
+    const url = this.userUrl + member;
+    return this.http.get<User>(url);
+  }
+
+  collectChatMembers(member: number) {
+    if (!this.chatMembers.includes(member)) {
+      this.chatMembers.push(member);
+    }
+  }
 
   getUser(userId: number) {
     return this.users.find(obj => obj.id === userId) as User;

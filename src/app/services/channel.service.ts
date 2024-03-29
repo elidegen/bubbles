@@ -138,6 +138,7 @@ export class ChannelService {
     private messageService: MessageService,
     private http: HttpClient,
     private userService: UserService,
+    private mainService: MainService,
   ) {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
@@ -162,6 +163,7 @@ export class ChannelService {
     this.$chats.next(data);
     this.updateChats();
     console.log('chats', this.chats);
+    this.mainService.deactivateLoader();
   }
 
   fetchChatsForUser(): Observable<Channel[]> {

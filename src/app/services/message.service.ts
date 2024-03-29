@@ -4,6 +4,7 @@ import { Observable, firstValueFrom, take } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Channel, ChannelService } from './channel.service';
 import { AuthService } from './auth.service';
+import { MainService } from './main.service';
 
 export interface Reaction {
   user: number,
@@ -32,7 +33,6 @@ export class Message {
 @Injectable({
   providedIn: 'root'
 })
-
 export class MessageService {
   messagesFromChatUrl: string = environment.baseUrl + 'messages-from-channel/'
   chatCollection: number[] = [];
@@ -284,8 +284,7 @@ export class MessageService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
-    // private channelService: ChannelService,
+    private mainService: MainService,
   ) {
 
     let localStorageAsString = localStorage.getItem('currentThread');
@@ -296,9 +295,10 @@ export class MessageService {
     this.messages = [];
     for (const chatId of this.chatCollection) {
       const message = await firstValueFrom(this.fetchMessagesForChats(chatId));
-      this.messages = this.messages.concat(message)
+      this.messages = this.messages.concat(message);
     }
     this.setReaction();
+    this.mainService.deactivateLoader();
   }
 
   updateMessage(message: Message){
@@ -332,8 +332,8 @@ export class MessageService {
   } //funktion löschen sobald reactions array im backend!
 
   fetchMessagesForChats(chatId: number): Observable<Message[]> {
-    const url = this.messagesFromChatUrl + chatId + '/'
-    return this.http.get<Message[]>(url)
+    const url = this.messagesFromChatUrl + chatId;
+    return this.http.get<Message[]>(url);
   }
 
   groupMsgByAuthor(channelId: number) {
