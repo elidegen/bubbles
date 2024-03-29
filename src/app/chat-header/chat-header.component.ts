@@ -21,14 +21,14 @@ export class ChatHeaderComponent {
     private userService: UserService,
     public messageService: MessageService,
     private mainService: MainService,
-    ) { }
+  ) { }
 
-  addMemberDialog(){
+  addMemberDialog() {
     this.mainService.showPopup = true;
     this.mainService.addMembersPopup = true;
   }
 
-  showMemberDialog(){
+  showMemberDialog() {
     this.mainService.showPopup = true;
     this.mainService.showMembersPopup = true;
   }
@@ -36,10 +36,14 @@ export class ChatHeaderComponent {
   renderGroupMember() {
     this.userImgArray = [];
     this.groupMemberCount = 0;
+    console.log('currentchat', this.currentChat);
+    // debugger;
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
       this.currentChat.members.forEach((memberId) => {
+        console.log('get User', this.userService.getUser(memberId));
+
         const userImg = this.userService.getUser(memberId).picture;
-        if (this.userImgArray.length < 3){
+        if (this.userImgArray.length < 3) {
           this.userImgArray.push(userImg);
         } else {
           this.groupMemberCount++;
@@ -79,7 +83,7 @@ export class ChatHeaderComponent {
     }
   }
 
-  closeThread(){
+  closeThread() {
     this.messageService.threadOpen = false;
   }
 }

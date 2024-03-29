@@ -5,6 +5,7 @@ import { MainService } from './services/main.service';
 import { PopupComponent } from './popup/popup.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AuthService } from './services/auth.service';
+import { ChannelService } from './services/channel.service';
 
 
 @Component({
@@ -18,9 +19,11 @@ export class AppComponent implements OnInit {
   constructor(
     public mainService: MainService,
     public authService: AuthService,
+    public channelService: ChannelService,
     private router: Router
   ) {
-
+    mainService.loader = true;
+    this.channelService.getChatsForUser();
   }
   ngOnInit(): void {
     // if (authService.currentUser) {

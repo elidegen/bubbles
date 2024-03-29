@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable, firstValueFrom, take } from 'rxjs';
+import { MainService } from './main.service';
 
 export interface User {
   id?: number,
@@ -57,6 +58,7 @@ export class UserService {
         this.users.push(user)
     }
     console.log('users', this.users);    
+    this.mainService.loader = false;
   }
 
   fetchUser(member: number): Observable<User> {
@@ -111,6 +113,7 @@ export class UserService {
 
   constructor(
     private authService: AuthService,
+    private mainService: MainService,
     private http: HttpClient
   ) { }
 
