@@ -7,7 +7,10 @@
     <div class="display-members">
         @for (member of currentMembers; track $index) {
         <div class="member-wrapper">
-            <img src="{{member.picture}}">
+            <div class="online-wrapper">
+                <img src="{{member.picture || 'assets/img/profile_placeholder.svg'}}">
+                <div [ngClass]="member.is_online ? 'online' : 'offline'"></div>
+            </div>
             <p>{{member.username}}</p>
         </div>
         }

@@ -1,7 +1,12 @@
 <div class="msg-preview card"
     [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}"
     [class.unread]="!channel.read_by.includes(authService.currentUser.id)">
-    <img src="{{channel.picture || 'assets/img/profile_placeholder.svg'}}" alt="">
+    <div class="online-wrapper">
+        <img src="{{channel.picture || 'assets/img/profile_placeholder.svg'}}" alt="">
+        @if (channel.is_channel === false) {
+        <div [ngClass]="userService.isOnline(channel) ? 'online': 'offline'"></div>
+        }
+    </div>
     <div class="text-wrapper">
         <div class="upper-text">
             <p class="name">{{channel.name}}</p>

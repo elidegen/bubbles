@@ -1,7 +1,14 @@
 @if (currentChat) {
 <div class="header-wrapper">
     <div class="chat-name-wrapper">
-        <img src="{{getPicture()}}" *ngIf="isChannel()">
+        @if (!isMessage()) {
+        <div class="online-wrapper">
+            <img src="{{getPicture() || 'assets/img/profile_placeholder.svg'}}" alt="">
+            @if (!isChannel()) {
+            <div [ngClass]="isOnline() ? 'online' : 'offline'"></div>
+            }
+        </div>
+        }
         <p>{{getName()}}</p>
     </div>
 
@@ -21,7 +28,7 @@
         </div>
     </div>
 
-    <div class="close-thread" *ngIf="isThread()" (click)="closeThread()">
+    <div class="close-thread" *ngIf="isMessage()" (click)="closeThread()">
         <img src="assets/img/close_icon.svg">
     </div>
 </div>

@@ -18,7 +18,7 @@ export class ChatHeaderComponent implements OnInit {
   groupMemberCount: number = 0;
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     public messageService: MessageService,
     private mainService: MainService,
   ) { }
@@ -57,7 +57,7 @@ export class ChatHeaderComponent implements OnInit {
     return 'is_channel' in this.currentChat && this.currentChat.is_channel === true;
   }
 
-  isThread() {
+  isMessage() {
     return 'reactions' in this.currentChat;
   }
 
@@ -83,5 +83,9 @@ export class ChatHeaderComponent implements OnInit {
 
   closeThread() {
     this.messageService.threadOpen = false;
+  }
+
+  isOnline() {
+    return this.userService.isOnline(this.currentChat as Channel);
   }
 }

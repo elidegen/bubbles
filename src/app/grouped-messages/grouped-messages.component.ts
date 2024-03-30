@@ -18,7 +18,7 @@ export class GroupedMessagesComponent {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    public userService: UserService
   ) { }
 
   myMessage(message: Message) {
@@ -33,7 +33,12 @@ export class GroupedMessagesComponent {
   getTime() {
     const lastMsg = this.groupedMessages[this.groupedMessages.length - 1];
     let date = new Date(lastMsg.created_at)
-    
+
     return date
+  }
+
+  isOnline() {
+    const author = this.userService.getUser(this.groupedMessages[0].author);
+    return author.is_online;
   }
 }

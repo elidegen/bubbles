@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { User, UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-show-members-dialog',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './show-members-dialog.component.html',
   styleUrl: './show-members-dialog.component.scss'
 })

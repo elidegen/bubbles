@@ -165,3 +165,28 @@ $text-color: $color5;
         @extend .large-font
     }
 }
+
+.online-wrapper {
+    position: relative;
+    @include d-flex();
+
+    .status {
+        height: 30%;
+        width: 30%;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border: 2px solid $color2;
+    }
+
+    .online {
+        background-color: $valid-color;
+        @extend .status;
+    }
+
+    .offline {
+        background-color: $error-color;
+        @extend .status;
+    }
+}
