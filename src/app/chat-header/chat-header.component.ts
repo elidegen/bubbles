@@ -65,7 +65,7 @@ export class ChatHeaderComponent implements OnInit {
     if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
       return this.currentChat.name;
     } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
-      return this.userService.getInterlocutor(this.currentChat)?.name
+      return this.userService.getInterlocutor(this.currentChat)?.username
     } else if ('reactions' in this.currentChat) {
       return 'Thread'
     } else {

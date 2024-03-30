@@ -8,7 +8,7 @@ import { MainService } from './main.service';
 
 export interface User {
   id?: number,
-  name: string,
+  username: string;
   email: string,
   picture: string,
   password?: string,
@@ -25,42 +25,42 @@ export class UserService {
   users: User[] = [
     {
       id: 1,
-      name: "USER1",
+      username: "USER1",
       email: "joshua@mail.com",
       picture: 'assets/img/profile_placeholder_blue.svg',
       is_online: false,
     },
     {
       id: 10,
-      name: "CurrentUser",
+      username: "CurrentUser",
       email: "joshua@mail.com",
       picture: 'assets/img/profile_placeholder_blue.svg',
       is_online: false,
     },
     {
       id: 11,
-      name: "Joshua",
+      username: "Joshua",
       email: "joshua@mail.com",
       picture: 'assets/img/profile_placeholder_red.svg',
       is_online: false,
     },
     {
       id: 12,
-      name: "Elijah",
+      username: "Elijah",
       email: "elijah@mail.com",
       picture: 'assets/img/profile_placeholder_green.svg',
       is_online: false,
     },
     {
       id: 13,
-      name: "Max",
+      username: "Max",
       email: "max@mail.com",
       picture: 'assets/img/profile_placeholder.svg',
       is_online: false,
     },
     {
       id: 14,
-      name: "Anna",
+      username: "Anna",
       email: "anna@mail.com",
       picture: 'assets/img/profile_placeholder_blue.svg',
       is_online: false,

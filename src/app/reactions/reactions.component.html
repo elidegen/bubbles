@@ -4,7 +4,7 @@
             @for (reaction of msgReactions; track $index) {
                 <div class="reaction-detail">
                     <p>{{reaction.emoji}}</p>
-                    <p>{{userService.getUser(reaction.user).name}}</p>
+                    <p>{{userService.getUser(reaction.user).username}}</p>
                 </div>
             }
         </div>
