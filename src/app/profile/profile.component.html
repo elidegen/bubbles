@@ -4,12 +4,24 @@
         <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
     </div>
     <div class="img-wrapper">
-        <img src="assets/img/profile_placeholder.svg" alt="">        
+        <div class="add-profile-img" [ngClass]="{'display': selectedImg}">
+            @if (!selectedImg) {
+                <input type="file" name="file" id="file" class="inputfile" (change)="onImgSelected($event)"/>
+                <label for="file">Choose img</label>
+            } @else {
+                <button  (click)="uploadImg(authService.currentUser.id)" class="button1">
+                    Upload
+                </button>
+            }
+            
+        </div>
+
+        <img src="assets/img/profile_placeholder.svg" alt="">
     </div>
 
     <div class="details">
 
-        <p>Elijah Degen</p>
+        <p>{{ authService.currentUser.username }}</p>
 
         <div class="online-status">
             <div class="online-circle"></div>
@@ -22,7 +34,7 @@
                 <p>E-Mail Adress</p>
             </div>
             <a href="mailto:elijah@mail.com" class="e-mail">
-                elijah&#64;mail.com                
+                {{ authService.currentUser.email }}
             </a>
         </div>
     </div>
