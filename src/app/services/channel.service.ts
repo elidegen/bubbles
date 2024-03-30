@@ -144,6 +144,16 @@ export class ChannelService {
     this.currentChannel = JSON.parse(localStorageAsString as string);
   }
 
+
+  getImg(imgUrl:string | undefined){
+    if (imgUrl != null) {
+      return environment.baseUrl + imgUrl;
+    } else {
+      return 'assets/img/profile_placeholder.svg';
+    }
+    
+  }
+
   // getChatsForUserOld() {
   //   this.fetchChatsForUser().pipe(take(1)).subscribe(
   //     {

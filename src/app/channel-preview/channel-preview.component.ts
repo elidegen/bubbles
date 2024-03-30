@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Message, Reaction, MessageService } from '../services/message.service';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-channel-preview',
@@ -15,17 +16,22 @@ import { AuthService } from '../services/auth.service';
 export class ChannelPreviewComponent implements OnInit {
   @Input() channel!: Channel;
   latestMsg!: Message;
+  baseUrl:string;
 
   constructor(
     public channelService: ChannelService,
     public messageService: MessageService,
     public userService: UserService,
     public authService: AuthService,
-  ) { }
+  ) { 
+    this.baseUrl = environment.baseUrl;
+  }
 
   ngOnInit(): void {
     this.latestMsg = this.getLatestMsg();
   }
+
+  
 
   getLatestMsg() {
     if (this.messageService.filterByChannel(this.channel.id).length > 0) {

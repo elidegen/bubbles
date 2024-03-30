@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Channel } from '../services/channel.service';
+import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-chat-header',
@@ -21,6 +22,7 @@ export class ChatHeaderComponent implements OnInit {
     public userService: UserService,
     public messageService: MessageService,
     private mainService: MainService,
+    public channelService: ChannelService
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class ChatHeaderComponent implements OnInit {
 
   getPicture() {
     if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
-      return this.currentChat.picture;
+      return  environment.baseUrl + this.currentChat.picture;
     } else {
       return 'assets/img/profile_placeholder.svg'
     }

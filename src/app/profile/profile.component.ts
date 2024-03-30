@@ -3,7 +3,7 @@ import { MainService } from '../services/main.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from '../services/auth.service';
+import { AuthService, CurrentUser } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 
@@ -60,12 +60,10 @@ export class ProfileComponent {
     if (this.selectedImg) {
       let formdata = new FormData;
       formdata.append('picture', this.selectedImg);
-      const data = await lastValueFrom(this.http.post(url, formdata));
+      const data = await lastValueFrom(this.http.post<CurrentUser>(url, formdata));
       console.log(data);
-      // Link funktioniert noch nicht richtig
+      this.authService.currentUser = data;
       this.selectedImg = undefined;
-      
-      
     }
   }
 

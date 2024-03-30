@@ -5,6 +5,7 @@ export interface CurrentUser {
   username: string,
   email: string,
   picture: null | string
+  is_online: boolean;
 }
 
 @Injectable({
@@ -18,6 +19,8 @@ export class AuthService {
     id: 2,
     username: "CurrentUser",
     email: "guestuser@mailinator.com",
-    picture: '',
+    picture: null,
+    is_online:true
+    
   }
 }

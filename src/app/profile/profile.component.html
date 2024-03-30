@@ -13,10 +13,14 @@
                     Upload
                 </button>
             }
-            
         </div>
-
-        <img src="assets/img/profile_placeholder.svg" alt="">
+        
+        @if (authService.currentUser.picture) {
+          <img src="{{ authService.currentUser.picture}}" alt="">  
+        } @else {
+            <img src="assets/img/profile_placeholder.svg" alt="">
+        }
+        
     </div>
 
     <div class="details">

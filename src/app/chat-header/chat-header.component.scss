@@ -4,6 +4,10 @@
     @include d-flex($jc: space-between);
     padding-right: 10px;
     min-height: 50px;
+    img {
+        border-radius: 50%;
+        // box-shadow: 1px 1px 10px rgb(60, 59, 59);
+    }
 }
 
 .chat-name-wrapper {
@@ -29,6 +33,7 @@
             @include d-flex();
             img{
                 height: 35px;
+                width: 35px;
                 margin-right: -10px;
                 border-radius: 50%;
             }
