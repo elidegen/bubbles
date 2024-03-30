@@ -14,12 +14,13 @@
                 </button>
             }
         </div>
-        
-        @if (authService.currentUser.picture) {
+
+        <img src="{{ authService.getImg() }}" alt="">
+        <!-- @if (authService.currentUser.picture) {
           <img src="{{ authService.currentUser.picture}}" alt="">  
         } @else {
-            <img src="assets/img/profile_placeholder.svg" alt="">
-        }
+            <img src=" {{  }} " alt="">
+        } -->
         
     </div>
 

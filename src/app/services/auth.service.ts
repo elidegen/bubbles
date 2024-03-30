@@ -20,7 +20,14 @@ export class AuthService {
     username: "CurrentUser",
     email: "guestuser@mailinator.com",
     picture: null,
-    is_online:true
-    
+    is_online: true
+
+  }
+
+  getImg() {
+    if (this.currentUser.picture != null) {
+      return this.currentUser.picture;
+    }
+    return 'assets/img/profile_placeholder.svg';
   }
 }
