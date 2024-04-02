@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction(getCharater($event))"></app-emoji-picker>
+<app-emoji-picker-dialog #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction(getCharater($event))"></app-emoji-picker-dialog>

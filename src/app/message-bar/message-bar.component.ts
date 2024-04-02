@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
+import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-message-bar',
   standalone: true,
-  imports: [FormsModule, EmojiPickerComponent, CommonModule],
+  imports: [FormsModule, EmojiPickerDialogComponent, CommonModule],
   templateUrl: './message-bar.component.html',
   styleUrl: './message-bar.component.scss'
 })
@@ -26,7 +26,7 @@ export class MessageBarComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.myInput.nativeElement.focus();
+    // this.myInput.nativeElement.focus();
   }
 
   sendMsg() {

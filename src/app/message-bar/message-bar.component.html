@@ -2,7 +2,6 @@
     <div class="msg-input">
         <input type="text" [disabled]="disabled" #myInput (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
             placeholder="Type a message...">
-        <!-- {{ myInput.focus() }} -->
         <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg" alt="">
     </div>
     <div class="sendbutton" [ngClass]="{'disabled': disabled}" (click)="sendMsg()">
@@ -10,4 +9,4 @@
     </div>
 </div>
 
-<app-emoji-picker #picker *ngIf="showEmojiPicker" (newEmoji)="typeEmoji($event)"></app-emoji-picker>
+<app-emoji-picker-dialog #picker *ngIf="showEmojiPicker" (newEmoji)="typeEmoji($event)"></app-emoji-picker-dialog>

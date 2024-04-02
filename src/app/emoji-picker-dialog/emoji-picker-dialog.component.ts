@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MainService } from '../services/main.service';
 
 @Component({
-  selector: 'app-emoji-picker',
+  selector: 'app-emoji-picker-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './emoji-picker.component.html',
-  styleUrl: './emoji-picker.component.scss'
+  templateUrl: './emoji-picker-dialog.component.html',
+  styleUrl: './emoji-picker-dialog.component.scss'
 })
-export class EmojiPickerComponent {
+export class EmojiPickerDialogComponent {
 
   constructor(
     public mainService: MainService,

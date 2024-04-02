@@ -6,16 +6,14 @@
     </div>
 
     <div class="content" *ngSwitchCase="false">
-        <p>
-            Channels serve your team for communication. Ideally, they should be topic-specific, for example, #marketing.
-        </p>
+        <p>Channels serve your team for communication. Ideally, they should be topic-specific, for example, #marketing.</p>
 
-        <div class="new-channel-input">
+        <div class="input-wrapper">
             <p>Channel Name</p>
             <input type="text" class="input" required placeholder="e.g. Development Team" [(ngModel)]="newChannel.name">
         </div>
 
-        <div class="new-channel-input">
+        <div class="input-wrapper">
             <p>Description</p>
             <input type="text" class="input" placeholder="Your description" [(ngModel)]="newChannel.description">
         </div>

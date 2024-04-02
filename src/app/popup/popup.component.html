@@ -3,16 +3,19 @@
 
 
 <div class="popup-content">
-    
+
     <div class="error-popup card" *ngIf="false">
         <span class="error">{{ mainService.errorMessage }}</span>
     </div>
 
-    <app-new-channel-dialog *ngIf="mainService.addChannelPopup == true"></app-new-channel-dialog>
+    <app-new-channel-dialog *ngIf="mainService.addChannelPopup === true"></app-new-channel-dialog>
 
-    <app-profile *ngIf="mainService.profilePopup == true"></app-profile>
+    <app-profile-dialog *ngIf="mainService.profilePopup === true"></app-profile-dialog>
 
-    <app-add-members-dialog *ngIf="mainService.addMembersPopup == true"></app-add-members-dialog>
-    
-    <app-show-members-dialog *ngIf="mainService.showMembersPopup == true"></app-show-members-dialog>
+    <app-add-members-dialog *ngIf="mainService.addMembersPopup === true"></app-add-members-dialog>
+
+    <app-show-members-dialog *ngIf="mainService.showMembersPopup === true"></app-show-members-dialog>
+
+    <app-channel-details-dialog *ngIf="mainService.showEditChannelPopup === true"></app-channel-details-dialog>
+
 </div>

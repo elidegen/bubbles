@@ -8,7 +8,7 @@
     @include d-flex($fd: column, $ai: flex-start, $g: 25px);
 }
 
-.new-channel-input {
+.input-wrapper {
     width: 100%;
 
     p {

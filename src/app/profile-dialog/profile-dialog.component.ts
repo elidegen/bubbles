@@ -8,13 +8,13 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profile-dialog',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  templateUrl: './profile-dialog.component.html',
+  styleUrl: './profile-dialog.component.scss'
 })
-export class ProfileComponent {
+export class ProfileDialogComponent {
 
   selectedImg: File | undefined;
 

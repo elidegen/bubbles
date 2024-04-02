@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="header">
+        <!-- @if (editName) {
+        <p>Edit channel</p>
+        } @else { -->
+        <p>Channel details</p>
+        <!-- } -->
+        <img src="assets/img/close_icon.svg" alt="" class="img-button" (click)="mainService.closePopups()">
+    </div>
+
+    <div class="content">
+        <div class="input-wrapper">
+            <div class="mini-header">
+                <p>Channel name</p>
+                <!-- <span>edit</span> -->
+            </div>
+
+            <div class="mini-content">
+                @if (editName) {
+                    <div class="card">
+                        <input type="text" class="input" placeholder="Entwicklerteam">
+                        <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editName = false">
+                    </div>
+                } @else {
+                <div class="card">
+                    <span class="info">Entwicklerteam</span>
+                    <img src="assets/img/edit_document_icon.svg" alt="" class="img-button" (click)="editName = true">
+                </div>
+                }
+            </div>
+        </div>
+
+        <div class="input-wrapper">
+            <div class="mini-header">
+                <p>Description</p>
+                <!-- <span>edit</span> -->
+            </div>
+
+            <div class="mini-content">
+                @if (editDesc) {
+                    <div class="card">
+                        <input type="text" class="input" placeholder="das ist die beschreibung des channels">
+                        <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editDesc = false">
+                    </div>
+                } @else {
+                <div class="card">
+                    <span>Das ist die aktuelle beschreibung des channels</span>
+                    <img src="assets/img/edit_document_icon.svg" alt="" class="img-button" (click)="editDesc = true">
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="button-wrapper">
+        <button class="button1">Leave channel</button>
+    </div>
+</div>

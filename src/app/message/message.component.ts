@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
+import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { MessageBarComponent } from '../message-bar/message-bar.component';
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, EmojiPickerComponent, ReactionsComponent, MessageBarComponent],
+  imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })

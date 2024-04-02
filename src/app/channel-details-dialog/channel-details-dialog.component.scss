@@ -1,0 +1,43 @@
+@import "../new-channel-dialog/new-channel-dialog.component.scss";
+@import "../library.scss";
+
+.card {
+    min-width: 400px;
+}
+
+.content,
+.input {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+.mini-header {
+    @include d-flex($jc: space-between);
+
+    span {
+        cursor: pointer;
+        font-size: 15px;
+        color: $color4;
+    }
+}
+
+.mini-content {
+
+    .card {
+        margin-top: 5px;
+        background-color: $color1;
+        @include d-flex($jc: space-between);
+        padding: 10px 15px;
+
+        span {
+            font-size: 20px;
+        }
+
+        .img-button {
+            background-color: $color1;
+        }
+    }
+
+}

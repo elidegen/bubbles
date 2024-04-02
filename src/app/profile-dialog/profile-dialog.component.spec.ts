@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmojiPickerComponent } from './emoji-picker.component';
+import { ProfileDialogComponent } from './profile-dialog.component';
 
-describe('EmojiPickerComponent', () => {
-  let component: EmojiPickerComponent;
-  let fixture: ComponentFixture<EmojiPickerComponent>;
+describe('ProfileDialogComponent', () => {
+  let component: ProfileDialogComponent;
+  let fixture: ComponentFixture<ProfileDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmojiPickerComponent]
+      imports: [ProfileDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EmojiPickerComponent);
+    fixture = TestBed.createComponent(ProfileDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
