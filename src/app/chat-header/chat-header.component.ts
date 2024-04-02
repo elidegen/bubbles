@@ -77,7 +77,7 @@ export class ChatHeaderComponent implements OnInit {
 
   getPicture() {
     if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
-      return  environment.baseUrl + this.currentChat.picture;
+      return  environment.baseUrl.slice(0, -1) + this.currentChat.picture;
     } else {
       return 'assets/img/profile_placeholder.svg'
     }
