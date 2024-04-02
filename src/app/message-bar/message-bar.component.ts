@@ -1,8 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Channel, ChannelService } from '../services/channel.service';
-import { AuthService } from '../services/auth.service';
-import { Message, MessageService } from '../services/message.service';
 import { EmojiPickerComponent } from '../emoji-picker/emoji-picker.component';
 import { CommonModule } from '@angular/common';
 import { MainService } from '../services/main.service';
@@ -14,10 +11,11 @@ import { MainService } from '../services/main.service';
   templateUrl: './message-bar.component.html',
   styleUrl: './message-bar.component.scss'
 })
-export class MessageBarComponent {
+export class MessageBarComponent implements AfterViewInit {
   @Input() disabled!: boolean;
   @Output() messageContent = new EventEmitter<string>();
   @ViewChild('picker') picker!: ElementRef;
+  @ViewChild('myInput') myInput!: ElementRef;
   inputContent: string = '';
   showEmojiPicker: boolean = false;
 
@@ -25,10 +23,14 @@ export class MessageBarComponent {
     public mainService: MainService,
   ) {
     this.setupClickListener();
-   }
+  }
+
+  ngAfterViewInit(): void {
+    this.myInput.nativeElement.focus();
+  }
 
   sendMsg() {
-    if(this.inputContent.trim()){
+    if (this.inputContent.trim()) {
       this.messageContent.emit(this.inputContent);
       this.inputContent = '';
     }
@@ -44,9 +46,9 @@ export class MessageBarComponent {
     });
   }
 
-  openEmojiPicker(){
+  openEmojiPicker() {
     setTimeout(() => {
-      this.showEmojiPicker = true;      
+      this.showEmojiPicker = true;
     }, 1);
   }
 }

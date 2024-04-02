@@ -54,18 +54,15 @@ export class ProfileComponent {
     return file.type === 'image/jpeg' || file.type === 'image/png';
   }
 
-
   async uploadImg(userId: number) {
     const url = environment.baseUrl + 'upload_img/' + userId + '/';
     if (this.selectedImg) {
       let formdata = new FormData;
       formdata.append('picture', this.selectedImg);
       const data = await lastValueFrom(this.http.post<CurrentUser>(url, formdata));
-      console.log(data);
+      console.log('data', data);
       this.authService.currentUser = data;
       this.selectedImg = undefined;
     }
   }
-
-
 }

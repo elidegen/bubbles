@@ -73,26 +73,6 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  // getUsers() {
-  //   this.users = [];
-  //   console.log('chatmembers', this.chatMembers);
-  //   this.chatMembers.forEach(member => {
-  //     this.fetchUser(member).pipe(take(1)).subscribe(
-  //       {
-  //         next: (data: User) => {
-  //           console.log('getUsers Data', data);
-
-  //           this.users.push(data);
-  //         },
-
-  //         complete: () => {
-  //           console.log('users:', this.users);
-  //         }
-  //       }
-  //     )
-  //   });
-  // }
-
   async getUsers() {
     this.users = [];
     for (const member of this.chatMembers) {

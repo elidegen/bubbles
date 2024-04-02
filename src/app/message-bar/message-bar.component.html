@@ -1,7 +1,8 @@
 <div class="input-wrapper">
     <div class="msg-input">
-        <input type="text" [disabled]="disabled" (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
+        <input type="text" [disabled]="disabled" #myInput (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
             placeholder="Type a message...">
+        <!-- {{ myInput.focus() }} -->
         <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg" alt="">
     </div>
     <div class="sendbutton" [ngClass]="{'disabled': disabled}" (click)="sendMsg()">
