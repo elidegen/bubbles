@@ -147,7 +147,7 @@ export class ChannelService {
 
   getImg(imgUrl:string | undefined){
     if (imgUrl != null) {
-      return environment.baseUrl + imgUrl;
+      return environment.baseUrl.slice(0, -1) + imgUrl;
     } else {
       return 'assets/img/profile_placeholder.svg';
     }
