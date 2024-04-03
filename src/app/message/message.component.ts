@@ -65,6 +65,7 @@ export class MessageComponent {
       this.message.reactions.push(reaction);
     }
     this.messageService.updateMessage(this.message);
+    this.messageService.putMessage(this.message);
     this.addedReaction.next();
   }
 

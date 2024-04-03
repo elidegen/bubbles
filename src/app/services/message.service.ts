@@ -406,4 +406,23 @@ export class MessageService {
     this.currentThread = this.currentMessages.find(obj => obj.id === threadId) as Message;
     this.threadOpen = true;
   }
+
+  async postMessage(endpoint: string, message:Message){
+     let url = environment.baseUrl + endpoint;
+     let response = await firstValueFrom(this.http.post(url, message));
+     console.log(response);
+     
+  }
+
+
+  async putMessage(message:Message){
+    let endpoint = 'messages/' ///TODO Thread oder Message?
+     let url = environment.baseUrl + endpoint + message.id;
+     let response = await firstValueFrom(this.http.put(url, message));
+     console.log(response);
+     
+  }
+
+  
+
 }
