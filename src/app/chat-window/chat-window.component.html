@@ -25,5 +25,5 @@
         }
     </div>
 
-    <app-message-bar (messageContent)="channelService.sendMsg($event, channelToDisplay)" [disabled]="channelToDisplay === undefined"></app-message-bar>
+    <app-message-bar (messageContent)="channelService.sendMsg($event, isThread)" [disabled]="channelToDisplay === undefined"></app-message-bar>
 </div>

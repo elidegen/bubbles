@@ -258,22 +258,22 @@ export class ChannelService {
     }
   }
 
-  sendMsg(messageContent: string, currentChat: Channel | Message) {
+  sendMsg(messageContent: string, isThread: boolean) {
     if (messageContent.trim()) {
       let newMessage: Message = {
         id: 0,
         author: this.authService.currentUser.id,
         reactions: [],
-        source: currentChat.id,
+        source: isThread ? this.messageService.currentThread.id : this.currentChannel.id,
         content: messageContent,
         created_at: new Date().getTime(),
       }
 
-      if(this.messageService.currentMessages.find(obj => obj.id === currentChat.id)){
-        this.messageService.threads.push(newMessage)
+      if(isThread){
+        this.messageService.threads.push(newMessage);
       } else {
         this.messageService.currentMessages.push(newMessage);
-        this.setUnread(currentChat.id);
+        this.setUnread(this.currentChannel.id);
       }
     }
   }
