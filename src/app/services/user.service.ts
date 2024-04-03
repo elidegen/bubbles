@@ -74,25 +74,20 @@ export class UserService {
   ) { }
 
   async getUsers() {
-    this.users = [];
-    for (const member of this.chatMembers) {
-      const user = await firstValueFrom(this.fetchUser(member));
-      this.users.push(user)
-    }
+    this.users = await firstValueFrom(this.fetchUsers());
     console.log('users', this.users);
     this.mainService.deactivateLoader();
   }
 
-  fetchUser(member: number): Observable<User> {
-    const url = this.userUrl + member;
-    return this.http.get<User>(url);
+  fetchUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl);
   }
 
-  collectChatMembers(member: number) {
-    if (!this.chatMembers.includes(member)) {
-      this.chatMembers.push(member);
-    }
-  }
+  // collectChatMembers(member: number) {
+  //   if (!this.chatMembers.includes(member)) {
+  //     this.chatMembers.push(member);
+  //   }
+  // }
 
   getUser(userId: number) {
     return this.users.find(obj => obj.id === userId) as User;
@@ -104,7 +99,7 @@ export class UserService {
     return interlocutor;
   }
 
-  isOnline(channel: Channel){
+  isOnline(channel: Channel) {
     const interlocutor = this.getInterlocutor(channel);
     return interlocutor.is_online;
   }

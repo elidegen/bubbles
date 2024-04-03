@@ -27,16 +27,29 @@ export class Channel {
   }
 }
 
+export interface ChatsAndPreview {
+  channels: Channel[],
+  preview_messages: Message[],
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChannelService {
 
-  getChannelsUrl: string = environment.baseUrl + 'channels-for-user/' + this.authService.currentUser.id;
-  $chats: BehaviorSubject<Channel[]> = new BehaviorSubject<Channel[]>([]);
+  getChannelsUrl: string = environment.baseUrl + 'channels-and-preview/' + this.authService.currentUser.id;
+
+  // $chats: BehaviorSubject<Channel[]> = new BehaviorSubject<Channel[]>([]);
+  // $chatPreview: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
+
+  $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
+    channels: [],
+    preview_messages: [],
+  });
   channels: Channel[] = [];
   directMessages: Channel[] = [];
   currentChannel!: Channel;
+  chatPreviews: Message[] = [];
   chats: Channel[] = [
     {
       id: 20,
@@ -142,51 +155,50 @@ export class ChannelService {
   ) {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
+    if (this.currentChannel) {
+      messageService.getMessagesAndThread(this.currentChannel.id);
+    }
   }
 
 
-  getImg(imgUrl:string | undefined){
+  getImg(imgUrl: string | undefined) {
     if (imgUrl != null) {
       return environment.baseUrl.slice(0, -1) + imgUrl;
     } else {
       return 'assets/img/profile_placeholder.svg';
     }
-    
+
   }
 
-  // getChatsForUserOld() {
-  //   this.fetchChatsForUser().pipe(take(1)).subscribe(
-  //     {
-  //       next: (data: Channel[]) => {
-  //         this.$chats.next(data);
-  //         this.updateChats();
-
-  //       },
-  //       error: () => {
-  //         this.mainService.errorLog('Error by fetching channels')
-  //       }
-  //     });
-  // }
+  async getChatsForUserOld() {
+    // const data = await firstValueFrom(this.fetchChatsForUser());
+    // this.$chats.next(data);
+    // this.updateChats();
+    // console.log('chats', this.chats);
+    // this.mainService.deactivateLoader();
+  }
 
   async getChatsForUser() {
-    const data = await firstValueFrom(this.fetchChatsForUser());
-    this.$chats.next(data);
-    this.updateChats();
-    console.log('chats', this.chats);
+    const data = await firstValueFrom(this.fetchChatsAndPreview());
+    this.$chatsAndPreview.next(data);
+
+    this.subscribeChatsAndPreview();
     this.mainService.deactivateLoader();
   }
 
-  fetchChatsForUser(): Observable<Channel[]> {
-    return this.http.get<Channel[]>(this.getChannelsUrl);
+  fetchChatsAndPreview(): Observable<ChatsAndPreview> {
+    return this.http.get<ChatsAndPreview>(this.getChannelsUrl);
   }
 
-  updateChats() {
-    this.$chats.subscribe(data => {
-      this.chats = data;
+  subscribeChatsAndPreview() {
+    this.$chatsAndPreview.subscribe(data => {
+      this.chats = data.channels;
+      this.chatPreviews = data.preview_messages;
+      console.log('previews:', this.chatPreviews);
+      console.log('chats: ', this.chats);
+
       this.filterChats();
-      this.collectData();
       this.userService.getUsers();
-      this.messageService.getMessages();
     });
   }
 
@@ -194,14 +206,14 @@ export class ChannelService {
    * For each chat, we collect the members to fetch the userdata from. 
    * this.userService.collectUsers(member) : We collect an sort the members to prevent fetching userdata twice.
    */
-  collectData() {
-    this.chats.forEach(chat => {
-      for (let member of chat.members) {
-        this.userService.collectChatMembers(member);
-      }
-      this.messageService.chatCollection.push(chat.id);
-    });
-  }
+  // collectData() {
+  //   this.chats.forEach(chat => {
+  //     for (let member of chat.members) {
+  //       this.userService.collectChatMembers(member);
+  //     }
+  //     // this.messageService.chatCollection.push(chat.id);
+  //   });
+  // }
 
   openChannel(id: number) {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
@@ -215,7 +227,7 @@ export class ChannelService {
     }); //filters only channels that have currentuser as member
 
     this.directMessages = this.chats.filter(channel => {
-      return channel.is_channel === false && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
+      return channel.is_channel === false //&& channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
     });
   }
 
@@ -262,7 +274,7 @@ export class ChannelService {
         source: currentChat.id,
         content: messageContent,
         created_at: new Date().getTime(),
-      } 
+      }
       this.messageService.messages.push(newMessage); //send newMessage to backend
       // if ('is_channel' in currentChat)
       //   this.channelService.setUnread(currentChat.id);
