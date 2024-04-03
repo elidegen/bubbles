@@ -48,11 +48,11 @@ export class ChannelPreviewComponent implements OnInit {
   // }
 
   getPreview() {
-    // if (this.getLatestMsg().author !== 0) {
+    if (this.getLatestMsg().author !== 0) {
     return this.getAuthor() + ': ' + this.getLatestMsg().content
-    // } else {
-    //   return 'Empty conversation'
-    // }
+    } else {
+      return 'Empty conversation'
+    }
   }
 
   getAuthor() {

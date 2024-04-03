@@ -43,7 +43,7 @@ export class MessageService {
   // chatCollection: number[] = [];
   currentThread!: Message;
   threadOpen: boolean = false;
-  
+
   $messagesAndThread: BehaviorSubject<MessagesAndThread> = new BehaviorSubject<MessagesAndThread>({
     messages: [],
     thread_messages: [],
@@ -358,10 +358,10 @@ export class MessageService {
   //   console.log('msg with reaction', this.messages);
   // } //funktion löschen sobald reactions array im backend!
 
-  groupMsgByAuthor(channelId: number) {
+  groupMsgByAuthor(channelId: number, isThread: boolean) {
     let groupedArray = [];
     let currentGroup: Message[] = [];
-    const seperatedArray = this.seperateChannelByDay(channelId);
+    const seperatedArray = this.seperateChannelByDay(channelId, isThread);
     for (let i = 0; i < seperatedArray.length; i++) {
       if ('author' in seperatedArray[i]) {
         const message = seperatedArray[i] as Message;
@@ -381,8 +381,9 @@ export class MessageService {
     return groupedArray;
   }
 
-  seperateChannelByDay(channelId: number) {
-    const sortedArray = this.sortChannel(channelId);
+  seperateChannelByDay(channelId: number, isThread: boolean) {
+    // const sortedArray = this.sortChannel(channelId);
+    const sortedArray = this.filterByChannel(channelId, isThread);
     let seperatedArray = [];
     let currentDay;
     for (let i = 0; i < sortedArray.length; i++) {
@@ -404,14 +405,18 @@ export class MessageService {
     )
   }
 
-  sortChannel(channelId: number) {
-    const filteredArray = this.filterByChannel(channelId);
-    const sortedArray = filteredArray.sort((a, b) => a.created_at - b.created_at);
-    return sortedArray;
-  }
+  // sortChannel(channelId: number) {
+  //   const filteredArray = this.filterByChannel(channelId);
+  //   const sortedArray = filteredArray.sort((a, b) => a.created_at - b.created_at);
+  //   return sortedArray;
+  // }
 
-  filterByChannel(channelId: number) {
-    return this.messages.filter(obj => obj.source == channelId);
+  filterByChannel(channelId: number, isThread: boolean) {
+    if (isThread) {
+      return this.threads.filter(obj => obj.source === channelId);
+    } else {
+      return this.currentMessages;
+    }
   }
 
   getMessage(messageId: number) {

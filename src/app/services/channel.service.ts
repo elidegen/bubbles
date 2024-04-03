@@ -219,6 +219,7 @@ export class ChannelService {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
+    this.messageService.getMessagesAndThread(id);
   }
 
   filterChats() {

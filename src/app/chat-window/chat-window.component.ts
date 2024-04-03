@@ -16,21 +16,32 @@ import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.c
 })
 export class ChatWindowComponent {
   @Input() channelToDisplay!: Channel | Message;
+  @Input() isThread!: boolean;
   threadMessage: string = '';
+  messagesToDisplay: Message[] = [];
 
   constructor(
     public channelService: ChannelService,
     public messageService: MessageService,
     public authService: AuthService,
   ) {
-    messageService.groupMsgByAuthor(20);
+    this.getMessagesToDisplay();
   }
 
-  isThread() {
-    if ('reactions' in this.channelToDisplay)
-      this.threadMessage = this.channelToDisplay.content;
-    return 'reactions' in this.channelToDisplay
+  getMessagesToDisplay() {
+    if (this.isThread) {
+      this.messagesToDisplay = this.messageService.threads.filter(obj => obj.source === this.channelToDisplay.id);
+      console.log('thread msg',this.messagesToDisplay);
+    } else {
+      this.messagesToDisplay = this.messageService.currentMessages;
+    }
   }
+
+  // isThread() {
+  //   if ('reactions' in this.channelToDisplay)
+  //     this.threadMessage = this.channelToDisplay.content;
+  //   return 'reactions' in this.channelToDisplay
+  // }
 
   isSeperator(obj: any) {
     return obj instanceof Date
