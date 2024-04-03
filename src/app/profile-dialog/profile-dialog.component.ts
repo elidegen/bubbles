@@ -60,7 +60,6 @@ export class ProfileDialogComponent {
       let formdata = new FormData;
       formdata.append('picture', this.selectedImg);
       const data = await lastValueFrom(this.http.post<CurrentUser>(url, formdata));
-      console.log('data', data);
       this.authService.currentUser = data;
       this.selectedImg = undefined;
     }

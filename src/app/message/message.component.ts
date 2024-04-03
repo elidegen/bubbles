@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -37,7 +37,7 @@ export class MessageComponent {
   }
 
   thread() {
-    const threadMsg = this.messageService.messages.find(obj => obj.source === this.message.id)
+    const threadMsg = this.messageService.threads.find(obj => obj.source === this.message.id)
     return threadMsg != undefined;
   }
 
@@ -77,8 +77,13 @@ export class MessageComponent {
   }
 
   deleteMessage() {
-    const index = this.messageService.messages.findIndex(obj => obj.id === this.message.id);
-    this.messageService.messages.splice(index, 1);
+    let index = this.messageService.currentMessages.findIndex(obj => obj.id === this.message.id);
+    if(index === -1){
+      index = this.messageService.threads.findIndex(obj => obj.id === this.message.id);
+      this.messageService.threads.splice(index, 1);
+    } else {
+      this.messageService.currentMessages.splice(index, 1);
+    }
   }
 
   editMessage(messageContent: string) {

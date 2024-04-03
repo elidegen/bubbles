@@ -31,7 +31,6 @@ export class ChatWindowComponent {
   getMessagesToDisplay() {
     if (this.isThread) {
       this.messagesToDisplay = this.messageService.threads.filter(obj => obj.source === this.channelToDisplay.id);
-      console.log('thread msg',this.messagesToDisplay);
     } else {
       this.messagesToDisplay = this.messageService.currentMessages;
     }

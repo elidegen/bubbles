@@ -51,6 +51,22 @@
             }
         }
     }
+
+    // .card:hover::after {
+    //     content: '';
+    //     position: absolute;
+    //     inset: -10px;
+    //     right: -35px;
+    // }
+
+    // .card:hover .reaction::after {
+    //     z-index: -1;
+    //     content: '';
+    //     position: absolute;
+    //     inset: -10px;
+    //     bottom: -35px;
+    //     border-radius: 25px;
+    // }
 }
 
 .my-msg {
@@ -64,7 +80,7 @@
             .reaction {
                 left: unset;
             }
-    
+
             .quick-thread {
                 left: -35px;
             }
@@ -84,10 +100,15 @@
     .quick-thread-img {
         transform: translate(1px, -1px) rotateY(180deg);
     }
-    
+
     .show-quick-thread {
         left: -35px;
     }
+
+    // .card:hover::after {
+    //     inset: -10px;
+    //     left: -35px;
+    // }
 }
 
 .quick-thread {

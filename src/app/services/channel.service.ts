@@ -170,14 +170,6 @@ export class ChannelService {
 
   }
 
-  async getChatsForUserOld() {
-    // const data = await firstValueFrom(this.fetchChatsForUser());
-    // this.$chats.next(data);
-    // this.updateChats();
-    // console.log('chats', this.chats);
-    // this.mainService.deactivateLoader();
-  }
-
   async getChatsForUser() {
     const data = await firstValueFrom(this.fetchChatsAndPreview());
     this.$chatsAndPreview.next(data);
@@ -233,22 +225,22 @@ export class ChannelService {
   }
 
   checkMsg(chatId: number) { // only render channels with messages?
-    let messagesOfChat = this.messageService.messages.filter(obj => obj.source === chatId);
+    let messagesOfChat = this.messageService.currentMessages.filter(obj => obj.source === chatId);
     return messagesOfChat.length > 0
   }
 
-  sortChats(arrayToSort: Channel[]) {
-    let chatLastMsgSorted = [];
-    for (let i = 0; i < arrayToSort.length; i++) {
-      let msgsOfChat = this.messageService.messages.filter(obj => obj.source === arrayToSort[i].id);
-      msgsOfChat.sort((a, b) => a.created_at - b.created_at);
-      let lastMsg = msgsOfChat[msgsOfChat.length - 1];
-      if (lastMsg)
-        chatLastMsgSorted.push(lastMsg);
-    }
-    chatLastMsgSorted.sort((a, b) => a.created_at - b.created_at);
-    return chatLastMsgSorted;
-  }
+  // sortChats(arrayToSort: Channel[]) {
+  //   let chatLastMsgSorted = [];
+  //   for (let i = 0; i < arrayToSort.length; i++) {
+  //     let msgsOfChat = this.messageService.messages.filter(obj => obj.source === arrayToSort[i].id);
+  //     msgsOfChat.sort((a, b) => a.created_at - b.created_at);
+  //     let lastMsg = msgsOfChat[msgsOfChat.length - 1];
+  //     if (lastMsg)
+  //       chatLastMsgSorted.push(lastMsg);
+  //   }
+  //   chatLastMsgSorted.sort((a, b) => a.created_at - b.created_at);
+  //   return chatLastMsgSorted;
+  // }
 
   getChannel(channelId: number) {
     return this.channels.find(obj => obj.id === channelId) as Channel;
@@ -276,9 +268,13 @@ export class ChannelService {
         content: messageContent,
         created_at: new Date().getTime(),
       }
-      this.messageService.messages.push(newMessage); //send newMessage to backend
-      // if ('is_channel' in currentChat)
-      //   this.channelService.setUnread(currentChat.id);
+
+      if(this.messageService.currentMessages.find(obj => obj.id === currentChat.id)){
+        this.messageService.threads.push(newMessage)
+      } else {
+        this.messageService.currentMessages.push(newMessage);
+        this.setUnread(currentChat.id);
+      }
     }
   }
 }

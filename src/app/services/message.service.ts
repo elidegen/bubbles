@@ -50,261 +50,254 @@ export class MessageService {
   });
   currentMessages: Message[] = [];
   threads: Message[] = [];
-  messages: Message[] = [
-    {
-      id: 30,
-      author: 10,
-      reactions: [],
-      source: 20,
-      content: "Hello, how are you?",
-      created_at: 1641415700000,
-    },
-    {
-      id: 31,
-      author: 11,
-      reactions: [],
-      source: 20,
-      content: "I'm doing great, thanks!",
-      created_at: 1641666855555,
-    },
-    {
-      id: 32,
-      author: 12,
-      reactions: [],
-      source: 20,
-      content: "That's awesome to hear!",
-      created_at: 1641510666666,
-    },
-    {
-      id: 33,
-      author: 13,
-      reactions: [],
-      source: 20,
-      content: "Yeah, it really is!",
-      created_at: 1700000000000,
-    },
-    {
-      id: 34,
-      author: 14,
-      reactions: [],
-      source: 20,
-      content: "Guten Tag",
-      created_at: 1641333333332,
-    },
-    {
-      id: 35,
-      author: 13,
-      reactions: [],
-      source: 20,
-      content: "Moin",
-      created_at: 1641333333334,
-    },
-    {
-      id: 36,
-      author: 14,
-      reactions: [],
-      source: 20,
-      content: "Grüeziwohl",
-      created_at: 1641423777775,
-    },
-    {
-      id: 37,
-      author: 13,
-      reactions: [],
-      source: 20,
-      content: "Servus",
-      created_at: 1641423777774,
-    },
-    {
-      id: 38,
-      author: 14,
-      reactions: [],
-      source: 20,
-      content: "Hallöchen",
-      created_at: 1641333333331,
-    },
-    {
-      id: 39,
-      author: 10,
-      reactions: [
-        {
-          user: 10,
-          emoji: '😆',
-        }
-      ],
-      source: 21,
-      content: "Not much, just chilling.",
-      created_at: 1641564444443,
-    },
-    {
-      id: 40,
-      author: 11,
-      reactions: [
-        {
-          user: 10,
-          emoji: '😆',
-        },
-        {
-          user: 11,
-          emoji: '😆',
-        },
-        {
-          user: 13,
-          emoji: '😀',
-        },
-        {
-          user: 10,
-          emoji: '😁',
-        },
-        {
-          user: 11,
-          emoji: '😂',
-        },
-        {
-          user: 13,
-          emoji: '😃',
-        },
-        {
-          user: 10,
-          emoji: '🤣',
-        },
-        {
-          user: 11,
-          emoji: '😆',
-        },
-        {
-          user: 13,
-          emoji: '😆',
-        }],
-      source: 21,
-      content: "Anyone here?",
-      created_at: 1641488888540,
-    },
-    {
-      id: 41,
-      author: 12,
-      reactions: [],
-      source: 21,
-      content: "Yes, I'm here!",
-      created_at: 1641587777770,
-    },
-    {
-      id: 42,
-      author: 13,
-      reactions: [],
-      source: 21,
-      content: "What's going on?",
-      created_at: 1641604444440,
-    },
-    {
-      id: 43,
-      author: 14,
-      reactions: [],
-      source: 21,
-      content: "Just hanging out.",
-      created_at: 1641458555550,
-    },
-    {
-      id: 44,
-      author: 10,
-      reactions: [],
-      source: 22,
-      content: "Good morning!",
-      created_at: 1641611116540,
-    },
-    {
-      id: 45,
-      author: 11,
-      reactions: [],
-      source: 22,
-      content: "Morning! How are you?",
-      created_at: 1641444461540,
-    },
-    {
-      id: 46,
-      author: 12,
-      reactions: [],
-      source: 22,
-      content: "I'm good, thanks!",
-      created_at: 1641444444440,
-    },
-    {
-      id: 47,
-      author: 13,
-      reactions: [],
-      source: 22,
-      content: "Hey, are you free tonight?",
-      created_at: 1641595747470,
-    },
-    {
-      id: 48,
-      author: 14,
-      reactions: [],
-      source: 22,
-      content: "Yes, I am. What's up?",
-      created_at: 1641658826540,
-    },
-    {
-      id: 49,
-      author: 10,
-      reactions: [],
-      source: 22,
-      content: "Let's grab dinner together!",
-      created_at: 1711154458965,
-    },
-    {
-      id: 50,
-      author: 10,
-      reactions: [],
-      source: 23,
-      content: "Hey magst du pizza?",
-      created_at: 1711154815648,
-    },
-    {
-      id: 51,
-      author: 11,
-      reactions: [],
-      source: 23,
-      content: "Lieber döner",
-      created_at: 1641495456789,
-    },
-    {
-      id: 52,
-      author: 10,
-      reactions: [],
-      source: 23,
-      content: "das coolste wäre ein burger",
-      created_at: 1711154834589,
-    },
-    {
-      id: 53,
-      author: 10,
-      reactions: [],
-      source: 23,
-      content: "ich würde gerne mexikanisch essen!",
-      created_at: 1711154458965,
-    },
-    {
-      id: 54,
-      author: 10,
-      reactions: [],
-      source: 23,
-      content: "Hallo ich bin auf diät nehmt ein bisschen rücksicht!",
-      created_at: 1641495695684,
-    }
-  ];
+  // messages: Message[] = [
+  //   {
+  //     id: 30,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Hello, how are you?",
+  //     created_at: 1641415700000,
+  //   },
+  //   {
+  //     id: 31,
+  //     author: 11,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "I'm doing great, thanks!",
+  //     created_at: 1641666855555,
+  //   },
+  //   {
+  //     id: 32,
+  //     author: 12,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "That's awesome to hear!",
+  //     created_at: 1641510666666,
+  //   },
+  //   {
+  //     id: 33,
+  //     author: 13,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Yeah, it really is!",
+  //     created_at: 1700000000000,
+  //   },
+  //   {
+  //     id: 34,
+  //     author: 14,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Guten Tag",
+  //     created_at: 1641333333332,
+  //   },
+  //   {
+  //     id: 35,
+  //     author: 13,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Moin",
+  //     created_at: 1641333333334,
+  //   },
+  //   {
+  //     id: 36,
+  //     author: 14,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Grüeziwohl",
+  //     created_at: 1641423777775,
+  //   },
+  //   {
+  //     id: 37,
+  //     author: 13,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Servus",
+  //     created_at: 1641423777774,
+  //   },
+  //   {
+  //     id: 38,
+  //     author: 14,
+  //     reactions: [],
+  //     source: 20,
+  //     content: "Hallöchen",
+  //     created_at: 1641333333331,
+  //   },
+  //   {
+  //     id: 39,
+  //     author: 10,
+  //     reactions: [
+  //       {
+  //         user: 10,
+  //         emoji: '😆',
+  //       }
+  //     ],
+  //     source: 21,
+  //     content: "Not much, just chilling.",
+  //     created_at: 1641564444443,
+  //   },
+  //   {
+  //     id: 40,
+  //     author: 11,
+  //     reactions: [
+  //       {
+  //         user: 10,
+  //         emoji: '😆',
+  //       },
+  //       {
+  //         user: 11,
+  //         emoji: '😆',
+  //       },
+  //       {
+  //         user: 13,
+  //         emoji: '😀',
+  //       },
+  //       {
+  //         user: 10,
+  //         emoji: '😁',
+  //       },
+  //       {
+  //         user: 11,
+  //         emoji: '😂',
+  //       },
+  //       {
+  //         user: 13,
+  //         emoji: '😃',
+  //       },
+  //       {
+  //         user: 10,
+  //         emoji: '🤣',
+  //       },
+  //       {
+  //         user: 11,
+  //         emoji: '😆',
+  //       },
+  //       {
+  //         user: 13,
+  //         emoji: '😆',
+  //       }],
+  //     source: 21,
+  //     content: "Anyone here?",
+  //     created_at: 1641488888540,
+  //   },
+  //   {
+  //     id: 41,
+  //     author: 12,
+  //     reactions: [],
+  //     source: 21,
+  //     content: "Yes, I'm here!",
+  //     created_at: 1641587777770,
+  //   },
+  //   {
+  //     id: 42,
+  //     author: 13,
+  //     reactions: [],
+  //     source: 21,
+  //     content: "What's going on?",
+  //     created_at: 1641604444440,
+  //   },
+  //   {
+  //     id: 43,
+  //     author: 14,
+  //     reactions: [],
+  //     source: 21,
+  //     content: "Just hanging out.",
+  //     created_at: 1641458555550,
+  //   },
+  //   {
+  //     id: 44,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "Good morning!",
+  //     created_at: 1641611116540,
+  //   },
+  //   {
+  //     id: 45,
+  //     author: 11,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "Morning! How are you?",
+  //     created_at: 1641444461540,
+  //   },
+  //   {
+  //     id: 46,
+  //     author: 12,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "I'm good, thanks!",
+  //     created_at: 1641444444440,
+  //   },
+  //   {
+  //     id: 47,
+  //     author: 13,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "Hey, are you free tonight?",
+  //     created_at: 1641595747470,
+  //   },
+  //   {
+  //     id: 48,
+  //     author: 14,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "Yes, I am. What's up?",
+  //     created_at: 1641658826540,
+  //   },
+  //   {
+  //     id: 49,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 22,
+  //     content: "Let's grab dinner together!",
+  //     created_at: 1711154458965,
+  //   },
+  //   {
+  //     id: 50,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 23,
+  //     content: "Hey magst du pizza?",
+  //     created_at: 1711154815648,
+  //   },
+  //   {
+  //     id: 51,
+  //     author: 11,
+  //     reactions: [],
+  //     source: 23,
+  //     content: "Lieber döner",
+  //     created_at: 1641495456789,
+  //   },
+  //   {
+  //     id: 52,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 23,
+  //     content: "das coolste wäre ein burger",
+  //     created_at: 1711154834589,
+  //   },
+  //   {
+  //     id: 53,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 23,
+  //     content: "ich würde gerne mexikanisch essen!",
+  //     created_at: 1711154458965,
+  //   },
+  //   {
+  //     id: 54,
+  //     author: 10,
+  //     reactions: [],
+  //     source: 23,
+  //     content: "Hallo ich bin auf diät nehmt ein bisschen rücksicht!",
+  //     created_at: 1641495695684,
+  //   }
+  // ];
 
   constructor(
     private http: HttpClient,
     private mainService: MainService,
-  ) {
-
-    let localStorageAsString = localStorage.getItem('currentThread');
-    this.currentThread = JSON.parse(localStorageAsString as string);
-
-
-    // this.getMessages
-  }
+  ) { }
 
   async getMessagesAndThread(chatId: number) {
     const data = await firstValueFrom(this.fetchMessagesAndThread(chatId));
@@ -329,34 +322,14 @@ export class MessageService {
   }
 
   updateMessage(message: Message) {
-    const index = this.messages.findIndex(obj => obj === message);
-    this.messages[index] = message;
+    let index = this.currentMessages.findIndex(obj => obj === message);
+    if(index === -1){
+      index = this.threads.findIndex(obj => obj === message);
+      this.threads[index] = message;
+    } else {
+      this.currentMessages[index] = message;
+    }
   }
-
-  // getMessagesOld() {
-  //   this.messages = [];
-  //   this.chatCollection.forEach(chatId => {
-  //     this.fetchMessagesForChats(chatId).pipe(take(1)).subscribe(
-  //       {
-  //         next: (data: Message[]) => {
-  //           console.log('data', data);
-  //           this.messages = this.messages.concat(data);
-  //           console.log('messages', this.messages);
-  //         }
-  //       }
-  //     )
-  //   });
-  // }
-
-  // setReaction() {
-  //   let messageArray = [];
-  //   for (const message of this.messages) {
-  //     message.reactions = [];
-  //     messageArray.push(message);
-  //   }
-  //   this.messages = messageArray;
-  //   console.log('msg with reaction', this.messages);
-  // } //funktion löschen sobald reactions array im backend!
 
   groupMsgByAuthor(channelId: number, isThread: boolean) {
     let groupedArray = [];
@@ -420,12 +393,17 @@ export class MessageService {
   }
 
   getMessage(messageId: number) {
-    return this.messages.find(obj => obj.id === messageId);
+    let index = this.currentMessages.findIndex(obj => obj.id === messageId);
+    if(index === -1){
+      index = this.threads.findIndex(obj => obj.id === messageId);
+      return this.threads[index];
+    } else {
+      return this.currentMessages[index];
+    }
   }
 
   openThread(threadId: number) {
-    this.currentThread = this.messages.find(obj => obj.id === threadId) as Message;
-    localStorage.setItem('currentThread', JSON.stringify(this.currentThread));
+    this.currentThread = this.currentMessages.find(obj => obj.id === threadId) as Message;
     this.threadOpen = true;
   }
 }
