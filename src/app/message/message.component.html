@@ -2,7 +2,6 @@
 
     <div class="card message">
         @if (editState) {
-            <!-- <input type="text" class="input"> -->
             <app-message-bar (messageContent)="editMessage($event)" [disabled]="false"></app-message-bar>
         } @else {
             <p>{{message!.content}}</p>
@@ -28,9 +27,6 @@
             <div class="img-wrapper" (click)="openEmojiPicker()">
                 <img src="assets/img/add_reaction_icon.svg" alt="">
             </div>
-            <!-- <div class="img-wrapper" (click)="messageService.openThread(message.id)">
-                <img src="assets/img/respond_icon.svg" alt="">
-            </div> -->
             @if (myMessage) {
             <div class="img-wrapper" (click)="editState = !editState">
                 <img src="assets/img/edit_document_icon.svg" alt="">

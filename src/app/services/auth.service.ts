@@ -16,12 +16,11 @@ export class AuthService {
   constructor() { }
 
   currentUser: CurrentUser = {
-    id: 2,
+    id: 1,
     username: "CurrentUser",
     email: "guestuser@mailinator.com",
     picture: null,
-    is_online: true
-
+    is_online: true,
   }
 
   getImg() {

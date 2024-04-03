@@ -15,6 +15,7 @@ export class Channel {
   is_channel: boolean;
   picture?: string;
   read_by: number[];
+  hash: string;
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
@@ -24,6 +25,7 @@ export class Channel {
     this.is_channel = obj ? obj.is_channel : false;
     this.picture = obj ? obj.picture : '';
     this.read_by = obj ? obj.read_by : [];
+    this.hash = obj ? obj.hash : '';
   }
 }
 
@@ -50,101 +52,7 @@ export class ChannelService {
   directMessages: Channel[] = [];
   currentChannel!: Channel;
   chatPreviews: Message[] = [];
-  chats: Channel[] = [
-    {
-      id: 20,
-      name: 'testchannel1',
-      description: 'this is description',
-      members: [10, 11, 12],
-      is_channel: true,
-      picture: 'assets/img/profile_placeholder_green.svg',
-      read_by: [],
-    },
-    {
-      id: 21,
-      name: 'testchannel2',
-      description: 'this is description',
-      members: [11, 13, 12, 10, 14],
-      is_channel: true,
-      picture: 'assets/img/profile_placeholder_blue.svg',
-      read_by: [],
-    },
-    {
-      id: 22,
-      name: 'testchannel3',
-      description: 'this is description',
-      members: [11, 12, 10, 13],
-      is_channel: true,
-      picture: 'assets/img/profile_placeholder_red.svg',
-      read_by: [],
-    },
-    {
-      id: 23,
-      name: 'Joshua',
-      members: [10, 11],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 24,
-      name: 'Elijah',
-      members: [12, 10],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 25,
-      name: 'Anna',
-      members: [10, 14],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 26,
-      name: 'Moritz',
-      members: [10, 13],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 27,
-      name: 'Sabine',
-      members: [10, 12],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 28,
-      name: 'Claudia',
-      members: [10, 11],
-      is_channel: false,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 29,
-      name: 'testchannel4',
-      description: 'this is description',
-      members: [10, 11, 12, 13, 14],
-      is_channel: true,
-      picture: '',
-      read_by: [],
-    },
-    {
-      id: 30,
-      name: 'testchannel5',
-      description: 'this is description',
-      members: [10, 11, 12, 13, 14],
-      is_channel: true,
-      picture: '',
-      read_by: [],
-    }
-  ];
+  chats: Channel[] = [];
 
   constructor(
     private authService: AuthService,
@@ -156,10 +64,13 @@ export class ChannelService {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
     if (this.currentChannel) {
+      console.log(this.currentChannel);
+      
       messageService.getMessagesAndThread(this.currentChannel.id);
+    } else {
+      this.mainService.deactivateLoader();
     }
   }
-
 
   getImg(imgUrl: string | undefined) {
     if (imgUrl != null) {
@@ -167,7 +78,6 @@ export class ChannelService {
     } else {
       return 'assets/img/profile_placeholder.svg';
     }
-
   }
 
   async getChatsForUser() {
@@ -267,6 +177,7 @@ export class ChannelService {
         source: isThread ? this.messageService.currentThread.id : this.currentChannel.id,
         content: messageContent,
         created_at: new Date().getTime(),
+        hash: ''
       }
 
       if(isThread){

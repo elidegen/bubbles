@@ -39,6 +39,7 @@ export class ChannelPreviewComponent implements OnInit {
       source: 0,
       content: 'Empty chat', // Placeholder in case there is no message in Channel
       created_at: 0,
+      hash: ''
     } as Message
   }
 

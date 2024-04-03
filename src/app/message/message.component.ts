@@ -74,12 +74,12 @@ export class MessageComponent {
   }
 
   sourceIsChannel() {
-    return !this.messageService.getMessage(this.message.source);
+    return this.messageService.currentMessages.some(obj => obj.hash === this.message.hash);
   }
 
   deleteMessage() {
     let index = this.messageService.currentMessages.findIndex(obj => obj.id === this.message.id);
-    if(index === -1){
+    if (index === -1) {
       index = this.messageService.threads.findIndex(obj => obj.id === this.message.id);
       this.messageService.threads.splice(index, 1);
     } else {
