@@ -62,6 +62,7 @@ export class SearchComponent {
 
 
   async mainSearch(url:string){
+    if(!this.searchIsValid()) return;
     const data = {
       search_value: this.searchValue
     }
@@ -71,11 +72,16 @@ export class SearchComponent {
 
 
   async userSearch(url:string){
+    if(!this.searchIsValid()) return;
     const data = {
       search_value: this.searchValue
     }
     this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
     console.log(this.searchSolutionUser);
+  }
+
+  searchIsValid(){    
+    return this.searchValue.length > 1;
   }
 
 
