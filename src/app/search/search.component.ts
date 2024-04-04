@@ -81,8 +81,10 @@ export class SearchComponent {
   }
 
   searchIsValid(){    
-    return this.searchValue.length > 1;
+    return this.searchValue.trim().length > 1 ;
   }
+
+
 
 
 
