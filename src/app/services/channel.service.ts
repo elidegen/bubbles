@@ -181,11 +181,9 @@ export class ChannelService {
       }
 
       if(isThread){
-        this.messageService.threads.push(newMessage);
         this.messageService.postMessage('threads/' , newMessage);
       } else {
         this.messageService.postMessage('messages/' , newMessage);
-        this.messageService.currentMessages.push(newMessage);
         this.setUnread(this.currentChannel.id);
       }
     }

@@ -82,7 +82,7 @@ export class MessageService {
 
   updateMessage(message: Message) {
     let index = this.currentMessages.findIndex(obj => obj === message);
-    if(index === -1){
+    if (index === -1) {
       index = this.threads.findIndex(obj => obj === message);
       this.threads[index] = message;
     } else {
@@ -153,7 +153,7 @@ export class MessageService {
 
   getMessage(messageId: number) {
     let index = this.currentMessages.findIndex(obj => obj.id === messageId);
-    if(index === -1){
+    if (index === -1) {
       index = this.threads.findIndex(obj => obj.id === messageId);
       return this.threads[index];
     } else {
@@ -166,22 +166,25 @@ export class MessageService {
     this.threadOpen = true;
   }
 
-  async postMessage(endpoint: string, message:Message){
-     let url = environment.baseUrl + endpoint;
-     let response = await firstValueFrom(this.http.post(url, message));
-     console.log(response);
-     
+  async postMessage(endpoint: string, message: Message) {
+    let url = environment.baseUrl + endpoint;
+    let response = await firstValueFrom(this.http.post(url, message)) as Message;
+
+    if(endpoint === 'messages/'){
+      this.currentMessages.push(response);
+    } else {
+      this.threads.push(response);
+    }
   }
 
 
-  async putMessage(message:Message){
+  async putMessage(message: Message) {
     let endpoint = 'messages/' ///TODO Thread oder Message?
-     let url = environment.baseUrl + endpoint + message.id;
-     let response = await firstValueFrom(this.http.put(url, message));
-     console.log(response);
-     
+    let url = environment.baseUrl + endpoint + message.id;
+    let response = await firstValueFrom(this.http.put(url, message));
+    console.log(response);
   }
 
-  
+
 
 }
