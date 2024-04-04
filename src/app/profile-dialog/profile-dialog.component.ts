@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService, CurrentUser } from '../services/auth.service';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
 import { environment } from '../../environments/environment.development';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -29,11 +29,11 @@ export class ProfileDialogComponent {
     this.mainService.closePopups();
   }
 
-  async uploadImg(file: any) {
+  async uploadImg(file: File) {
     const url = environment.baseUrl + 'upload_img/' + this.authService.currentUser.id + '/';
     let formdata = new FormData();
     formdata.append('picture', file);
-    const data = await lastValueFrom(this.http.post<CurrentUser>(url, formdata));
+    const data = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
     this.authService.currentUser = data;
   }
 }

@@ -5,24 +5,34 @@
     </div>
 
     <div class="content">
-        <div class="input-wrapper">
-            <div class="mini-header">
-                <p>Channel name</p>
+        <div class="channel-picture-wrapper">
+            <div class="input-wrapper">
+                <div class="mini-header">
+                    <p>Channel name</p>
+                </div>
+
+                <div class="mini-content">
+                    <!-- @if (editName) { -->
+                    <div class="card">
+                        <input type="text" class="input" placeholder="{{updatedChannel.name}}" [(ngModel)]="updatedChannel.name">
+                        <img src="assets/img/edit_document_icon.svg" (click)="this.editName = false">
+                    </div>
+                    <!-- } @else {
+                    <div class="card">
+                        <span class="info">{{updatedChannel.name}}</span>
+                        <img src="assets/img/edit_document_icon.svg" alt="" class="img-button"
+                            (click)="editName = true">
+                    </div>
+                    } -->
+                </div>
             </div>
 
-            <div class="mini-content">
-                @if (editName) {
-                    <div class="card">
-                        <input type="text" class="input" placeholder="Entwicklerteam">
-                        <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editName = false">
-                    </div>
-                } @else {
-                <div class="card">
-                    <span class="info">Entwicklerteam</span>
-                    <img src="assets/img/edit_document_icon.svg" alt="" class="img-button" (click)="editName = true">
-                </div>
-                }
+
+            <div class="file-picker-wrapper">
+                <app-file-picker name="file-picker" (newPicture)="handleImg($event)"></app-file-picker>
+                <img src="{{updatedChannel.picture}}" alt="">
             </div>
+
         </div>
 
         <div class="input-wrapper">
@@ -31,22 +41,23 @@
             </div>
 
             <div class="mini-content">
-                @if (editDesc) {
-                    <div class="card">
-                        <input type="text" class="input" placeholder="das ist die beschreibung des channels">
-                        <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editDesc = false">
-                    </div>
-                } @else {
+                <!-- @if (editDesc) { -->
                 <div class="card">
-                    <span>Das ist die aktuelle beschreibung des channels</span>
+                    <input type="text" class="input" placeholder="{{updatedChannel.description}}" [(ngModel)]="updatedChannel.description">
+                    <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editDesc = false">
+                </div>
+                <!-- } @else {
+                <div class="card">
+                    <span>{{updatedChannel.description}}</span>
                     <img src="assets/img/edit_document_icon.svg" alt="" class="img-button" (click)="editDesc = true">
                 </div>
-                }
+                } -->
             </div>
         </div>
     </div>
 
     <div class="button-wrapper">
-        <button class="button1">Leave channel</button>
+        <button class="button2" (click)="leaveChannel()">Leave channel</button>
+        <button class="button1" (click)="putChannel()">Save changes</button>
     </div>
 </div>

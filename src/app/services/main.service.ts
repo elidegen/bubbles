@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  showPopup: boolean = false;
+  showPopup: boolean = true;
   errorMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
   addMembersPopup: boolean = false;
   showMembersPopup: boolean = false;
-  showEditChannelPopup: boolean = false;
+  editChannelPopup: boolean = true;
   sideMenuOpen: boolean = true;
   fetchingDone: number = 0;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;

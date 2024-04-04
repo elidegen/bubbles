@@ -4,29 +4,33 @@
     width: 350px;
 }
 
-.file-picker-wrapper {
-    position: relative;
+.picture-wrapper {
     width: 100%;
     @include d-flex();
     padding: 25px;
 
-    img {
-        height: 150px;
-        width: 150px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
+    .file-picker-wrapper {
+        position: relative;
+        @include d-flex();
 
-    app-file-picker {
-        opacity: 0;
-        @include pos-center($pos: absolute);
-        height: 100%;
-        width: 100%;
-    }
+        img {
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
 
-    &:hover {
         app-file-picker {
-            opacity: 1;
+            opacity: 0;
+            @include pos-center($pos: absolute);
+            height: 100%;
+            width: 100%;
+        }
+
+        &:hover {
+            app-file-picker {
+                opacity: 1;
+            }
         }
     }
 }

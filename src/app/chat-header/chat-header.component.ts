@@ -90,4 +90,9 @@ export class ChatHeaderComponent implements OnInit {
   isOnline() {
     return this.userService.isOnline(this.currentChat as Channel);
   }
+
+  openChannelDetails() {
+    this.mainService.showPopup = true;
+    this.mainService.editChannelPopup = true;
+  }
 }

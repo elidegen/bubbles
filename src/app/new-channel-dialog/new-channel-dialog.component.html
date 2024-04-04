@@ -6,11 +6,20 @@
     </div>
 
     <div class="content" *ngSwitchCase="false">
-        <p>Channels serve your team for communication. Ideally, they should be topic-specific, for example, #marketing.</p>
+        <p>Channels serve your team for communication. Ideally, they should be topic-specific, for example, #marketing.
+        </p>
 
-        <div class="input-wrapper">
-            <p>Channel Name</p>
-            <input type="text" class="input" required placeholder="e.g. Development Team" [(ngModel)]="newChannel.name">
+        <div class="channel-picture-wrapper">
+            <div class="input-wrapper">
+                <p>Channel Name</p>
+                <input type="text" class="input" required placeholder="e.g. Development Team"
+                    [(ngModel)]="newChannel.name">
+            </div>
+
+            <div class="file-picker-wrapper">
+                <app-file-picker name="file-picker" (newPicture)="handleImg($event)"></app-file-picker>
+                <img src="{{newChannel.picture}}" alt="">
+            </div>
         </div>
 
         <div class="input-wrapper">

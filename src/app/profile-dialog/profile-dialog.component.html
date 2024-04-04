@@ -3,11 +3,13 @@
         <p>Profile</p>
         <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
     </div>
+    
+    <div class="picture-wrapper">
+        <div class="file-picker-wrapper">
+            <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
 
-    <div class="file-picker-wrapper">
-        <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
-
-        <img src="{{authService.currentUser.picture}}" alt="">
+            <img src="{{authService.currentUser.picture}}" alt="">
+        </div>
     </div>
 
     <div class="details">

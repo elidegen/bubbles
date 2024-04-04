@@ -165,8 +165,8 @@ export class MessageService {
   }
 
   async postMessage(endpoint: string, message: Message) {
-    let url = environment.baseUrl + endpoint;
-    let response = await firstValueFrom(this.http.post(url, message)) as Message;
+    const url = environment.baseUrl + endpoint;
+    const response = await firstValueFrom(this.http.post(url, message)) as Message;
 
     if (endpoint === 'messages/') {
       this.currentMessages.push(response);
@@ -176,8 +176,8 @@ export class MessageService {
   }
 
   async putMessage(message: Message) {
-    let endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
-    let url = environment.baseUrl + endpoint + message.id + '/';
+    const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
+    const url = environment.baseUrl + endpoint + message.id + '/';
     await firstValueFrom(this.http.put(url, message));
   }
 }

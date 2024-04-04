@@ -4,18 +4,23 @@
     @include d-flex($jc: space-between);
     padding-right: 10px;
     min-height: 50px;
+
     img {
         border-radius: 50%;
-        // box-shadow: 1px 1px 10px rgb(60, 59, 59);
     }
 }
 
 .chat-name-wrapper {
-    @include d-flex($g: 25px);
+    @include d-flex($g: 15px);
+    @extend .hover;
+    background-color: $color1;
+    border-radius: 25px;
+    padding: 5px;
+    padding-right: 15px;
 
     img {
-        height: 50px;
-        width: 50px;
+        height: 35px;
+        width: 35px;
     }
 }
 
@@ -28,10 +33,11 @@
         background-color: $color1;
         padding: 5px 15px 5px 5px;
         border-radius: 22px;
-        
+
         .member-pics {
             @include d-flex();
-            img{
+
+            img {
                 height: 35px;
                 width: 35px;
                 margin-right: -10px;

@@ -3,7 +3,7 @@ $color2: #5c4f82;
 $color3: #efa985;
 $color4: #3cc6b7;
 $color5: #FFFFFF;
-$error-color: red;
+$error-color: rgb(255, 85, 85);
 $valid-color: rgb(29, 209, 137);
 $text-color: $color5;
 
@@ -77,9 +77,9 @@ $text-color: $color5;
 
 .button2 {
     @extend .button;
-    background-color: $color1;
-    border: 2px solid $color3;
-    color: $color1;
+    background-color: inherit;
+    border: 2px solid $error-color;
+    color: $error-color;
 }
 
 .button3 {
@@ -99,7 +99,7 @@ $text-color: $color5;
 
 .button-wrapper {
     width: 100%;
-    @include d-flex($jc: flex-end);
+    @include d-flex($jc: flex-end, $g: 15px);
 }
 
 .border-radius {

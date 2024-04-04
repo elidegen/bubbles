@@ -1,6 +1,6 @@
 @if (currentChat) {
 <div class="header-wrapper">
-    <div class="chat-name-wrapper">
+    <div class="chat-name-wrapper" (click)="openChannelDetails()">
         @if (!isMessage()) {
         <div class="online-wrapper">
             <img src="{{ getPicture() }}" alt="">
