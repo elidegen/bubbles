@@ -2,9 +2,9 @@
     <div class="left-side">
         <div class="close-side-menu card" (click)="toggleSideMenu()">
             @if (mainService.sideMenuOpen) {
-                <img src="assets/img/close_side_menu.svg" alt="">
+                <img src="assets/img/close_side_menu.svg">
             } @else {
-                <img src="assets/img/open_side_menu.svg" alt="">
+                <img src="assets/img/open_side_menu.svg">
             }
         </div>
             <app-search [searchType]="'search'" ></app-search>

@@ -190,3 +190,8 @@ $text-color: $color5;
         @extend .status;
     }
 }
+
+img {
+    border-radius: 50%;
+    object-fit: cover;
+}

@@ -1,13 +1,10 @@
 <div class="grouped-msg-wrapper" [ngClass]="{'my-msg': myMessage(groupedMessages[0])}">
     <div class="img-wrapper">
 
-
         <div class="online-wrapper">
-            <img src="{{getAuthor().picture || 'assets/img/profile_placeholder.svg'}}" alt="">
+            <img src="{{getAuthor().picture || 'assets/img/profile_placeholder.svg'}}">
             <div [ngClass]="isOnline() ? 'online' : 'offline'"></div>
-            
         </div>
-
 
         <p>{{ getTime() | date:"HH:mm"}}</p>
     </div>

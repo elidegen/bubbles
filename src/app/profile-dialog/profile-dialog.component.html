@@ -1,14 +1,14 @@
 <div class="card">
     <div class="header">
         <p>Profile</p>
-        <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
+        <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg">
     </div>
     
     <div class="picture-wrapper">
         <div class="file-picker-wrapper">
             <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
 
-            <img src="{{authService.currentUser.picture}}" alt="">
+            <img src="{{authService.currentUser.picture}}">
         </div>
     </div>
 
@@ -23,7 +23,7 @@
 
         <div class="email-adress">
             <div class="upper">
-                <img src="assets/img/mail_icon.svg" alt="">
+                <img src="assets/img/mail_icon.svg">
                 <p>E-Mail Adress</p>
             </div>
             <a href="mailto:elijah@mail.com" class="e-mail">

@@ -13,7 +13,7 @@
 
         <div class="reaction">
             <div class="img-wrapper" (click)="addReaction('👍🏼')">
-                <img src="assets/img/thumb_up_icon.svg" alt="">
+                <img src="assets/img/thumb_up_icon.svg">
             </div>
             <div class="img-wrapper" (click)="addReaction('♥')">
                 <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
@@ -22,24 +22,24 @@
                 </svg>
             </div>
             <div class="img-wrapper" (click)="addReaction('🚀')">
-                <img src="assets/img/rocket_icon.svg" alt="">
+                <img src="assets/img/rocket_icon.svg">
             </div>
             <div class="img-wrapper" (click)="openEmojiPicker()">
-                <img src="assets/img/add_reaction_icon.svg" alt="">
+                <img src="assets/img/add_reaction_icon.svg">
             </div>
             @if (myMessage) {
             <div class="img-wrapper" (click)="editState = !editState">
-                <img src="assets/img/edit_document_icon.svg" alt="">
+                <img src="assets/img/edit_document_icon.svg">
             </div>
             <div class="img-wrapper" (click)="deleteMessage()">
-                <img src="assets/img/delete_icon.svg" alt="">
+                <img src="assets/img/delete_icon.svg">
             </div>
             }
         </div>
 
         @if (sourceIsChannel()) {
         <div class="quick-thread" [class.show-quick-thread]="thread()" (click)="messageService.openThread(message.id)">
-            <img class="quick-thread-img" src="assets/img/reply_icon.svg" alt="">
+            <img class="quick-thread-img" src="assets/img/reply_icon.svg">
         </div>
         }
     </div>

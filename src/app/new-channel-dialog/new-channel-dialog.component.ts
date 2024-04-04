@@ -45,23 +45,29 @@ export class NewChannelDialogComponent {
     } else {
       this.newChannel.members = this.selectedMembers;
     }
+    this.postChannel();
+  }
+
+  async postChannel() {
+    const url = environment.baseUrl + 'channels/';
+    const formdata = new FormData();
+    // formdata.append(    );
+    const response = await firstValueFrom(this.http.post(url, this.newChannel)) as Channel;
+    console.log('resp', response);
 
     // sende newChannel ans Backend
-    this.channelService.chats.push(this.newChannel as Channel);
-    this.channelService.filterChats();
+    // this.channelService.chats.push(this.newChannel as Channel);
     this.mainService.closePopups();
   }
 
   async handleImg(file: File) {
     console.log('file from newchnl dlg', file);
     this.newChannel.picture = 'assets/img/profile_placeholder_blue.svg';
-    
-
   }
 
   async uploadImg(file: File) { //not in use
     const url = environment.baseUrl + 'media/channel_pictures/' + file.name + '/';
-    let formdata = new FormData();
+    const formdata = new FormData();
     formdata.append('picture', file);
     const response = await firstValueFrom(this.http.post<Channel>(url, formdata));
   }

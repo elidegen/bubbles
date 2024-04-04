@@ -2,10 +2,10 @@
     <div class="msg-input">
         <input type="text" [disabled]="disabled" #myInput (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
             placeholder="Type a message...">
-        <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg" alt="">
+        <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg">
     </div>
     <div class="sendbutton" [ngClass]="{'disabled': disabled}" (click)="sendMsg()">
-        <img src="assets/img/send_icon.png" alt="">
+        <img src="assets/img/send_icon.png">
     </div>
 </div>
 

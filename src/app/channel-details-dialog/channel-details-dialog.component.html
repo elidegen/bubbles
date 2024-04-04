@@ -1,7 +1,7 @@
 <div class="card">
     <div class="header">
         <p>Channel details</p>
-        <img src="assets/img/close_icon.svg" alt="" class="img-button" (click)="mainService.closePopups()">
+        <img src="assets/img/close_icon.svg" class="img-button" (click)="mainService.closePopups()">
     </div>
 
     <div class="content">
@@ -20,7 +20,7 @@
                     <!-- } @else {
                     <div class="card">
                         <span class="info">{{updatedChannel.name}}</span>
-                        <img src="assets/img/edit_document_icon.svg" alt="" class="img-button"
+                        <img src="assets/img/edit_document_icon.svg" class="img-button"
                             (click)="editName = true">
                     </div>
                     } -->
@@ -30,7 +30,7 @@
 
             <div class="file-picker-wrapper">
                 <app-file-picker name="file-picker" (newPicture)="handleImg($event)"></app-file-picker>
-                <img src="{{updatedChannel.picture}}" alt="">
+                <img src="{{updatedChannel.picture}}">
             </div>
 
         </div>
@@ -44,12 +44,12 @@
                 <!-- @if (editDesc) { -->
                 <div class="card">
                     <input type="text" class="input" placeholder="{{updatedChannel.description}}" [(ngModel)]="updatedChannel.description">
-                    <img src="assets/img/check_icon.svg" alt="" class="img-button" (click)="editDesc = false">
+                    <img src="assets/img/check_icon.svg" class="img-button" (click)="editDesc = false">
                 </div>
                 <!-- } @else {
                 <div class="card">
                     <span>{{updatedChannel.description}}</span>
-                    <img src="assets/img/edit_document_icon.svg" alt="" class="img-button" (click)="editDesc = true">
+                    <img src="assets/img/edit_document_icon.svg" class="img-button" (click)="editDesc = true">
                 </div>
                 } -->
             </div>

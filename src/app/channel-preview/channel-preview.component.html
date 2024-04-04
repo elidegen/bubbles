@@ -2,7 +2,7 @@
     [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}"
     [class.unread]="!channel.read_by.includes(authService.currentUser.id)">
     <div class="online-wrapper">
-        <img src="{{ channelService.getImg(channel.picture) }}" alt="">
+        <img src="{{ channelService.getImg(channel.picture) }}">
         @if (channel.is_channel === false) {
         <div [ngClass]="userService.isOnline(channel) ? 'online': 'offline'"></div>
         }

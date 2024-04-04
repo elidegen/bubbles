@@ -1,68 +1,75 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Channel, ChannelService } from '../services/channel.service';
-import { User, UserService } from '../services/user.service';
-import { Message, MessageService } from '../services/message.service';
+import { Channel } from '../services/channel.service';
+import { User } from '../services/user.service';
+import { Message } from '../services/message.service';
 import { firstValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { SearchResultsComponent } from '../search-results/search-results.component';
 
-interface SearchSolution {
+export interface SearchSolution {
   channels: Channel[],
   messages: Message[],
-  threads:Message[],
-  users:User[],
+  threads: Message[],
+  users: User[],
 }
 
 interface SearchSolutionUser {
-  users:User[]
+  users: User[]
 }
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, SearchResultsComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
-  @Input() searchType: 'search' | 'user-search' | undefined;
-
-  searchValue: string = '';
-
+export class SearchComponent implements OnInit {
+  @Input() searchType!: 'search' | 'user-search';
+  searchValue: string = 'chan';
+  placeholder!: string;
+  showResults: boolean = false;
   searchSolution: SearchSolution = {
     channels: [],
-    messages:[],
-    threads:[],
-    users:[]
+    messages: [],
+    threads: [],
+    users: [],
   };
-
   searchSolutionUser: SearchSolutionUser = {
-    users: []
+    users: [],
   }
 
   constructor(
     private http: HttpClient,
-    public channelService:ChannelService,
-    public userService:UserService,
-    public messageService:MessageService,
-    ) {
+  ) {
+    this.setupClickListener();
+  }
 
+  private setupClickListener() {
+    document.addEventListener('click', () => {
+      this.showResults = false;
+    });
+  }
+
+  ngOnInit(): void {
+    this.placeholder = this.searchType === 'search' ? 'Search' : 'Search user';
   }
 
   triggerSearch() {
+    if (!this.searchIsValid()) return;
     let url = environment.baseUrl + this.searchType;
+    this.search(url);
+    // if (this.searchType === "search") {
 
-    if (this.searchType === "search") {
-      this.mainSearch(url);
-    } else if (this.searchType === "user-search") {
-      this.userSearch(url)
-    } 
+    // } else if (this.searchType === "user-search") {
+    //   this.userSearch(url)
+    // }
   }
 
-
-  async mainSearch(url:string){
-    if(!this.searchIsValid()) return;
+  async search(url: string) {
     const data = {
       search_value: this.searchValue
     }
@@ -70,9 +77,8 @@ export class SearchComponent {
     console.log(this.searchSolution);
   }
 
-
-  async userSearch(url:string){
-    if(!this.searchIsValid()) return;
+  async userSearch(url: string) {
+    if (!this.searchIsValid()) return;
     const data = {
       search_value: this.searchValue
     }
@@ -80,14 +86,11 @@ export class SearchComponent {
     console.log(this.searchSolutionUser);
   }
 
-  searchIsValid(){    
-    return this.searchValue.trim().length > 1 ;
+  searchIsValid() {
+    return this.searchValue.trim().length > 1;
   }
 
-
-
-
-
-
-
+  stopProp($event: Event) {
+    $event.stopPropagation();
+  }
 }
