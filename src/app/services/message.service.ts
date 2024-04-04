@@ -180,7 +180,7 @@ export class MessageService {
 
   async putMessage(message: Message) {
     let endpoint = 'messages/' ///TODO Thread oder Message?
-    let url = environment.baseUrl + endpoint + message.id;
+    let url = environment.baseUrl + endpoint + message.id + '/';
     let response = await firstValueFrom(this.http.put(url, message));
     console.log(response);
   }
