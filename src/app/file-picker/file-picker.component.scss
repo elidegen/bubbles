@@ -1,0 +1,33 @@
+@import "../library.scss";
+
+.file-picker-wrapper {
+    @include d-flex();
+    height: 100%;
+    width: 100%;
+    border: 1px solid green;
+}
+
+// .add-profile-img {
+//     @include center();
+//     // @include pos-center($pos: absolute);
+//     display: flex;
+//     background-color: rgb(50 45 45 / 35%);
+//     height: 150px;
+//     width: 150px;
+//     border-radius: 100%;
+// }
+
+.file-input {
+    opacity: 0;
+    position: absolute;
+}
+
+label {
+    @extend .button3;
+    scale: 1.4;
+    background-color: rgba($color: #000000, $alpha: .4);
+}
+
+.display {
+    display: flex !important;
+}

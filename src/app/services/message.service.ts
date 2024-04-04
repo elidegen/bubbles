@@ -75,8 +75,6 @@ export class MessageService {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
-      console.log('curmsg:', this.currentMessages);
-      console.log('threads: ', this.threads);
     });
   }
 
@@ -170,21 +168,16 @@ export class MessageService {
     let url = environment.baseUrl + endpoint;
     let response = await firstValueFrom(this.http.post(url, message)) as Message;
 
-    if(endpoint === 'messages/'){
+    if (endpoint === 'messages/') {
       this.currentMessages.push(response);
     } else {
       this.threads.push(response);
     }
   }
 
-
   async putMessage(message: Message) {
-    let endpoint = 'messages/' ///TODO Thread oder Message?
+    let endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
     let url = environment.baseUrl + endpoint + message.id + '/';
-    let response = await firstValueFrom(this.http.put(url, message));
-    console.log(response);
+    await firstValueFrom(this.http.put(url, message));
   }
-
-
-
 }

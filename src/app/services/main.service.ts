@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  showPopup: boolean = false;
+  showPopup: boolean = true;
   errorMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
-  profilePopup: boolean = false;
+  profilePopup: boolean = true;
   addMembersPopup: boolean = false;
   showMembersPopup: boolean = false;
   showEditChannelPopup: boolean = false;

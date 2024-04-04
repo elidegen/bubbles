@@ -4,50 +4,24 @@
     width: 350px;
 }
 
-.img-wrapper {
+.file-picker-wrapper {
     position: relative;
     width: 100%;
     @include d-flex();
     padding: 25px;
 
-    img {
-        height: 150px;
-        width: 150px;
-        border-radius: 100%;
+    app-file-picker{
+        opacity: 0;
+        @include pos-center($pos: absolute);
+        height: 100%;
+        width: 100%;
     }
-    &:hover {
-        .add-profile-img{
-            display: flex !important;
+
+    &:hover{
+        app-file-picker{
+            opacity: 1;
         }
     }
-}
-
-.add-profile-img {
-    @include center();
-    @include pos-center($pos:absolute);
-    display: none;
-    background-color: rgb(50 45 45 / 35%);
-    height: 150px;
-    width: 150px;
-    border-radius: 100%;
-}
-
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-label {
-    @extend .button3;
-    scale: 1.4;
-}
-
-.display {
-    display: flex !important;
 }
 
 .details {

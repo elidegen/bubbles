@@ -1,0 +1,18 @@
+<div class="file-picker-wrapper">
+
+    <!-- <div class="add-profile-img" [ngClass]="{'display': selectedImg}">
+        @if (!selectedImg) {
+        <input type="file" name="file" id="file" class="inputfile" (change)="onImgSelected($event)" />
+        <label for="file">Choose img</label>
+        } @else {
+        <button (click)="uploadImg(authService.currentUser.id)" class="button1">
+            Upload
+        </button>
+        }
+    </div> -->
+
+    <!-- <div class="add-profile-img" [ngClass]="{'display': selectedImg}"> -->
+        <input type="file" name="file" id="file" class="file-input" (change)="onImgSelected($event)" />
+        <label for="file">Upload image</label>
+    <!-- </div> -->
+</div>

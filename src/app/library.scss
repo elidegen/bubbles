@@ -83,13 +83,13 @@ $text-color: $color5;
 }
 
 .button3 {
-    @extend .button;
     font-size: 10px;
     padding: 8px;
     border-radius: 25px;
     background-color: inherit;
     color: rgba(255, 255, 255, 0.441);
     border: 1px solid rgba(255, 255, 255, 0.413);
+    cursor: pointer;
 
     &:hover {
         color: $color5;

@@ -22,50 +22,7 @@ export interface User {
 export class UserService {
   userUrl: string = environment.baseUrl + 'users/';
   chatMembers: number[] = [];
-  users: User[] = [
-    {
-      id: 1,
-      username: "USER1",
-      email: "joshua@mail.com",
-      picture: 'assets/img/profile_placeholder_blue.svg',
-      is_online: false,
-    },
-    {
-      id: 10,
-      username: "CurrentUser",
-      email: "joshua@mail.com",
-      picture: 'assets/img/profile_placeholder_blue.svg',
-      is_online: false,
-    },
-    {
-      id: 11,
-      username: "Joshua",
-      email: "joshua@mail.com",
-      picture: 'assets/img/profile_placeholder_red.svg',
-      is_online: false,
-    },
-    {
-      id: 12,
-      username: "Elijah",
-      email: "elijah@mail.com",
-      picture: 'assets/img/profile_placeholder_green.svg',
-      is_online: false,
-    },
-    {
-      id: 13,
-      username: "Max",
-      email: "max@mail.com",
-      picture: 'assets/img/profile_placeholder.svg',
-      is_online: false,
-    },
-    {
-      id: 14,
-      username: "Anna",
-      email: "anna@mail.com",
-      picture: 'assets/img/profile_placeholder_blue.svg',
-      is_online: false,
-    }
-  ]
+  users: User[] = [];
 
   constructor(
     private authService: AuthService,
@@ -82,12 +39,6 @@ export class UserService {
   fetchUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
-
-  // collectChatMembers(member: number) {
-  //   if (!this.chatMembers.includes(member)) {
-  //     this.chatMembers.push(member);
-  //   }
-  // }
 
   getUser(userId: number) {
     return this.users.find(obj => obj.id === userId) as User;

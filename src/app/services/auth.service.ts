@@ -19,12 +19,12 @@ export class AuthService {
     id: 1,
     username: "CurrentUser",
     email: "guestuser@mailinator.com",
-    picture: null,
+    picture: 'assets/img/profile_placeholder.svg',
     is_online: true,
   }
 
-  getImg() {
-    if (this.currentUser.picture != null) {
+  getImg() {    
+    if (this.currentUser.picture) {
       return this.currentUser.picture;
     }
     return 'assets/img/profile_placeholder.svg';

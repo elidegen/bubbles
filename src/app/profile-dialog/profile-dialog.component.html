@@ -3,25 +3,14 @@
         <p>Profile</p>
         <img (click)="mainService.closePopups()" src="assets/img/close_icon.svg" alt="">
     </div>
-    <div class="img-wrapper">
-        <div class="add-profile-img" [ngClass]="{'display': selectedImg}">
-            @if (!selectedImg) {
-                <input type="file" name="file" id="file" class="inputfile" (change)="onImgSelected($event)"/>
-                <label for="file">Choose img</label>
-            } @else {
-                <button  (click)="uploadImg(authService.currentUser.id)" class="button1">
-                    Upload
-                </button>
-            }
-        </div>
 
-        <img src="{{ authService.getImg() }}" alt="">
-        <!-- @if (authService.currentUser.picture) {
-          <img src="{{ authService.currentUser.picture}}" alt="">  
-        } @else {
-            <img src=" {{  }} " alt="">
-        } -->
-        
+    <div class="file-picker-wrapper">
+        <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
+
+        <div class="profile-img" style="background-image: url({{authService.currentUser.picture}});">
+
+        </div>
+        <!-- <img src="{{authService.currentUser.picture}}" alt=""> -->
     </div>
 
     <div class="details">

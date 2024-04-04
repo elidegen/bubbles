@@ -122,6 +122,7 @@ export class ChannelService {
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
+    this.messageService.threadOpen = false;
   }
 
   filterChats() {
