@@ -7,10 +7,7 @@
     <div class="file-picker-wrapper">
         <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
 
-        <div class="profile-img" style="background-image: url({{authService.currentUser.picture}});">
-
-        </div>
-        <!-- <img src="{{authService.currentUser.picture}}" alt=""> -->
+        <img src="{{authService.currentUser.picture}}" alt="">
     </div>
 
     <div class="details">
