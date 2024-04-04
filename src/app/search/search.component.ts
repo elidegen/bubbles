@@ -29,7 +29,7 @@ interface SearchSolutionUser {
 })
 export class SearchComponent implements OnInit {
   @Input() searchType!: 'search' | 'user-search';
-  searchValue: string = 'chan';
+  searchValue: string = '';
   placeholder!: string;
   showResults: boolean = false;
   searchSolution: SearchSolution = {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { MainService } from '../services/main.service';
   templateUrl: './message-bar.component.html',
   styleUrl: './message-bar.component.scss'
 })
-export class MessageBarComponent implements AfterViewInit {
+export class MessageBarComponent {
   @Input() disabled!: boolean;
   @Output() messageContent = new EventEmitter<string>();
   @ViewChild('picker') picker!: ElementRef;
@@ -23,10 +23,6 @@ export class MessageBarComponent implements AfterViewInit {
     public mainService: MainService,
   ) {
     this.setupClickListener();
-  }
-
-  ngAfterViewInit(): void {
-    // this.myInput.nativeElement.focus();
   }
 
   sendMsg() {
