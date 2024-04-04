@@ -92,4 +92,5 @@ export class MessageComponent {
     this.messageService.updateMessage(this.message);
     this.editState = false;
   }
+  
 }
