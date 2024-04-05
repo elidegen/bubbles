@@ -33,3 +33,7 @@ label {
 .display {
     display: flex !important;
 }
+
+input[type=file]::-webkit-file-upload-button {
+    display: none;
+}

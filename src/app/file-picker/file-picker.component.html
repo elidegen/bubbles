@@ -12,7 +12,7 @@
     </div> -->
 
     <!-- <div class="add-profile-img" [ngClass]="{'display': selectedImg}"> -->
-        <input type="file" name="file" id="file" class="file-input" (change)="onImgSelected($event)" />
+        <input type="file" name="file" accept=".jpg, .png, .jpeg" class="file-input" (change)="onImgSelected($event)" />
         <label for="file">
             <img src="assets/img/upload_icon.svg">
         </label>

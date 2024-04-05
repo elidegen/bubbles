@@ -48,18 +48,33 @@
 }
 
 .file-picker-wrapper {
-    position: relative;
     @include d-flex();
+    max-width: 35px;
+    height: 35px;
+    position: relative;
 
-    &:hover img {
+    input {
+        opacity: 0;
+        z-index: 99;
+        cursor: pointer;
+    }
+
+    label {
+        @include d-flex();
+        position: absolute;
+        inset: 0;
+        border-radius: 5px;
+    }
+
+    &:hover {
         filter: brightness(.9);
     }
 
     img {
-        height: 35px;
-        width: 35px;
-        object-fit: cover;
-        border-radius: 50%;
         margin: 0;
+    }
+
+    input[type=file]::-webkit-file-upload-button {
+        display: none;
     }
 }
