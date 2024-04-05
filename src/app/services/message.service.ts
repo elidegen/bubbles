@@ -18,7 +18,7 @@ export class Message {
   source: number; //ID from Channel
   content: string;
   created_at: number;
-  attachment?: string[];
+  attachment?: string[] | null;
   hash: string;
 
   constructor(obj?: any) {

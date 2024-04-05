@@ -36,9 +36,10 @@ export class ChannelDetailsDialogComponent {
       is_channel: true,
       read_by: this.currentChannel.read_by,
       hash: this.currentChannel.hash,
-      picture: this.currentChannel.picture,
+      picture: this.channelService.getImg(this.currentChannel.picture),
     }    
   }
+
 
   handleImg(file: File) {
     console.log('new file:', file);
