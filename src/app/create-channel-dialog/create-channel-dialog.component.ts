@@ -52,18 +52,18 @@ export class CreateChannelDialogComponent {
   async postChannel() {
     const url = environment.baseUrl + 'channels/';
     const formData = new FormData();
-    
+
     if (this.imgSelected) {
       formData.append('name', this.newChannel.name);
       formData.append('description', JSON.stringify(this.newChannel.description));
       this.newChannel.members.forEach(memberId => {
         formData.append('members', memberId.toString());
-    });
+      });
       formData.append('is_channel', this.newChannel.is_channel.toString());
       formData.append('picture', this.imgSelected);
     };
     console.log(formData);
-    
+
     const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
     console.log('resp', response);
 
@@ -73,13 +73,10 @@ export class CreateChannelDialogComponent {
   }
 
 
-  async handleImg(file: File) {
+  handleImg(file: File) {
     console.log(this.newChannel);
     if (file) {
-      ///VALidation pdf, img .... 
       this.imgSelected = file;
-      console.log('file' , file);
-      
     }
 
     let reader = new FileReader();
