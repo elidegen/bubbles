@@ -20,6 +20,7 @@ export class EditChannelDialogComponent {
   editDesc: boolean = false;
   currentChannel: Channel;
   updatedChannel!: Channel;
+  imgSelected: File | undefined;
 
   constructor(
     public mainService: MainService,
@@ -37,14 +38,25 @@ export class EditChannelDialogComponent {
       read_by: this.currentChannel.read_by,
       hash: this.currentChannel.hash,
       picture: this.channelService.getImg(this.currentChannel.picture),
-    }    
+    }
   }
 
 
   handleImg(file: File) {
-    console.log('filepicker edit channel', file);
-    this.updatedChannel.picture = 'assets/img/profile_placeholder_green.svg';
+    if (file) {
+      this.imgSelected = file;
+    }
+
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      if (event.target.readyState === FileReader.DONE) {
+        const imageData = event.target.result;
+        this.updatedChannel.picture = imageData;
+      }
+    };
+    reader.readAsDataURL(file);
   }
+
 
   leaveChannel() {
     this.updatedChannel = this.currentChannel;
@@ -56,18 +68,20 @@ export class EditChannelDialogComponent {
   }
 
   async putChannel() {
-    console.log('before', this.channelService.chats);
-
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
+    const formData = new FormData();
+    if (this.imgSelected) {
+      formData.append('name', this.updatedChannel.name);
+      formData.append('description', JSON.stringify(this.updatedChannel.description));
+      this.updatedChannel.members.forEach(memberId => {
+        formData.append('members', memberId.toString());
+      });
+      formData.append('is_channel', this.updatedChannel.is_channel.toString());
+      formData.append('picture', this.imgSelected);
+    };
 
     // const index = this.channelService.chats.findIndex(obj => obj.hash === this.currentChannel.hash);
     // this.channelService.chats[index] = this.updatedChannel;
-    const response = await firstValueFrom(this.http.put(url, this.updatedChannel));
-
-
-    console.log('res', response);
-    console.log('after', this.channelService.chats);
-
 
     this.mainService.closePopups();
   }
