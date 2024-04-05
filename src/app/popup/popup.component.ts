@@ -5,12 +5,12 @@ import { NewChannelDialogComponent } from '../new-channel-dialog/new-channel-dia
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import { AddMembersDialogComponent } from '../add-members-dialog/add-members-dialog.component';
 import { ShowMembersDialogComponent } from '../show-members-dialog/show-members-dialog.component';
-import { ChannelDetailsDialogComponent } from '../channel-details-dialog/channel-details-dialog.component';
+import { EditChannelDialogComponent } from '../edit-channel-dialog/edit-channel-dialog.component';
 
 @Component({
   selector: 'app-popup',
   standalone: true,
-  imports: [CommonModule, NewChannelDialogComponent, ProfileDialogComponent, AddMembersDialogComponent, ShowMembersDialogComponent, ChannelDetailsDialogComponent],
+  imports: [CommonModule, NewChannelDialogComponent, ProfileDialogComponent, AddMembersDialogComponent, ShowMembersDialogComponent, EditChannelDialogComponent],
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.scss'
 })

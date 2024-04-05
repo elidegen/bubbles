@@ -30,6 +30,8 @@ export class ProfileDialogComponent {
   }
 
   async uploadImg(file: File) {
+    console.log('filepicker profile');
+    
     const url = environment.baseUrl + 'upload_img/' + this.authService.currentUser.id + '/';
     let formdata = new FormData();
     formdata.append('picture', file);

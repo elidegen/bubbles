@@ -12,27 +12,17 @@
                 </div>
 
                 <div class="mini-content">
-                    <!-- @if (editName) { -->
                     <div class="card">
-                        <input type="text" class="input" placeholder="{{updatedChannel.name}}" [(ngModel)]="updatedChannel.name">
-                        <img src="assets/img/edit_document_icon.svg" (click)="this.editName = false">
+                        <input type="text" class="input" placeholder="{{updatedChannel.name}}"
+                            [(ngModel)]="updatedChannel.name">
                     </div>
-                    <!-- } @else {
-                    <div class="card">
-                        <span class="info">{{updatedChannel.name}}</span>
-                        <img src="assets/img/edit_document_icon.svg" class="img-button"
-                            (click)="editName = true">
-                    </div>
-                    } -->
                 </div>
             </div>
-
 
             <div class="file-picker-wrapper">
                 <app-file-picker name="file-picker" (newPicture)="handleImg($event)"></app-file-picker>
                 <img src="{{updatedChannel.picture}}">
             </div>
-
         </div>
 
         <div class="input-wrapper">
@@ -41,17 +31,10 @@
             </div>
 
             <div class="mini-content">
-                <!-- @if (editDesc) { -->
                 <div class="card">
-                    <input type="text" class="input" placeholder="{{updatedChannel.description}}" [(ngModel)]="updatedChannel.description">
-                    <img src="assets/img/check_icon.svg" class="img-button" (click)="editDesc = false">
+                    <input type="text" class="input" placeholder="{{updatedChannel.description}}"
+                        [(ngModel)]="updatedChannel.description">
                 </div>
-                <!-- } @else {
-                <div class="card">
-                    <span>{{updatedChannel.description}}</span>
-                    <img src="assets/img/edit_document_icon.svg" class="img-button" (click)="editDesc = true">
-                </div>
-                } -->
             </div>
         </div>
     </div>

@@ -60,6 +60,7 @@ export class MainService {
     this.profilePopup = false;
     this.addMembersPopup = false;
     this.showMembersPopup = false;
+    this.editChannelPopup = false;
   }
 
   openPopup() {

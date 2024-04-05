@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MainService } from '../services/main.service';
+import { FilePickerComponent } from '../file-picker/file-picker.component';
+import { every } from 'rxjs';
 
 @Component({
   selector: 'app-message-bar',
   standalone: true,
-  imports: [FormsModule, EmojiPickerDialogComponent, CommonModule],
+  imports: [FormsModule, EmojiPickerDialogComponent, CommonModule, FilePickerComponent],
   templateUrl: './message-bar.component.html',
   styleUrl: './message-bar.component.scss'
 })
@@ -46,5 +48,9 @@ export class MessageBarComponent {
     setTimeout(() => {
       this.showEmojiPicker = true;
     }, 1);
+  }
+
+  attachImg(file: File) {
+    console.log('filepicker messagebar', file);
   }
 }

@@ -4,18 +4,7 @@
     @include d-flex();
     height: 100%;
     width: 100%;
-    border: 1px solid green;
 }
-
-// .add-profile-img {
-//     @include center();
-//     // @include pos-center($pos: absolute);
-//     display: flex;
-//     background-color: rgb(50 45 45 / 35%);
-//     height: 150px;
-//     width: 150px;
-//     border-radius: 100%;
-// }
 
 .file-input {
     opacity: 0;
@@ -32,7 +21,10 @@ label {
     width: 100%;
     background-color: rgba($color: #000000, $alpha: .4);
     @include d-flex();
-    img{
+    cursor: pointer;
+    z-index: 2;
+
+    img {
         height: 50%;
         max-height: 50px;
     }

@@ -9,13 +9,13 @@ import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
 @Component({
-  selector: 'app-channel-details-dialog',
+  selector: 'app-edit-channel-dialog',
   standalone: true,
   imports: [FilePickerComponent, FormsModule],
-  templateUrl: './channel-details-dialog.component.html',
-  styleUrl: './channel-details-dialog.component.scss'
+  templateUrl: './edit-channel-dialog.component.html',
+  styleUrl: './edit-channel-dialog.component.scss'
 })
-export class ChannelDetailsDialogComponent {
+export class EditChannelDialogComponent {
   editName: boolean = false;
   editDesc: boolean = false;
   currentChannel: Channel;
@@ -42,7 +42,7 @@ export class ChannelDetailsDialogComponent {
 
 
   handleImg(file: File) {
-    console.log('new file:', file);
+    console.log('filepicker edit channel', file);
     this.updatedChannel.picture = 'assets/img/profile_placeholder_green.svg';
   }
 

@@ -5,7 +5,7 @@
     gap: 15px;
 
     .msg-input {
-        @include d-flex($jc: space-between);
+        @include d-flex($jc: space-between, $g: 5px);
         background-color: $color5;
         height: 50px;
         width: 100%;
@@ -45,4 +45,29 @@
     background-color: white;
     height: 35px;
     margin-right: -5px;
+}
+
+.file-picker-wrapper {
+    position: relative;
+    @include d-flex();
+
+    &:hover img {
+        filter: brightness(.9);
+    }
+
+    img {
+        height: 35px;
+        width: 35px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 0;
+    }
+
+    app-file-picker {
+        z-index: 1;
+        opacity: 0;
+        @include pos-center($pos: absolute);
+        height: 100%;
+        width: 100%;
+    }
 }
