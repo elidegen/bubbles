@@ -10,13 +10,13 @@ import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-new-channel-dialog',
+  selector: 'app-create-channel-dialog',
   standalone: true,
   imports: [NgSwitchCase, CommonModule, FormsModule, FilePickerComponent],
-  templateUrl: './new-channel-dialog.component.html',
-  styleUrl: './new-channel-dialog.component.scss'
+  templateUrl: './create-channel-dialog.component.html',
+  styleUrl: './create-channel-dialog.component.scss'
 })
-export class NewChannelDialogComponent {
+export class CreateChannelDialogComponent {
   addMembers: boolean = false;
   addAllMembers: boolean = false;
   selectedMembers: number[] = [];

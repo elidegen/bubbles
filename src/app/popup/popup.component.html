@@ -8,7 +8,7 @@
         <span class="error">{{ mainService.errorMessage }}</span>
     </div>
 
-    <app-new-channel-dialog *ngIf="mainService.addChannelPopup === true"></app-new-channel-dialog>
+    <app-create-channel-dialog *ngIf="mainService.addChannelPopup === true"></app-create-channel-dialog>
 
     <app-profile-dialog *ngIf="mainService.profilePopup === true"></app-profile-dialog>
 
