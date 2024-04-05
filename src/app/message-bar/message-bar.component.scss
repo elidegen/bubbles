@@ -62,12 +62,4 @@
         border-radius: 50%;
         margin: 0;
     }
-
-    app-file-picker {
-        z-index: 1;
-        opacity: 0;
-        @include pos-center($pos: absolute);
-        height: 100%;
-        width: 100%;
-    }
 }

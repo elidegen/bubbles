@@ -4,8 +4,7 @@
             placeholder="Type a message...">
 
         <div class="file-picker-wrapper">
-            <app-file-picker (newPicture)="attachImg($event)"></app-file-picker>
-
+            <input name="file" type="file">
             <img class="img-button" src="assets/img/attachment_icon.svg">
         </div>
         <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg">
