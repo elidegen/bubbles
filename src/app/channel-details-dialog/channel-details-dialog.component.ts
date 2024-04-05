@@ -43,7 +43,6 @@ export class ChannelDetailsDialogComponent {
 
   handleImg(file: File) {
     console.log('new file:', file);
-
     this.updatedChannel.picture = 'assets/img/profile_placeholder_green.svg';
   }
 

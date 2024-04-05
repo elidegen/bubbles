@@ -20,6 +20,7 @@ export class NewChannelDialogComponent {
   addMembers: boolean = false;
   addAllMembers: boolean = false;
   selectedMembers: number[] = [];
+  imgSelected: File | undefined;
   newChannel: Channel = {
     id: 0,
     name: '',
@@ -50,9 +51,20 @@ export class NewChannelDialogComponent {
 
   async postChannel() {
     const url = environment.baseUrl + 'channels/';
-    const formdata = new FormData();
-    // formdata.append(    );
-    const response = await firstValueFrom(this.http.post(url, this.newChannel)) as Channel;
+    const formData = new FormData();
+    
+    if (this.imgSelected) {
+      formData.append('name', this.newChannel.name);
+      formData.append('description', JSON.stringify(this.newChannel.description));
+      this.newChannel.members.forEach(memberId => {
+        formData.append('members', memberId.toString());
+    });
+      formData.append('is_channel', this.newChannel.is_channel.toString());
+      formData.append('picture', this.imgSelected);
+    };
+    console.log(formData);
+    
+    const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
     console.log('resp', response);
 
     // sende newChannel ans Backend
@@ -60,10 +72,26 @@ export class NewChannelDialogComponent {
     this.mainService.closePopups();
   }
 
+
   async handleImg(file: File) {
-    console.log('file from newchnl dlg', file);
-    this.newChannel.picture = 'assets/img/profile_placeholder_blue.svg';
+    console.log(this.newChannel);
+    if (file) {
+      ///VALidation pdf, img .... 
+      this.imgSelected = file;
+      console.log('file' , file);
+      
+    }
+
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      if (event.target.readyState === FileReader.DONE) {
+        const imageData = event.target.result;
+        this.newChannel.picture = imageData;
+      }
+    };
+    reader.readAsDataURL(file);
   }
+
 
   async uploadImg(file: File) { //not in use
     const url = environment.baseUrl + 'media/channel_pictures/' + file.name + '/';
