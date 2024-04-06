@@ -56,4 +56,8 @@ export class AddMembersDialogComponent {
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
     console.log('new members', response);
   }
+
+  removeMember(member: User){
+    this.channelMembers.splice(this.channelMembers.indexOf(member), 1)
+  }
 }

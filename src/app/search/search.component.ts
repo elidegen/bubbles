@@ -16,7 +16,7 @@ export interface SearchSolution {
 }
 
 export interface SearchSolutionUser {
-  users: User[]
+  users: any[]
 }
 
 @Component({

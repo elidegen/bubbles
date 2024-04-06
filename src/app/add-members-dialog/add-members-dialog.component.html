@@ -4,25 +4,16 @@
         <img src="assets/img/close_icon.svg" (click)="mainService.closePopups()">
     </div>
     <p>{{currentChannel.name}}</p>
-    <app-search [searchType]="'user-search'" [userSelection]="channelMembers" (selectedUsers)="handleSelectedUsers($event)"></app-search>
+    <app-search [searchType]="'user-search'" [userSelection]="channelMembers"
+        (selectedUsers)="handleSelectedUsers($event)"></app-search>
     <div class="selected-users">
-
+        @for (user of channelMembers; track $index) {
         <div class="selected-user">
-            <img src="assets/img/profile_placeholder.svg">
-            <p>Elijah</p>
-            <img class="img-button" src="assets/img/close_icon.svg">
+            <img src="{{channelService.getImg(user.picture)}}">
+            <p>{{user.username}}</p>
+            <img class="img-button" src="assets/img/close_icon.svg" (click)="removeMember(user)">
         </div>
-        <div class="selected-user">
-            <img src="assets/img/profile_placeholder.svg">
-            <p>Joshua</p>
-            <img class="img-button" src="assets/img/close_icon.svg">
-        </div>
-        <div class="selected-user">
-            <img src="assets/img/profile_placeholder.svg">
-            <p>Anna</p>
-            <img class="img-button" src="assets/img/close_icon.svg">
-        </div>
-
+        }
     </div>
     <div class="button-wrapper">
         <!-- <button [disabled]="selectedUsers.length < 1" [class.disabled]="selectedUsers.length < 1"
