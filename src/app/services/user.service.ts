@@ -10,7 +10,7 @@ export interface User {
   id?: number,
   username: string;
   email: string,
-  picture: string,
+  picture: string | null,
   password?: string,
   is_online: boolean,
 }
