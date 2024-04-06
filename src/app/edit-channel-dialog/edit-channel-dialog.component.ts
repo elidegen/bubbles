@@ -62,7 +62,6 @@ export class EditChannelDialogComponent {
     this.updatedChannel = this.currentChannel;
     const index = this.updatedChannel.members.findIndex(obj => obj === this.authService.currentUser.id)
     this.updatedChannel.members.splice(index, 1);
-    console.log('left channel', this.updatedChannel);
     this.putChannel();
     this.mainService.closePopups();
   }

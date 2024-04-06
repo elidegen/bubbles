@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { Channel, ChannelService } from '../services/channel.service';
 import { User } from '../services/user.service';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-add-members-dialog',
   standalone: true,
-  imports: [],
+  imports: [SearchComponent],
   templateUrl: './add-members-dialog.component.html',
   styleUrl: './add-members-dialog.component.scss'
 })

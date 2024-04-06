@@ -8,11 +8,12 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
 import { environment } from '../../environments/environment.development';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-create-channel-dialog',
   standalone: true,
-  imports: [NgSwitchCase, CommonModule, FormsModule, FilePickerComponent],
+  imports: [NgSwitchCase, CommonModule, FormsModule, FilePickerComponent, SearchComponent],
   templateUrl: './create-channel-dialog.component.html',
   styleUrl: './create-channel-dialog.component.scss'
 })
@@ -62,11 +63,8 @@ export class CreateChannelDialogComponent {
       formData.append('is_channel', this.newChannel.is_channel.toString());
       formData.append('picture', this.imgSelected);
     };
-    console.log(formData);
-
     const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
-    console.log('resp', response);
-
+    console.log('created and uploaded channel: ', response);    
     // sende newChannel ans Backend
     // this.channelService.chats.push(this.newChannel as Channel);
     this.mainService.closePopups();
@@ -74,7 +72,6 @@ export class CreateChannelDialogComponent {
 
 
   handleImg(file: File) {
-    console.log(this.newChannel);
     if (file) {
       this.imgSelected = file;
     }

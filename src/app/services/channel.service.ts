@@ -64,8 +64,6 @@ export class ChannelService {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
     if (this.currentChannel) {
-      console.log(this.currentChannel);
-      
       messageService.getMessagesAndThread(this.currentChannel.id);
     } else {
       this.mainService.deactivateLoader();

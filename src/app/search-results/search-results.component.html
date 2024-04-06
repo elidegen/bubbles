@@ -1,20 +1,20 @@
 <div class="search-result card">
     <p class="seperator">Users</p>
+    @if (searchType === 'search') {
     @for (user of searchSolution.users; track $index) {
     <div class=" preview">
         <div class="online-wrapper">
-            <img src="{{user.picture}}">
+            <img src="{{channelService.getImg(user.picture)}}">
             <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
         </div>
         <p>{{user.username}}</p>
     </div>
     }
 
-    @if (searchType === 'search') {
     <p class="seperator">Channels</p>
     @for (channel of searchSolution.channels; track $index) {
     <div class=" preview">
-        <img src="{{channel.picture || 'assets/img/profile_placeholder.svg'}}">
+        <img src="{{channelService.getImg(channel.picture)}}">
         <p>{{channel.name}}</p>
     </div>
     }
@@ -24,7 +24,7 @@
     <div class=" message preview">
 
         <div class="online-wrapper">
-            <img src="{{this.userService.getUser(message.author).picture}}">
+            <img src="{{channelService.getImg(this.userService.getUser(message.author).picture)}}">
             <div [ngClass]="this.userService.getUser(message.author).is_online ? 'online' : 'offline'"></div>
         </div>
 
@@ -39,7 +39,7 @@
     <div class=" message preview">
 
         <div class="online-wrapper">
-            <img src="{{this.userService.getUser(thread.author).picture}}">
+            <img src="{{channelService.getImg(this.userService.getUser(thread.author).picture)}}">
             <div [ngClass]="this.userService.getUser(thread.author).is_online ? 'online' : 'offline'"></div>
         </div>
 
@@ -50,5 +50,24 @@
         </div>
     </div>
     }
+    } @else {
+    <!-- @for (user of searchSolutionUser.users; track $index) {
+    <div class=" preview">
+        <div class="online-wrapper">
+            <img src="{{channelService.getImg(user.picture)}}">
+            <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
+        </div>
+        <p>{{user.username}}</p>
+    </div>
+    } -->
+    @for (user of userService.users; track $index) {
+        <div class="preview" (click)="selectUser(user)" [class.selected]="userSelection.includes(user)">
+            <div class="online-wrapper">
+                <img src="{{'assets/img/profile_placeholder_red.svg'}}">
+                <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
+            </div>
+            <p>{{user.username}}</p>
+        </div>
+        }
     }
 </div>

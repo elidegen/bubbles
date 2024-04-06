@@ -16,7 +16,7 @@ export interface SearchSolution {
   users: User[],
 }
 
-interface SearchSolutionUser {
+export interface SearchSolutionUser {
   users: User[]
 }
 
@@ -55,35 +55,26 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.placeholder = this.searchType === 'search' ? 'Search' : 'Search user';
+    this.placeholder = this.searchType === 'search' ? 'Search' : 'Search members';
   }
 
   triggerSearch() {
-    if (!this.searchIsValid()) return;
-    let url = environment.baseUrl + this.searchType;
-    this.search(url);
-    // if (this.searchType === "search") {
-
-    // } else if (this.searchType === "user-search") {
-    //   this.userSearch(url)
-    // }
+    if (this.searchIsValid())
+      this.search();
   }
 
-  async search(url: string) {
+  async search() {
+    const url = environment.baseUrl + this.searchType;
     const data = {
       search_value: this.searchValue
     }
-    this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-    console.log(this.searchSolution);
-  }
-
-  async userSearch(url: string) {
-    if (!this.searchIsValid()) return;
-    const data = {
-      search_value: this.searchValue
+    if (this.searchType === 'search') {
+      this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
+      // console.log('searchSolution', this.searchSolution);
+    } else {
+      this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
+      // console.log('searchSolutionUser', this.searchSolutionUser);
     }
-    this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
-    console.log(this.searchSolutionUser);
   }
 
   searchIsValid() {

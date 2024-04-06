@@ -1,6 +1,6 @@
 <div class="search-wrapper" (click)="stopProp($event)">
-    <input (click)="showResults = true" placeholder="{{ placeholder }}" class="input" type="text" (keyup)="triggerSearch()"
+    <input (click)="showResults = true" placeholder="{{ placeholder }}" class="input" [class.dark-input]="searchType === 'user-search'" type="text" (keyup)="triggerSearch()"
         [(ngModel)]="searchValue">
 
-    <app-search-results *ngIf="searchValue.trim() && showResults" [searchSolution]="searchSolution" [searchType]="searchType"></app-search-results>
+    <app-search-results *ngIf="searchValue.trim() && showResults" [searchSolution]="searchSolution" [searchSolutionUser]="searchSolutionUser" [searchType]="searchType"></app-search-results>
 </div>

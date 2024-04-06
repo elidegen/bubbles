@@ -37,7 +37,7 @@
             <input type="radio" name="radio" [value]="false" [(ngModel)]="addAllMembers">
             Add certain members
         </label>
-        <input *ngIf="!addAllMembers" type="text" class="input" placeholder="Search members">
+        <app-search *ngIf="!addAllMembers" [searchType]="'user-search'"></app-search>
     </div>
 
     <div class="button-wrapper">

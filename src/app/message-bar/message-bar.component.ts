@@ -60,7 +60,7 @@ export class MessageBarComponent {
   handleImg(event: any) {
     const file: File = event.target.files[0];
     if (file && this.checkForFormat(file)) {
-      this.uploadImg(file);
+      this.uploadImg(file); // add img
     } else {
       alert('Only JPG, JPEG, PNG, PDF and max 5mb accepted!');
     }
@@ -76,6 +76,6 @@ export class MessageBarComponent {
   }
 
   uploadImg(file: File) {
-
+    console.log('upload', file);
   }
 }

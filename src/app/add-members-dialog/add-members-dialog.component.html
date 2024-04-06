@@ -4,7 +4,7 @@
         <img src="assets/img/close_icon.svg" (click)="mainService.closePopups()">
     </div>
     <p>{{currentChannel.name}}</p>
-    <input type="text" class="input" placeholder="Enter name">
+    <app-search [searchType]="'user-search'"></app-search>
     <div class="selected-users">
 
         <div class="selected-user">
@@ -25,6 +25,7 @@
 
     </div>
     <div class="button-wrapper">
-        <button [disabled]="selectedUsers.length < 1" [class.disabled]="selectedUsers.length < 1" class="button1">Add</button>
+        <button [disabled]="selectedUsers.length < 1" [class.disabled]="selectedUsers.length < 1"
+            class="button1">Add</button>
     </div>
 </div>

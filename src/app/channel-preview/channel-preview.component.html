@@ -10,7 +10,9 @@
     <div class="text-wrapper">
         <div class="upper-text">
             <p class="name">{{channel.name}}</p>
+            @if(getLatestMsg().created_at != 0){
             <p class="time">{{ getLatestMsg().created_at| date:"HH:mm"}}</p>
+            }
         </div>
         <p class="msg">{{getPreview()}}</p>
     </div>
