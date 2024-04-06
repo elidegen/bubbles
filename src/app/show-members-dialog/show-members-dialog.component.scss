@@ -13,6 +13,7 @@
 
         .member-wrapper {
             @include d-flex($g: 15px, $jc: flex-start);
+            max-width: 100%;
 
             img {
                 height: 40px;

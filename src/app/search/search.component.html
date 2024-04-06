@@ -56,7 +56,7 @@
         </div>
         }
         } @else {
-        <!-- @for (user of searchSolutionUser.users; track $index) {
+        @for (user of searchSolutionUser.users; track $index) {
         <div class=" preview">
             <div class="online-wrapper">
                 <img src="{{channelService.getImg(user.picture)}}">
@@ -64,8 +64,8 @@
             </div>
             <p>{{user.username}}</p>
         </div>
-        } -->
-        @for (user of userService.users; track $index) {
+        }
+        <!-- @for (user of userService.users; track $index) {
         <div class="preview" (click)="selectUser(user)" [class.selected]="userSelection.includes(user)">
             <div class="online-wrapper">
                 <img src="{{'assets/img/profile_placeholder_red.svg'}}">
@@ -73,7 +73,7 @@
             </div>
             <p>{{user.username}}</p>
         </div>
-        }
+        } -->
         }
     </div>
 </div>
