@@ -3,6 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,13 @@ export class LoginComponent  {
   hide:boolean = false;
   loginForm: FormGroup
 
-  constructor(private router: Router, private ms: MainService){
+  constructor(
+    private router: Router, 
+    private mainService: MainService,
+    private authService: AuthService
+    ){
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
   }
@@ -30,16 +35,22 @@ export class LoginComponent  {
   }
 
   guestLogin(){
-     this.ms.loader = true;
+     this.mainService.loader = true;
     
   }
 
   submit(){
-
+    if (this.loginForm.valid) {
+      const formData = new FormData();
+      formData.append('username', this.loginForm.get('username')?.value),
+      formData.append('password', this.loginForm.get('password')?.value)
+      this.mainService.loader = true;
+      this.authService.logIn(formData);
+    }
   }
 
 
-  //**************FORM CONTROL */
+  //**************FORM CONTROL ******/
   isFormValid() {
     return this.loginForm.valid;
   }

@@ -1,14 +1,13 @@
 <div class="wrapper">
-    <form class="card" [ngClass]="{'hide': hide}" [formGroup]="loginForm" (ngSubmit)="submit()">
+    <form class="card" [ngClass]="{'hide': hide}" [formGroup]="loginForm" (submit)="submit()">
         <div class="row"><span class="large-font">LOGIN</span></div>
 
 
         <div class="input-container">
-            <input placeholder="e-mail" type="email" formControlName="email"
-                [ngClass]="{'invalid': isInvalid('email'), 'valid': isValidInput('email') }">
+            <input placeholder="username" type="username" formControlName="username"
+                [ngClass]="{'invalid': isInvalid('username'), 'valid': isValidInput('username') }">
             <div class="error-container">
-                <div *ngIf="requiredErrors('email')" class="errors">email is required</div>
-                <div *ngIf="emailError('email')" class="errors">please use a valid email</div>
+                <div *ngIf="requiredErrors('username')" class="errors">username is required</div>
             </div>
         </div>
 
@@ -35,7 +34,7 @@
         </div>
 
         <div class="row">
-            <button [ngClass]="{'valid-form-button': isFormValid()}" type="button" class="button1" (click)="navigateTo('/home')">LOG IN</button>
+            <button  [ngClass]="{'valid-form-button': isFormValid()}" type="submit" class="button1" (click)="navigateTo('/home')">LOG IN</button>
         </div>
 
     </form>
