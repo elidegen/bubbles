@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class MainService {
   showPopup: boolean = false;
   errorMessage: string | undefined;
+  logMessage: string | undefined;
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
@@ -56,6 +57,7 @@ export class MainService {
   closePopups() {
     this.showPopup = false;
     this.errorMessage = undefined;
+    this.logMessage = undefined;
     this.addChannelPopup = false;
     this.profilePopup = false;
     this.addMembersPopup = false;
@@ -70,6 +72,14 @@ export class MainService {
   errorLog(message: string) {
     this.openPopup();
     this.errorMessage = message;
+    setTimeout(() => {
+      this.closePopups();
+    }, 3000);
+  }
+
+  messageLog(message: string) {
+    this.openPopup();
+    this.logMessage = message;
     setTimeout(() => {
       this.closePopups();
     }, 3000);

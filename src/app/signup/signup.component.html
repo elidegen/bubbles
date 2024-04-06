@@ -1,14 +1,14 @@
 <div class="wrapper">
-    <form class="card" [ngClass]="{'hide': hide}" [formGroup]="signUpForm">
+    <form class="card" [ngClass]="{'hide': hide}" (submit)="submit()" [formGroup]="signUpForm">
         <div class="row"><span class="large-font">SIGN UP</span></div>
 
         <div class="input-container">
-            <input placeholder="name" type="text" formControlName="name"
-                [ngClass]="{'invalid': isInvalid('name'), 'valid': isValidInput('name') }">
+            <input placeholder="username" type="text" formControlName="username"
+                [ngClass]="{'invalid': isInvalid('username'), 'valid': isValidInput('username') }">
 
             <div class="error-container">
-                <div *ngIf="requiredErrors('name')" class="errors">firstname is required</div>
-                <div *ngIf="minLengthError('name')" class="errors">firstname must have a minimum of 4 characters
+                <div *ngIf="requiredErrors('username')" class="errors">username is required</div>
+                <div *ngIf="minLengthError('username')" class="errors">username must have a minimum of 4 characters
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
 
         </div>
         <div class="row">
-            <button [ngClass]="{'valid-form-button': isFormValid()}" class="button1">SIGN UP</button>
+            <button type="submit" [ngClass]="{'valid-form-button': isFormValid()}" class="button1">SIGN UP</button>
         </div>
 
     </form>
