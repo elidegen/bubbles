@@ -19,3 +19,60 @@
         background-color: $color1;
     }
 }
+@import "../library.scss";
+
+.search-result {
+    width: 400px;
+    z-index: 999;
+    position: absolute;
+    top: 55px;
+    border: 1px solid white;
+    @include d-flex($fd: column, $ai: flex-start, $g: 5px);
+}
+
+.seperator {
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid grey;
+}
+
+.seperator:first-child {
+    padding-top: 0;
+    border: 0;
+}
+
+.preview {
+    @include d-flex($jc: flex-start, $g: 5px);
+    @extend .hover;
+    @extend .card;
+    padding: 5px;
+    border-radius: 20px;
+    width: 100%;
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.message {
+    align-items: flex-start;
+
+    .details {
+        @include d-flex($fd: column, $g: 5px, $ai: flex-start);
+
+        .author {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .source {
+            @extend .small-font;
+            color: rgb(182, 182, 182);
+        }
+    }
+}
+
+.selected{
+    filter: brightness(.8);
+}

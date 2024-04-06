@@ -78,13 +78,13 @@ export class MessageComponent {
   }
 
   deleteMessage() {
-    let index = this.messageService.currentMessages.findIndex(obj => obj.id === this.message.id);
-    if (index === -1) {
-      index = this.messageService.threads.findIndex(obj => obj.id === this.message.id);
-      this.messageService.threads.splice(index, 1);
-    } else {
-      this.messageService.currentMessages.splice(index, 1);
-    }
+    // let index = this.messageService.currentMessages.findIndex(obj => obj.id === this.message.id);
+    // if (index === -1) {
+    //   index = this.messageService.threads.findIndex(obj => obj.id === this.message.id);
+    //   this.messageService.threads.splice(index, 1);
+    // } else {
+    //   this.messageService.currentMessages.splice(index, 1);
+    // }
   }
 
   editMessage(messageContent: string) {

@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Channel } from '../services/channel.service';
-import { User } from '../services/user.service';
-import { Message } from '../services/message.service';
+import { Channel, ChannelService } from '../services/channel.service';
+import { User, UserService } from '../services/user.service';
+import { Message, MessageService } from '../services/message.service';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { SearchResultsComponent } from '../search-results/search-results.component';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -23,12 +22,15 @@ export interface SearchSolutionUser {
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule, SearchResultsComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
 export class SearchComponent implements OnInit {
   @Input() searchType!: 'search' | 'user-search';
+  @Input() userSelection: User[] = [];
+  @Output() selectedUsers = new EventEmitter<User[]>();
+  
   searchValue: string = '';
   placeholder!: string;
   showResults: boolean = false;
@@ -44,8 +46,11 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    public userService: UserService,
+    public channelService: ChannelService,
+    public messageService: MessageService,
   ) {
-    this.setupClickListener();
+    this.setupClickListener();  
   }
 
   private setupClickListener() {
@@ -70,10 +75,10 @@ export class SearchComponent implements OnInit {
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-      // console.log('searchSolution', this.searchSolution);
+      console.log('searchSolution', this.searchSolution);
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
-      // console.log('searchSolutionUser', this.searchSolutionUser);
+      console.log('searchSolutionUser', this.searchSolutionUser);
     }
   }
 
@@ -83,5 +88,14 @@ export class SearchComponent implements OnInit {
 
   stopProp($event: Event) {
     $event.stopPropagation();
+  }
+
+  selectUser(user: User) {
+    if (this.userSelection.includes(user)) {
+      this.userSelection.splice(this.userSelection.indexOf(user), 1);
+    } else {
+      this.userSelection.push(user);
+    }
+    this.selectedUsers.emit(this.userSelection);
   }
 }

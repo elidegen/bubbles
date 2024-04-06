@@ -14,9 +14,9 @@ import { every } from 'rxjs';
   styleUrl: './message-bar.component.scss'
 })
 export class MessageBarComponent {
-  @Input() disabled!: boolean;
   @Output() messageContent = new EventEmitter<string>();
   @Output() messagePicture = new EventEmitter<File>();
+  @Input() disabled!: boolean;
   @ViewChild('picker') picker!: ElementRef;
   @ViewChild('myInput') myInput!: ElementRef;
   inputContent: string = '';
@@ -30,15 +30,12 @@ export class MessageBarComponent {
   }
 
   sendMsg() {
-    if (this.inputContent.trim() && this.seletedFile) {
+    if (this.inputContent.trim()) {
       this.messagePicture.emit(this.seletedFile);
       this.messageContent.emit(this.inputContent);
-      this.inputContent = '';
-      this.seletedFile = undefined;
-    } else if (this.inputContent.trim()) {
-      this.messageContent.emit(this.inputContent);
-      this.inputContent = '';
     }
+    this.seletedFile = undefined;
+    this.inputContent = '';
   }
 
   typeEmoji($event: any) {

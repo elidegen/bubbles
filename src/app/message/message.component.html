@@ -31,7 +31,7 @@
             <div class="img-wrapper" (click)="editState = !editState">
                 <img src="assets/img/edit_document_icon.svg">
             </div>
-            <div class="img-wrapper" (click)="deleteMessage()">
+            <div class="img-wrapper" (click)="messageService.deleteMessage(message)">
                 <img src="assets/img/delete_icon.svg">
             </div>
             }

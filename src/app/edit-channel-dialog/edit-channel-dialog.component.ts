@@ -5,7 +5,7 @@ import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { first, firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
 @Component({
@@ -47,7 +47,7 @@ export class EditChannelDialogComponent {
       this.imgSelected = file;
     }
 
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (event: any) => {
       if (event.target.readyState === FileReader.DONE) {
         const imageData = event.target.result;
@@ -70,17 +70,14 @@ export class EditChannelDialogComponent {
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
     const formData = new FormData();
     if (this.imgSelected) {
-      formData.append('name', this.updatedChannel.name);
-      formData.append('description', JSON.stringify(this.updatedChannel.description));
-      this.updatedChannel.members.forEach(memberId => {
-        formData.append('members', memberId.toString());
-      });
-      formData.append('is_channel', this.updatedChannel.is_channel.toString());
       formData.append('picture', this.imgSelected);
-    };
+    }
+    formData.append('name', this.updatedChannel.name);
+    formData.append('description', JSON.stringify(this.updatedChannel.description));
 
-    // const index = this.channelService.chats.findIndex(obj => obj.hash === this.currentChannel.hash);
-    // this.channelService.chats[index] = this.updatedChannel;
+    const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
+    localStorage.setItem('currentChannel', JSON.stringify(response))
+    console.log('edited channel', response);
 
     this.mainService.closePopups();
   }

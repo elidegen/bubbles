@@ -78,16 +78,6 @@ export class MessageService {
     });
   }
 
-  updateMessage(message: Message) {
-    let index = this.currentMessages.findIndex(obj => obj === message);
-    if (index === -1) {
-      index = this.threads.findIndex(obj => obj === message);
-      this.threads[index] = message;
-    } else {
-      this.currentMessages[index] = message;
-    }
-  }
-
   groupMsgByAuthor(channelId: number, isThread: boolean) {
     let groupedArray = [];
     let currentGroup: Message[] = [];
@@ -175,9 +165,41 @@ export class MessageService {
     }
   }
 
-  async putMessage(message: Message) {
+  async putMessageOld(message: Message) {
     const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
     const url = environment.baseUrl + endpoint + message.id + '/';
     await firstValueFrom(this.http.put(url, message));
+  }
+
+  async putMessage(message: Message) {
+    const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
+    const url = environment.baseUrl + endpoint + message.id + '/';
+    const formData = new FormData();
+
+    // // Schleife durch message-Objekt und füge Werte zum FormData hinzu
+    // Object.keys(message).forEach(key => {
+    //   if (key in message) { // Check if key exists in Message type
+    //     const value = message[key];
+    //     if (value !== undefined && value !== null) {
+    //       formData.append(key, value);
+    //     }
+    //   }
+    // });
+
+    await firstValueFrom(this.http.put(url, formData));
+  }
+
+  async updateMessage(message: Message) {
+    const url = environment.baseUrl + 'messages/' + message.id + '/';
+    const formData = new FormData();
+    formData.append('content', message.content);
+    const response = await firstValueFrom(this.http.patch(url, formData));
+    console.log('edited Msg:', response);
+  }
+
+  async deleteMessage(message: Message) {
+    const url = environment.baseUrl + 'messages/' + message.id + '/';
+    const response = await firstValueFrom(this.http.delete(url));
+    console.log('edited Msg:', response);
   }
 }

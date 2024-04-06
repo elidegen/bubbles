@@ -38,12 +38,7 @@ export interface ChatsAndPreview {
   providedIn: 'root'
 })
 export class ChannelService {
-
   getChannelsUrl: string = environment.baseUrl + 'channels-and-preview/' + this.authService.currentUser.id;
-
-  // $chats: BehaviorSubject<Channel[]> = new BehaviorSubject<Channel[]>([]);
-  // $chatPreview: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
-
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
     preview_messages: [],
@@ -81,7 +76,6 @@ export class ChannelService {
   async getChatsForUser() {
     const data = await firstValueFrom(this.fetchChatsAndPreview());
     this.$chatsAndPreview.next(data);
-
     this.subscribeChatsAndPreview();
     this.mainService.deactivateLoader();
   }
@@ -96,27 +90,14 @@ export class ChannelService {
       this.chatPreviews = data.preview_messages;
       console.log('previews:', this.chatPreviews);
       console.log('chats: ', this.chats);
-
       this.filterChats();
       this.userService.getUsers();
     });
   }
 
-  /**
-   * For each chat, we collect the members to fetch the userdata from. 
-   * this.userService.collectUsers(member) : We collect an sort the members to prevent fetching userdata twice.
-   */
-  // collectData() {
-  //   this.chats.forEach(chat => {
-  //     for (let member of chat.members) {
-  //       this.userService.collectChatMembers(member);
-  //     }
-  //     // this.messageService.chatCollection.push(chat.id);
-  //   });
-  // }
-
   openChannel(id: number) {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
+    console.log('openChannel', this.currentChannel);
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
@@ -124,13 +105,8 @@ export class ChannelService {
   }
 
   filterChats() {
-    this.channels = this.chats.filter(channel => {
-      return channel.is_channel === true; // && channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
-    }); //filters only channels that have currentuser as member
-
-    this.directMessages = this.chats.filter(channel => {
-      return channel.is_channel === false //&& channel.members.includes(this.authService.currentUser.id)// && this.checkMsg(channel.id);
-    });
+    this.channels = this.chats.filter(channel => channel.is_channel === true); //filters only channels that have currentuser as member
+    this.directMessages = this.chats.filter(channel => channel.is_channel === false);
   }
 
   checkMsg(chatId: number) { // only render channels with messages?
@@ -138,20 +114,9 @@ export class ChannelService {
     return messagesOfChat.length > 0
   }
 
-  // sortChats(arrayToSort: Channel[]) {
-  //   let chatLastMsgSorted = [];
-  //   for (let i = 0; i < arrayToSort.length; i++) {
-  //     let msgsOfChat = this.messageService.messages.filter(obj => obj.source === arrayToSort[i].id);
-  //     msgsOfChat.sort((a, b) => a.created_at - b.created_at);
-  //     let lastMsg = msgsOfChat[msgsOfChat.length - 1];
-  //     if (lastMsg)
-  //       chatLastMsgSorted.push(lastMsg);
-  //   }
-  //   chatLastMsgSorted.sort((a, b) => a.created_at - b.created_at);
-  //   return chatLastMsgSorted;
-  // }
-
   getChannel(channelId: number) {
+    console.log('channelId', channelId);
+    
     return this.channels.find(obj => obj.id === channelId) as Channel;
   }
 
@@ -179,10 +144,10 @@ export class ChannelService {
         hash: ''
       }
 
-      if(isThread){
-        this.messageService.postMessage('threads/' , newMessage);
+      if (isThread) {
+        this.messageService.postMessage('threads/', newMessage);
       } else {
-        this.messageService.postMessage('messages/' , newMessage);
+        this.messageService.postMessage('messages/', newMessage);
         this.setUnread(this.currentChannel.id);
       }
     }
