@@ -4,7 +4,7 @@ $color3: #efa985;
 $color4: #3cc6b7;
 $color5: #FFFFFF;
 $error-color: rgb(255, 85, 85);
-$valid-color: rgb(29, 209, 137);
+$valid-color: rgba(112, 171, 148, 0.72);
 $text-color: $color5;
 
 @mixin center($display: flex, $jc: center, $ai: center) {

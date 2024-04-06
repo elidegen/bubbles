@@ -4,8 +4,12 @@
 
 <div class="popup-content">
 
-    <div class="error-popup card" *ngIf="false">
+    <div class="error-popup card" *ngIf="mainService.errorMessage">
         <span class="error">{{ mainService.errorMessage }}</span>
+    </div>
+
+    <div class="message-popup card" *ngIf="mainService.logMessage">
+        <span class="error">{{ mainService.logMessage }}</span>
     </div>
 
     <app-create-channel-dialog *ngIf="mainService.addChannelPopup === true"></app-create-channel-dialog>
