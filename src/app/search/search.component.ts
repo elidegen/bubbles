@@ -7,6 +7,7 @@ import { User, UserService } from '../services/user.service';
 import { Message, MessageService } from '../services/message.service';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -34,6 +35,9 @@ export class SearchComponent implements OnInit {
   searchValue: string = '';
   placeholder!: string;
   showResults: boolean = false;
+
+  currentUserId:number = 0;
+
   searchSolution: SearchSolution = {
     channels: [],
     messages: [],
@@ -49,8 +53,10 @@ export class SearchComponent implements OnInit {
     public userService: UserService,
     public channelService: ChannelService,
     public messageService: MessageService,
+    private authService: AuthService
   ) {
     this.setupClickListener();  
+    this.currentUserId= this.authService.currentUser.id;
   }
 
   private setupClickListener() {
@@ -71,7 +77,8 @@ export class SearchComponent implements OnInit {
   async search() {
     const url = environment.baseUrl + this.searchType;
     const data = {
-      search_value: this.searchValue
+      search_value: this.searchValue, 
+      current_user: this.currentUserId
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
