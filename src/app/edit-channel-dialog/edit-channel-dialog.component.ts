@@ -29,6 +29,8 @@ export class EditChannelDialogComponent {
     private http: HttpClient,
   ) {
     this.currentChannel = channelService.currentChannel;
+    console.log(this.currentChannel);
+    
     this.updatedChannel = {
       id: this.currentChannel.id,
       name: this.currentChannel.name,
@@ -72,8 +74,13 @@ export class EditChannelDialogComponent {
     if (this.imgSelected) {
       formData.append('picture', this.imgSelected);
     }
-    formData.append('name', this.updatedChannel.name);
-    formData.append('description', JSON.stringify(this.updatedChannel.description));
+    if (this.updatedChannel.name) {
+      formData.append('name', this.updatedChannel.name);
+    }
+    if (this.updatedChannel.description) {
+      formData.append('description', this.updatedChannel.description);
+    } 
+  
 
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
     localStorage.setItem('currentChannel', JSON.stringify(response))
