@@ -52,6 +52,7 @@
     max-width: 35px;
     height: 35px;
     position: relative;
+    border-radius: 50%;
 
     input {
         opacity: 0;
@@ -76,5 +77,24 @@
 
     input[type=file]::-webkit-file-upload-button {
         display: none;
+    }
+}
+
+.attachment{
+    background-color: $color4 !important;
+    cursor: pointer;
+    transition: 225ms ease;
+    padding: 5px;
+
+    img{
+        background-color: unset !important;
+        &:hover{
+            filter: brightness(1) !important;            
+        }        
+    }
+
+    &:hover{
+        background-color: $color3 !important;
+        filter: brightness(1) !important;
     }
 }

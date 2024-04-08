@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
 import { Subject } from 'rxjs';
 import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.component';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-message',
@@ -15,7 +16,7 @@ import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit {
   @Input() message!: Message;
   @Input() myMessage!: boolean;
   currentUser: CurrentUser;
@@ -31,9 +32,22 @@ export class MessageComponent {
     public authService: AuthService,
     public messageService: MessageService,
     public userService: UserService,
+    public channelService: ChannelService,
   ) {
     this.currentUser = authService.currentUser;
     this.setupClickListener();
+  }
+  
+  ngOnInit(): void {
+    console.log('msg', this.message);
+  }
+
+  getImage() {
+    if (typeof this.message.attachment === 'string')
+      return this.channelService.getImg(this.message.attachment);
+    else {
+      return 'assets/img/profile_placeholder.svg'
+    }
   }
 
   thread() {
@@ -81,5 +95,5 @@ export class MessageComponent {
     this.message.content = messageContent.content;
     this.messageService.updateMessage(this.message);
     this.editState = false;
-  }  
+  }
 }

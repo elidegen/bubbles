@@ -31,12 +31,12 @@ export class SearchComponent implements OnInit {
   @Input() searchType!: 'search' | 'user-search';
   @Input() userSelection: User[] = [];
   @Output() selectedUsers = new EventEmitter<User[]>();
-  
+
   searchValue: string = '';
   placeholder!: string;
   showResults: boolean = false;
 
-  currentUserId:number = 0;
+  currentUserId: number = 0;
 
   searchSolution: SearchSolution = {
     channels: [],
@@ -55,8 +55,8 @@ export class SearchComponent implements OnInit {
     public messageService: MessageService,
     private authService: AuthService
   ) {
-    this.setupClickListener();  
-    this.currentUserId= this.authService.currentUser.id;
+    this.setupClickListener();
+    this.currentUserId = this.authService.currentUser.id;
   }
 
   private setupClickListener() {
@@ -77,12 +77,12 @@ export class SearchComponent implements OnInit {
   async search() {
     const url = environment.baseUrl + this.searchType;
     const data = {
-      search_value: this.searchValue.trim(), 
+      search_value: this.searchValue.trim(),
       current_user: this.currentUserId
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-      
+
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
     }
@@ -103,5 +103,9 @@ export class SearchComponent implements OnInit {
       this.userSelection.push(user);
     }
     this.selectedUsers.emit(this.userSelection);
+  }
+
+  isChannel(msg: Message) {
+    return this.channelService.getChannel(msg.source);
   }
 }

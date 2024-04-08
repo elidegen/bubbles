@@ -66,7 +66,6 @@ export class ChatWindowComponent {
 
   selectUser($event: User[]) {
     const user = $event[0];
-    // debugger;
     if (user.id === this.authService.currentUser.id) {
       this.dmWithSelf();
     } else {

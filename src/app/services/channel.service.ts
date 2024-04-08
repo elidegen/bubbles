@@ -89,11 +89,8 @@ export class ChannelService {
   }
 
   openChannel(id: number) {
-    console.log('openchannelId', id);
-    
     this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
-    console.log('openChannel', this.currentChannel);
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
@@ -137,9 +134,7 @@ export class ChannelService {
       hash: '',
       attachment: messageContent.attachment
     }
-
     const formData = this.getMessageForm(newMessage, isThread);
-
     if (isThread) {
       this.messageService.postMessage('threads/', formData);
     } else {

@@ -36,7 +36,7 @@
             <div class="details">
                 <p class="author">{{this.userService.getUser(message.author).username}}</p>
                 <p>{{message.content}}</p>
-                <p class="source">in channel: {{channelService.getChannel(message.source).name}}</p>
+                <p *ngIf="isChannel(message)" class="source">in channel: {{channelService.getChannel(message.source).name}}</p>
             </div>
         </div>
         }

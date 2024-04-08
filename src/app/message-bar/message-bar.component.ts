@@ -44,6 +44,10 @@ export class MessageBarComponent {
     this.inputContent = '';
   }
 
+  removeAttachment(){
+    this.selectedFile = undefined;
+  }
+
   typeEmoji($event: any) {
     this.inputContent += $event.character;
   }

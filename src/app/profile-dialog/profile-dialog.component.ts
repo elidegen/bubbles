@@ -7,11 +7,13 @@ import { FilePickerComponent } from '../file-picker/file-picker.component';
 import { environment } from '../../environments/environment.development';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { User, UserService } from '../services/user.service';
+import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 
 @Component({
   selector: 'app-profile-dialog',
   standalone: true,
-  imports: [CommonModule, FilePickerComponent],
+  imports: [CommonModule, FilePickerComponent, ChatHeaderComponent],
   templateUrl: './profile-dialog.component.html',
   styleUrl: './profile-dialog.component.scss'
 })
@@ -21,7 +23,8 @@ export class ProfileDialogComponent {
     public mainService: MainService,
     private router: Router,
     public authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserService,
   ) { }
 
   logout() {
@@ -30,12 +33,16 @@ export class ProfileDialogComponent {
   }
 
   async uploadImg(file: File) {
-    console.log('filepicker profile');
-    
     const url = environment.baseUrl + 'upload_img/' + this.authService.currentUser.id + '/';
-    let formdata = new FormData();
+    const formdata = new FormData();
     formdata.append('picture', file);
-    const data = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
-    this.authService.currentUser = data;
+    const response = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
+    this.authService.currentUser = response;
+    this.updateUsers(response as User);
+  }
+
+  updateUsers(response: User) {
+    const index = this.userService.users.findIndex(obj => obj.id === response.id);
+    this.userService.users.splice(index, 1, response);
   }
 }

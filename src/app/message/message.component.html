@@ -1,14 +1,14 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
-    <div class="card message">
+    <div class="card message" [class.margin-bottom]="message.reactions.length > 0">
         @if (editState) {
-            <app-message-bar (messageContent)="editMessage($event)" [disabled]="false"></app-message-bar>
+        <app-message-bar (messageContent)="editMessage($event)" [disabled]="false"></app-message-bar>
         } @else {
-            <p>{{message!.content}}</p>
+        <p>{{message!.content}}</p>
         }
         @if (message.reactions.length > 0) {
-        <app-reactions [addedReaction]="addedReaction.asObservable()"
-            [msgReactions]="this.message.reactions" [myMessage]="myMessage"></app-reactions>
+        <app-reactions [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions"
+            [myMessage]="myMessage"></app-reactions>
         }
 
         <div class="reaction">
@@ -43,6 +43,12 @@
         </div>
         }
     </div>
+    @if (message.attachment) {
+        <div class="attachment-wrapper card">
+            <img src="{{getImage()}}" alt="">
+        </div>
+    }
 </div>
 
-<app-emoji-picker-dialog #picker *ngIf="showEmojiPicker" (newEmoji)="addReaction(getCharater($event))"></app-emoji-picker-dialog>
+<app-emoji-picker-dialog #picker *ngIf="showEmojiPicker"
+    (newEmoji)="addReaction(getCharater($event))"></app-emoji-picker-dialog>

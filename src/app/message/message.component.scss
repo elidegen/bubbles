@@ -1,7 +1,7 @@
 @import '../library.scss';
 
 .msg {
-    @include d-flex($jc: flex-start, $g: 10px);
+    @include d-flex($fd: column, $ai:flex-start, $g: 5px);
     margin: 2px 0;
     width: 100%;
 
@@ -70,7 +70,7 @@
 }
 
 .my-msg {
-    flex-direction: row-reverse;
+    align-items: flex-end;
 
     .card {
         background-color: $color3;
@@ -132,4 +132,19 @@
 .show-quick-thread {
     opacity: 1;
     right: -35px;
+}
+
+.attachment-wrapper{
+    @include d-flex();
+    padding: 5px !important;
+    max-width: 50%;
+
+    img{
+        max-width: 100%;
+        @extend .border-radius
+    }
+}
+
+.margin-bottom{
+    margin-bottom: 7px;
 }

@@ -30,7 +30,7 @@ export class EditChannelDialogComponent {
   ) {
     this.currentChannel = channelService.currentChannel;
     console.log(this.currentChannel);
-    
+
     this.updatedChannel = {
       id: this.currentChannel.id,
       name: this.currentChannel.name,
@@ -71,21 +71,26 @@ export class EditChannelDialogComponent {
   async putChannel() {
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
     const formData = new FormData();
-    if (this.imgSelected) {
+    if (this.imgSelected)
       formData.append('picture', this.imgSelected);
-    }
-    if (this.updatedChannel.name) {
+    if (this.updatedChannel.name)
       formData.append('name', this.updatedChannel.name);
-    }
-    if (this.updatedChannel.description) {
+    if (this.updatedChannel.description)
       formData.append('description', this.updatedChannel.description);
-    } 
-  
 
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
-    localStorage.setItem('currentChannel', JSON.stringify(response))
-    console.log('edited channel', response);
+    console.log('response ', response);
 
+    localStorage.setItem('currentChannel', JSON.stringify(response));
+    // this.channelService.getChatsForUser();
+    this.pushToLocalArray(response);
     this.mainService.closePopups();
+  }
+
+  pushToLocalArray(response: Channel) {
+    const index = this.channelService.chats.findIndex(obj => obj.id === response.id);
+    this.channelService.chats.splice(index, 1, response);
+    console.log('index', index, 'response ', response);
+    this.channelService.filterChats();
   }
 }

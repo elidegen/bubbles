@@ -158,8 +158,6 @@ export class MessageService {
   async postMessage(endpoint: string, message: FormData) {
     const url = environment.baseUrl + endpoint;
     const response = await firstValueFrom(this.http.post(url, message)) as Message;
-    console.log('Message Response', response);
-    
     if (endpoint === 'messages/') {
       this.currentMessages.push(response);
     } else {
