@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Channel, ChannelService } from './channel.service';
 import { AuthService } from './auth.service';
 import { MainService } from './main.service';
+import { Form } from '@angular/forms';
 
 export interface Reaction {
   user: number,
@@ -18,7 +19,7 @@ export class Message {
   source: number; //ID from Channel
   content: string;
   created_at: number;
-  attachment?: string[] | null;
+  attachment?: string[] | File | null;
   hash: string;
 
   constructor(obj?: any) {
@@ -154,10 +155,11 @@ export class MessageService {
     this.threadOpen = true;
   }
 
-  async postMessage(endpoint: string, message: Message) {
+  async postMessage(endpoint: string, message: FormData) {
     const url = environment.baseUrl + endpoint;
     const response = await firstValueFrom(this.http.post(url, message)) as Message;
-
+    console.log('Message Response', response);
+    
     if (endpoint === 'messages/') {
       this.currentMessages.push(response);
     } else {

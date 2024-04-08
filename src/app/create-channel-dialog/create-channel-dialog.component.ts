@@ -54,15 +54,17 @@ export class CreateChannelDialogComponent {
     const url = environment.baseUrl + 'channels/';
     const formData = new FormData();
 
-    if (this.imgSelected) {
+    if (this.imgSelected && this.newChannel.name && this.newChannel.description) {
       formData.append('name', this.newChannel.name);
-      formData.append('description', JSON.stringify(this.newChannel.description));
+      formData.append('description', this.newChannel.description);
       this.newChannel.members.forEach(memberId => {
         formData.append('members', memberId.toString());
       });
       formData.append('is_channel', this.newChannel.is_channel.toString());
       formData.append('picture', this.imgSelected);
-    };
+    }
+
+
     const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
     console.log('created and uploaded channel: ', response);
     this.mainService.closePopups();

@@ -134,15 +134,33 @@ export class ChannelService {
       source: isThread ? this.messageService.currentThread.id : this.currentChannel.id,
       content: messageContent.content,
       created_at: new Date().getTime(),
-      hash: ''
+      hash: '',
+      attachment: messageContent.attachment
     }
 
+    const formData = this.getMessageForm(newMessage, isThread);
+
     if (isThread) {
-      this.messageService.postMessage('threads/', newMessage);
+      this.messageService.postMessage('threads/', formData);
     } else {
-      this.messageService.postMessage('messages/', newMessage);
+      this.messageService.postMessage('messages/', formData);
       this.setUnread(this.currentChannel.id);
     }
+  }
+
+
+  getMessageForm(newMessage:Message, isThread:boolean) {
+    const formData = new FormData();
+    formData.append('author', this.authService.currentUser.id.toString());
+    if (newMessage.reactions.length > 0) {
+      formData.append('reactions', JSON.stringify(newMessage.reactions));
+    }
+    formData.append('source', isThread ? this.messageService.currentThread.id.toString() : this.currentChannel.id.toString());
+    formData.append('content', newMessage.content);
+    if (newMessage.attachment instanceof File) {
+      formData.append('attachment', newMessage.attachment);
+    }
+    return formData;
   }
 
   getImg(imgUrl: string | undefined) {
