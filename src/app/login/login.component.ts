@@ -15,6 +15,8 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent  {
   hide:boolean = false;
   loginForm: FormGroup
+  bubbles:any[] = [];
+
 
   constructor(
     private router: Router, 
@@ -25,6 +27,16 @@ export class LoginComponent  {
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
+
+    this.fillBubbles();
+    
+   
+  }
+
+  fillBubbles(){
+    for (let i = 0; i < 50; i++) {
+      this.bubbles.push(i);
+    }
   }
 
   navigateTo(path:string){

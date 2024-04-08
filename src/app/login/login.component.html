@@ -1,4 +1,7 @@
 <div class="wrapper">
+    <div class="bubbles">
+        <div class="bubble" *ngFor="let bubble of bubbles"></div>
+    </div>
     <form class="card" [ngClass]="{'hide': hide}" [formGroup]="loginForm" (submit)="submit()">
         <div class="row"><span class="large-font">LOGIN</span></div>
 

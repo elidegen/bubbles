@@ -18,6 +18,7 @@ import { MainService } from '../services/main.service';
 export class SignupComponent {
   hide: boolean = false;
   signUpForm: FormGroup;
+  bubbles:any[]= [];
 
   constructor(private router: Router, private http: HttpClient, private mainService:MainService) {
     this.signUpForm = new FormGroup({
@@ -25,6 +26,14 @@ export class SignupComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
+
+    this.fillBubbles();
+  }
+
+  fillBubbles(){
+    for (let i = 0; i < 30; i++) {
+      this.bubbles.push(i);
+    }
   }
 
   navigateTo(path: string) {
