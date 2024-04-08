@@ -47,7 +47,7 @@ export class ChatHeaderComponent implements OnInit {
         const userImg = this.userService.getUser(memberId).picture;
 
         if (this.userImgArray.length < 3) {
-          this.userImgArray.push(userImg || 'assets/img/profile_placeholder.svg');
+          this.userImgArray.push(this.channelService.getImg(userImg));
         } else {
           this.groupMemberCount++;
         }
