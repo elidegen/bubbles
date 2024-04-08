@@ -8,12 +8,11 @@ import { environment } from '../../environments/environment.development';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User, UserService } from '../services/user.service';
-import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 
 @Component({
   selector: 'app-profile-dialog',
   standalone: true,
-  imports: [CommonModule, FilePickerComponent, ChatHeaderComponent],
+  imports: [CommonModule, FilePickerComponent],
   templateUrl: './profile-dialog.component.html',
   styleUrl: './profile-dialog.component.scss'
 })
