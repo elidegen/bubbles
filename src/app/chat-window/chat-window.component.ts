@@ -9,6 +9,9 @@ import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.c
 import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
+import { environment } from '../../environments/environment.development';
+import { firstValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat-window',
@@ -28,6 +31,7 @@ export class ChatWindowComponent {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
+    private http: HttpClient,
   ) {
     this.getMessagesToDisplay();
   }
@@ -65,24 +69,34 @@ export class ChatWindowComponent {
     this.createDirectMessage(user);
   }
 
-  createDirectMessage(user: User) {
+  async createDirectMessage(user: User) {
+    console.log('createmsg user', user);
+
     const userId = user.id || 0;
-    const formData = new FormData();
-    const newChannel: Channel = {
-      id: 0,
-      name: 'DirectMessage',
-      members: [userId, this.authService.currentUser.id],
-      is_channel: false,
-      read_by: [],
-      hash: '',
-      description: '',
-      picture: '',
+    if (!this.channelService.directMessages.some(obj => obj.members.includes(userId))) {
+      console.log('directmessage exist?', this.channelService.directMessages.some(obj => obj.members.includes(userId)));
+
+      const newChannel: Channel = {
+        id: 0,
+        name: 'DirectMessage',
+        members: [userId, this.authService.currentUser.id],
+        is_channel: false,
+        read_by: [],
+        hash: '',
+        description: '',
+        picture: undefined,
+      }
+
+      const url = environment.baseUrl + 'channels/';
+      const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
+      await this.channelService.getChatsForUser();
+
+      this.channelService.openChannel(response.id);
+
+    } else {
+      this.channelService.openChannel(this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id)
     }
-    // Object.keys(newChannel).forEach(key => formData.append(key, newChannel[key]));
-    // for (const key in newChannel) {
-    //   const value = newChannel[key];
-    //   formData.append(key, value);
-    // }
+
   }
 
   // async postChannel() {

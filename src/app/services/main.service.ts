@@ -14,7 +14,7 @@ export class MainService {
   showMembersPopup: boolean = false;
   editChannelPopup: boolean = false;
   sideMenuOpen: boolean = true;
-  showNewMessageSearch: boolean = true;
+  showNewMessageSearch: boolean = false;
   fetchingDone: number = 0;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];

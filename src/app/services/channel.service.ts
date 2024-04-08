@@ -89,6 +89,8 @@ export class ChannelService {
   }
 
   openChannel(id: number) {
+    console.log('openchannelId', id);
+    
     this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     console.log('openChannel', this.currentChannel);

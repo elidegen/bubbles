@@ -9,7 +9,11 @@
     </div>
     <div class="text-wrapper">
         <div class="upper-text">
-            <p class="name">{{channel.name}}</p>
+            @if (channel.is_channel === true) {
+                <p class="name">{{channel.name}}</p>
+            } @else {
+                <p class="name">{{userService.getInterlocutor(channel).username}}</p>                
+            }
             @if(getLatestMsg().created_at != 0){
             <p class="time">{{ getLatestMsg().created_at| date:"HH:mm"}}</p>
             }

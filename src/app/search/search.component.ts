@@ -75,10 +75,8 @@ export class SearchComponent implements OnInit {
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-      console.log('searchSolution', this.searchSolution);
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
-      console.log('searchSolutionUser', this.searchSolutionUser);
     }
   }
 
