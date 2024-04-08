@@ -8,25 +8,25 @@
     .input {
         width: 100%;
     }
+}
 
-    .selected-users {
-        @include d-flex($jc: flex-start, $g: 5px);
-        flex-wrap: wrap;
+.selected-users {
+    @include d-flex($jc: flex-start, $g: 5px);
+    flex-wrap: wrap;
 
-        .selected-user {
-            @include d-flex($g: 5px);
+    .selected-user {
+        @include d-flex($g: 5px);
+        background-color: $color1;
+        border-radius: 23px;
+        padding: 5px;
+
+        img {
+            height: 25px;
+            width: 25px;
+        }
+
+        .img-button {
             background-color: $color1;
-            border-radius: 23px;
-            padding: 5px;
-
-            img {
-                height: 25px;
-                width: 25px;
-            }
-
-            .img-button {
-                background-color: $color1;
-            }
         }
     }
 }

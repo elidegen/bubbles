@@ -1,7 +1,8 @@
 @import "../library.scss";
+@import "../add-members-dialog/add-members-dialog.component.scss";
 
 .card {
-    @include d-flex($fd: column, $ai: flex-start, $g: 15px)
+    @include d-flex($fd: column, $ai: flex-start, $g: 15px);
 }
 
 .content {

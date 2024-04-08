@@ -37,7 +37,17 @@
             <input type="radio" name="radio" [value]="false" [(ngModel)]="addAllMembers">
             Add certain members
         </label>
-        <app-search *ngIf="!addAllMembers" [searchType]="'user-search'"></app-search>
+        <app-search *ngIf="!addAllMembers" [searchType]="'user-search'" [userSelection]="channelMembers"
+            (selectedUsers)="handleSelectedUsers($event)"></app-search>
+        <div class="selected-users">
+            @for (user of channelMembers; track $index) {
+            <div class="selected-user">
+                <img src="{{channelService.getImg(user.picture)}}">
+                <p>{{user.username}}</p>
+                <img class="img-button" src="assets/img/close_icon.svg" (click)="removeMember(user)">
+            </div>
+            }
+        </div>
     </div>
 
     <div class="button-wrapper">
@@ -45,7 +55,7 @@
             [class.disabled]="!newChannel.name">Next</button>
 
         <button class="button1" *ngSwitchCase="true" (click)="addMemberToChannel()"
-            [class.disabled]="!addAllMembers || selectedMembers.length > 0"
-            [disabled]="!addAllMembers || selectedMembers.length > 0">Create</button>
+            [class.disabled]="!(addAllMembers || (!addAllMembers && channelMembers.length > 0))"
+            [disabled]="!(addAllMembers || (!addAllMembers && channelMembers.length > 0))">Create</button>
     </div>
 </div>

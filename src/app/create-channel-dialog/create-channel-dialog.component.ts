@@ -2,13 +2,14 @@ import { CommonModule, NgSwitchCase } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Channel, ChannelService } from '../services/channel.service';
-import { UserService } from '../services/user.service';
+import { User, UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
 import { environment } from '../../environments/environment.development';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SearchComponent } from '../search/search.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-create-channel-dialog',
@@ -20,6 +21,7 @@ import { SearchComponent } from '../search/search.component';
 export class CreateChannelDialogComponent {
   addMembers: boolean = false;
   addAllMembers: boolean = false;
+  channelMembers: User[] = [];
   selectedMembers: number[] = [];
   imgSelected: File | undefined;
   newChannel: Channel = {
@@ -36,15 +38,20 @@ export class CreateChannelDialogComponent {
   constructor(
     private userService: UserService,
     public mainService: MainService,
-    private channelService: ChannelService,
+    public channelService: ChannelService,
+    private authService: AuthService,
     private http: HttpClient,
   ) { }
 
   addMemberToChannel() {
+    debugger;
     if (this.addAllMembers) {
       this.selectedMembers = this.userService.users.map(obj => obj.id) as number[];
       this.newChannel.members = this.selectedMembers;
     } else {
+      this.selectedMembers = this.channelMembers.map(obj => obj.id) as number[];
+      if (!this.selectedMembers.includes(this.authService.currentUser.id))
+        this.selectedMembers.push(this.authService.currentUser.id);
       this.newChannel.members = this.selectedMembers;
     }
     this.postChannel();
@@ -72,10 +79,8 @@ export class CreateChannelDialogComponent {
 
 
   handleImg(file: File) {
-    if (file) {
+    if (file)
       this.imgSelected = file;
-    }
-
     let reader = new FileReader();
     reader.onload = (event: any) => {
       if (event.target.readyState === FileReader.DONE) {
@@ -86,11 +91,18 @@ export class CreateChannelDialogComponent {
     reader.readAsDataURL(file);
   }
 
-
   async uploadImg(file: File) { //not in use
     const url = environment.baseUrl + 'media/channel_pictures/' + file.name + '/';
     const formdata = new FormData();
     formdata.append('picture', file);
     const response = await firstValueFrom(this.http.post<Channel>(url, formdata));
+  }
+
+  handleSelectedUsers(selectedUsers: User[]) {
+    this.channelMembers = selectedUsers;
+  }
+
+  removeMember(member: User) {
+    this.channelMembers.splice(this.channelMembers.indexOf(member), 1)
   }
 }
