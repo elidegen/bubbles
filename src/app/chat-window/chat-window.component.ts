@@ -66,54 +66,59 @@ export class ChatWindowComponent {
 
   selectUser($event: User[]) {
     const user = $event[0];
-    this.createDirectMessage(user);
+    // debugger;
+    if (user.id === this.authService.currentUser.id) {
+      this.dmWithSelf();
+    } else {
+      this.createDirectMessage(user);
+    }
+  }
+
+  dmWithSelf() {
+    if (this.currentUserDmAlreadyExist()) {
+      const channel = this.channelService.directMessages.find(obj => obj.members.length === 1 && obj.members.includes(this.authService.currentUser.id))!.id
+      
+      this.channelService.openChannel(channel);
+    } else {
+      this.createDmWithUser(this.authService.currentUser.id);
+    }
   }
 
   async createDirectMessage(user: User) {
-    console.log('createmsg user', user);
-
     const userId = user.id || 0;
-    if (!this.channelService.directMessages.some(obj => obj.members.includes(userId))) {
-      console.log('directmessage exist?', this.channelService.directMessages.some(obj => obj.members.includes(userId)));
-
-      const newChannel: Channel = {
-        id: 0,
-        name: 'DirectMessage',
-        members: [userId, this.authService.currentUser.id],
-        is_channel: false,
-        read_by: [],
-        hash: '',
-        description: '',
-        picture: undefined,
-      }
-
-      const url = environment.baseUrl + 'channels/';
-      const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
-      await this.channelService.getChatsForUser();
-
-      this.channelService.openChannel(response.id);
-
+    if (!this.dmAlreadyExist(userId)) {
+      this.createDmWithUser(userId);
     } else {
-      this.channelService.openChannel(this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id)
+      console.log('open this chnl', this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id);
+      this.channelService.openChannel(this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id);
     }
-
   }
 
-  // async postChannel() {
-  //   const url = environment.baseUrl + 'channels/';
-  //   const formData = new FormData();
+  async createDmWithUser(userId: number) {
+    let members = [];
+    members.push(userId);
+    members.push(this.authService.currentUser.id);
+    const newChannel: Channel = {
+      id: 0,
+      name: 'DirectMessage',
+      members: members,
+      is_channel: false,
+      read_by: [],
+      hash: '',
+      description: '',
+      picture: undefined,
+    }
+    const url = environment.baseUrl + 'channels/';
+    const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
+    await this.channelService.getChatsForUser(); //remove
+    this.channelService.openChannel(response.id);
+  }
 
-  //   if (this.imgSelected) {
-  //     formData.append('name', this.newChannel.name);
-  //     formData.append('description', JSON.stringify(this.newChannel.description));
-  //     this.newChannel.members.forEach(memberId => {
-  //       formData.append('members', memberId.toString());
-  //     });
-  //     formData.append('is_channel', this.newChannel.is_channel.toString());
-  //     formData.append('picture', this.imgSelected);
-  //   };
-  //   const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
-  //   console.log('created and uploaded channel: ', response);
-  //   this.mainService.closePopups();
-  // }
+  dmAlreadyExist(userId: number) {
+    return this.channelService.directMessages.some(obj => obj.members.includes(userId));
+  }
+
+  currentUserDmAlreadyExist() {
+    return this.channelService.directMessages.some(obj => obj.members.length === 1 && obj.members.includes(this.authService.currentUser.id));
+  }
 }

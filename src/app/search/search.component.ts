@@ -77,7 +77,7 @@ export class SearchComponent implements OnInit {
   async search() {
     const url = environment.baseUrl + this.searchType;
     const data = {
-      search_value: this.searchValue, 
+      search_value: this.searchValue.trim(), 
       current_user: this.currentUserId
     }
     if (this.searchType === 'search') {

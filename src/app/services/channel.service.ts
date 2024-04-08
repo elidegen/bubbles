@@ -148,7 +148,6 @@ export class ChannelService {
     }
   }
 
-
   getMessageForm(newMessage:Message, isThread:boolean) {
     const formData = new FormData();
     formData.append('author', this.authService.currentUser.id.toString());
@@ -164,7 +163,7 @@ export class ChannelService {
   }
 
   getImg(imgUrl: string | undefined) {
-    if (imgUrl != null) {
+    if (imgUrl) {
       if (imgUrl.startsWith('https:')) {
         return imgUrl; //if full link is available just return full link
       } else {

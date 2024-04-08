@@ -45,9 +45,13 @@ export class UserService {
   }
 
   getInterlocutor(chatToCheck: Channel) {
-    const interlocutorId = chatToCheck!.members.find(obj => obj !== this.authService.currentUser.id);
-    const interlocutor = this.getUser(interlocutorId!);
-    return interlocutor;
+    if (chatToCheck.members.length === 1 && chatToCheck.members.includes(this.authService.currentUser.id)) {
+      return this.authService.currentUser as User;
+    } else {
+      const interlocutorId = chatToCheck!.members.find(obj => obj !== this.authService.currentUser.id);
+      const interlocutor = this.getUser(interlocutorId!);
+      return interlocutor as User;
+    }
   }
 
   isOnline(channel: Channel) {
