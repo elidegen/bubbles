@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { UserService } from './user.service';
 import { MainService } from './main.service';
+import { MessageContent } from '../message-bar/message-bar.component';
 
 export class Channel {
   id: number;
@@ -65,14 +66,6 @@ export class ChannelService {
     }
   }
 
-  getImg(imgUrl: string | undefined) {
-    if (imgUrl != null) {
-      return environment.baseUrl.slice(0, -1) + imgUrl;
-    } else {
-      return 'assets/img/profile_placeholder.svg';
-    }
-  }
-
   async getChatsForUser() {
     const data = await firstValueFrom(this.fetchChatsAndPreview());
     this.$chatsAndPreview.next(data);
@@ -96,6 +89,7 @@ export class ChannelService {
   }
 
   openChannel(id: number) {
+    this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     console.log('openChannel', this.currentChannel);
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
@@ -115,8 +109,6 @@ export class ChannelService {
   }
 
   getChannel(channelId: number) {
-    console.log('channelId', channelId);
-    
     return this.channels.find(obj => obj.id === channelId) as Channel;
   }
 
@@ -132,24 +124,34 @@ export class ChannelService {
     }
   }
 
-  sendMsg(messageContent: string, isThread: boolean) {
-    if (messageContent.trim()) {
-      let newMessage: Message = {
-        id: 0,
-        author: this.authService.currentUser.id,
-        reactions: [],
-        source: isThread ? this.messageService.currentThread.id : this.currentChannel.id,
-        content: messageContent,
-        created_at: new Date().getTime(),
-        hash: ''
-      }
+  sendMsg(messageContent: MessageContent, isThread: boolean) {
+    let newMessage: Message = {
+      id: 0,
+      author: this.authService.currentUser.id,
+      reactions: [],
+      source: isThread ? this.messageService.currentThread.id : this.currentChannel.id,
+      content: messageContent.content,
+      created_at: new Date().getTime(),
+      hash: ''
+    }
 
-      if (isThread) {
-        this.messageService.postMessage('threads/', newMessage);
+    if (isThread) {
+      this.messageService.postMessage('threads/', newMessage);
+    } else {
+      this.messageService.postMessage('messages/', newMessage);
+      this.setUnread(this.currentChannel.id);
+    }
+  }
+
+  getImg(imgUrl: string | undefined) {
+    if (imgUrl != null) {
+      if (imgUrl.startsWith('https:')) {
+        return imgUrl; //if full link is available just return full link
       } else {
-        this.messageService.postMessage('messages/', newMessage);
-        this.setUnread(this.currentChannel.id);
+        return environment.baseUrl.slice(0, -1) + imgUrl;
       }
+    } else {
+      return 'assets/img/profile_placeholder.svg';
     }
   }
 }

@@ -1,11 +1,15 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { CommonModule } from '@angular/common';
 import { MainService } from '../services/main.service';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
-import { every } from 'rxjs';
 
+
+export interface MessageContent {
+  content: string,
+  attachment: File | undefined,
+}
 @Component({
   selector: 'app-message-bar',
   standalone: true,
@@ -14,13 +18,12 @@ import { every } from 'rxjs';
   styleUrl: './message-bar.component.scss'
 })
 export class MessageBarComponent {
-  @Output() messageContent = new EventEmitter<string>();
-  @Output() messagePicture = new EventEmitter<File>();
+  @Output() messageContent = new EventEmitter<MessageContent>();
   @Input() disabled!: boolean;
   @ViewChild('picker') picker!: ElementRef;
   @ViewChild('myInput') myInput!: ElementRef;
   inputContent: string = '';
-  seletedFile: File | undefined;
+  selectedFile: File | undefined;
   showEmojiPicker: boolean = false;
 
   constructor(
@@ -31,10 +34,13 @@ export class MessageBarComponent {
 
   sendMsg() {
     if (this.inputContent.trim()) {
-      this.messagePicture.emit(this.seletedFile);
-      this.messageContent.emit(this.inputContent);
+      const messageContent: MessageContent = {
+        content: this.inputContent,
+        attachment: this.selectedFile,
+      }
+      this.messageContent.emit(messageContent);
     }
-    this.seletedFile = undefined;
+    this.selectedFile = undefined;
     this.inputContent = '';
   }
 
@@ -57,7 +63,7 @@ export class MessageBarComponent {
   handleImg(event: any) {
     const file: File = event.target.files[0];
     if (file && this.checkForFormat(file)) {
-      this.uploadImg(file); // add img
+      this.selectedFile = file;
     } else {
       alert('Only JPG, JPEG, PNG, PDF and max 5mb accepted!');
     }
@@ -70,9 +76,5 @@ export class MessageBarComponent {
    */
   checkForFormat(file: File): boolean {
     return (file.type === 'application/pdf' || file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg') && file.size < 2000000;// 2mb upload maximum
-  }
-
-  uploadImg(file: File) {
-    console.log('upload', file);
   }
 }

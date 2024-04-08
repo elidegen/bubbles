@@ -8,11 +8,12 @@ import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { MainService } from '../services/main.service';
+import { NewMessageComponent } from '../new-message/new-message.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ChatWindowComponent, FormsModule, SideMenuComponent,CommonModule, HeaderComponent],
+  imports: [ChatWindowComponent, FormsModule, SideMenuComponent,CommonModule, HeaderComponent, NewMessageComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

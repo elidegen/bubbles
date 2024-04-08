@@ -25,4 +25,9 @@ export class SideMenuComponent {
     this.mainService.showPopup = true;
     this.mainService.addChannelPopup = true;
   }
+
+  openNewMessage(){
+    this.mainService.showNewMessageSearch = true;
+    this.messageService.threadOpen = false;
+  }
 }

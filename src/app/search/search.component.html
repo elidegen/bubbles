@@ -57,7 +57,7 @@
         }
         } @else {
         @for (user of searchSolutionUser.users; track $index) {
-        <div class=" preview">
+        <div class=" preview" (click)="selectUser(user)" [class.selected]="userSelection.includes(user)">
             <div class="online-wrapper">
                 <img src="{{channelService.getImg(user.picture)}}">
                 <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>

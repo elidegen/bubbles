@@ -1,0 +1,9 @@
+@import '../library.scss';
+
+.new-message-wrapper {
+    @include d-flex($fd: column, $jc: space-between);
+    height: 100%;
+    > * {
+        width: 100%;
+    }
+}

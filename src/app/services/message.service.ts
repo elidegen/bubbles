@@ -41,17 +41,17 @@ export interface MessagesAndThread {
   providedIn: 'root'
 })
 export class MessageService {
-  messagesFromChatUrl: string = environment.baseUrl + 'messages-and-thread-from-channel/'
-  // chatCollection: number[] = [];
+  messagesFromChatUrl: string = environment.baseUrl + 'messages-and-thread-from-channel/';
   currentThread!: Message;
   threadOpen: boolean = false;
+  currentMessages: Message[] = [];
+  threads: Message[] = [];
+  showNewMessageComp: boolean = true;
 
   $messagesAndThread: BehaviorSubject<MessagesAndThread> = new BehaviorSubject<MessagesAndThread>({
     messages: [],
     thread_messages: [],
   });
-  currentMessages: Message[] = [];
-  threads: Message[] = [];
 
   constructor(
     private http: HttpClient,

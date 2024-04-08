@@ -64,9 +64,7 @@ export class CreateChannelDialogComponent {
       formData.append('picture', this.imgSelected);
     };
     const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
-    console.log('created and uploaded channel: ', response);    
-    // sende newChannel ans Backend
-    // this.channelService.chats.push(this.newChannel as Channel);
+    console.log('created and uploaded channel: ', response);
     this.mainService.closePopups();
   }
 

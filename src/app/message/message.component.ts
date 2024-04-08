@@ -6,7 +6,7 @@ import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-
 import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
 import { Subject } from 'rxjs';
-import { MessageBarComponent } from '../message-bar/message-bar.component';
+import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.component';
 
 @Component({
   selector: 'app-message',
@@ -64,7 +64,7 @@ export class MessageComponent {
     } else {
       this.message.reactions.push(reaction);
     }
-    this.messageService.updateMessage(this.message);
+    // this.messageService.updateMessage(this.message);
     this.messageService.putMessage(this.message);
     this.addedReaction.next();
   }
@@ -77,20 +77,9 @@ export class MessageComponent {
     return this.messageService.currentMessages.some(obj => obj.hash === this.message.hash);
   }
 
-  deleteMessage() {
-    // let index = this.messageService.currentMessages.findIndex(obj => obj.id === this.message.id);
-    // if (index === -1) {
-    //   index = this.messageService.threads.findIndex(obj => obj.id === this.message.id);
-    //   this.messageService.threads.splice(index, 1);
-    // } else {
-    //   this.messageService.currentMessages.splice(index, 1);
-    // }
-  }
-
-  editMessage(messageContent: string) {
-    this.message.content = messageContent;
+  editMessage(messageContent: MessageContent) {
+    this.message.content = messageContent.content;
     this.messageService.updateMessage(this.message);
     this.editState = false;
-  }
-  
+  }  
 }
