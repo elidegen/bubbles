@@ -1,4 +1,5 @@
 @import "../library.scss";
+@import "./bubbles.scss";
 
 .wrapper {
     @include center();
@@ -24,6 +25,10 @@
 
 .row {
     gap: 10px;
+}
+ 
+.card {
+    z-index: 100;
 }
 
 .input-container {
@@ -78,3 +83,4 @@ input::placeholder {
 .valid-form-button {
     background-color: $valid-color;
 }
+
