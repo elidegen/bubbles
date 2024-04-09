@@ -34,7 +34,7 @@ export class LoginComponent  {
   }
 
   fillBubbles(){
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       this.bubbles.push(i);
     }
   }
