@@ -69,16 +69,16 @@ export class MessageComponent {
       user: this.currentUser.id,
       emoji: character,
     };
-    console.log('msg', this.message);
-    
+
     if (this.message.reactions.length > 0 && this.message.reactions.some(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)) {
       const reactionIndex = this.message.reactions.findIndex(obj => obj.emoji === reaction.emoji && obj.user === reaction.user);
       this.message.reactions.splice(reactionIndex, 1);
     } else {
       this.message.reactions.push(reaction);
     }
+
     // this.messageService.updateMessage(this.message);
-    this.messageService.putMessage(this.message);
+    this.messageService.patchMessage(this.message);
     this.addedReaction.next();
   }
 

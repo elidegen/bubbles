@@ -165,28 +165,15 @@ export class MessageService {
     }
   }
 
-  async putMessage(message: Message) {
+  async patchMessage(message: Message) {
     const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
     const url = environment.baseUrl + endpoint + message.id + '/';
-    const formData = new FormData();
-    message.reactions.forEach(reaction => {
-      // formData.append('reactions', reaction);
-    });
-    await firstValueFrom(this.http.patch(url, formData));
+    const data = {
+      'reactions': message.reactions
+    }
+    await firstValueFrom(this.http.patch(url, data));
   }
 
-  async putMessageOld(message: Message) {
-    const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
-    const url = environment.baseUrl + endpoint + message.id + '/';
-    const formData = new FormData();
-    message.reactions.forEach(element => {
-      formData.append('reactions', JSON.stringify(element))
-    });
-
-    const response = await firstValueFrom(this.http.patch(url, formData));
-    console.log('resp', response);
-
-  }
 
   async updateMessage(message: Message) {
     const url = environment.baseUrl + 'messages/' + message.id + '/';
