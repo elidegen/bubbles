@@ -28,21 +28,18 @@ export class ProfileDialogComponent {
 
   async logout() {
     this.mainService.loader = true;
-    if (this.authService.isGuestUser()) {
-      this.authService.resetData();
-      return;
-    }
-    // If it's not guest user:
+
     const url = environment.baseUrl + 'logout';
     const token = {
       token: localStorage.getItem('token')
     }
     const response = await firstValueFrom(this.http.post(url, token));
-  
+
     this.router.navigate(['/login']);
     this.authService.resetData();
-    
-    this.mainService.loader = true;
+
+    this.mainService.loader = false;
+    this.mainService.closePopups();
   }
 
 

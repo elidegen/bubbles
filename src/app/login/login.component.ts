@@ -52,9 +52,7 @@ export class LoginComponent {
     formData.append('username', this.authService.guestUser.username);
     if(this.authService.guestUser.password){
       formData.append('password', this.authService.guestUser.password);
-    }
-    console.log(this.authService.currentUser.password);
-    
+    } 
     this.mainService.loader = true;
     this.authService.logIn(formData);
   }
@@ -70,7 +68,7 @@ export class LoginComponent {
       this.mainService.errorLog('Please fill the form with valid data!')
     }
   }
-
+  
 
   //**************FORM CONTROL ******/
   isFormValid() {
