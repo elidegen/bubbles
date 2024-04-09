@@ -16,7 +16,7 @@ import { ChannelService } from '../services/channel.service';
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent {
   @Input() message!: Message;
   @Input() myMessage!: boolean;
   currentUser: CurrentUser;
@@ -36,10 +36,6 @@ export class MessageComponent implements OnInit {
   ) {
     this.currentUser = authService.currentUser;
     this.setupClickListener();
-  }
-  
-  ngOnInit(): void {
-    console.log('msg', this.message);
   }
 
   getImage() {
@@ -68,12 +64,15 @@ export class MessageComponent implements OnInit {
   }
 
   addReaction(character: string) {
+    // debugger;
     const reaction = {
       user: this.currentUser.id,
       emoji: character,
     };
-    if (this.message.reactions.some(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)) {
-      const reactionIndex = this.message.reactions.findIndex(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)
+    console.log('msg', this.message);
+    
+    if (this.message.reactions.length > 0 && this.message.reactions.some(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)) {
+      const reactionIndex = this.message.reactions.findIndex(obj => obj.emoji === reaction.emoji && obj.user === reaction.user);
       this.message.reactions.splice(reactionIndex, 1);
     } else {
       this.message.reactions.push(reaction);

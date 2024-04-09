@@ -7,6 +7,10 @@ $error-color: rgb(255, 85, 85);
 $valid-color: rgba(112, 171, 148, 0.72);
 $text-color: $color5;
 
+:root {
+    --color1: rgb(65, 65, 255);
+}
+
 @mixin center($display: flex, $jc: center, $ai: center) {
     display: $display;
     justify-content: $jc;
@@ -56,7 +60,8 @@ $text-color: $color5;
 }
 
 .card {
-    background-color: $color2;
+    // background-color: $color2;
+    background-color: var(--color1);
     padding: 15px;
     @extend .border-radius;
 }

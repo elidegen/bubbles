@@ -31,5 +31,10 @@ export class AppComponent implements OnInit {
     // } else {
     //   this.router.navigate(['/login']);
     // }
+
+    // document.documentElement.style.setProperty('--color1', 'lightgrey');
+
+
+
   }
 }

@@ -1,11 +1,8 @@
-import { Inject, Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { BehaviorSubject, Observable, firstValueFrom, take } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Channel, ChannelService } from './channel.service';
-import { AuthService } from './auth.service';
 import { MainService } from './main.service';
-import { Form } from '@angular/forms';
 
 export interface Reaction {
   user: number,
@@ -75,7 +72,10 @@ export class MessageService {
   subscribeMessagesAndThreads() {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
+      console.log('currentMsg', this.currentMessages);
+
       this.threads = data.thread_messages;
+      console.log('threads', this.threads);
     });
   }
 
@@ -165,28 +165,27 @@ export class MessageService {
     }
   }
 
-  async putMessageOld(message: Message) {
-    const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
-    const url = environment.baseUrl + endpoint + message.id + '/';
-    await firstValueFrom(this.http.put(url, message));
-  }
-
   async putMessage(message: Message) {
     const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
     const url = environment.baseUrl + endpoint + message.id + '/';
     const formData = new FormData();
+    message.reactions.forEach(reaction => {
+      // formData.append('reactions', reaction);
+    });
+    await firstValueFrom(this.http.patch(url, formData));
+  }
 
-    // // Schleife durch message-Objekt und füge Werte zum FormData hinzu
-    // Object.keys(message).forEach(key => {
-    //   if (key in message) { // Check if key exists in Message type
-    //     const value = message[key];
-    //     if (value !== undefined && value !== null) {
-    //       formData.append(key, value);
-    //     }
-    //   }
-    // });
+  async putMessageOld(message: Message) {
+    const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
+    const url = environment.baseUrl + endpoint + message.id + '/';
+    const formData = new FormData();
+    message.reactions.forEach(element => {
+      formData.append('reactions', JSON.stringify(element))
+    });
 
-    await firstValueFrom(this.http.put(url, formData));
+    const response = await firstValueFrom(this.http.patch(url, formData));
+    console.log('resp', response);
+
   }
 
   async updateMessage(message: Message) {
