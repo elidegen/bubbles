@@ -23,8 +23,14 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {
     mainService.loader = true;
-    this.channelService.getChatsForUser();
+    if (authService.isUserLoggedIn()) {
+      this.router.navigate(['/home'])
+      this.channelService.getChatsForUser();
+    } else {
+      authService.resetData();
+    }
   }
+
   ngOnInit(): void {
     // if (authService.currentUser) {
     //   this.router.navigate(['/home']);
@@ -33,8 +39,5 @@ export class AppComponent implements OnInit {
     // }
 
     // document.documentElement.style.setProperty('--color1', 'lightgrey');
-
-
-
   }
 }

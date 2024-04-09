@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent {
 
   constructor(
     public mainService: MainService,
+    public authService: AuthService,
     ) { }
 
   openProfile() {

@@ -12,52 +12,62 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent  {
-  hide:boolean = false;
+export class LoginComponent {
+  hide: boolean = false;
   loginForm: FormGroup
-  bubbles:any[] = [];
+  bubbles: any[] = [];
 
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private mainService: MainService,
     private authService: AuthService
-    ){
+  ) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
 
     this.fillBubbles();
-    
-   
+
+
   }
 
-  fillBubbles(){
+  fillBubbles() {
     for (let i = 0; i < 30; i++) {
       this.bubbles.push(i);
     }
   }
 
-  navigateTo(path:string){
+  navigateTo(path: string) {
     this.hide = true;
     setTimeout(() => {
       this.router.navigate([path]);
     }, 300);
   }
 
-  guestLogin(){
-     this.mainService.loader = true;
+  guestLogin() {
+    this.mainService.loader = true;
+    const formData = new FormData();
+    formData.append('username', this.authService.guestUser.username);
+    if(this.authService.guestUser.password){
+      formData.append('password', this.authService.guestUser.password);
+    }
+    console.log(this.authService.currentUser.password);
     
+    this.mainService.loader = true;
+    this.authService.logIn(formData);
   }
 
-  submit(){
+  submit() {
     if (this.loginForm.valid) {
       const formData = new FormData();
       formData.append('username', this.loginForm.get('username')?.value),
-      formData.append('password', this.loginForm.get('password')?.value)
+        formData.append('password', this.loginForm.get('password')?.value)
       this.mainService.loader = true;
       this.authService.logIn(formData);
+    } else {
+      this.mainService.errorLog('Please fill the form with valid data!')
     }
   }
 
@@ -67,20 +77,20 @@ export class LoginComponent  {
     return this.loginForm.valid;
   }
 
-  emailError(key:string){
+  emailError(key: string) {
     const field = this.getField(key);
     if (field) {
       return field.errors?.['email'] && this.dirtyTouched(field);
     }
   }
 
-  getField(key:string){
+  getField(key: string) {
     let myForm = this.loginForm;
     let field = myForm?.get(key);
     return field;
   }
 
-  dirtyTouched(field:any){
+  dirtyTouched(field: any) {
     return (field.dirty ||
       field.touched);
   }
@@ -89,14 +99,14 @@ export class LoginComponent  {
     const field = this.getField(key);
     if (field) {
       return field.invalid &&
-      this.dirtyTouched(field);
+        this.dirtyTouched(field);
     } else {
       return false;
     }
   }
 
 
-  isValidInput(key: string){
+  isValidInput(key: string) {
     const field = this.getField(key);
     if (field) {
       return !this.isInvalid(key) && field.valid;
@@ -106,18 +116,18 @@ export class LoginComponent  {
   }
 
 
-  requiredErrors(key:string){
+  requiredErrors(key: string) {
     const field = this.getField(key);
     if (field) {
-      return field.errors?.['required'] && 
-      this.dirtyTouched(field);
+      return field.errors?.['required'] &&
+        this.dirtyTouched(field);
     } else {
       return false;
     }
   }
 
 
-  minLengthError(key:string){
+  minLengthError(key: string) {
     const field = this.getField(key);
     if (field) {
       return field.errors?.['minlength'];

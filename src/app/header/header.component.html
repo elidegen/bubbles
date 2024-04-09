@@ -11,6 +11,6 @@
     </div>
 
     <div class="card chat-name" (click)="openProfile()">
-        Max Mustermann
+        {{ authService.currentUser.username }}
     </div>
 </div>

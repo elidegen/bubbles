@@ -3,13 +3,21 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom, take } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MainService } from './main.service';
+import { Router } from '@angular/router';
+import { UpperCasePipe } from '@angular/common';
 
 export interface CurrentUser {
   id: number,
   username: string,
   email: string,
+  password?: string
   picture: null | string
   is_online: boolean;
+}
+
+interface LoginResponse {
+  token: string;
+  user: CurrentUser
 }
 
 @Injectable({
@@ -17,23 +25,53 @@ export interface CurrentUser {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private mainService: MainService) {
-    let response = this.getCurrentuser(); // DIESE FUNKTION WIRD GELÖSCHT (wenn login aktiv)
+  constructor(private http: HttpClient, private mainService: MainService, private router: Router) {
+    this.currentUser = this.getCurrentUser();
    }
 
-  currentUser: CurrentUser = {
-    id: 3,
-    username: "CurrentUser",
-    email: "guestuser@mailinator.com",
-    picture: 'assets/img/profile_placeholder.svg',
-    is_online: true,
+  currentUser: CurrentUser;
+
+  guestUser: CurrentUser = {
+    id: 0,
+    username: 'guestuser',
+    password: 'TestUser123',
+    email: 'guest@mailinator.com',
+    is_online: false,
+    picture: null
   }
 
-  async getCurrentuser(){
-    let url = environment.baseUrl + 'users/' + this.currentUser?.id + '/';
-    let response = await firstValueFrom(this.http.get(url)) as CurrentUser;
-    this.currentUser = response
+  isUserLoggedIn() {
+    return this.getToken() !== false && this.getCurrentUser() !== false;
   }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return token;
+    } else {
+      return false;
+    }
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  setUser(user: object) {
+    const userToString = JSON.stringify(user);
+    localStorage.setItem('currentUser', userToString);
+  }
+
+
+ getCurrentUser() {
+    const userString = localStorage.getItem('currentUser');
+    if (!userString) return false;
+    else {
+      let user = JSON.parse(userString);
+      return user;
+    }
+  }
+
 
   getImg() {    
     if (this.currentUser.picture) {
@@ -42,21 +80,50 @@ export class AuthService {
     return 'assets/img/profile_placeholder.svg';
   }
 
+
   logIn(formData: FormData){
     const url = environment.baseUrl + 'login';
-    this.http.post<CurrentUser>(url, formData).pipe(take(1)).subscribe(
+    this.http.post<LoginResponse>(url, formData).pipe(take(1)).subscribe(
       {
-        next: (response:CurrentUser) => {
-          this.currentUser = response;
-          this.mainService.messageLog('Login successfull');
+        next: (response) => {
+          console.log(response);
+          if (response && response.token) {
+            this.setToken(response.token);
+            this.setUser(response.user);
+            this. currentUser = response.user;
+            this.router.navigate(['/home']);
+            this.mainService.loader = false;
+          }
+
+          this.mainService.messageLog('Welcome ' + response.user.username);
           this.mainService.loader = false;
         },
         error: e => {
           this.mainService.errorLog('Login failed..');
           console.log('Login Error:', e);
+          this.mainService.loader = false;
           
         },
       }
     );
   }
+
+
+  isGuestUser() {
+    if (this.currentUser?.email === this.guestUser.email &&
+      this.currentUser?.username === this.guestUser.username) {
+        return true;
+      } else {
+        return false;
+      }
+  }
+
+
+  resetData() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+    this.mainService.loader = false;
+  }
+
 }

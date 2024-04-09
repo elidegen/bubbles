@@ -26,10 +26,25 @@ export class ProfileDialogComponent {
     private userService: UserService,
   ) { }
 
-  logout() {
+  async logout() {
+    this.mainService.loader = true;
+    if (this.authService.isGuestUser()) {
+      this.authService.resetData();
+      return;
+    }
+    // If it's not guest user:
+    const url = environment.baseUrl + 'logout';
+    const token = {
+      token: localStorage.getItem('token')
+    }
+    const response = await firstValueFrom(this.http.post(url, token));
+  
     this.router.navigate(['/login']);
-    this.mainService.closePopups();
+    this.authService.resetData();
+    
+    this.mainService.loader = true;
   }
+
 
   async uploadImg(file: File) {
     const url = environment.baseUrl + 'upload_img/' + this.authService.currentUser.id + '/';
@@ -37,8 +52,12 @@ export class ProfileDialogComponent {
     formdata.append('picture', file);
     const response = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
     this.authService.currentUser = response;
+    this.authService.setUser(response);
     this.updateUsers(response as User);
   }
+
+
+
 
   updateUsers(response: User) {
     const index = this.userService.users.findIndex(obj => obj.id === response.id);

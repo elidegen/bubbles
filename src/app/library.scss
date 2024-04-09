@@ -8,7 +8,7 @@ $valid-color: rgba(112, 171, 148, 0.72);
 $text-color: $color5;
 
 :root {
-    --color1: rgb(65, 65, 255);
+    --color1: rgba(21, 21, 108, 0.465);
 }
 
 @mixin center($display: flex, $jc: center, $ai: center) {
