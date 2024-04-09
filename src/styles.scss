@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: $color1;
+    background-color: var(--color1);
 }
 
 /* width */
@@ -35,7 +35,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: $color1;
+    background-color: var(--color1);
     border-radius: 10px;
 }
 

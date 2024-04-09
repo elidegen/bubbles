@@ -14,7 +14,7 @@
 }
 
 .error-popup {
-    background-color: $color1;
+    background-color: var(--color1);
     border: 2px solid red;
     @include center();
 
@@ -24,8 +24,8 @@
 }
 
 .message-popup {
-    background-color: $color1;
-    border: 2px solid $color3;
+    background-color: var(--color1);
+    border: 2px solid var(--color3);
     @include center();
 }
 

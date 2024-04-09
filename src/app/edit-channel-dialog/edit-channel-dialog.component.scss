@@ -19,7 +19,7 @@
     span {
         cursor: pointer;
         font-size: 15px;
-        color: $color4;
+        color: var(--color4);
     }
 }
 
@@ -27,7 +27,7 @@
 
     .card {
         margin-top: 5px;
-        background-color: $color1;
+        background-color: var(--color1);
         @include d-flex($jc: space-between);
         padding: 10px 15px;
 
@@ -36,7 +36,7 @@
         }
 
         .img-button {
-            background-color: $color1;
+            background-color: var(--color1);
         }
     }
 

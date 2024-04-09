@@ -6,7 +6,7 @@
 
     .msg-input {
         @include d-flex($jc: space-between, $g: 5px);
-        background-color: $color5;
+        background-color: var(--color5);
         height: 50px;
         width: 100%;
         border-radius: 25px;
@@ -27,7 +27,7 @@
         min-width: 50px;
         max-height: 50px;
         max-width: 50px;
-        background-color: $color4;
+        background-color: var(--color4);
         border-radius: 50%;
         @include d-flex();
         @extend .hover;
@@ -81,7 +81,7 @@
 }
 
 .attachment{
-    background-color: $color4 !important;
+    background-color: var(--color4) !important;
     cursor: pointer;
     transition: 225ms ease;
     padding: 5px;
@@ -94,7 +94,7 @@
     }
 
     &:hover{
-        background-color: $color3 !important;
+        background-color: var(--color3) !important;
         filter: brightness(1) !important;
     }
 }

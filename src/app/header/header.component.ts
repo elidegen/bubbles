@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent {
   openMenu: boolean = false;
+  showThemes: boolean = false;
 
   constructor(
     public mainService: MainService,
@@ -32,4 +33,8 @@ export class HeaderComponent {
     this.mainService.sideMenuOpen = !this.mainService.sideMenuOpen;
   }
 
+  setTheme(color: string){
+    console.log('theme');
+    // document.documentElement.style.setProperty('var(--color1)', color)
+  }
 }

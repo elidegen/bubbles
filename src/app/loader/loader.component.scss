@@ -12,7 +12,7 @@
     display: inline-block;
     position: relative;
     border: 3px solid;
-    border-color: $color3 $color3 transparent;
+    border-color: var(--color3) var(--color3) transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
   }
@@ -26,7 +26,7 @@
     bottom: 0;
     margin: auto;
     border: 3px solid;
-    border-color: transparent $color4 $color4;
+    border-color: transparent var(--color4) var(--color4);
     width: 24px;
     height: 24px;
     border-radius: 50%;

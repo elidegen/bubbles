@@ -13,7 +13,7 @@
 .chat-name-wrapper {
     @include d-flex($g: 15px);
     @extend .hover;
-    background-color: $color1;
+    background-color: var(--color1);
     border-radius: 25px;
     padding: 5px;
     padding-right: 15px;
@@ -30,7 +30,7 @@
     .group-members {
         @include d-flex($g: 20px);
         @extend .hover;
-        background-color: $color1;
+        background-color: var(--color1);
         padding: 5px 15px 5px 5px;
         border-radius: 22px;
 
@@ -47,7 +47,7 @@
     }
 
     .add-member {
-        background-color: $color1;
+        background-color: var(--color1);
         @extend .img-button;
         @include d-flex;
         padding: 7px;

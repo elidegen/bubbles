@@ -9,14 +9,15 @@
     }
 }
 
-.left-side {
+.left-side,
+.right-side {
     @include d-flex($g: 15px);
+}
 
-    .close-side-menu {
-        @include d-flex();
-        @extend .hover;
-        min-width: 40px; // avoids twitch of search bar
-    }
+.header-button {
+    @include d-flex();
+    @extend .hover;
+    min-width: 40px; // avoids twitch of search bar
 }
 
 .chat-name {
@@ -25,7 +26,7 @@
 }
 
 .popup-menu {
-    background-color: $color2;
+    background-color: var(--color2);
     @extend .border-radius;
     padding: 0 5px;
     position: absolute;
@@ -38,7 +39,7 @@
 
     .option {
         padding: 10px;
-        background-color: $color2;
+        background-color: var(--color2);
         border-radius: 10px;
         @extend .hover;
     }
@@ -69,5 +70,92 @@
 
     100% {
         height: 0;
+    }
+}
+
+.theme-picker {
+    height: 40px;
+    overflow: hidden;
+    padding: 0;
+    @include d-flex();
+}
+
+.theme-picker fieldset {
+    padding: 0 !important;
+    border: 0;
+    display: flex;
+    gap: 15px;
+
+    label {
+        padding: 5px;
+        @include d-flex();
+        border-radius: 50%;
+    }
+}
+
+.theme-picker input[type="radio"] {
+    cursor: pointer;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    outline-offset: 2px;
+    outline: 2px solid var(--radio-color, currentColor);
+    background-color: var(--radio-color, currentColor);
+
+    &:checked {
+        background-color: var(--radio-color, currentColor);
+    }
+}
+
+input[type="radio"]#purple {
+    --radio-color: #5c4f82;
+}
+
+input[type="radio"]#dark {
+    --radio-color: #224780;
+}
+
+input[type="radio"]#pink {
+    --radio-color: #750052;
+}
+
+input[type="radio"]#orange {
+    --radio-color: #FFA726;
+}
+
+input[type="radio"]#green {
+    --radio-color: green;
+}
+
+.slide-in {
+    animation: slide-in .5s forwards;
+}
+
+.slide-out {
+    animation: slide-out .5s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+
+    100% {
+        opacity: 1;
+        width: 190px;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        opacity: 1;
+        width: 190px;
+    }
+
+    100% {
+        opacity: 0;
+        width: 0;
     }
 }

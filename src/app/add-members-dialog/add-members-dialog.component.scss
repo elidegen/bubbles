@@ -16,7 +16,7 @@
 
     .selected-user {
         @include d-flex($g: 5px);
-        background-color: $color1;
+        background-color: var(--color1);
         border-radius: 23px;
         padding: 5px;
 
@@ -26,7 +26,7 @@
         }
 
         .img-button {
-            background-color: $color1;
+            background-color: var(--color1);
         }
     }
 }

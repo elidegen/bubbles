@@ -1,16 +1,37 @@
 <div class="header-wrapper">
     <div class="left-side">
-        <div class="close-side-menu card" (click)="toggleSideMenu()">
+        <div class="header-button card" (click)="toggleSideMenu()">
             @if (mainService.sideMenuOpen) {
-                <img src="assets/img/close_side_menu.svg">
+            <img src="assets/img/close_side_menu.svg">
             } @else {
-                <img src="assets/img/open_side_menu.svg">
+            <img src="assets/img/open_side_menu.svg">
             }
         </div>
-            <app-search [searchType]="'search'" ></app-search>
+        <app-search [searchType]="'search'"></app-search>
     </div>
 
-    <div class="card chat-name" (click)="openProfile()">
-        {{ authService.currentUser.username }}
+
+
+
+    <div class="right-side">
+        <div class="theme-picker card" [ngClass]="{'slide-in': showThemes, 'slide-out': !showThemes}">
+            <fieldset>
+                <label for="purple"><input type="radio" name="theme" id="purple" checked></label>                
+
+                <label for="dark"><input type="radio" name="theme" id="dark"></label>                
+
+                <label for="pink"><input type="radio" name="theme" id="pink"></label>                
+
+                <label for="orange"><input type="radio" name="theme" id="orange"></label>                
+            </fieldset>
+        </div>
+
+        <div class="header-button card" (click)="showThemes = !showThemes">
+            <img src="assets/img/palette_icon.svg" alt="">
+        </div>
+
+        <div class="card chat-name" (click)="openProfile()">
+            {{ authService.currentUser.username }}
+        </div>
     </div>
 </div>

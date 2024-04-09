@@ -3,7 +3,7 @@
 // .fullscreen {
 //     @include position($pos: fixed);
 //     @include d-flex();
-//     background-color: rgba($color: #000000, $alpha: .2);
+//     background-color: rgba(--color: #000000, $alpha: .2);
 // }
 
 .emoji-wrapper {
@@ -70,7 +70,7 @@
 }
 
 .currentCat {
-    background-color: $color3 !important;
+    background-color: var(--color3) !important;
     @extend .border-radius;
 
     img {

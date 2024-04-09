@@ -5,10 +5,14 @@ $color4: #3cc6b7;
 $color5: #FFFFFF;
 $error-color: rgb(255, 85, 85);
 $valid-color: rgba(112, 171, 148, 0.72);
-$text-color: $color5;
+$text-color: var(--color5);
 
 :root {
-    --color1: rgba(21, 21, 108, 0.465);
+    --color1: #4d426d;
+    --color2: #5c4f82;
+    --color3: #efa985;
+    --color4: #3cc6b7;
+    --color5: #FFFFFF;
 }
 
 @mixin center($display: flex, $jc: center, $ai: center) {
@@ -60,8 +64,8 @@ $text-color: $color5;
 }
 
 .card {
-    // background-color: $color2;
-    background-color: var(--color1);
+    background-color: var(--color2);
+    // background-color: var(--color1);
     padding: 15px;
     @extend .border-radius;
 }
@@ -75,8 +79,8 @@ $text-color: $color5;
 
 .button1 {
     @extend .button;
-    background-color: $color3;
-    border: 2px solid $color3;
+    background-color: var(--color3);
+    border: 2px solid var(--color3);
     color: $text-color;
 }
 
@@ -97,8 +101,8 @@ $text-color: $color5;
     cursor: pointer;
 
     &:hover {
-        color: $color5;
-        border: 1px solid $color5;
+        color: var(--color5);
+        border: 1px solid var(--color5);
     }
 }
 
@@ -136,7 +140,7 @@ $text-color: $color5;
 .img-button {
     border-radius: 50%;
     padding: 3px;
-    background-color: $color2;
+    background-color: var(--color2);
     @extend .hover;
 }
 
@@ -151,7 +155,7 @@ $text-color: $color5;
 }
 
 .input {
-    background-color: $color1;
+    background-color: var(--color1);
     border: 0;
     outline: 0;
     padding: 15px;
@@ -182,7 +186,7 @@ $text-color: $color5;
         position: absolute;
         bottom: 0;
         right: 0;
-        border: 2px solid $color2;
+        border: 2px solid var(--color2);
     }
 
     .online {
@@ -199,4 +203,36 @@ $text-color: $color5;
 img {
     border-radius: 50%;
     object-fit: cover;
+}
+
+:root:has(#purple:checked) {
+    --color1: #4d426d;
+    --color2: #5c4f82;
+    --color3: #efa985;
+    --color4: #3cc6b7;
+    --color5: #FFFFFF;
+}
+
+:root:has(#dark:checked) {
+    --color1: #173157;
+    --color2: #224780;
+    --color3: #bd3c5d;
+    --color4: #52c2d8;
+    --color5: #FFFFFF;
+}
+
+:root:has(#pink:checked) {
+    --color1: #490033;
+    --color2: #750052;
+    --color3: #f79c3a;
+    --color4: #3af79c;
+    --color5: #FFFFFF;
+}
+
+:root:has(#orange:checked) {
+    --color1: #FB8C00;
+    --color2: #FFA726;
+    --color3: #fb0d00;
+    --color4: #0071fb;
+    --color5: #FFFFFF;
 }
