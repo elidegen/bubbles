@@ -75,7 +75,7 @@ export class AuthService {
 
   getImg() {    
     if (this.currentUser.picture) {
-      return this.currentUser.picture;
+      return environment.baseUrl.slice(0 , -1) + this.currentUser.picture;
     }
     return 'assets/img/profile_placeholder.svg';
   }
