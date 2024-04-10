@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MainService } from './services/main.service';
 import { PopupComponent } from './popup/popup.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -22,12 +22,27 @@ export class AppComponent implements OnInit {
     public channelService: ChannelService,
     private router: Router
   ) {
-    mainService.loader = true;
-    if (authService.isUserLoggedIn()) {
+  
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        const url = this.router.url;
+        if (url.includes('/resetpassword') || url.includes('/forgotpassword') || url.includes('/success') || url.includes('/signup')) {
+          return
+        } else {
+          this.handleLogin();
+        }
+      }
+    });  
+
+  }
+
+  handleLogin(){
+    this.mainService.loader = true;
+    if (this.authService.isUserLoggedIn()) {
       this.router.navigate(['/home'])
       this.channelService.getChatsForUser();
     } else {
-      authService.resetData();
+      this.authService.resetData();
     }
   }
 
