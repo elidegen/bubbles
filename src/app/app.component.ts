@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     public channelService: ChannelService,
     private router: Router
   ) {
-  
+
     this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd){
+      if (event instanceof NavigationEnd) {
         const url = this.router.url;
         if (url.includes('/resetpassword') || url.includes('/forgotpassword') || url.includes('/success') || url.includes('/signup')) {
           return
@@ -32,15 +32,12 @@ export class AppComponent implements OnInit {
           this.handleLogin();
         }
       }
-    });  
+    });
 
   }
 
-  handleLogin(){
-    this.mainService.loader = true;
-    console.log('User logged in?', this.authService.isUserLoggedIn());
-    
-    if (this.authService.isUserLoggedIn()) {
+  async handleLogin() {
+    if (this.authService.isUserLoggedIn() && localStorage.getItem('currentUser')) {
       this.router.navigate(['/home']);
       this.channelService.getChatsForUser();
     } else {

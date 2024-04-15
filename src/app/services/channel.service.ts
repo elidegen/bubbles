@@ -39,7 +39,6 @@ export interface ChatsAndPreview {
   providedIn: 'root'
 })
 export class ChannelService {
-  getChannelsUrl: string = environment.baseUrl + 'channels-and-preview/' + this.authService.currentUser.id;
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
     preview_messages: [],
@@ -67,14 +66,20 @@ export class ChannelService {
   }
 
   async getChatsForUser() {
-    const data = await firstValueFrom(this.fetchChatsAndPreview());
-    this.$chatsAndPreview.next(data);
-    this.subscribeChatsAndPreview();
-    this.mainService.deactivateLoader();
+    try {
+      const data = await firstValueFrom(this.fetchChatsAndPreview());
+      this.$chatsAndPreview.next(data);
+      this.subscribeChatsAndPreview();
+      this.mainService.deactivateLoader();
+    } catch (error) {
+      console.error('Error by fetching Chats:', error);
+      throw error;
+    }
   }
 
   fetchChatsAndPreview(): Observable<ChatsAndPreview> {
-    return this.http.get<ChatsAndPreview>(this.getChannelsUrl);
+    const url: string = environment.baseUrl + 'channels-and-preview/' + this.authService.currentUser.id;
+    return this.http.get<ChatsAndPreview>(url);
   }
 
   subscribeChatsAndPreview() {
