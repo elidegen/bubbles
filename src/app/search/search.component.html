@@ -1,5 +1,5 @@
 <div class="search-wrapper" (click)="stopProp($event)">
-    <input (click)="showResults = true" placeholder="{{ placeholder }}" class="input"
+    <input (input)="showResults = true" placeholder="{{ placeholder }}" class="input"
         [class.dark-input]="searchType === 'user-search'" type="text" (keyup)="triggerSearch()"
         [(ngModel)]="searchValue">
 
@@ -36,7 +36,8 @@
             <div class="details">
                 <p class="author">{{this.userService.getUser(message.author).username}}</p>
                 <p>{{message.content}}</p>
-                <p *ngIf="isChannel(message)" class="source">in channel: {{channelService.getChannel(message.source).name}}</p>
+                <p *ngIf="isChannel(message)" class="source">in channel:
+                    {{channelService.getChannel(message.source).name}}</p>
             </div>
         </div>
         }
@@ -57,7 +58,7 @@
         }
         } @else {
         @for (user of searchSolutionUser.users; track $index) {
-        <div class=" preview" (click)="selectUser(user)" [class.selected]="userSelection.includes(user)">
+        <div class="preview" (click)="selectUser(user)" [class.selected-user]="alreadySelected(user.id)">
             <div class="online-wrapper">
                 <img src="{{channelService.getImg(user.picture)}}">
                 <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
@@ -65,15 +66,6 @@
             <p>{{user.username}}</p>
         </div>
         }
-        <!-- @for (user of userService.users; track $index) {
-        <div class="preview" (click)="selectUser(user)" [class.selected]="userSelection.includes(user)">
-            <div class="online-wrapper">
-                <img src="{{'assets/img/profile_placeholder_red.svg'}}">
-                <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
-            </div>
-            <p>{{user.username}}</p>
-        </div>
-        } -->
         }
     </div>
 </div>

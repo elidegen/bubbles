@@ -35,9 +35,7 @@ export class SearchComponent implements OnInit {
   searchValue: string = '';
   placeholder!: string;
   showResults: boolean = false;
-
   currentUserId: number = 0;
-
   searchSolution: SearchSolution = {
     channels: [],
     messages: [],
@@ -86,6 +84,8 @@ export class SearchComponent implements OnInit {
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
     }
+    console.log('searchSol', this.searchSolutionUser);
+    console.log('userSel', this.userSelection);
   }
 
   searchIsValid() {
@@ -107,5 +107,9 @@ export class SearchComponent implements OnInit {
 
   isChannel(msg: Message) {
     return this.channelService.getChannel(msg.source);
+  }
+
+  alreadySelected(userId: number){    
+    return this.userSelection.includes(this.userService.getUser(userId));
   }
 }

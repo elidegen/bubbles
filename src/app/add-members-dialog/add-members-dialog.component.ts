@@ -26,7 +26,6 @@ export class AddMembersDialogComponent {
     private http: HttpClient,
   ) {
     this.currentChannel = channelService.currentChannel;
-    console.log('curchnl before', this.currentChannel);
 
     this.prepareChannelMembers();
   }
@@ -41,10 +40,14 @@ export class AddMembersDialogComponent {
     this.channelMembers = selectedUsers;
   }
 
+  removeMember(member: User) {
+    this.channelMembers.splice(this.channelMembers.indexOf(member), 1)
+  }
+
   async addMembers() {
     for (const member of this.channelMembers) {
       if (member.id)
-        this.channelMembersId.push(member.id)
+        this.channelMembersId.push(member.id);
     }
 
     const formData = new FormData();
@@ -54,10 +57,9 @@ export class AddMembersDialogComponent {
 
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
-    console.log('new members', response);
-  }
-
-  removeMember(member: User){
-    this.channelMembers.splice(this.channelMembers.indexOf(member), 1)
+    localStorage.setItem('currentChannel', JSON.stringify(response));
+    // this.channelService.currentChannel = response;
+    // this.mainService.closePopups();
+    location.reload(); //reload der seite OK?
   }
 }
