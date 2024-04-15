@@ -89,7 +89,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchIsValid() {
-    return this.searchValue.trim().length > 1;
+    return this.searchValue.trim().length > 0;
   }
 
   stopProp($event: Event) {

@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   isUserLoggedIn() {
-    return this.getToken()  && this.getCurrentUser() !== false;
+    return !!this.getToken() && !!this.getCurrentUser();
   }
 
   getToken() {
