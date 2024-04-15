@@ -96,11 +96,17 @@ export class SearchComponent implements OnInit {
     $event.stopPropagation();
   }
 
-  selectUser(user: User) {
-    if (this.userSelection.includes(user)) {
-      this.userSelection.splice(this.userSelection.indexOf(user), 1);
+  selectUser(user: User, event: Event) {
+
+    if (this.userSelection.some(obj => obj.id === user.id)) {
+      const index = this.userSelection.findIndex(obj => obj.id === user.id);
+      this.userSelection.splice(index, 1);      
     } else {
       this.userSelection.push(user);
+    }
+    if (event.currentTarget) {
+      const previewElement = event.currentTarget as HTMLElement;
+      previewElement.classList.toggle('selected-user');
     }
     this.selectedUsers.emit(this.userSelection);
   }
@@ -109,7 +115,7 @@ export class SearchComponent implements OnInit {
     return this.channelService.getChannel(msg.source);
   }
 
-  alreadySelected(userId: number){    
+  alreadySelected(userId: number) {
     return this.userSelection.includes(this.userService.getUser(userId));
   }
 }

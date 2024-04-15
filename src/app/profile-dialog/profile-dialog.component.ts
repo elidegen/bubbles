@@ -33,19 +33,14 @@ export class ProfileDialogComponent {
       const token = {
         token: localStorage.getItem('token')
       }
-      const response = await firstValueFrom(this.http.post(url, token));
-      console.log(response);
+      await firstValueFrom(this.http.post(url, token));
     }
-
-
-
 
     this.authService.resetData();
     this.router.navigate(['/login']);
     this.mainService.loader = false;
     this.mainService.closePopups();
   }
-
 
   async uploadImg(file: File) {
     const url = environment.baseUrl + 'upload_img/' + this.authService.currentUser.id + '/';
@@ -56,9 +51,6 @@ export class ProfileDialogComponent {
     this.authService.setUser(response);
     this.updateUsers(response as User);
   }
-
-
-
 
   updateUsers(response: User) {
     const index = this.userService.users.findIndex(obj => obj.id === response.id);

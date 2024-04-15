@@ -13,6 +13,8 @@
             <p>{{user.username}}</p>
             <img class="img-button" src="assets/img/close_icon.svg" (click)="removeMember(user)">
         </div>
+        } @empty {
+            <p>No users selected</p>
         }
     </div>
     <div class="button-wrapper">
