@@ -4,11 +4,12 @@
     @include d-flex($fd: column, $ai:flex-start, $g: 5px);
     margin: 2px 0;
     width: 100%;
+    padding-left: 0;
+    padding-right: 35px;
 
     .card {
         background-color: var(--color1);
         width: fit-content;
-        padding: 15px;
         position: relative;
 
         &:hover {
@@ -31,7 +32,6 @@
     .reaction {
         opacity: 0;
         border-radius: 25px;
-        padding: 0 2px;
         background-color: var(--color2);
         border: 1px solid var(--color5);
         position: absolute;
@@ -71,6 +71,8 @@
 
 .my-msg {
     align-items: flex-end;
+    padding-left: 35px;
+    padding-right: 0;
 
     .card {
         background-color: var(--color3);
@@ -136,8 +138,8 @@
 
 .attachment-wrapper{
     @include d-flex();
-    padding: 5px !important;
-    max-width: 50%;
+    margin: -10px -10px 15px -10px;
+    // max-width: 50%;
 
     img{
         max-width: 100%;
@@ -147,4 +149,8 @@
 
 .margin-bottom{
     margin-bottom: 7px;
+}
+
+.message{
+    @include d-flex($fd: column, $ai: flex-end);
 }

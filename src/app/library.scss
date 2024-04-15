@@ -1,11 +1,13 @@
-$color1: #4d426d;
-$color2: #5c4f82;
-$color3: #efa985;
-$color4: #3cc6b7;
-$color5: #FFFFFF;
+// $color1: #4d426d;
+// $color2: #5c4f82;
+// $color3: #efa985;
+// $color4: #3cc6b7;
+// $color5: #FFFFFF;
 $error-color: rgb(255, 85, 85);
 $valid-color: rgba(112, 171, 148, 0.72);
 $text-color: var(--color5);
+
+$card-padding: 15px;
 
 :root {
     --color1: #4d426d;
@@ -60,13 +62,12 @@ $text-color: var(--color5);
 
 .wrapper {
     @include position($pos: fixed);
-    padding: 15px;
+    padding: $card-padding;
 }
 
 .card {
     background-color: var(--color2);
-    // background-color: var(--color1);
-    padding: 15px;
+    padding: $card-padding;
     @extend .border-radius;
 }
 
@@ -158,7 +159,7 @@ $text-color: var(--color5);
     background-color: var(--color1);
     border: 0;
     outline: 0;
-    padding: 15px;
+    padding: $card-padding;
     @extend .border-radius;
 }
 

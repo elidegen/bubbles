@@ -1,6 +1,11 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
     <div class="card message" [class.margin-bottom]="message.reactions.length > 0">
+        @if (message.attachment) {
+            <div class="attachment-wrapper">
+                <img src="{{getImage()}}" alt="">
+            </div>
+        }
         @if (editState) {
         <app-message-bar (messageContent)="editMessage($event)" [disabled]="false"></app-message-bar>
         } @else {
@@ -43,11 +48,6 @@
         </div>
         }
     </div>
-    @if (message.attachment) {
-        <div class="attachment-wrapper card">
-            <img src="{{getImage()}}" alt="">
-        </div>
-    }
 </div>
 
 <app-emoji-picker-dialog #picker *ngIf="showEmojiPicker"
