@@ -41,13 +41,13 @@ export class AuthService {
   }
 
   isUserLoggedIn() {
-    return this.getToken() !== false && this.getCurrentUser() !== false;
+    return this.getToken()  && this.getCurrentUser() !== false;
   }
 
   getToken() {
     const token = localStorage.getItem('token');
     if (token) {
-      return token;
+      return true;
     } else {
       return false;
     }
@@ -122,6 +122,7 @@ export class AuthService {
   resetData() {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentChannel');
     this.router.navigate(['/login']);
     this.mainService.loader = false;
   }

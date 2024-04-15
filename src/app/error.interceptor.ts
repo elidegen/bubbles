@@ -9,6 +9,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         console.log('Unauthorized request');
         localStorage.removeItem('token');
         localStorage.removeItem('currentUser');
+        window.location.reload();
+        //TODO -> POPUP für User
       }
       return throwError(() => error);
     }));

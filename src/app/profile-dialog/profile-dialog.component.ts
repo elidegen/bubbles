@@ -28,16 +28,20 @@ export class ProfileDialogComponent {
 
   async logout() {
     this.mainService.loader = true;
-
-    const url = environment.baseUrl + 'logout';
-    const token = {
-      token: localStorage.getItem('token')
+    if (!this.authService.isGuestUser()) {
+      const url = environment.baseUrl + 'logout';
+      const token = {
+        token: localStorage.getItem('token')
+      }
+      const response = await firstValueFrom(this.http.post(url, token));
+      console.log(response);
     }
-    const response = await firstValueFrom(this.http.post(url, token));
 
-    this.router.navigate(['/login']);
+
+
+
     this.authService.resetData();
-
+    this.router.navigate(['/login']);
     this.mainService.loader = false;
     this.mainService.closePopups();
   }
