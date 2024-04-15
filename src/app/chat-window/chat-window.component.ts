@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewChecked, Component, HostListener, Input, OnInit, ViewChild, viewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -20,9 +20,10 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })
-export class ChatWindowComponent {
+export class ChatWindowComponent implements OnInit {
   @Input() channelToDisplay!: Channel | Message;
   @Input() isThread!: boolean;
+  @ViewChild('chatWrapper') chatWrapper!: any;
   threadMessage: string = '';
   messagesToDisplay: Message[] = [];
 
@@ -36,6 +37,17 @@ export class ChatWindowComponent {
     this.getMessagesToDisplay();
   }
 
+  ngOnInit(): void {
+    this.channelService.scrollToBottom.subscribe(() => {
+      // getScrollPosition();
+      this.scrollToBottom();
+    })
+  }
+
+  scrollToBottom() {
+    this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+  }
+
   getMessagesToDisplay() {
     if (this.isThread) {
       this.messagesToDisplay = this.messageService.threads.filter(obj => obj.source === this.channelToDisplay.id);
@@ -43,12 +55,6 @@ export class ChatWindowComponent {
       this.messagesToDisplay = this.messageService.currentMessages;
     }
   }
-
-  // isThread() {
-  //   if ('reactions' in this.channelToDisplay)
-  //     this.threadMessage = this.channelToDisplay.content;
-  //   return 'reactions' in this.channelToDisplay
-  // }
 
   isSeperator(obj: any) {
     return obj instanceof Date
@@ -76,7 +82,7 @@ export class ChatWindowComponent {
   dmWithSelf() {
     if (this.currentUserDmAlreadyExist()) {
       const channel = this.channelService.directMessages.find(obj => obj.members.length === 1 && obj.members.includes(this.authService.currentUser.id))!.id
-      
+
       this.channelService.openChannel(channel);
     } else {
       this.createDmWithUser(this.authService.currentUser.id);

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Message, MessageService } from './message.service';
 import { environment } from '../../environments/environment.development';
@@ -39,6 +39,7 @@ export interface ChatsAndPreview {
   providedIn: 'root'
 })
 export class ChannelService {
+  @Output() scrollToBottom = new EventEmitter<any>();
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
     preview_messages: [],
@@ -100,6 +101,9 @@ export class ChannelService {
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
     this.messageService.threadOpen = false;
+    setTimeout(() => {
+      this.scrollToBottom.emit();
+    }, 100);
   }
 
   filterChats() {
@@ -148,7 +152,7 @@ export class ChannelService {
     }
   }
 
-  getMessageForm(newMessage:Message, isThread:boolean) {
+  getMessageForm(newMessage: Message, isThread: boolean) {
     const formData = new FormData();
     formData.append('author', this.authService.currentUser.id.toString());
     if (newMessage.reactions.length > 0) {

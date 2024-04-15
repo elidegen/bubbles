@@ -20,10 +20,7 @@ export class HeaderComponent {
   constructor(
     public mainService: MainService,
     public authService: AuthService,
-  ) {
-    console.log('selTheme', this.selectedTheme);
-    
-  }
+  ) { }
 
   openProfile() {
     this.mainService.showPopup = true;

@@ -72,10 +72,7 @@ export class MessageService {
   subscribeMessagesAndThreads() {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
-      console.log('currentMsg', this.currentMessages);
-
       this.threads = data.thread_messages;
-      console.log('threads', this.threads);
     });
   }
 
@@ -103,7 +100,6 @@ export class MessageService {
   }
 
   seperateChannelByDay(channelId: number, isThread: boolean) {
-    // const sortedArray = this.sortChannel(channelId);
     const sortedArray = this.filterByChannel(channelId, isThread);
     let seperatedArray = [];
     let currentDay;

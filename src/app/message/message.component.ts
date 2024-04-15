@@ -8,6 +8,7 @@ import { ReactionsComponent } from '../reactions/reactions.component';
 import { Subject } from 'rxjs';
 import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.component';
 import { ChannelService } from '../services/channel.service';
+import { MainService } from '../services/main.service';
 
 @Component({
   selector: 'app-message',
@@ -33,6 +34,7 @@ export class MessageComponent {
     public messageService: MessageService,
     public userService: UserService,
     public channelService: ChannelService,
+    private mainService: MainService,
   ) {
     this.currentUser = authService.currentUser;
     this.setupClickListener();
@@ -64,22 +66,19 @@ export class MessageComponent {
   }
 
   addReaction(character: string) {
-    // debugger;
     const reaction = {
       user: this.currentUser.id,
       emoji: character,
     };
-
     if (this.message.reactions.length > 0 && this.message.reactions.some(obj => obj.emoji === reaction.emoji && obj.user === reaction.user)) {
       const reactionIndex = this.message.reactions.findIndex(obj => obj.emoji === reaction.emoji && obj.user === reaction.user);
       this.message.reactions.splice(reactionIndex, 1);
     } else {
       this.message.reactions.push(reaction);
     }
-
-    // this.messageService.updateMessage(this.message);
     this.messageService.patchMessage(this.message);
     this.addedReaction.next();
+    this.showEmojiPicker = false;
   }
 
   getCharater($event: any) {
