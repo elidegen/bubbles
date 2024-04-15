@@ -10,19 +10,20 @@
         <app-search [searchType]="'search'"></app-search>
     </div>
 
-
-
-
     <div class="right-side">
         <div class="theme-picker card" [ngClass]="{'slide-in': showThemes, 'slide-out': !showThemes}">
             <fieldset>
-                <label for="purple"><input type="radio" name="theme" id="purple" checked></label>                
+                <label for="purple"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="purple" value="purple"
+                        (ngModelChange)="saveTheme()"></label>
 
-                <label for="dark"><input type="radio" name="theme" id="dark"></label>                
+                <label for="dark"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="dark" value="purpldarke"
+                        (ngModelChange)="saveTheme()"></label>
 
-                <label for="pink"><input type="radio" name="theme" id="pink"></label>                
+                <label for="pink"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="pink" value="pink"
+                        (ngModelChange)="saveTheme()"></label>
 
-                <label for="orange"><input type="radio" name="theme" id="orange"></label>                
+                <label for="orange"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="orange" value="orange"
+                        (ngModelChange)="saveTheme()"></label>
             </fieldset>
         </div>
 
