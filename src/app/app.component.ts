@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   async handleLogin() {
+    this.mainService.loader = true;
     if (this.authService.isUserLoggedIn() && localStorage.getItem('currentUser')) {
       this.router.navigate(['/home']);
       this.channelService.getChatsForUser();
