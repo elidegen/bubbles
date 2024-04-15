@@ -38,8 +38,10 @@ export class AppComponent implements OnInit {
 
   handleLogin(){
     this.mainService.loader = true;
+    console.log('User logged in?', this.authService.isUserLoggedIn());
+    
     if (this.authService.isUserLoggedIn()) {
-      this.router.navigate(['/home'])
+      this.router.navigate(['/home']);
       this.channelService.getChatsForUser();
     } else {
       this.authService.resetData();
