@@ -1,6 +1,13 @@
 @import "../library.scss";
 
 
+.card {
+  
+  @media (max-width:700px) {
+      min-width: unset !important;
+      width: 90%;
+  }
+}
 
 .bubbles {
     position: absolute;

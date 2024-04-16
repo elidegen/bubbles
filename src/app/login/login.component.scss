@@ -11,6 +11,10 @@
     min-width: 450px;
     gap: 20px;
     transition: all 300ms ease-in-out;
+    @media (max-width:650px) {
+        min-width: unset !important;
+        width: 90%;
+    }
 }
 
 @keyframes slide-in {
@@ -82,5 +86,12 @@ input::placeholder {
 
 .valid-form-button {
     background-color: $valid-color;
+}
+
+@media (max-width:360px) {
+    .button3{
+        font-size: 10px !important;
+        padding: 5px;
+    }
 }
 
