@@ -9,11 +9,12 @@ import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User, UserService } from '../services/user.service';
 import { CloseComponent } from '../svgs/close/close.component';
+import { MailComponent } from '../svgs/mail/mail.component';
 
 @Component({
   selector: 'app-profile-dialog',
   standalone: true,
-  imports: [CommonModule, FilePickerComponent, CloseComponent],
+  imports: [CommonModule, FilePickerComponent, CloseComponent, MailComponent],
   templateUrl: './profile-dialog.component.html',
   styleUrl: './profile-dialog.component.scss'
 })
