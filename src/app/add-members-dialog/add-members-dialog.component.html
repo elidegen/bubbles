@@ -11,7 +11,8 @@
         <div class="selected-user">
             <img src="{{channelService.getImg(user.picture)}}">
             <p>{{user.username}}</p>
-            <img class="img-button" src="assets/img/close_icon.svg" (click)="removeMember(user)">
+            
+            <app-close [removeMember]="true" class="img-button" (click)="removeMember(user)" ></app-close>
         </div>
         } @empty {
             <p>No users selected</p>

@@ -6,11 +6,13 @@ import { SearchComponent } from '../search/search.component';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { AddMemberComponent } from '../svgs/add-member/add-member.component';
+import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
   selector: 'app-add-members-dialog',
   standalone: true,
-  imports: [SearchComponent],
+  imports: [SearchComponent, CloseComponent],
   templateUrl: './add-members-dialog.component.html',
   styleUrl: './add-members-dialog.component.scss'
 })
