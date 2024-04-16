@@ -1,11 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { FilePickerComponent } from '../file-picker/file-picker.component';
 import { Channel, ChannelService } from '../services/channel.service';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { first, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { CloseComponent } from '../svgs/close/close.component';
 
@@ -22,6 +22,7 @@ export class EditChannelDialogComponent {
   currentChannel: Channel;
   updatedChannel!: Channel;
   imgSelected: File | undefined;
+  url: string = '';
 
   constructor(
     public mainService: MainService,
@@ -30,8 +31,6 @@ export class EditChannelDialogComponent {
     private http: HttpClient,
   ) {
     this.currentChannel = channelService.currentChannel;
-    console.log(this.currentChannel);
-
     this.updatedChannel = {
       id: this.currentChannel.id,
       name: this.currentChannel.name,
@@ -42,14 +41,13 @@ export class EditChannelDialogComponent {
       hash: this.currentChannel.hash,
       picture: this.channelService.getImg(this.currentChannel.picture),
     }
+    this.url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/'
   }
-
 
   handleImg(file: File) {
     if (file) {
       this.imgSelected = file;
     }
-
     const reader = new FileReader();
     reader.onload = (event: any) => {
       if (event.target.readyState === FileReader.DONE) {
@@ -60,17 +58,20 @@ export class EditChannelDialogComponent {
     reader.readAsDataURL(file);
   }
 
-
-  leaveChannel() {
-    this.updatedChannel = this.currentChannel;
+  async leaveChannel() {
     const index = this.updatedChannel.members.findIndex(obj => obj === this.authService.currentUser.id)
     this.updatedChannel.members.splice(index, 1);
-    this.putChannel();
-    this.mainService.closePopups();
+
+    const formData = new FormData();
+    this.updatedChannel.members.forEach(memberId => {
+      formData.append('members', memberId.toString());
+    });
+    await firstValueFrom(this.http.patch<Channel>(this.url, formData));
+    localStorage.removeItem('currentChannel');
+    location.reload();
   }
 
-  async putChannel() {
-    const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
+  async patchChannel() {
     const formData = new FormData();
     if (this.imgSelected)
       formData.append('picture', this.imgSelected);
@@ -78,10 +79,10 @@ export class EditChannelDialogComponent {
       formData.append('name', this.updatedChannel.name);
     if (this.updatedChannel.description)
       formData.append('description', this.updatedChannel.description);
-    const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
+    const response = await firstValueFrom(this.http.patch<Channel>(this.url, formData));
     localStorage.setItem('currentChannel', JSON.stringify(response));
 
-    location.reload(); // alternative zu den 5 zeilen
+    location.reload(); // alternative zu den 7 zeilen
 
     // this.pushToLocalArray(response);
     // if (this.channelService.currentChannel.id === response.id) {

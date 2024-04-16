@@ -13,11 +13,10 @@
     position: relative;
     overflow-y: scroll;
     padding: 5px 5px 25px 0;
+}
 
-    .no-msg-to-display {
-        position: absolute;
-        bottom: 50%;
-    }
+.no-msg-to-display {
+    margin: auto;
 }
 
 app-grouped-messages {
