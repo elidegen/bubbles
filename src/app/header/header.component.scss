@@ -19,6 +19,7 @@
     app-side-menu-button {
         @include center();
     }
+
     @include center();
     @extend .hover;
     min-width: 40px; // avoids twitch of search bar
@@ -27,26 +28,6 @@
 .chat-name {
     @extend .hover;
     height: 40px;
-}
-
-.popup-menu {
-    background-color: var(--color2);
-    @extend .border-radius;
-    padding: 0 5px;
-    position: absolute;
-    right: 25px;
-    top: 45px;
-    box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.4);
-    z-index: 99;
-    @include d-flex($fd: column, $ai: center, $g: 5px);
-    overflow: hidden;
-
-    .option {
-        padding: 10px;
-        background-color: var(--color2);
-        border-radius: 10px;
-        @extend .hover;
-    }
 }
 
 .menu-open {
@@ -80,7 +61,7 @@
 .theme-picker {
     height: 40px;
     overflow: hidden;
-    padding: 0;
+    padding: 0 !important;
     @include d-flex();
 }
 
@@ -142,24 +123,24 @@ input[type="radio"]#green {
 
 @keyframes slide-in {
     0% {
-        opacity: 0;
         width: 0;
     }
 
     100% {
-        opacity: 1;
         width: 190px;
     }
 }
 
 @keyframes slide-out {
     0% {
-        opacity: 1;
         width: 190px;
     }
 
     100% {
-        opacity: 0;
         width: 0;
     }
+}
+
+.invisible {
+    opacity: 0;
 }

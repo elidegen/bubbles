@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { AuthService } from '../services/auth.service';
@@ -18,6 +18,7 @@ export class HeaderComponent {
   openMenu: boolean = false;
   showThemes: boolean = false;
   selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
+  @ViewChild('picker') picker!: ElementRef;
 
   constructor(
     public mainService: MainService,
@@ -39,5 +40,10 @@ export class HeaderComponent {
 
   saveTheme() {
     localStorage.setItem('selectedTheme', this.selectedTheme);
+  }
+
+  showThemesPicker() {
+    this.showThemes = !this.showThemes;    
+    this.picker.nativeElement.classList.remove('invisible');
   }
 }

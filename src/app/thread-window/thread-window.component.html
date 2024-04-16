@@ -1,11 +1,16 @@
 <div class="card chat-wrapper">
     <div class="header">
         <p>Thread</p>
-        <img class="img-button" src="assets/img/close_icon.svg" alt="">
+        <img class="img-button" (click)="closeThread()" src="assets/img/close_icon.svg" alt="">
     </div>
     <div class="chat-messages-wrapper" #chatWrapper>
         @if (threadToDisplay){
-        <div>{{threadMessage}}</div>
+        <div class="thread-message">
+            <div *ngIf="getImg(threadToDisplay.attachment)"  class="attachment-wrapper">
+                <img src="{{getImg(threadToDisplay.attachment)}}" alt="">
+            </div>
+            <p>{{this.threadToDisplay.content}}</p>
+        </div>
         @for (groupedMessages of messageService.groupMsgByAuthor(threadToDisplay.id, true); track $index) {
         @if (channelService.isSeperator(groupedMessages)) {
         <div class="seperator">{{channelService.createSeperator(groupedMessages)}}</div>

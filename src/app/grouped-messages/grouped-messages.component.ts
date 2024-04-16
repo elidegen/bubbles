@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Message } from '../services/message.service';
 import { MessageComponent } from '../message/message.component';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-import { last } from 'rxjs';
 
 @Component({
   selector: 'app-grouped-messages',
@@ -13,13 +12,17 @@ import { last } from 'rxjs';
   templateUrl: './grouped-messages.component.html',
   styleUrl: './grouped-messages.component.scss'
 })
-export class GroupedMessagesComponent {
+export class GroupedMessagesComponent implements OnInit {
   @Input() groupedMessages!: Message[];
 
   constructor(
     private authService: AuthService,
     public userService: UserService
   ) { }
+
+  ngOnInit(): void {
+    console.log('groupedmsg', this.groupedMessages);
+  }
 
   myMessage(message: Message) {
     return message.author === this.authService.currentUser.id;

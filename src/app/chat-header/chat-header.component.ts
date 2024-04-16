@@ -90,10 +90,6 @@ export class ChatHeaderComponent implements OnInit {
     }
   }
 
-  closeThread() {
-    this.messageService.threadOpen = false;
-  }
-
   isOnline() {
     return this.userService.isOnline(this.currentChat as Channel);
   }

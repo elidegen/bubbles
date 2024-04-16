@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -95,7 +95,8 @@ export class MessageService {
         groupedArray.push(seperatedArray[i]);
       }
     }
-    groupedArray.push(currentGroup);
+    if(currentGroup.length > 0)    
+      groupedArray.push(currentGroup);
     return groupedArray;
   }
 
@@ -121,12 +122,6 @@ export class MessageService {
       date1.getFullYear() === date2.getFullYear()
     )
   }
-
-  // sortChannel(channelId: number) {
-  //   const filteredArray = this.filterByChannel(channelId);
-  //   const sortedArray = filteredArray.sort((a, b) => a.created_at - b.created_at);
-  //   return sortedArray;
-  // }
 
   filterByChannel(channelId: number, isThread: boolean) {
     if (isThread) {

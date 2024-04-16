@@ -11,7 +11,7 @@
     </div>
 
     <div class="right-side">
-        <div class="theme-picker card" [ngClass]="{'slide-in': showThemes, 'slide-out': !showThemes}">
+        <div class="theme-picker card invisible" #picker [ngClass]="{'slide-in': showThemes, 'slide-out': !showThemes}">
             <fieldset>
                 <label for="purple"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="purple" value="purple"
                         (ngModelChange)="saveTheme()"></label>
@@ -27,7 +27,7 @@
             </fieldset>
         </div>
 
-        <div class="header-button card" (click)="showThemes = !showThemes">
+        <div class="header-button card" (click)="showThemesPicker()">
             <app-color-picker></app-color-picker>
         </div>
 
