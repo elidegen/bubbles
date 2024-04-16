@@ -9,11 +9,19 @@ import { Subject } from 'rxjs';
 import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.component';
 import { ChannelService } from '../services/channel.service';
 import { MainService } from '../services/main.service';
+import { AddReactionComponent } from '../svgs/add-reaction/add-reaction.component';
+import { DeleteComponent } from '../svgs/delete/delete.component';
+import { EditDocumentComponent } from '../svgs/edit-document/edit-document.component';
+import { HeartComponent } from '../svgs/heart/heart.component';
+import { LikeComponent } from '../svgs/like/like.component';
+import { RocketComponent } from '../svgs/rocket/rocket.component';
 
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent],
+  imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent, 
+    // reaction components:
+    AddReactionComponent, DeleteComponent, EditDocumentComponent, HeartComponent, LikeComponent, RocketComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
