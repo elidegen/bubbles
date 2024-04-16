@@ -20,6 +20,7 @@ export interface MessageContent {
 export class MessageBarComponent {
   @Output() messageContent = new EventEmitter<MessageContent>();
   @Input() disabled!: boolean;
+  @Input() enableFilePicker: boolean = true;
   @ViewChild('picker') picker!: ElementRef;
   @ViewChild('myInput') myInput!: ElementRef;
   inputContent: string = '';

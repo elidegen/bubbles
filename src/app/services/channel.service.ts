@@ -40,6 +40,7 @@ export interface ChatsAndPreview {
 })
 export class ChannelService {
   @Output() scrollToBottom = new EventEmitter<any>();
+  @Output() renderGroupMember = new EventEmitter<any>();
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
     preview_messages: [],
@@ -49,6 +50,8 @@ export class ChannelService {
   currentChannel!: Channel;
   chatPreviews: Message[] = [];
   chats: Channel[] = [];
+  // groupMemberPreview: string[] = [];
+  // groupMemberCount: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -103,6 +106,7 @@ export class ChannelService {
     this.messageService.threadOpen = false;
     setTimeout(() => {
       this.scrollToBottom.emit();
+      this.renderGroupMember.emit();
     }, 100);
   }
 
@@ -177,4 +181,20 @@ export class ChannelService {
       return 'assets/img/profile_placeholder.svg';
     }
   }
+
+  // renderGroupMemberPreview() {
+  //   this.groupMemberPreview = [];
+  //   this.groupMemberCount = 0;
+  //   if ('is_channel' in this.currentChannel && this.currentChannel.is_channel === true) {
+  //     this.currentChannel.members.forEach((memberId) => {
+  //       const userImg = this.userService.getUser(memberId).picture;
+
+  //       if (this.groupMemberPreview.length < 3) {
+  //         this.groupMemberPreview.push(this.getImg(userImg));
+  //       } else {
+  //         this.groupMemberCount++;
+  //       }
+  //     })
+  //   }
+  // }
 }

@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, HostListener, Input, OnInit, ViewChild, viewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -39,7 +39,6 @@ export class ChatWindowComponent implements OnInit {
 
   ngOnInit(): void {
     this.channelService.scrollToBottom.subscribe(() => {
-      // getScrollPosition();
       this.scrollToBottom();
     })
   }

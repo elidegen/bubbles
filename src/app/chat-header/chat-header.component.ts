@@ -27,6 +27,9 @@ export class ChatHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.renderGroupMember();
+    this.channelService.renderGroupMember.subscribe(()=>{
+      this.renderGroupMember();
+    })
   }
 
   addMemberDialog() {
@@ -78,6 +81,9 @@ export class ChatHeaderComponent implements OnInit {
   getPicture() {
     if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
       return this.channelService.getImg(this.currentChat.picture);
+    } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
+      const interloc = this.userService.getInterlocutor(this.currentChat);
+      return this.channelService.getImg(interloc.picture);
     } else {
       return 'assets/img/profile_placeholder.svg'
     }

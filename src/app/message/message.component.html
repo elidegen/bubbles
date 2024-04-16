@@ -7,7 +7,7 @@
             </div>
         }
         @if (editState) {
-        <app-message-bar (messageContent)="editMessage($event)" [disabled]="false"></app-message-bar>
+        <app-message-bar (messageContent)="editMessage($event)" [enableFilePicker]="false" [disabled]="false"></app-message-bar>
         } @else {
         <p>{{message!.content}}</p>
         }

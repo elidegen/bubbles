@@ -2,7 +2,7 @@
     <div class="msg-input">
         <input type="text" [disabled]="disabled" #myInput (keydown.enter)="sendMsg()" [(ngModel)]="inputContent"
             placeholder="Type a message...">
-
+        @if (enableFilePicker) {
         @if(selectedFile){
         <div class="file-picker-wrapper attachment" (click)="removeAttachment()">
             <img src="assets/img/attachment_icon_white.svg">
@@ -15,6 +15,7 @@
                 <img class="img-button" src="assets/img/attachment_icon.svg">
             </label>
         </div>
+        }
         }
         <img class="img-button" (click)="openEmojiPicker()" src="assets/img/smile_icon.svg">
     </div>
