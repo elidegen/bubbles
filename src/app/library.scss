@@ -143,8 +143,11 @@ $card-padding: 15px;
 
 .img-button {
     border-radius: 50%;
+    width: 30px;
+    height: 30px;
     padding: 3px;
     background-color: var(--color2);
+    @include center();
     @extend .hover;
 }
 
