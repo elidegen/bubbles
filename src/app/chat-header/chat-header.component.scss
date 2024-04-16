@@ -61,4 +61,7 @@
 .close-thread {
     @include d-flex();
     @extend .img-button;
+    app-close {
+        @include center();
+    }
 }

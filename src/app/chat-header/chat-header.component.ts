@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
 import { environment } from '../../environments/environment.development';
+import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
   selector: 'app-chat-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CloseComponent],
   templateUrl: './chat-header.component.html',
   styleUrl: './chat-header.component.scss'
 })
