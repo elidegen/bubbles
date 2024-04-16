@@ -211,3 +211,16 @@ img {
     border-radius: 50%;
     object-fit: cover;
 }
+
+app-edit-document,
+app-reaction,
+app-delete,
+app-heart,
+app-like,
+app-rocket,
+app-color-picker, 
+app-reply {
+
+    @include center();
+
+}

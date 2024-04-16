@@ -41,7 +41,7 @@
 
         @if (sourceIsChannel()) {
         <div class="quick-thread" [class.show-quick-thread]="thread()" (click)="messageService.openThread(message.id)">
-            <img class="quick-thread-img" src="assets/img/reply_icon.svg">
+            <app-reply class="quick-thread-img"></app-reply>
         </div>
         }
     </div>

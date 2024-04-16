@@ -81,20 +81,21 @@
     }
 }
 
-.attachment{
+.attachment {
     background-color: var(--color4) !important;
     cursor: pointer;
     transition: 225ms ease;
     padding: 5px;
 
-    img{
+    img {
         background-color: unset !important;
-        &:hover{
-            filter: brightness(1) !important;            
-        }        
+
+        &:hover {
+            filter: brightness(1) !important;
+        }
     }
 
-    &:hover{
+    &:hover {
         background-color: var(--color3) !important;
         filter: brightness(1) !important;
     }

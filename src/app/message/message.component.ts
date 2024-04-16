@@ -15,13 +15,14 @@ import { EditDocumentComponent } from '../svgs/edit-document/edit-document.compo
 import { HeartComponent } from '../svgs/heart/heart.component';
 import { LikeComponent } from '../svgs/like/like.component';
 import { RocketComponent } from '../svgs/rocket/rocket.component';
+import { ReplyComponent } from '../svgs/reply/reply.component';
 
 @Component({
   selector: 'app-message',
   standalone: true,
   imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent, 
     // reaction components:
-    AddReactionComponent, DeleteComponent, EditDocumentComponent, HeartComponent, LikeComponent, RocketComponent],
+    AddReactionComponent, DeleteComponent, EditDocumentComponent, HeartComponent, LikeComponent, RocketComponent, ReplyComponent],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
