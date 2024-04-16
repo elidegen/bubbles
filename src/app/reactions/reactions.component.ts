@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-reactions',
@@ -11,6 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ReactionsComponent implements OnInit {
   private addedReactionSubscription!: Subscription;
+  @Output() addQuickReaction = new EventEmitter<string>();
   @Input() addedReaction!: Observable<void>;
   @Input() msgReactions!: any[];
   @Input() myMessage!: boolean;
@@ -24,6 +26,7 @@ export class ReactionsComponent implements OnInit {
 
   constructor(
     public userService: UserService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -44,13 +47,22 @@ export class ReactionsComponent implements OnInit {
         });
       }
     })
-    this.sortReactions();
+    this.allReactions.sort((a, b) => a.reaction - b.reaction);
   }
 
-  sortReactions() {
-    this.allReactions.sort((a, b) => a.count - b.count);
-    this.reactionsPreview = this.allReactions.slice(0, 3);
+  sortReactions() { //not in use
+    this.allReactions.sort((a, b) => a.reaction - b.reaction);
+    // this.reactionsPreview = this.allReactions.slice(0, 3);
 
-    this.msgReactions.sort((a, b) => a.user - b.user);
+    // this.msgReactions.sort((a, b) => a.user - b.user);
+  }
+
+  quickReaction(reaction: string) {
+    this.addQuickReaction.next(reaction)
+  }
+
+  myReaction(reaction: string) {
+    // debugger;
+   return this.msgReactions.some(obj => obj.emoji === reaction && obj.user === this.authService.currentUser.id);
   }
 }

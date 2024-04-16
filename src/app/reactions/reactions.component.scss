@@ -1,43 +1,29 @@
 @import '../library.scss';
 
 .reactions-wrapper {
-    @include d-flex($fd: row-reverse);
-    @extend .hover;
-    position: absolute;
-    bottom: -10px;
-    left: 5px;
-    background-color: rgb(226, 226, 226);
-    padding: 2px 5px;
-    border-radius: 15px;
-    z-index: 44;
+    @include d-flex($jc: flex-start, $g: 5px);
+    flex-wrap: wrap;
+    width: 100%;
 
     .reaction-preview {
-        @include d-flex();
+        @include d-flex($g: 2px);
+        @extend .hover;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 12px;
+        padding: 2px 5px;
+
+        &:hover{
+            transform: rotate(5deg);
+        }
     }
 
     p {
+        // color: var(--color6) !important;
         color: black !important;
     }
 }
 
-.reactions-detail {
-    @include d-flex($jc: flex-start, $fd: column, $g: 5px);
-    padding: 5px;
-    max-height: 100px !important;
-    overflow-y: scroll;
-
-    .reaction-detail {
-        @include d-flex($jc: flex-start, $g: 5px);
-        width: 100%;
-    }
-}
-
-.reactions-detail::-webkit-scrollbar {
-    display: none;
-}
-
-.my-msg {
-    flex-direction: row;
-    left: unset;
-    right: 5px;
+.my-reaction {
+    background-color: lightgrey !important;
 }

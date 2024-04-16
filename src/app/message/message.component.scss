@@ -1,13 +1,13 @@
 @import '../library.scss';
 
 .msg {
-    @include d-flex($fd: column, $ai:flex-start, $g: 5px);
+    @include d-flex($fd: column, $ai: flex-start, $g: 5px);
     margin: 2px 0;
     width: 100%;
     padding-left: 0;
     padding-right: 35px;
 
-    .card {
+    .message {
         background-color: var(--color1);
         width: fit-content;
         position: relative;
@@ -52,14 +52,14 @@
         }
     }
 
-    // .card:hover::after {
+    // .message:hover::after {
     //     content: '';
     //     position: absolute;
     //     inset: -10px;
     //     right: -35px;
     // }
 
-    // .card:hover .reaction::after {
+    // .message:hover .reaction::after {
     //     z-index: -1;
     //     content: '';
     //     position: absolute;
@@ -74,7 +74,7 @@
     padding-left: 35px;
     padding-right: 0;
 
-    .card {
+    .message {
         background-color: var(--color3);
         width: fit-content;
 
@@ -107,7 +107,7 @@
         left: -35px;
     }
 
-    // .card:hover::after {
+    // .message:hover::after {
     //     inset: -10px;
     //     left: -35px;
     // }
@@ -136,21 +136,30 @@
     right: -35px;
 }
 
-.attachment-wrapper{
+.attachment-wrapper {
     @include d-flex();
-    margin: -10px -10px 15px -10px;
-    // max-width: 50%;
 
-    img{
+    img {
         max-width: 100%;
         @extend .border-radius
     }
 }
 
-.margin-bottom{
+.margin-bottom {
     margin-bottom: 7px;
 }
 
-.message{
+.message {
     @include d-flex($fd: column, $ai: flex-end);
+    padding: 5px;
+    @extend .border-radius;
+
+    p {
+        padding: 5px;
+        // border: 1px solid black;
+    }
+}
+
+app-reactions {
+    width: 100%;
 }

@@ -1,22 +1,8 @@
-<div class="reactions-wrapper" [class.my-msg]="myMessage" (click)="expandReaction = !expandReaction">
-    @if (expandReaction) {
-        <div class="reactions-detail">
-            @for (reaction of msgReactions; track $index) {
-                <div class="reaction-detail">
-                    <p>{{reaction.emoji}}</p>
-                    <p>{{userService.getUser(reaction.user).username}}</p>
-                </div>
-            }
+<div class="reactions-wrapper">
+    @for (reaction of allReactions; track $index) {
+        <div class="reaction-preview" [class.my-reaction]="myReaction(reaction.reaction)" (click)="quickReaction(reaction.reaction)">
+            <p>{{reaction.reaction}}</p>
+            <p>{{reaction.count}}</p>
         </div>
-    } @else {
-    @for (reaction of reactionsPreview; track $index) {
-    <div class="reaction-preview">
-        <p>{{reaction.reaction}}</p>
-        <!-- <p>{{reaction.count}}</p> -->
-    </div>
-    }
-    @if (allReactions.length > 3) {
-    <p style="margin: 0 5px;">+{{allReactions.length-3}}</p>
-    }
-    }
+        }
 </div>

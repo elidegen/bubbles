@@ -1,6 +1,6 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
-    <div class="card message" [class.margin-bottom]="message.reactions.length > 0">
+    <div class="message" [class.margin-bottom]="message.reactions.length > 0">
         @if (message.attachment) {
             <div class="attachment-wrapper">
                 <img src="{{getImage()}}" alt="">
@@ -12,7 +12,7 @@
         <p>{{message!.content}}</p>
         }
         @if (message.reactions.length > 0) {
-        <app-reactions [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions"
+        <app-reactions (addQuickReaction)="addReaction($event)" [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions"
             [myMessage]="myMessage"></app-reactions>
         }
 

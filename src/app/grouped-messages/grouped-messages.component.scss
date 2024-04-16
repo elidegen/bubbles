@@ -20,6 +20,8 @@
 .img-wrapper {
     @include d-flex($fd: column, $g: 2px);
     min-height: 100%;
+    position: sticky;
+    bottom: 0;
 
     img {
         height: 40px;
