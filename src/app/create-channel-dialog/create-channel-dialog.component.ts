@@ -10,11 +10,12 @@ import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SearchComponent } from '../search/search.component';
 import { AuthService } from '../services/auth.service';
+import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
   selector: 'app-create-channel-dialog',
   standalone: true,
-  imports: [NgSwitchCase, CommonModule, FormsModule, FilePickerComponent, SearchComponent],
+  imports: [NgSwitchCase, CommonModule, FormsModule, FilePickerComponent, SearchComponent, CloseComponent],
   templateUrl: './create-channel-dialog.component.html',
   styleUrl: './create-channel-dialog.component.scss'
 })

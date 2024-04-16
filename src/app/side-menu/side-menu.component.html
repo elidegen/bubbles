@@ -3,7 +3,7 @@
     <div class="card">
         <div class="section-header">
             <p>Messages</p>
-            <img class="img-button" (click)="openNewMessage()" src="assets/img/plus_icon.svg">
+            <app-plus class="img-button" (click)="openNewMessage()"></app-plus>
         </div>
         @if (channelService.directMessages.length > 0) {
         <div class="channel-preview-wrapper">
@@ -19,7 +19,7 @@
     <div class="card">
         <div class="section-header">
             <p>Channels</p>
-            <img class="img-button" (click)="newChannelDialog()" src="assets/img/plus_icon.svg">
+            <app-plus class="img-button" (click)="newChannelDialog()"></app-plus>
         </div>
         @if (channelService.channels.length > 0) {
         <div class="channel-preview-wrapper">

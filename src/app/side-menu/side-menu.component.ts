@@ -4,11 +4,12 @@ import { ChannelService } from '../services/channel.service';
 import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
+import { PlusComponent } from '../svgs/plus/plus.component';
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [ChannelPreviewComponent,],
+  imports: [ChannelPreviewComponent, PlusComponent],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss'
 })
