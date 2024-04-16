@@ -1,0 +1,31 @@
+:root:has(#purple:checked) {
+    --color1: #4d426d;
+    --color2: #5c4f82;
+    --color3: #efa985;
+    --color4: #3cc6b7;
+    --color5: #FFFFFF;
+}
+
+:root:has(#dark:checked) {
+    --color1: #173157;
+    --color2: #224780;
+    --color3: #bd3c5d;
+    --color4: #52c2d8;
+    --color5: #FFFFFF;
+}
+
+:root:has(#pink:checked) {
+    --color1: #490033;
+    --color2: #750052;
+    --color3: #f79c3a;
+    --color4: #3af79c;
+    --color5: #FFFFFF;
+}
+
+:root:has(#orange:checked) {
+    --color1: #4165d3;
+    --color2: #4a7fbc;
+    --color3: #5d8fd1;
+    --color4: #0071fb;
+    --color5: #060606;
+}

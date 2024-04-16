@@ -3,6 +3,9 @@
 // $color3: #efa985;
 // $color4: #3cc6b7;
 // $color5: #FFFFFF;
+@import "./themes.scss";
+
+
 $error-color: rgb(255, 85, 85);
 $valid-color: rgba(112, 171, 148);
 $text-color: var(--color5);
@@ -204,36 +207,4 @@ $card-padding: 15px;
 img {
     border-radius: 50%;
     object-fit: cover;
-}
-
-:root:has(#purple:checked) {
-    --color1: #4d426d;
-    --color2: #5c4f82;
-    --color3: #efa985;
-    --color4: #3cc6b7;
-    --color5: #FFFFFF;
-}
-
-:root:has(#dark:checked) {
-    --color1: #173157;
-    --color2: #224780;
-    --color3: #bd3c5d;
-    --color4: #52c2d8;
-    --color5: #FFFFFF;
-}
-
-:root:has(#pink:checked) {
-    --color1: #490033;
-    --color2: #750052;
-    --color3: #f79c3a;
-    --color4: #3af79c;
-    --color5: #FFFFFF;
-}
-
-:root:has(#orange:checked) {
-    --color1: #FB8C00;
-    --color2: #FFA726;
-    --color3: #fb0d00;
-    --color4: #0071fb;
-    --color5: #FFFFFF;
 }
