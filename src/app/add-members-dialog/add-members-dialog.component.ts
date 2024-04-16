@@ -7,6 +7,7 @@ import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { CloseComponent } from '../svgs/close/close.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-add-members-dialog',
@@ -25,6 +26,7 @@ export class AddMembersDialogComponent {
     public channelService: ChannelService,
     private userService: UserService,
     private http: HttpClient,
+    private authService: AuthService,
   ) {
     this.currentChannel = channelService.currentChannel;
 
@@ -58,14 +60,18 @@ export class AddMembersDialogComponent {
 
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
-    localStorage.setItem('currentChannel', JSON.stringify(response));
 
+    if (!response.members.some(obj => obj === this.authService.currentUser.id)) {
+      localStorage.removeItem('currentChannel');
+    } else {
+      localStorage.setItem('currentChannel', JSON.stringify(response));
+    }
 
-    this.channelService.currentChannel = response;
-    this.mainService.closePopups();
-    setTimeout(() => {
-      this.channelService.renderGroupMember.emit();      
-    }, 100);
-    // location.reload(); //das wäre die alternative die uns 5 zeilen spart.
+    // this.channelService.currentChannel = response;
+    // this.mainService.closePopups();
+    // setTimeout(() => {
+    //   this.channelService.renderGroupMember.emit();
+    // }, 100);
+    location.reload(); //das spart uns die 5 zeilen oben + funktioniert  
   }
 }
