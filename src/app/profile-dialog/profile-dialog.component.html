@@ -7,8 +7,7 @@
     <div class="picture-wrapper">
         <div class="file-picker-wrapper">
             <app-file-picker (newPicture)="uploadImg($event)"></app-file-picker>
-
-            <img src="{{ authService.getImg() }}">
+            <img src="{{ channelService.getImg(authService.currentUser.picture) }}">
         </div>
     </div>
 

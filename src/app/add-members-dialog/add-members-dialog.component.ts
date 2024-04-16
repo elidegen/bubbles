@@ -6,7 +6,6 @@ import { SearchComponent } from '../search/search.component';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { AddMemberComponent } from '../svgs/add-member/add-member.component';
 import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
@@ -60,8 +59,13 @@ export class AddMembersDialogComponent {
     const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
     localStorage.setItem('currentChannel', JSON.stringify(response));
-    // this.channelService.currentChannel = response;
-    // this.mainService.closePopups();
-    location.reload(); //reload der seite OK?
+
+
+    this.channelService.currentChannel = response;
+    this.mainService.closePopups();
+    setTimeout(() => {
+      this.channelService.renderGroupMember.emit();      
+    }, 100);
+    // location.reload(); //das wäre die alternative die uns 5 zeilen spart.
   }
 }

@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { User, UserService } from '../services/user.service';
 import { CloseComponent } from '../svgs/close/close.component';
 import { MailComponent } from '../svgs/mail/mail.component';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-profile-dialog',
@@ -26,6 +27,7 @@ export class ProfileDialogComponent {
     public authService: AuthService,
     private http: HttpClient,
     private userService: UserService,
+    public channelService: ChannelService,
   ) { }
 
   async logout() {
@@ -51,7 +53,9 @@ export class ProfileDialogComponent {
     const response = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
     this.authService.currentUser = response;
     this.authService.setUser(response);
+    // location.reload();
     this.updateUsers(response as User);
+    this.channelService.renderGroupMember.emit();
   }
 
   updateUsers(response: User) {

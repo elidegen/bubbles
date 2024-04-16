@@ -40,6 +40,7 @@ export interface ChatsAndPreview {
 })
 export class ChannelService {
   @Output() scrollToBottom = new EventEmitter<any>();
+  @Output() updateHeader = new EventEmitter<any>();
   @Output() renderGroupMember = new EventEmitter<any>();
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
@@ -50,8 +51,6 @@ export class ChannelService {
   currentChannel!: Channel;
   chatPreviews: Message[] = [];
   chats: Channel[] = [];
-  // groupMemberPreview: string[] = [];
-  // groupMemberCount: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -107,6 +106,7 @@ export class ChannelService {
     setTimeout(() => {
       this.scrollToBottom.emit();
       this.renderGroupMember.emit();
+      this.updateHeader.emit();
     }, 100);
   }
 
@@ -170,7 +170,7 @@ export class ChannelService {
     return formData;
   }
 
-  getImg(imgUrl: string | undefined) {
+  getImg(imgUrl: string | undefined | null) {
     if (imgUrl) {
       if (imgUrl.startsWith('https:')) {
         return imgUrl; //if full link is available just return full link

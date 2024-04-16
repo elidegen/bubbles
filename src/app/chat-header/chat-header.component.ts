@@ -4,7 +4,6 @@ import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
-import { environment } from '../../environments/environment.development';
 import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
@@ -18,19 +17,32 @@ export class ChatHeaderComponent implements OnInit {
   @Input() currentChat!: Channel | Message;
   userImgArray: string[] = [];
   groupMemberCount: number = 0;
+  updateHeader = true;
+  channelPicture: string = 'assets/img/profile_placeholder.svg';
 
   constructor(
     public userService: UserService,
     public messageService: MessageService,
     private mainService: MainService,
     public channelService: ChannelService
-  ) { }
+  ) {
+    this.channelService.updateHeader.subscribe(() => {
+      this.setPicture();
+    })
+  }
 
   ngOnInit(): void {
     this.renderGroupMember();
-    this.channelService.renderGroupMember.subscribe(()=>{
+    this.setPicture();
+    this.channelService.renderGroupMember.subscribe(() => {
       this.renderGroupMember();
     })
+  }
+
+  setPicture(){
+    if('is_channel' in this.currentChat){
+      this.channelPicture = this.channelService.getImg(this.currentChat.picture);      
+    }
   }
 
   addMemberDialog() {

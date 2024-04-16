@@ -18,9 +18,10 @@
         @include d-flex($g: 5px);
         background-color: var(--color1);
         border-radius: 23px;
-        padding: 5px;
+        padding: 5px !important;
 
-        img {
+        img,
+        .img-button {
             height: 25px;
             width: 25px;
         }
@@ -31,6 +32,6 @@
     }
 }
 
-app-search{
+app-search {
     width: 100%;
 }

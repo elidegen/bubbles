@@ -11,11 +11,11 @@
         <div class="selected-user">
             <img src="{{channelService.getImg(user.picture)}}">
             <p>{{user.username}}</p>
-            
-            <app-close [removeMember]="true" class="img-button" (click)="removeMember(user)" ></app-close>
+
+            <app-close [removeMember]="true" class="img-button" (click)="removeMember(user)"></app-close>
         </div>
         } @empty {
-            <p>No users selected</p>
+        <p>No users selected</p>
         }
     </div>
     <div class="button-wrapper">

@@ -78,20 +78,24 @@ export class EditChannelDialogComponent {
       formData.append('name', this.updatedChannel.name);
     if (this.updatedChannel.description)
       formData.append('description', this.updatedChannel.description);
-
     const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
-    console.log('response ', response);
-
     localStorage.setItem('currentChannel', JSON.stringify(response));
-    // this.channelService.getChatsForUser();
-    this.pushToLocalArray(response);
-    this.mainService.closePopups();
+
+    location.reload(); // alternative zu den 5 zeilen
+
+    // this.pushToLocalArray(response);
+    // if (this.channelService.currentChannel.id === response.id) {
+    //   this.channelService.currentChannel === response;
+    // }
+    // setTimeout(() => {
+    //   this.channelService.updateHeader.emit();
+    // }, 1000);
+    // this.mainService.closePopups();
   }
 
   pushToLocalArray(response: Channel) {
     const index = this.channelService.chats.findIndex(obj => obj.id === response.id);
     this.channelService.chats.splice(index, 1, response);
-    console.log('index', index, 'response ', response);
     this.channelService.filterChats();
   }
 }
