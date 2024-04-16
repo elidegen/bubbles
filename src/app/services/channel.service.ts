@@ -182,19 +182,17 @@ export class ChannelService {
     }
   }
 
-  // renderGroupMemberPreview() {
-  //   this.groupMemberPreview = [];
-  //   this.groupMemberCount = 0;
-  //   if ('is_channel' in this.currentChannel && this.currentChannel.is_channel === true) {
-  //     this.currentChannel.members.forEach((memberId) => {
-  //       const userImg = this.userService.getUser(memberId).picture;
+  isSeperator(obj: any) {
+    return obj instanceof Date
+  }
 
-  //       if (this.groupMemberPreview.length < 3) {
-  //         this.groupMemberPreview.push(this.getImg(userImg));
-  //       } else {
-  //         this.groupMemberCount++;
-  //       }
-  //     })
-  //   }
-  // }
+  createSeperator(date: any) {
+    const weekday = date.toLocaleDateString("en-EN", { weekday: 'long' });
+    const dateString = date.toLocaleDateString();
+    return weekday + ' ' + dateString;
+  }
+
+  checkGroupedMsg(messages: any) {
+    return messages as Message[];
+  }
 }

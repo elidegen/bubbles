@@ -22,9 +22,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ChatWindowComponent implements OnInit {
   @Input() channelToDisplay!: Channel | Message;
-  @Input() isThread!: boolean;
+  // @Input() isThread!: boolean;
   @ViewChild('chatWrapper') chatWrapper!: any;
-  threadMessage: string = '';
   messagesToDisplay: Message[] = [];
 
   constructor(
@@ -48,25 +47,7 @@ export class ChatWindowComponent implements OnInit {
   }
 
   getMessagesToDisplay() {
-    if (this.isThread) {
-      this.messagesToDisplay = this.messageService.threads.filter(obj => obj.source === this.channelToDisplay.id);
-    } else {
-      this.messagesToDisplay = this.messageService.currentMessages;
-    }
-  }
-
-  isSeperator(obj: any) {
-    return obj instanceof Date
-  }
-
-  checkGroupedMsg(messages: any) {
-    return messages as Message[];
-  }
-
-  createSeperator(date: any) {
-    const weekday = date.toLocaleDateString("en-EN", { weekday: 'long' });
-    const dateString = date.toLocaleDateString();
-    return weekday + ' ' + dateString;
+    this.messagesToDisplay = this.messageService.currentMessages;
   }
 
   selectUser($event: User[]) {
