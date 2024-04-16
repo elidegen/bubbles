@@ -7,11 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { first, firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { CloseComponent } from '../svgs/close/close.component';
 
 @Component({
   selector: 'app-edit-channel-dialog',
   standalone: true,
-  imports: [FilePickerComponent, FormsModule],
+  imports: [FilePickerComponent, FormsModule, CloseComponent],
   templateUrl: './edit-channel-dialog.component.html',
   styleUrl: './edit-channel-dialog.component.scss'
 })

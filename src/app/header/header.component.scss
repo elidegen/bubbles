@@ -15,7 +15,11 @@
 }
 
 .header-button {
-    @include d-flex();
+
+    app-side-menu-button {
+        @include center();
+    }
+    @include center();
     @extend .hover;
     min-width: 40px; // avoids twitch of search bar
 }

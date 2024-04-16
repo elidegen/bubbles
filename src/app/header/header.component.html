@@ -2,9 +2,9 @@
     <div class="left-side">
         <div class="header-button card" (click)="toggleSideMenu()">
             @if (mainService.sideMenuOpen) {
-            <img src="assets/img/close_side_menu.svg">
+            <app-side-menu-button style="transform:rotate(180deg)"></app-side-menu-button>
             } @else {
-            <img src="assets/img/open_side_menu.svg">
+            <app-side-menu-button></app-side-menu-button>
             }
         </div>
         <app-search [searchType]="'search'"></app-search>

@@ -4,11 +4,12 @@ import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { SideMenuButtonComponent } from '../svgs/side-menu-button/side-menu-button.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, SearchComponent, FormsModule],
+  imports: [CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
