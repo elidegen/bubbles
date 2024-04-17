@@ -61,7 +61,6 @@ export class CreateChannelDialogComponent {
     const url = environment.baseUrl + 'channels/';
     const formData = new FormData();
     formData.append('name', this.newChannel.name);
-
     formData.append('description', this.newChannel.description || '');
     this.newChannel.members.forEach(memberId => {
       formData.append('members', memberId.toString());
@@ -69,11 +68,15 @@ export class CreateChannelDialogComponent {
     formData.append('is_channel', this.newChannel.is_channel.toString());
     formData.append('picture', this.imgSelected || '');
     const response = await firstValueFrom(this.http.post(url, formData)) as Channel;
+    this.updateLocal(response);
+  }
+
+  updateLocal(response: Channel){    
     this.channelService.chats.push(response);
     this.channelService.filterChats();
     this.mainService.closePopups();
+    this.channelService.openChannel(response.id)
   }
-
 
   handleImg(file: File) {
     if (file)

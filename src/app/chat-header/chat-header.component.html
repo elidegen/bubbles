@@ -1,14 +1,11 @@
-@if (currentChat) {
 <div class="header-wrapper">
     <div class="chat-name-wrapper" (click)="openChannelDetails()">
-        @if (!isMessage()) {
         <div class="online-wrapper">
-            <img src="{{channelPicture}}">
+            <img src="{{getPicture()}}">
             @if (!isChannel()) {
             <div [ngClass]="isOnline() ? 'online' : 'offline'"></div>
             }
-        </div>
-        }
+        </div>        
         <p>{{getName()}}</p>
     </div>
 
@@ -28,4 +25,3 @@
         </div>
     </div>
 </div>
-}

@@ -21,8 +21,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './chat-window.component.scss'
 })
 export class ChatWindowComponent implements OnInit {
-  @Input() channelToDisplay!: Channel | Message;
-  // @Input() isThread!: boolean;
+  @Input() channelToDisplay!: Channel;
   @ViewChild('chatWrapper') chatWrapper!: any;
   messagesToDisplay: Message[] = [];
 

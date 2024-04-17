@@ -14,7 +14,7 @@ import { CloseComponent } from '../svgs/close/close.component';
   styleUrl: './chat-header.component.scss'
 })
 export class ChatHeaderComponent implements OnInit {
-  @Input() currentChat!: Channel | Message;
+  @Input() currentChat!: Channel;
   userImgArray: string[] = [];
   groupMemberCount: number = 0;
   updateHeader = true;
@@ -27,22 +27,14 @@ export class ChatHeaderComponent implements OnInit {
     public channelService: ChannelService
   ) {
     this.channelService.updateHeader.subscribe(() => {
-      this.setPicture();
     })
   }
 
   ngOnInit(): void {
     this.renderGroupMember();
-    this.setPicture();
     this.channelService.renderGroupMember.subscribe(() => {
       this.renderGroupMember();
     })
-  }
-
-  setPicture(){
-    if('is_channel' in this.currentChat){
-      this.channelPicture = this.channelService.getImg(this.currentChat.picture);      
-    }
   }
 
   addMemberDialog() {
@@ -72,29 +64,21 @@ export class ChatHeaderComponent implements OnInit {
   }
 
   isChannel() {
-    return 'is_channel' in this.currentChat && this.currentChat.is_channel === true;
-  }
-
-  isMessage() {
-    return 'reactions' in this.currentChat;
+    return this.currentChat.is_channel === true;
   }
 
   getName() {
-    if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
+    if (this.currentChat.is_channel === true) {
       return this.currentChat.name;
-    } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
-      return this.userService.getInterlocutor(this.currentChat)?.username
-    } else if ('reactions' in this.currentChat) {
-      return 'Thread'
     } else {
-      return 'Select a Thread'
-    }
+      return this.userService.getInterlocutor(this.currentChat)?.username
+    } 
   }
 
   getPicture() {
-    if ('is_channel' in this.currentChat && this.currentChat.picture !== null) {
+    if (this.currentChat.picture !== null) {
       return this.channelService.getImg(this.currentChat.picture);
-    } else if ('is_channel' in this.currentChat && this.currentChat.is_channel === false) {
+    } else if (this.currentChat.is_channel === false) {
       const interloc = this.userService.getInterlocutor(this.currentChat);
       return this.channelService.getImg(interloc.picture);
     } else {
