@@ -10,7 +10,7 @@ export interface User {
   id?: number,
   username: string;
   email: string,
-  picture: string,
+  picture: string | null,
   password?: string,
   is_online: boolean,
 }
@@ -23,6 +23,8 @@ export class UserService {
   userUrl: string = environment.baseUrl + 'users/';
   chatMembers: number[] = [];
   users: User[] = [];
+
+  userToShow: User | undefined;
 
   constructor(
     private authService: AuthService,

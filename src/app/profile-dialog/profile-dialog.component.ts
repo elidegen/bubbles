@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,15 +20,27 @@ import { ChannelService } from '../services/channel.service';
   styleUrl: './profile-dialog.component.scss'
 })
 export class ProfileDialogComponent {
+  user:User | undefined;
+  currentUser:boolean = true;
 
   constructor(
     public mainService: MainService,
     private router: Router,
     public authService: AuthService,
     private http: HttpClient,
-    private userService: UserService,
+    public userService: UserService,
     public channelService: ChannelService,
-  ) { }
+  ) {
+    if (this.userService.userToShow == undefined) {
+      this.user = authService.currentUser;
+      this.currentUser = true;
+    } else if (userService.userToShow != undefined) {
+      this.user = userService.userToShow;
+      this.currentUser = false;
+    };
+   }
+  
+
 
   async logout() {
     this.mainService.loader = true;
@@ -61,5 +73,9 @@ export class ProfileDialogComponent {
   updateUsers(response: User) {
     const index = this.userService.users.findIndex(obj => obj.id === response.id);
     this.userService.users.splice(index, 1, response);
+  }
+
+  sendDirectMessage() {
+    alert('Send direct Message -> Muss man noch implementieren')
   }
 }
