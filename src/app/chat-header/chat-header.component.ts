@@ -59,9 +59,9 @@ export class ChatHeaderComponent implements OnInit {
     })
   }
 
-  isChannel() {
-    return this.currentChat.is_channel === true;
-  }
+  // isChannel() {
+  //   return this.currentChat.is_channel === true;
+  // }
 
   getName() {
     if (this.currentChat.is_channel === true) {

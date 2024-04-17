@@ -2,14 +2,14 @@
     <div class="chat-name-wrapper" (click)="openChannelDetails()">
         <div class="online-wrapper">
             <img src="{{getPicture()}}">
-            @if (!isChannel()) {
+            @if (this.currentChat.is_channel === false) {
             <div [ngClass]="isOnline() ? 'online' : 'offline'"></div>
             }
         </div>        
         <p>{{getName()}}</p>
     </div>
 
-    <div class="group-members-wrapper" *ngIf="isChannel()">
+    <div class="group-members-wrapper" *ngIf="this.currentChat.is_channel">
 
         <div class="group-members" (click)="showMemberDialog()">
             <div class="member-pics">
