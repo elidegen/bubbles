@@ -91,8 +91,15 @@ export class ChatHeaderComponent implements OnInit {
     if (this.currentChat.is_channel) {
       this.mainService.editChannelPopup = true;
     } else {
-
+      this.userService.userToShow = this.userService.getInterlocutor(this.currentChat);
+      this.mainService.profilePopup = true;
+      
     }
     
+    
+    
   }
+
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MainService } from '../services/main.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ import { ChannelService } from '../services/channel.service';
   templateUrl: './profile-dialog.component.html',
   styleUrl: './profile-dialog.component.scss'
 })
-export class ProfileDialogComponent {
+export class ProfileDialogComponent implements OnDestroy {
   user:User | undefined;
   currentUser:boolean = true;
 
@@ -75,7 +75,13 @@ export class ProfileDialogComponent {
     this.userService.users.splice(index, 1, response);
   }
 
+  //TODO
   sendDirectMessage() {
     alert('Send direct Message -> Muss man noch implementieren')
   }
+
+  ngOnDestroy(): void {
+      this.userService.userToShow = undefined;
+  }
+  
 }
