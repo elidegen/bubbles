@@ -63,18 +63,8 @@
         inset: -0;
         right: -35px;
         top: -3px;
-        border: 1px solid red;
         z-index: -1;
     }
-
-    // .message:hover .reaction::after {
-    //     content: '';
-    //     position: absolute;
-    //     inset: 0;
-    //     top: 30px;
-    //     bottom: -10px;
-    //     border: 1px solid blue;
-    // }
 }
 
 .my-msg {
@@ -161,7 +151,6 @@
 
     p {
         padding: 5px;
-        // border: 1px solid black;
     }
 }
 

@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { UserService } from './user.service';
 import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
+import { FormsModule } from '@angular/forms';
 
 export class Channel {
   id: number;
@@ -126,16 +127,26 @@ export class ChannelService {
     return this.channels.find(obj => obj.id === channelId) as Channel;
   }
 
-  setUnread(channelId: number) {
+  async setUnread(channelId: number) {
+    const url = environment.baseUrl + 'channels/' + channelId + '/';
     const index = this.chats.findIndex(obj => obj.id === channelId);
     this.chats[index].read_by = [this.authService.currentUser.id];
+    const formData = new FormData();
+    formData.append('read_by', this.authService.currentUser.id.toString());
+    await firstValueFrom(this.http.patch<Channel>(url, formData));
   }
 
-  setRead(channelId: number) {
+  async setRead(channelId: number) {
+    const url = environment.baseUrl + 'channels/' + channelId + '/';
     const index = this.chats.findIndex(obj => obj.id === channelId);
     if (!this.chats[index].read_by.includes(this.authService.currentUser.id)) {
-      this.chats[index].read_by = [this.authService.currentUser.id];
+      this.chats[index].read_by.push(this.authService.currentUser.id);
     }
+    const formData = new FormData();
+    this.chats[index].read_by.forEach((memberId) => {
+      formData.append('read_by', memberId.toString());
+    })
+    await firstValueFrom(this.http.patch<Channel>(url, formData));
   }
 
   sendMsg(messageContent: MessageContent, isThread: boolean) {
