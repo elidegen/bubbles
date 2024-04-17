@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reactions',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reactions.component.html',
   styleUrl: './reactions.component.scss'
 })

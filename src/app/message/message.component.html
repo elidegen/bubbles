@@ -1,6 +1,6 @@
 <div class="msg" [ngClass]="{'my-msg': myMessage}">
 
-    <div class="message" [class.margin-bottom]="message.reactions.length > 0">
+    <div class="message">
         @if (message.attachment) {
             <div class="attachment-wrapper">
                 <img src="{{getImage()}}" alt="">
@@ -9,7 +9,7 @@
         @if (editState) {
         <app-message-bar (messageContent)="editMessage($event)" [enableFilePicker]="false" [disabled]="false"></app-message-bar>
         } @else {
-        <p>{{message!.content}}</p>
+        <p class="message-content">{{message!.content}}</p>
         }
         @if (message.reactions.length > 0) {
         <app-reactions (addQuickReaction)="addReaction($event)" [addedReaction]="addedReaction.asObservable()" [msgReactions]="this.message.reactions"
