@@ -12,17 +12,13 @@ import { UserService } from '../services/user.service';
   templateUrl: './grouped-messages.component.html',
   styleUrl: './grouped-messages.component.scss'
 })
-export class GroupedMessagesComponent implements OnInit {
+export class GroupedMessagesComponent {
   @Input() groupedMessages!: Message[];
 
   constructor(
     private authService: AuthService,
     public userService: UserService
   ) { }
-
-  ngOnInit(): void {
-    console.log('groupedmsg', this.groupedMessages);
-  }
 
   myMessage(message: Message) {
     return message.author === this.authService.currentUser.id;

@@ -74,7 +74,6 @@ export class ChatWindowComponent implements OnInit {
     if (!this.dmAlreadyExist(userId)) {
       this.createDmWithUser(userId);
     } else {
-      console.log('open this chnl', this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id);
       this.channelService.openChannel(this.channelService.directMessages.find(obj => obj.members.includes(userId))!.id);
     }
   }

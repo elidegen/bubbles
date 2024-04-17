@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { CommonModule } from '@angular/common';
 import { Message, MessageService } from '../services/message.service';
@@ -23,6 +23,7 @@ export class ChannelPreviewComponent implements OnInit {
     public messageService: MessageService,
     public userService: UserService,
     public authService: AuthService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.baseUrl = environment.baseUrl;
   }
@@ -31,7 +32,7 @@ export class ChannelPreviewComponent implements OnInit {
     this.latestMsg = this.getLatestMsg();
   }
 
-  getLatestMsg() {
+  getLatestMsg() {      
     return this.channelService.chatPreviews.find(obj => obj.source === this.channel.id) || {
       id: 0,
       author: 0,
@@ -43,16 +44,11 @@ export class ChannelPreviewComponent implements OnInit {
     } as Message
   }
 
-  // isToday(date: Date) {
-  //   let dummy = date;
-  //   return dummy.setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)
-  // }
-
   getPreview() {
     if (this.getLatestMsg().author !== 0) {
-    return this.getAuthor() + ': ' + this.getLatestMsg().content
+      return this.getAuthor() + ': ' + this.getLatestMsg().content;
     } else {
-      return 'Empty conversation'
+      return this.getLatestMsg().content;
     }
   }
 

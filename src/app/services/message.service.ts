@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MainService } from './main.service';
+import { ChannelService } from './channel.service';
 
 export interface Reaction {
   user: number,
@@ -95,7 +96,7 @@ export class MessageService {
         groupedArray.push(seperatedArray[i]);
       }
     }
-    if(currentGroup.length > 0)    
+    if (currentGroup.length > 0)
       groupedArray.push(currentGroup);
     return groupedArray;
   }
@@ -146,16 +147,6 @@ export class MessageService {
     this.threadOpen = true;
   }
 
-  async postMessage(endpoint: string, message: FormData) {
-    const url = environment.baseUrl + endpoint;
-    const response = await firstValueFrom(this.http.post(url, message)) as Message;
-    if (endpoint === 'messages/') {
-      this.currentMessages.push(response);
-    } else {
-      this.threads.push(response);
-    }
-  }
-
   async patchMessage(message: Message) {
     const endpoint = this.currentMessages.some(obj => obj === message) ? 'messages/' : 'threads/';
     const url = environment.baseUrl + endpoint + message.id + '/';
@@ -170,13 +161,12 @@ export class MessageService {
     const url = environment.baseUrl + 'messages/' + message.id + '/';
     const formData = new FormData();
     formData.append('content', message.content);
-    const response = await firstValueFrom(this.http.patch(url, formData));
-    console.log('edited Msg:', response);
+    await firstValueFrom(this.http.patch(url, formData));
   }
 
   async deleteMessage(message: Message) {
     const url = environment.baseUrl + 'messages/' + message.id + '/';
     const response = await firstValueFrom(this.http.delete(url));
-    console.log('edited Msg:', response);
+    console.log('deleted Msg:', response);
   }
 }

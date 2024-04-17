@@ -84,8 +84,6 @@ export class SearchComponent implements OnInit {
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
     }
-    console.log('searchSol', this.searchSolutionUser);
-    console.log('userSel', this.userSelection);
   }
 
   searchIsValid() {

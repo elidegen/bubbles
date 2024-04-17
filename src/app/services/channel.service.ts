@@ -162,11 +162,27 @@ export class ChannelService {
     }
     const formData = this.getMessageForm(newMessage, isThread);
     if (isThread) {
-      this.messageService.postMessage('threads/', formData);
+      this.postMessage('threads/', formData);
     } else {
-      this.messageService.postMessage('messages/', formData);
+      this.postMessage('messages/', formData);
       this.setUnread(this.currentChannel.id);
     }
+  }
+
+  async postMessage(endpoint: string, message: FormData) {
+    const url = environment.baseUrl + endpoint;
+    const response = await firstValueFrom(this.http.post(url, message)) as Message;
+    if (endpoint === 'messages/') {
+      this.messageService.currentMessages.push(response);
+      this.replacePreview(response);
+    } else {
+      this.messageService.threads.push(response);
+    }
+  }
+
+  replacePreview(message: Message) {
+    const index = this.chatPreviews.findIndex(obj => obj.source === message.source);
+    this.chatPreviews[index] = message;
   }
 
   getMessageForm(newMessage: Message, isThread: boolean) {
