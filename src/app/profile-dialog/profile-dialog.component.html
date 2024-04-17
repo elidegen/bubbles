@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="button-wrapper">
-        @if (currentUser) {
+        @if (user === authService.currentUser) {
         <button class="button1" (click)="logout()">Logout</button>
         } @else {
         <button (click)="sendDirectMessage()" class="button1">Send Message</button>

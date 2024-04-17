@@ -21,7 +21,6 @@ import { ChannelService } from '../services/channel.service';
 })
 export class ProfileDialogComponent implements OnDestroy {
   user: User | undefined;
-  currentUser: boolean = true;
 
   constructor(
     public mainService: MainService,
@@ -55,7 +54,11 @@ export class ProfileDialogComponent implements OnDestroy {
     const formdata = new FormData();
     formdata.append('picture', file);
     const response = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
-    this.user	= response;
+    this.updateLocal(response);
+  }
+
+  updateLocal(response: CurrentUser) {
+    this.user = response;
     this.authService.currentUser = response;
     this.authService.setUser(response);
     this.updateUsers(response as User);
