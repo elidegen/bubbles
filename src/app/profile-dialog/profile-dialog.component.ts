@@ -75,6 +75,7 @@ export class ProfileDialogComponent {
     this.userService.users.splice(index, 1, response);
   }
 
+  //TODO
   sendDirectMessage() {
     alert('Send direct Message -> Muss man noch implementieren')
   }
