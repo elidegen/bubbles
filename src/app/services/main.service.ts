@@ -26,12 +26,12 @@ export class MainService {
   selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
   themes: Theme[] = [{
     name: 'purple',
-    color1: '#4d426d',
-    color2: '#5c4f82',
-    color3: '#efa985',
-    color4: '#3cc6b7',
-    color5: '#FFFFFF',
-    color6: '#adadad',
+    color1: '#4d426d', //dunkle hauptfarbe
+    color2: '#5c4f82', //helle hauptfarbe
+    color3: '#efa985', //nachrichten/akzente
+    color4: '#3cc6b7', //buttons links (call to action) -> höherer kontrast
+    color5: '#FFFFFF', //textfarbe
+    color6: '#adadad', //schwarz
   },
   {
     name: 'dark',
@@ -43,6 +43,15 @@ export class MainService {
     color6: '#adadad',
   },
   {
+    name: 'bright',
+    color1: '#c2dee9',
+    color2: '#f2fafe',
+    color3: '#f0d9d2',
+    color4: '#ff4e94',
+    color5: '#060606',
+    color6: '#000000',
+  },
+  {
     name: 'pink',
     color1: '#490033',
     color2: '#750052',
@@ -50,17 +59,7 @@ export class MainService {
     color4: '#3af79c',
     color5: '#FFFFFF',
     color6: '#adadad',
-  },
-  {
-    name: 'orange',
-    color1: '#fdc92d',
-    color2: '#7860cd',
-    color3: '#6e9cd3',
-    color4: '#70cbad',
-    color5: '#060606',
-    color6: '#000000',
   }];
-
   
   constructor() {
     this.getEmojis();

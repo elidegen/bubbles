@@ -36,7 +36,7 @@
 }
 
 input[type="radio"]#purple {
-    --radio-color: #5c4f82;
+    --radio-color: #5c4f82; // die hellere hauptfarbe farbe hier
 }
 
 input[type="radio"]#dark {
@@ -47,8 +47,8 @@ input[type="radio"]#pink {
     --radio-color: #750052;
 }
 
-input[type="radio"]#orange {
-    --radio-color: #FFA726;
+input[type="radio"]#bright {
+    --radio-color: #f2fafe;
 }
 
 input[type="radio"]#green {

@@ -8,7 +8,6 @@ import { AuthService } from './services/auth.service';
 import { ChannelService } from './services/channel.service';
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
