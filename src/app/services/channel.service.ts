@@ -8,6 +8,7 @@ import { User, UserService } from './user.service';
 import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 export class Channel {
   id: number;
@@ -59,6 +60,7 @@ export class ChannelService {
     private http: HttpClient,
     private userService: UserService,
     private mainService: MainService,
+    private router: Router,
   ) {
     this.setCurrentChannel();
   }
@@ -279,5 +281,14 @@ export class ChannelService {
     const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
     await this.getChatsForUser(); //remove
     this.openChannel(response.id);
+  }
+
+  resetData() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentChannel');
+    this.router.navigate(['/login']);
+    this.mainService.loader = false;
+    this.setCurrentChannel();
   }
 }

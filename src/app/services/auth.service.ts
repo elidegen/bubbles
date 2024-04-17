@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, take } from 'rxjs';
+import { take } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MainService } from './main.service';
 import { Router } from '@angular/router';
-import { UpperCasePipe } from '@angular/common';
+import { ChannelService } from './channel.service';
 
 export interface CurrentUser {
   id: number,
@@ -24,13 +24,7 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private http: HttpClient, private mainService: MainService, private router: Router) {
-    this.currentUser = this.getCurrentUser();
-   }
-
   currentUser: CurrentUser;
-
   guestUser: CurrentUser = {
     id: 0,
     username: 'guestuser',
@@ -38,6 +32,14 @@ export class AuthService {
     email: 'guest@mailinator.com',
     is_online: false,
     picture: null
+  }
+
+  constructor(
+    private http: HttpClient, 
+    private mainService: MainService, 
+    private router: Router,
+  ) {
+    this.currentUser = this.getCurrentUser();
   }
 
   isUserLoggedIn() {
@@ -62,8 +64,7 @@ export class AuthService {
     localStorage.setItem('currentUser', userToString);
   }
 
-
- getCurrentUser() {
+  getCurrentUser() {
     const userString = localStorage.getItem('currentUser');
     if (!userString) return false;
     else {
@@ -72,16 +73,14 @@ export class AuthService {
     }
   }
 
-
-  getImg() {    
+  getImg() {
     if (this.currentUser.picture) {
-      return environment.baseUrl.slice(0 , -1) + this.currentUser.picture;
+      return environment.baseUrl.slice(0, -1) + this.currentUser.picture;
     }
     return 'assets/img/profile_placeholder.svg';
   }
 
-
-  logIn(formData: FormData){
+  logIn(formData: FormData) {
     const url = environment.baseUrl + 'login';
     this.http.post<LoginResponse>(url, formData).pipe(take(1)).subscribe(
       {
@@ -90,11 +89,10 @@ export class AuthService {
           if (response && response.token) {
             this.setToken(response.token);
             this.setUser(response.user);
-            this. currentUser = response.user;
+            this.currentUser = response.user;
             this.router.navigate(['/home']);
             this.mainService.loader = false;
           }
-
           this.mainService.messageLog('Welcome ' + response.user.username);
           this.mainService.loader = false;
         },
@@ -102,29 +100,17 @@ export class AuthService {
           this.mainService.errorLog('Login failed..');
           console.log('Login Error:', e);
           this.mainService.loader = false;
-          
         },
       }
     );
   }
 
-
   isGuestUser() {
     if (this.currentUser?.email === this.guestUser.email &&
       this.currentUser?.username === this.guestUser.username) {
-        return true;
-      } else {
-        return false;
-      }
+      return true;
+    } else {
+      return false;
+    }
   }
-
-
-  resetData() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('currentChannel');
-    this.router.navigate(['/login']);
-    this.mainService.loader = false;
-  }
-
 }

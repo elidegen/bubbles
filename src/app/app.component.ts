@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/home']);
       this.channelService.getChatsForUser();
     } else {
-      this.authService.resetData();
+      this.channelService.resetData();
     }
   }
 

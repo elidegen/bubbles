@@ -43,7 +43,7 @@ export class ProfileDialogComponent implements OnDestroy {
       await firstValueFrom(this.http.post(url, token));
     }
 
-    this.authService.resetData();
+    this.channelService.resetData();
     this.router.navigate(['/login']);
     this.mainService.loader = false;
     this.mainService.closePopups();

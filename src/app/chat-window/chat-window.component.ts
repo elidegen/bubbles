@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -20,7 +20,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent {
   @Input() channelToDisplay!: Channel;
   @ViewChild('chatWrapper') chatWrapper!: any;
   messagesToDisplay: Message[] = [];
@@ -33,11 +33,8 @@ export class ChatWindowComponent implements OnInit {
     private http: HttpClient,
   ) {
     this.getMessagesToDisplay();
-  }
-
-  ngOnInit(): void {
     this.channelService.scrollToBottom.subscribe(() => {
-      this.scrollToBottom();
+      // this.scrollToBottom();
     })
   }
 

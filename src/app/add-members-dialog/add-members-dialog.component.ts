@@ -29,7 +29,6 @@ export class AddMembersDialogComponent {
     private authService: AuthService,
   ) {
     this.currentChannel = channelService.currentChannel;
-
     this.prepareChannelMembers();
   }
 

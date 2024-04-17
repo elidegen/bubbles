@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MainService } from '../services/main.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-login',
@@ -17,20 +18,18 @@ export class LoginComponent {
   loginForm: FormGroup
   bubbles: any[] = [];
 
-
   constructor(
     private router: Router,
     private mainService: MainService,
-    private authService: AuthService
+    private authService: AuthService,
+    private channelService: ChannelService,
   ) {
+    mainService.selectedTheme = localStorage.getItem('selectedTheme') || 'purple';
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
-
     this.fillBubbles();
-
-
   }
 
   fillBubbles() {
@@ -47,17 +46,19 @@ export class LoginComponent {
   }
 
   guestLogin() {
+    this.channelService.setCurrentChannel();
     this.mainService.loader = true;
     const formData = new FormData();
     formData.append('username', this.authService.guestUser.username);
-    if(this.authService.guestUser.password){
+    if (this.authService.guestUser.password) {
       formData.append('password', this.authService.guestUser.password);
-    } 
+    }
     this.mainService.loader = true;
     this.authService.logIn(formData);
   }
 
   submit() {
+    this.channelService.setCurrentChannel();
     if (this.loginForm.valid) {
       const formData = new FormData();
       formData.append('username', this.loginForm.get('username')?.value),
@@ -68,7 +69,6 @@ export class LoginComponent {
       this.mainService.errorLog('Please fill the form with valid data!')
     }
   }
-  
 
   //**************FORM CONTROL ******/
   isFormValid() {
@@ -103,7 +103,6 @@ export class LoginComponent {
     }
   }
 
-
   isValidInput(key: string) {
     const field = this.getField(key);
     if (field) {
@@ -112,7 +111,6 @@ export class LoginComponent {
       return false;
     }
   }
-
 
   requiredErrors(key: string) {
     const field = this.getField(key);
@@ -124,7 +122,6 @@ export class LoginComponent {
     }
   }
 
-
   minLengthError(key: string) {
     const field = this.getField(key);
     if (field) {
@@ -133,6 +130,5 @@ export class LoginComponent {
       return false;
     }
   }
-
 
 }

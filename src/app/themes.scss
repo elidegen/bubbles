@@ -1,3 +1,12 @@
+:root {
+    --color1: #4d426d;
+    --color2: #5c4f82;
+    --color3: #efa985;
+    --color4: #3cc6b7;
+    --color5: #FFFFFF;
+    --color6: #adadad;
+}
+
 :root:has(#purple:checked) {
     --color1: #4d426d;
     --color2: #5c4f82;

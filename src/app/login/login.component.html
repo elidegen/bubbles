@@ -5,7 +5,6 @@
     <form class="card" [ngClass]="{'hide': hide}" [formGroup]="loginForm" (submit)="submit()">
         <div class="row"><span class="large-font">LOGIN</span></div>
 
-
         <div class="input-container">
             <input placeholder="username" type="username" formControlName="username"
                 [ngClass]="{'invalid': isInvalid('username'), 'valid': isValidInput('username') }">
@@ -13,8 +12,6 @@
                 <div *ngIf="requiredErrors('username')" class="errors">username is required</div>
             </div>
         </div>
-
-
 
         <div class="input-container">
             <input placeholder="set password" type="password" formControlName="password"
@@ -26,10 +23,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="row small-font">
             <button type="button" (click)="navigateTo('/forgotpassword')" class="button3">forgot password</button>
             <button type="button" (click)="guestLogin()" class="button3">guest login</button>
@@ -37,7 +30,7 @@
         </div>
 
         <div class="row">
-            <button  [ngClass]="{'valid-form-button': isFormValid()}" type="submit" class="button1" >LOG IN</button>
+            <button [ngClass]="{'valid-form-button': isFormValid()}" type="submit" class="button1">LOG IN</button>
         </div>
 
     </form>
