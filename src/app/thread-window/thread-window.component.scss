@@ -4,6 +4,7 @@
     @extend .card;
     background-color: var(--color1);
     text-align: center;
+    word-break: break-all;
 
     .attachment-wrapper {
         margin: -10px -10px 15px -10px;

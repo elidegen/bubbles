@@ -67,8 +67,15 @@ export class EditChannelDialogComponent {
       formData.append('members', memberId.toString());
     });
     await firstValueFrom(this.http.patch<Channel>(this.url, formData));
+    this.removeChannel();
+  }
+
+  removeChannel(){    
     localStorage.removeItem('currentChannel');
-    location.reload();
+    const index = this.channelService.channels.findIndex(obj => obj.id === this.updatedChannel.id);
+    this.channelService.channels.splice(index, 1);
+    this.channelService.setCurrentChannel();
+    this.mainService.closePopups();
   }
 
   async patchChannel() {
@@ -81,17 +88,9 @@ export class EditChannelDialogComponent {
       formData.append('description', this.updatedChannel.description);
     const response = await firstValueFrom(this.http.patch<Channel>(this.url, formData));
     localStorage.setItem('currentChannel', JSON.stringify(response));
-
-    location.reload(); // alternative zu den 7 zeilen
-
-    // this.pushToLocalArray(response);
-    // if (this.channelService.currentChannel.id === response.id) {
-    //   this.channelService.currentChannel === response;
-    // }
-    // setTimeout(() => {
-    //   this.channelService.updateHeader.emit();
-    // }, 1000);
-    // this.mainService.closePopups();
+    await this.channelService.getChatsForUser();
+    this.channelService.openChannel(this.updatedChannel.id);
+    this.mainService.closePopups();
   }
 
   pushToLocalArray(response: Channel) {

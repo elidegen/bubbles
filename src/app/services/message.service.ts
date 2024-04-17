@@ -163,10 +163,4 @@ export class MessageService {
     formData.append('content', message.content);
     await firstValueFrom(this.http.patch(url, formData));
   }
-
-  async deleteMessage(message: Message) {
-    const url = environment.baseUrl + 'messages/' + message.id + '/';
-    const response = await firstValueFrom(this.http.delete(url));
-    console.log('deleted Msg:', response);
-  }
 }

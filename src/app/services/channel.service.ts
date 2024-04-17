@@ -60,12 +60,16 @@ export class ChannelService {
     private userService: UserService,
     private mainService: MainService,
   ) {
+    this.setCurrentChannel();
+  }
+
+  setCurrentChannel() {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
     if (this.currentChannel) {
-      if (!this.currentChannel.members.some(obj => obj === authService.currentUser.id))
+      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id))
         localStorage.removeItem('currentChannel');
-      messageService.getMessagesAndThread(this.currentChannel.id);
+      this.messageService.getMessagesAndThread(this.currentChannel.id);
     } else {
       this.mainService.deactivateLoader();
     }
@@ -167,6 +171,21 @@ export class ChannelService {
       this.postMessage('messages/', formData);
       this.setUnread(this.currentChannel.id);
     }
+  }
+
+  async deleteMessage(message: Message) {
+    let index = null;
+    let url = '';
+    if (this.messageService.currentMessages.some(obj => obj.id === message.id)) {
+      index = this.messageService.currentMessages.findIndex(obj => obj.id === message.id);
+      this.messageService.currentMessages.splice(index, 1);
+      url = environment.baseUrl + 'messages/' + message.id + '/';
+    } else {
+      index = this.messageService.threads.findIndex(obj => obj.id === message.id);
+      this.messageService.threads.splice(index, 1);
+      url = environment.baseUrl + 'threads/' + message.id + '/';
+    }
+    await firstValueFrom(this.http.delete(url));
   }
 
   async postMessage(endpoint: string, message: FormData) {

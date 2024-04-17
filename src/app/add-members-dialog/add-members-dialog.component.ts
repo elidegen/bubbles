@@ -66,12 +66,8 @@ export class AddMembersDialogComponent {
     } else {
       localStorage.setItem('currentChannel', JSON.stringify(response));
     }
-
-    // this.channelService.currentChannel = response;
-    // this.mainService.closePopups();
-    // setTimeout(() => {
-    //   this.channelService.renderGroupMember.emit();
-    // }, 100);
-    location.reload(); //das spart uns die 5 zeilen oben + funktioniert  
+    await this.channelService.getChatsForUser();
+    this.channelService.openChannel(this.currentChannel.id);
+    this.mainService.closePopups();
   }
 }
