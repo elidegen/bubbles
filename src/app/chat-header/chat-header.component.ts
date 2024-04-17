@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
-import { Message, MessageService } from '../services/message.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
@@ -21,20 +20,19 @@ export class ChatHeaderComponent implements OnInit {
   channelPicture: string = 'assets/img/profile_placeholder.svg';
 
   constructor(
-    public userService: UserService,
-    public messageService: MessageService,
+    private userService: UserService,
     private mainService: MainService,
-    public channelService: ChannelService
+    private channelService: ChannelService
   ) {
-    this.channelService.updateHeader.subscribe(() => {
+    this.channelService.renderGroupMember.subscribe(() => {
+      this.renderGroupMember();
     })
   }
 
   ngOnInit(): void {
-    this.renderGroupMember();
-    this.channelService.renderGroupMember.subscribe(() => {
+    if (this.currentChat.is_channel === true) {
       this.renderGroupMember();
-    })
+    }
   }
 
   addMemberDialog() {
@@ -50,17 +48,15 @@ export class ChatHeaderComponent implements OnInit {
   renderGroupMember() {
     this.userImgArray = [];
     this.groupMemberCount = 0;
-    if ('is_channel' in this.currentChat && this.currentChat.is_channel === true) {
-      this.currentChat.members.forEach((memberId) => {
-        const userImg = this.userService.getUser(memberId).picture;
+    this.currentChat.members.forEach((memberId) => {
+      const userImg = this.userService.getUser(memberId).picture;
 
-        if (this.userImgArray.length < 3) {
-          this.userImgArray.push(this.channelService.getImg(userImg));
-        } else {
-          this.groupMemberCount++;
-        }
-      })
-    }
+      if (this.userImgArray.length < 3) {
+        this.userImgArray.push(this.channelService.getImg(userImg));
+      } else {
+        this.groupMemberCount++;
+      }
+    })
   }
 
   isChannel() {
@@ -72,7 +68,7 @@ export class ChatHeaderComponent implements OnInit {
       return this.currentChat.name;
     } else {
       return this.userService.getInterlocutor(this.currentChat)?.username
-    } 
+    }
   }
 
   getPicture() {
