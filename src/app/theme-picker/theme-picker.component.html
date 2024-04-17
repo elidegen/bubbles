@@ -1,15 +1,15 @@
-<div class="theme-picker card invisible" #picker [ngClass]="{'slide-in': mainService.showThemes, 'slide-out': !mainService.showThemes}">
+<div class="theme-picker card" #picker [ngClass]="{'slide-in': mainService.showThemes, 'slide-out': !mainService.showThemes}">
     <fieldset>
-        <label for="purple"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="purple" value="purple"
+        <label for="purple"><input type="radio" [(ngModel)]="mainService.selectedTheme" name="theme" id="purple" value="purple"
                 (ngModelChange)="saveTheme()"></label>
 
-        <label for="dark"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="dark" value="dark"
+        <label for="dark"><input type="radio" [(ngModel)]="mainService.selectedTheme" name="theme" id="dark" value="dark"
                 (ngModelChange)="saveTheme()"></label>
 
-        <label for="pink"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="pink" value="pink"
+        <label for="pink"><input type="radio" [(ngModel)]="mainService.selectedTheme" name="theme" id="pink" value="pink"
                 (ngModelChange)="saveTheme()"></label>
 
-        <label for="orange"><input type="radio" [(ngModel)]="selectedTheme" name="theme" id="orange" value="orange"
+        <label for="orange"><input type="radio" [(ngModel)]="mainService.selectedTheme" name="theme" id="orange" value="orange"
                 (ngModelChange)="saveTheme()"></label>
     </fieldset>
 </div>

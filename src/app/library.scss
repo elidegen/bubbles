@@ -1,24 +1,10 @@
-// $color1: #4d426d;
-// $color2: #5c4f82;
-// $color3: #efa985;
-// $color4: #3cc6b7;
-// $color5: #FFFFFF;
 @import "./themes.scss";
-
 
 $error-color: rgb(255, 85, 85);
 $valid-color: rgba(112, 171, 148);
 $text-color: var(--color5);
 
 $card-padding: 15px;
-
-:root {
-    --color1: #4d426d;
-    --color2: #5c4f82;
-    --color3: #efa985;
-    --color4: #3cc6b7;
-    --color5: #FFFFFF;
-}
 
 @mixin center($display: flex, $jc: center, $ai: center) {
     display: $display;
@@ -221,7 +207,5 @@ app-rocket,
 app-color-picker, 
 app-reply,
 app-add-member {
-
     @include center();
-
 }

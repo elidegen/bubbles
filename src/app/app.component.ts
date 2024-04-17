@@ -6,6 +6,7 @@ import { PopupComponent } from './popup/popup.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AuthService } from './services/auth.service';
 import { ChannelService } from './services/channel.service';
+import { ThemePickerComponent } from './theme-picker/theme-picker.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { ChannelService } from './services/channel.service';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, CommonModule, PopupComponent, LoaderComponent]
+  imports: [RouterOutlet, CommonModule, PopupComponent, LoaderComponent, ThemePickerComponent]
 })
 export class AppComponent implements OnInit {
   constructor(
@@ -22,7 +23,6 @@ export class AppComponent implements OnInit {
     public channelService: ChannelService,
     private router: Router
   ) {
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = this.router.url;
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
         }
       }
     });
-
   }
 
   async handleLogin() {

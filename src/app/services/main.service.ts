@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
+  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
   showThemes: boolean = false;
   showPopup: boolean = false;
   errorMessage: string | undefined;
@@ -89,9 +90,9 @@ export class MainService {
 
   deactivateLoader() {
     this.fetchingDone++;
-    if (this.fetchingDone >= 3){
+    if (this.fetchingDone >= 3) {
       this.loader = false;
       this.fetchingDone = 0;
-    }    
+    }
   }
 }

@@ -12,7 +12,6 @@ import { MainService } from '../services/main.service';
 })
 export class ThemePickerComponent implements AfterViewInit {
   @ViewChild('picker') picker!: ElementRef;
-  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
 
   constructor(
     public mainService: MainService,
@@ -25,6 +24,6 @@ export class ThemePickerComponent implements AfterViewInit {
   }
 
   saveTheme() {
-    localStorage.setItem('selectedTheme', this.selectedTheme);
+    localStorage.setItem('selectedTheme', this.mainService.selectedTheme);
   }
 }
