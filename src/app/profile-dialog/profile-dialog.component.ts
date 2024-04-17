@@ -20,8 +20,8 @@ import { ChannelService } from '../services/channel.service';
   styleUrl: './profile-dialog.component.scss'
 })
 export class ProfileDialogComponent implements OnDestroy {
-  user:User | undefined;
-  currentUser:boolean = true;
+  user: User | undefined;
+  currentUser: boolean = true;
 
   constructor(
     public mainService: MainService,
@@ -38,9 +38,7 @@ export class ProfileDialogComponent implements OnDestroy {
       this.user = userService.userToShow;
       this.currentUser = false;
     };
-   }
-  
-
+  }
 
   async logout() {
     this.mainService.loader = true;
@@ -75,13 +73,13 @@ export class ProfileDialogComponent implements OnDestroy {
     this.userService.users.splice(index, 1, response);
   }
 
-  //TODO
   sendDirectMessage() {
-    alert('Send direct Message -> Muss man noch implementieren')
+    if (this.userService.userToShow)
+      this.channelService.selectDirectMessage(this.userService.userToShow);
+    this.mainService.closePopups();
   }
 
   ngOnDestroy(): void {
-      this.userService.userToShow = undefined;
+    this.userService.userToShow = undefined;
   }
-  
 }

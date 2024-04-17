@@ -16,7 +16,8 @@
         <p>{{ user?.username }}</p>
 
         <div class="online-status">
-            <div [ngClass]="{'online-circle': user?.is_online, 'offline-circle': !user?.is_online }" class="online-circle"></div>
+            <div [ngClass]="{'online-circle': user?.is_online, 'offline-circle': !user?.is_online }"
+                class="online-circle"></div>
             <p *ngIf="user?.is_online">active</p>
             <p *ngIf="!user?.is_online">inactive</p>
         </div>
@@ -37,7 +38,5 @@
         } @else {
         <button (click)="sendDirectMessage()" class="button1">Send Message</button>
         }
-
-
     </div>
 </div>

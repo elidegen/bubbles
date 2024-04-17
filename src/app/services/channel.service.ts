@@ -4,7 +4,7 @@ import { Message, MessageService } from './message.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
-import { UserService } from './user.service';
+import { User, UserService } from './user.service';
 import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
 import { FormsModule } from '@angular/forms';
@@ -201,7 +201,11 @@ export class ChannelService {
 
   replacePreview(message: Message) {
     const index = this.chatPreviews.findIndex(obj => obj.source === message.source);
-    this.chatPreviews[index] = message;
+    if(index == -1){
+      this.chatPreviews.push(message);
+    } else {
+      this.chatPreviews[index] = message;
+    }
   }
 
   getMessageForm(newMessage: Message, isThread: boolean) {
@@ -242,5 +246,38 @@ export class ChannelService {
 
   checkGroupedMsg(messages: any) {
     return messages as Message[];
+  }
+
+  async selectDirectMessage(user: User) {
+    const userId = user.id || 0;
+    if (!this.dmAlreadyExist(userId)) {
+      this.createDmWithUser(userId);
+    } else {
+      this.openChannel(this.directMessages.find(obj => obj.members.includes(userId))!.id);
+    }
+  }
+
+  dmAlreadyExist(userId: number) {
+    return this.directMessages.some(obj => obj.members.includes(userId));
+  }
+
+  async createDmWithUser(userId: number) {
+    let members = [];
+    members.push(userId);
+    members.push(this.authService.currentUser.id);
+    const newChannel: Channel = {
+      id: 0,
+      name: 'DirectMessage',
+      members: members,
+      is_channel: false,
+      read_by: [],
+      hash: '',
+      description: '',
+      picture: undefined,
+    }
+    const url = environment.baseUrl + 'channels/';
+    const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
+    await this.getChatsForUser(); //remove
+    this.openChannel(response.id);
   }
 }
