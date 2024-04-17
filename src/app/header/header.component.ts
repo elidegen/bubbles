@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { SideMenuButtonComponent } from '../svgs/side-menu-button/side-menu-button.component';
 import { ColorPickerComponent } from '../svgs/color-picker/color-picker.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -23,9 +24,11 @@ export class HeaderComponent {
   constructor(
     public mainService: MainService,
     public authService: AuthService,
+    private userService: UserService,
   ) { }
 
   openProfile() {
+    this.userService.userToShow = this.authService.currentUser;
     this.mainService.showPopup = true;
     this.mainService.profilePopup = true;
   }

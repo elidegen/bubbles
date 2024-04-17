@@ -31,13 +31,7 @@ export class ProfileDialogComponent implements OnDestroy {
     public userService: UserService,
     public channelService: ChannelService,
   ) {
-    if (this.userService.userToShow == undefined) {
-      this.user = authService.currentUser;
-      this.currentUser = true;
-    } else if (userService.userToShow != undefined) {
-      this.user = userService.userToShow;
-      this.currentUser = false;
-    };
+    this.user = userService.userToShow;
   }
 
   async logout() {
@@ -61,9 +55,9 @@ export class ProfileDialogComponent implements OnDestroy {
     const formdata = new FormData();
     formdata.append('picture', file);
     const response = await firstValueFrom(this.http.post<CurrentUser>(url, formdata));
+    this.user	= response;
     this.authService.currentUser = response;
     this.authService.setUser(response);
-    // location.reload();
     this.updateUsers(response as User);
     this.channelService.renderGroupMember.emit();
   }
