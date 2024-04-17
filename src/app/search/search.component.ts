@@ -8,6 +8,7 @@ import { Message, MessageService } from '../services/message.service';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+import { MainService } from '../services/main.service';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -51,7 +52,8 @@ export class SearchComponent implements OnInit {
     public userService: UserService,
     public channelService: ChannelService,
     public messageService: MessageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private mainService: MainService,
   ) {
     this.setupClickListener();
     this.currentUserId = this.authService.currentUser.id;
@@ -115,5 +117,11 @@ export class SearchComponent implements OnInit {
 
   alreadySelected(userId: number) {
     return this.userSelection.includes(this.userService.getUser(userId));
+  }
+
+  showUser(user:User){
+    this.userService.userToShow = user;
+    this.mainService.profilePopup = true;
+    this.mainService.showPopup = true;
   }
 }

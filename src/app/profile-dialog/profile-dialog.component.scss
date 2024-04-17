@@ -51,6 +51,11 @@
     margin: 0 3px;
 }
 
+.offline-circle {
+    @extend .online-circle;
+    background-color: $error-color;
+}
+
 .upper {
     @include d-flex($jc: flex-start, $g: 15px);
 
