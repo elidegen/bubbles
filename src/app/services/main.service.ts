@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Theme } from '../theme-picker/theme-picker.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
-  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
   showThemes: boolean = false;
   showPopup: boolean = false;
   errorMessage: string | undefined;
@@ -23,7 +23,45 @@ export class MainService {
   categoryList: Array<any> = [];
   emojiUrl: string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
   categoryUrl: string = 'https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
+  themes: Theme[] = [{
+    name: 'purple',
+    color1: '#4d426d',
+    color2: '#5c4f82',
+    color3: '#efa985',
+    color4: '#3cc6b7',
+    color5: '#FFFFFF',
+    color6: '#adadad',
+  },
+  {
+    name: 'dark',
+    color1: '#173157',
+    color2: '#224780',
+    color3: '#bd3c5d',
+    color4: '#52c2d8',
+    color5: '#FFFFFF',
+    color6: '#adadad',
+  },
+  {
+    name: 'pink',
+    color1: '#490033',
+    color2: '#750052',
+    color3: '#f79c3a',
+    color4: '#3af79c',
+    color5: '#FFFFFF',
+    color6: '#adadad',
+  },
+  {
+    name: 'orange',
+    color1: '#fdc92d',
+    color2: '#7860cd',
+    color3: '#6e9cd3',
+    color4: '#70cbad',
+    color5: '#060606',
+    color6: '#000000',
+  }];
 
+  
   constructor() {
     this.getEmojis();
   }
@@ -94,5 +132,15 @@ export class MainService {
       this.loader = false;
       this.fetchingDone = 0;
     }
+  }
+
+  setTheme() {
+    const currentTheme = this.themes.filter(obj => obj.name === this.selectedTheme);
+    document.documentElement.style.setProperty('--color1', currentTheme[0].color1);
+    document.documentElement.style.setProperty('--color2', currentTheme[0].color2);
+    document.documentElement.style.setProperty('--color3', currentTheme[0].color3);
+    document.documentElement.style.setProperty('--color4', currentTheme[0].color4);
+    document.documentElement.style.setProperty('--color5', currentTheme[0].color5);
+    document.documentElement.style.setProperty('--color6', currentTheme[0].color6);
   }
 }

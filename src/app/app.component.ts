@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     public channelService: ChannelService,
     private router: Router
   ) {
+    mainService.setTheme();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = this.router.url;

@@ -3,6 +3,16 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormsModule } from '@angular/forms';
 import { MainService } from '../services/main.service';
 
+export interface Theme {
+  name: string,
+  color1: string,
+  color2: string,
+  color3: string,
+  color4: string,
+  color5: string,
+  color6: string,
+}
+
 @Component({
   selector: 'app-theme-picker',
   standalone: true,
@@ -12,6 +22,7 @@ import { MainService } from '../services/main.service';
 })
 export class ThemePickerComponent implements AfterViewInit {
   @ViewChild('picker') picker!: ElementRef;
+  
 
   constructor(
     public mainService: MainService,
@@ -19,11 +30,12 @@ export class ThemePickerComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.picker.nativeElement.classList.remove('invisible');      
+      this.picker.nativeElement.classList.remove('invisible');
     }, 500);
   }
 
   saveTheme() {
     localStorage.setItem('selectedTheme', this.mainService.selectedTheme);
+    this.mainService.setTheme();
   }
 }

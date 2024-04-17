@@ -24,7 +24,7 @@ export class LoginComponent {
     private authService: AuthService,
     private channelService: ChannelService,
   ) {
-    mainService.selectedTheme = localStorage.getItem('selectedTheme') || 'purple';
+    this.mainService.setTheme();
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
