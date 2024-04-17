@@ -7,19 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { SideMenuButtonComponent } from '../svgs/side-menu-button/side-menu-button.component';
 import { ColorPickerComponent } from '../svgs/color-picker/color-picker.component';
 import { UserService } from '../services/user.service';
+import { ThemePickerComponent } from '../theme-picker/theme-picker.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent],
+  imports: [ThemePickerComponent, CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   openMenu: boolean = false;
-  showThemes: boolean = false;
-  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
-  @ViewChild('picker') picker!: ElementRef;
 
   constructor(
     public mainService: MainService,
@@ -41,12 +39,7 @@ export class HeaderComponent {
     this.mainService.sideMenuOpen = !this.mainService.sideMenuOpen;
   }
 
-  saveTheme() {
-    localStorage.setItem('selectedTheme', this.selectedTheme);
-  }
-
   showThemesPicker() {
-    this.showThemes = !this.showThemes;    
-    this.picker.nativeElement.classList.remove('invisible');
+    this.mainService.showThemes = !this.mainService.showThemes;
   }
 }

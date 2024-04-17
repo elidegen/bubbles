@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
+  showThemes: boolean = false;
   showPopup: boolean = false;
   errorMessage: string | undefined;
   logMessage: string | undefined;
