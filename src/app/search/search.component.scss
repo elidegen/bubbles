@@ -25,12 +25,18 @@
 @import "../library.scss";
 
 .search-result {
+    max-height: 70vh;
+    overflow-y: scroll;
     width: 400px;
     z-index: 999;
     position: absolute;
     top: 55px;
     border: 1px solid white;
-    @include d-flex($fd: column, $ai: flex-start, $g: 5px);
+    @include d-flex($fd: column, $ai: flex-start, $jc: flex-start, $g: 5px);
+}
+
+.search-result::-webkit-scrollbar{
+    display: none;
 }
 
 .seperator {

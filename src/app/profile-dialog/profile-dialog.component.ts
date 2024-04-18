@@ -30,7 +30,7 @@ export class ProfileDialogComponent implements OnDestroy {
     public userService: UserService,
     public channelService: ChannelService,
   ) {
-    this.user = userService.userToShow;
+    this.user = userService.userToShow;    
   }
 
   async logout() {

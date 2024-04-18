@@ -15,7 +15,6 @@ export interface User {
   is_online: boolean,
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +22,6 @@ export class UserService {
   userUrl: string = environment.baseUrl + 'users/';
   chatMembers: number[] = [];
   users: User[] = [];
-
   userToShow: User | undefined;
 
   constructor(

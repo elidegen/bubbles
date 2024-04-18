@@ -18,10 +18,12 @@
 
         <p class="seperator">Channels</p>
         @for (channel of searchSolution.channels; track $index) {
-        <div class=" preview">
-            <img src="{{channelService.getImg(channel.picture)}}">
-            <p>{{channel.name}}</p>
-        </div>
+            @if (channel.is_channel) {
+                <div class=" preview">
+                    <img src="{{channelService.getImg(channel.picture)}}">
+                    <p>{{channel.name}}</p>
+                </div>
+            }
         }
 
         <p class="seperator">Messages</p>
@@ -29,7 +31,7 @@
         <div class=" message preview">
 
             <div class="online-wrapper">
-                <img src="{{this.userService.getUser(message.author).picture}}">
+                <img src="{{channelService.getImg(this.userService.getUser(message.author).picture)}}">
                 <div [ngClass]="this.userService.getUser(message.author).is_online ? 'online' : 'offline'"></div>
             </div>
 

@@ -225,7 +225,7 @@ export class ChannelService {
   }
 
   getImg(imgUrl: string | undefined | null) {
-    if (imgUrl) {
+    if (imgUrl != null) {
       if (imgUrl.startsWith('https:')) {
         return imgUrl; //if full link is available just return full link
       } else {

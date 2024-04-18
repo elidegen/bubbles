@@ -126,10 +126,13 @@ export class MainService {
   }
 
   deactivateLoader() {
+    console.log('fetchingdone', this.fetchingDone);
+    
     this.fetchingDone++;
     if (this.fetchingDone >= 3) {
       this.loader = false;
       this.fetchingDone = 0;
+      console.log('fetchingdone2', this.fetchingDone);
     }
   }
 

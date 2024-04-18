@@ -82,9 +82,10 @@ export class SearchComponent implements OnInit {
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-
+      console.log('searchSol', this.searchSolution);
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
+      console.log('searchSolUser', this.searchSolutionUser);
     }
   }
 
@@ -100,7 +101,7 @@ export class SearchComponent implements OnInit {
 
     if (this.userSelection.some(obj => obj.id === user.id)) {
       const index = this.userSelection.findIndex(obj => obj.id === user.id);
-      this.userSelection.splice(index, 1);      
+      this.userSelection.splice(index, 1);
     } else {
       this.userSelection.push(user);
     }
@@ -119,7 +120,7 @@ export class SearchComponent implements OnInit {
     return this.userSelection.includes(this.userService.getUser(userId));
   }
 
-  showUser(user:User){
+  showUser(user: User) {
     this.userService.userToShow = user;
     this.mainService.profilePopup = true;
     this.mainService.showPopup = true;
