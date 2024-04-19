@@ -9,6 +9,10 @@
 .main-chat {
     width: 100%;
     min-width: 400px;
+
+    @media(max-width: 430px) {
+        min-width: unset;
+    }
 }
 
 .thread {
@@ -44,6 +48,10 @@
     100% {
         transform: translateX(-110%);
         margin-right: -415px;
+
+        // @media(max-width: 430px) {
+        //     margin-right: calc(-100vw - 30px);
+        // }
     }
 }
 

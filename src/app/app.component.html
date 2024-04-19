@@ -1,4 +1,4 @@
-<router-outlet class="blue-theme" *ngIf="!mainService.loader"></router-outlet>
+<router-outlet *ngIf="!mainService.loader"></router-outlet>
 
 <app-popup-manager *ngIf="mainService.showPopup"></app-popup-manager>
 <app-loader *ngIf="mainService.loader"></app-loader>

@@ -1,6 +1,6 @@
 <div class="header-wrapper">
     <div class="left-side">
-        <div class="header-button card" (click)="toggleSideMenu()">
+        <div class="header-button" (click)="toggleSideMenu()">
             @if (mainService.sideMenuOpen) {
             <app-side-menu-button style="transform:rotate(180deg)"></app-side-menu-button>
             } @else {
@@ -14,12 +14,16 @@
 
         <app-theme-picker></app-theme-picker>
 
-        <div class="header-button card" (click)="showThemesPicker()">
+        <div class="header-button" (click)="showThemesPicker()">
             <app-color-picker></app-color-picker>
         </div>
 
-        <div class="card chat-name" (click)="openProfile()">
-            {{ authService.currentUser.username }}
+        <div class="chat-name" (click)="openProfile()">
+            @if (getScreenWidth()) {
+                <p>{{ authService.currentUser.username }}</p>
+            } @else {
+                <app-profile></app-profile>
+            }
         </div>
     </div>
 </div>

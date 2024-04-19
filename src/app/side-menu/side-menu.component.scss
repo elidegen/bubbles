@@ -18,6 +18,11 @@
             @include d-flex($g: 5px, $fd: column, $ai: unset);
         }
     }
+
+    @media (max-width: 430px) {
+        min-width: unset;
+        width: calc(100vw - 30px) !important;
+    }
 }
 
 .side-menu::-webkit-scrollbar {

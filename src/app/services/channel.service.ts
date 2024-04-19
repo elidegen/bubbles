@@ -115,6 +115,9 @@ export class ChannelService {
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
     this.mainService.threadOpen = false;
+    if(window.innerWidth < 845){
+      this.mainService.sideMenuOpen = false;
+    }
     setTimeout(() => {
       this.scrollToBottom.emit();
       this.renderGroupMember.emit();

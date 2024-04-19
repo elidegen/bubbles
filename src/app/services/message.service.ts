@@ -141,9 +141,11 @@ export class MessageService {
     })
   }
 
-  openThread(threadId: number) {
-    this.currentThread = this.currentMessages.find(obj => obj.id === threadId) as Message;
+  openThread(threadSource: number) {
+    this.currentThread = this.currentMessages.find(obj => obj.id === threadSource) as Message;
     this.mainService.threadOpen = true;
+    if(window.innerWidth < 1260)
+      this.mainService.sideMenuOpen = false;
   }
 
   async patchMessage(message: Message) {

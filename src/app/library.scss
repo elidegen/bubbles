@@ -216,3 +216,7 @@ app-reply,
 app-add-member {
     @include center();
 }
+
+.icon-component-wrapper{
+    @include d-flex();
+}

@@ -42,6 +42,10 @@ export class AppComponent implements OnInit {
     if (event.target.innerWidth < 1260 && this.mainService.threadOpen === true) {
       this.mainService.sideMenuOpen = false;
     }
+    if (event.target.innerWidth < 845) {
+      this.mainService.sideMenuOpen = false;
+      this.mainService.threadOpen = false;
+    }
   }
 
   async handleLogin() {

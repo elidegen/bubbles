@@ -8,11 +8,13 @@ import { SideMenuButtonComponent } from '../svgs/side-menu-button/side-menu-butt
 import { ColorPickerComponent } from '../svgs/color-picker/color-picker.component';
 import { UserService } from '../services/user.service';
 import { ThemePickerComponent } from '../theme-picker/theme-picker.component';
+import { ProfileComponent } from '../svgs/profile/profile.component';
+import { windowWhen } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ThemePickerComponent, CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent],
+  imports: [ThemePickerComponent, CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent, ProfileComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -40,5 +42,9 @@ export class HeaderComponent {
 
   showThemesPicker() {
     this.mainService.showThemes = !this.mainService.showThemes;
+  }
+
+  getScreenWidth(){
+    return window.innerWidth > 500;
   }
 }
