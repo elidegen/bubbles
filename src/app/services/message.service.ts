@@ -62,6 +62,7 @@ export class MessageService {
     this.$messagesAndThread.next(data);
 
     this.subscribeMessagesAndThreads();
+    this.mainService.messageAndThreadFetchingDone = true;
     this.mainService.deactivateLoader();
   }
 

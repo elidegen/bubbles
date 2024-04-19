@@ -33,6 +33,7 @@ export class UserService {
   async getUsers() {
     this.users = await firstValueFrom(this.fetchUsers());
     console.log('users', this.users);
+    this.mainService.userFetchingDone = true;
     this.mainService.deactivateLoader();
   }
 

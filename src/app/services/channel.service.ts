@@ -69,10 +69,12 @@ export class ChannelService {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
     if (this.currentChannel) {
-      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id))
+      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id)){
         localStorage.removeItem('currentChannel');
+      }
       this.messageService.getMessagesAndThread(this.currentChannel.id);
     } else {
+      this.mainService.messageAndThreadFetchingDone = true;
       this.mainService.deactivateLoader();
     }
   }
@@ -82,6 +84,7 @@ export class ChannelService {
       const data = await firstValueFrom(this.fetchChatsAndPreview());
       this.$chatsAndPreview.next(data);
       this.subscribeChatsAndPreview();
+      this.mainService.chatsAndPreviewFetchingDone = true;
       this.mainService.deactivateLoader();
     } catch (error) {
       console.error('Error by fetching Chats:', error);

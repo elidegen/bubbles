@@ -24,8 +24,8 @@
 
     button {
         @extend .button;
-        color: white;
-        background-color: green;
+        color: var(--color5);
+        background-color: var(--color3);
     }
 }
 

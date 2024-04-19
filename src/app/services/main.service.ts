@@ -7,7 +7,7 @@ import { Theme } from '../theme-picker/theme-picker.component';
 export class MainService {
   showThemes: boolean = false;
   showPopup: boolean = false;
-  popupMessage: string | undefined = 'ich bin eine fehlermeldung!!!';
+  popupMessage: string | undefined;
   popupIsError: boolean = true;
   loader: boolean = false;
   addChannelPopup: boolean = false;
@@ -17,6 +17,11 @@ export class MainService {
   editChannelPopup: boolean = false;
   sideMenuOpen: boolean = true;
   showNewMessageSearch: boolean = false;
+
+  userFetchingDone: boolean = false;
+  chatsAndPreviewFetchingDone: boolean = false;
+  messageAndThreadFetchingDone: boolean = false;
+
   fetchingDone: number = 0;
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
@@ -60,9 +65,17 @@ export class MainService {
     color5: '#FFFFFF',
     color6: '#adadad',
   }];
-  
+
   constructor() {
+    this.checkSelectedTheme();
     this.getEmojis();
+  }
+
+  checkSelectedTheme() {
+    if (!this.themes.some(theme => theme.name === this.selectedTheme)) {
+      localStorage.setItem('selectedTheme', 'purple');
+      this.selectedTheme = 'purple';
+    }
   }
 
   /**
@@ -116,12 +129,19 @@ export class MainService {
     }, 3000);
   }
 
-  deactivateLoader() {    
-    this.fetchingDone++;
-    if (this.fetchingDone >= 3) {
+  deactivateLoader() {
+    if (this.userFetchingDone && this.chatsAndPreviewFetchingDone && this.messageAndThreadFetchingDone) {
       this.loader = false;
-      this.fetchingDone = 0;
+      this.userFetchingDone = false;
+      this.chatsAndPreviewFetchingDone = false;
+      this.messageAndThreadFetchingDone = false;      
     }
+    // this.fetchingDone++;
+    // if (this.fetchingDone >= 3) {
+    //   console.log('fetch', this.fetchingDone);
+    //   this.loader = false;
+    //   this.fetchingDone = 0;
+    // }
   }
 
   setTheme() {
