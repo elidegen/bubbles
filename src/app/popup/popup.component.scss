@@ -1,42 +1,42 @@
-@import "../library.scss";
+@import '../library.scss';
 
-#fullscreen {
-    @include position($pos: fixed);
-    background-color: rgba($color: #000000, $alpha: .4);
-    backdrop-filter: blur(5px);
-}
+.popup-wrapper {
+    @extend .card;
+    @include d-flex($fd: column, $g: $card-padding);
+    background-color: var(--color2);
+    // border: 2px solid green;
 
-.popup-content {
-    animation: slide-in 300ms ease-in-out;
-    height: fit-content;
-    @include pos-center();
-    z-index: 10;
-}
+    p {
+        @extend .large-font;
+        //    letter-spacing: px;
+    }
 
-.error-popup {
-    background-color: var(--color1);
-    border: 2px solid red;
-    @include center();
+    span {
+        color: var(--color6);
+    }
 
-    .error {
-        color: red;
+    .icon-wrapper {
+        padding: 10px;
+        border: 2px solid green;
+        border-radius: 50%;
+        @include d-flex();
+    }
+
+    button {
+        @extend .button;
+        color: white;
+        background-color: green;
     }
 }
 
-.message-popup {
-    background-color: var(--color1);
-    border: 2px solid var(--color3);
-    @include center();
-}
+.error {
+    border-color: red;
 
-@keyframes slide-in {
-    0% {
-        transform: translate(-50%, 100%);
-        opacity: 0;
+    .icon-wrapper {
+        border-color: red;
     }
 
-    100% {
-        transform: translate(-50%, -50%);
-        opacity: 1;
+    button {
+        background-color: red;
     }
 }

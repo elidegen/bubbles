@@ -125,4 +125,27 @@ export class SearchComponent implements OnInit {
     this.mainService.profilePopup = true;
     this.mainService.showPopup = true;
   }
+
+  openChannel(id: number) {
+    this.channelService.openChannel(id);
+    this.showResults = false;
+    this.searchValue = '';
+  }
+
+  async getContent(thread: Message) {
+    // const message = await this.messageService.getMessage(thread.source);
+    // console.log('msg', message);
+    
+  //   return message.content;
+  }
+
+  async openThread(thread: Message) {
+    const url = environment.baseUrl + 'messages/' + thread.source + '/';
+    await firstValueFrom(this.http.get<Message>(url)).then((response) => {
+      this.channelService.openChannel(response.source);
+      setTimeout(() => {
+        this.messageService.openThread(thread.source);
+      }, 100);
+    });
+  }
 }

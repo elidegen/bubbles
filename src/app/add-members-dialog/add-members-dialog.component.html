@@ -1,7 +1,8 @@
 <div class="add-members-wrapper card">
     <div class="header">
         <p>Add members</p>
-        <img src="assets/img/close_icon.svg" (click)="mainService.closePopups()">
+        <app-close class="img-button" (click)="mainService.closePopups()"> </app-close>
+        <!-- <img src="assets/img/close_icon.svg" (click)="mainService.closePopups()"> -->
     </div>
     <p>{{currentChannel.name}}</p>
     <app-search [searchType]="'user-search'" [userSelection]="channelMembers"

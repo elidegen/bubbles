@@ -51,6 +51,8 @@
         @extend .img-button;
         @include d-flex;
         padding: 7px;
+        height: 43px;
+        width: 43px;
 
         img {
             height: 30px;

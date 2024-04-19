@@ -57,11 +57,11 @@ export class SignupComponent {
         {
           next: (data) => {
             console.log('success' ,data);
-            this.mainService.messageLog('You have signed up successfully, you can now log in');
+            this.mainService.popupLog('You have signed up successfully, you can now log in');
             this.signUpForm.reset();
           },
           error: e => {
-            this.mainService.errorLog('Something went wrong');
+            this.mainService.popupLog('Something went wrong');
           }
         }
       );

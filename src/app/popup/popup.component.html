@@ -1,25 +1,17 @@
-<div id="fullscreen" (click)="mainService.closePopups()"></div>
-
-
-
-<div class="popup-content">
-
-    <div class="error-popup card" *ngIf="mainService.errorMessage">
-        <span class="error">{{ mainService.errorMessage }}</span>
-    </div>
-
-    <div class="message-popup card" *ngIf="mainService.logMessage">
-        <span class="error">{{ mainService.logMessage }}</span>
-    </div>
-
-    <app-create-channel-dialog *ngIf="mainService.addChannelPopup === true"></app-create-channel-dialog>
-
-    <app-profile-dialog *ngIf="mainService.profilePopup === true"></app-profile-dialog>
-
-    <app-add-members-dialog *ngIf="mainService.addMembersPopup === true"></app-add-members-dialog>
-
-    <app-show-members-dialog *ngIf="mainService.showMembersPopup === true"></app-show-members-dialog>
-
-    <app-edit-channel-dialog *ngIf="mainService.editChannelPopup === true"></app-edit-channel-dialog>
-
+<div class="popup-wrapper" [class.error]="error"> 
+    @if (error) {
+        <div class="icon-wrapper">
+            <img src="assets/img/close_icon_red.svg" alt="">
+        </div>
+        <p>Error</p>
+        <span>{{ mainService.popupMessage }}</span>
+        <button>Continue</button>        
+    } @else {
+        <div class="icon-wrapper">
+            <img src="assets/img/check_icon_green.svg" alt="">
+        </div>
+        <p>Success</p>
+        <span>{{ mainService.popupMessage }}</span>
+        <button>Continue</button>        
+    }
 </div>

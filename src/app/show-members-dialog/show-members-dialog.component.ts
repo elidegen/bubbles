@@ -4,11 +4,12 @@ import { User, UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
 import { CommonModule } from '@angular/common';
 import { CloseComponent } from '../svgs/close/close.component';
+import { AddMemberComponent } from '../svgs/add-member/add-member.component';
 
 @Component({
   selector: 'app-show-members-dialog',
   standalone: true,
-  imports: [CommonModule, CloseComponent],
+  imports: [CommonModule, CloseComponent, AddMemberComponent],
   templateUrl: './show-members-dialog.component.html',
   styleUrl: './show-members-dialog.component.scss'
 })

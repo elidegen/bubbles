@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MainService } from './services/main.service';
-import { PopupComponent } from './popup/popup.component';
+import { PopupManagerComponent } from './popup-manager/popup-manager.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AuthService } from './services/auth.service';
 import { ChannelService } from './services/channel.service';
@@ -13,7 +13,7 @@ import { ThemePickerComponent } from './theme-picker/theme-picker.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, CommonModule, PopupComponent, LoaderComponent, ThemePickerComponent]
+  imports: [RouterOutlet, CommonModule, PopupManagerComponent, LoaderComponent, ThemePickerComponent]
 })
 export class AppComponent implements OnInit {
   constructor(

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -9,9 +9,6 @@ import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.c
 import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
-import { environment } from '../../environments/environment.development';
-import { firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat-window',
@@ -30,13 +27,17 @@ export class ChatWindowComponent {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
-    private http: HttpClient,
   ) {
     this.getMessagesToDisplay();
     this.channelService.scrollToBottom.subscribe(() => {
       // this.scrollToBottom();
+      // this.scrollToElement();
     })
   }
+
+  // scrollToElement(){
+
+  // }
 
   scrollToBottom() {
     this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;

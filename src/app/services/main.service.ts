@@ -6,9 +6,9 @@ import { Theme } from '../theme-picker/theme-picker.component';
 })
 export class MainService {
   showThemes: boolean = false;
-  showPopup: boolean = false;
-  errorMessage: string | undefined;
-  logMessage: string | undefined;
+  showPopup: boolean = true;
+  popupMessage: string | undefined = 'ich bin eine fehlermeldung!!!';
+  popupIsError: boolean = true;
   loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
@@ -96,8 +96,7 @@ export class MainService {
 
   closePopups() {
     this.showPopup = false;
-    this.errorMessage = undefined;
-    this.logMessage = undefined;
+    this.popupMessage = undefined;
     this.addChannelPopup = false;
     this.profilePopup = false;
     this.addMembersPopup = false;
@@ -109,30 +108,19 @@ export class MainService {
     this.showPopup = true;
   }
 
-  errorLog(message: string) {
+  popupLog(message: string) {
     this.openPopup();
-    this.errorMessage = message;
+    this.popupMessage = message;
     setTimeout(() => {
       this.closePopups();
     }, 3000);
   }
 
-  messageLog(message: string) {
-    this.openPopup();
-    this.logMessage = message;
-    setTimeout(() => {
-      this.closePopups();
-    }, 3000);
-  }
-
-  deactivateLoader() {
-    console.log('fetchingdone', this.fetchingDone);
-    
+  deactivateLoader() {    
     this.fetchingDone++;
     if (this.fetchingDone >= 3) {
       this.loader = false;
       this.fetchingDone = 0;
-      console.log('fetchingdone2', this.fetchingDone);
     }
   }
 

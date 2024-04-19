@@ -31,7 +31,7 @@
     z-index: 999;
     position: absolute;
     top: 55px;
-    border: 1px solid white;
+    border: 1px solid var(--color5);
     @include d-flex($fd: column, $ai: flex-start, $jc: flex-start, $g: 5px);
 }
 
@@ -42,7 +42,7 @@
 .seperator {
     width: 100%;
     padding-top: 10px;
-    border-top: 1px solid grey;
+    border-top: 1px solid var(--color6);
 }
 
 .seperator:first-child {
@@ -77,7 +77,7 @@
 
         .source {
             @extend .small-font;
-            color: rgb(182, 182, 182);
+            color: var(--color6);
         }
     }
 }

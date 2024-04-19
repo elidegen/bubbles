@@ -132,14 +132,13 @@ export class MessageService {
     }
   }
 
-  getMessage(messageId: number) {
-    let index = this.currentMessages.findIndex(obj => obj.id === messageId);
-    if (index === -1) {
-      index = this.threads.findIndex(obj => obj.id === messageId);
-      return this.threads[index];
-    } else {
-      return this.currentMessages[index];
-    }
+  async getMessage(messageId: number) {
+    console.log('getMessage');
+    
+    const url = environment.baseUrl + 'messages/' + messageId + '/';
+    await firstValueFrom(this.http.get<Message>(url)).then((response) => {
+      return response as Message;
+    })
   }
 
   openThread(threadId: number) {

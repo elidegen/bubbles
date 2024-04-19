@@ -61,7 +61,7 @@ export class ResetpasswordComponent {
       formData.append('token', this.token);
       return formData;
     } else {
-      this.mainService.errorLog('Error by reset your password. Do you have filled all fields correctly?');
+      this.mainService.popupLog('Error by reset your password. Do you have filled all fields correctly?');
       return false;
     }
   }
@@ -76,10 +76,10 @@ export class ResetpasswordComponent {
     const data = this.getFormData();
     if (!data) return
     this.http.post<any>(url, data).subscribe(response => {
-      this.mainService.messageLog('Password reset was successful!');
+      this.mainService.popupLog('Password reset was successful!');
       this.pwResetForm.reset();
     }, error => {
-      this.mainService.errorLog('Your request failed, maybe your token is not vaild anymore.');
+      this.mainService.popupLog('Your request failed, maybe your token is not vaild anymore.');
       console.error(error);
     });
   }
