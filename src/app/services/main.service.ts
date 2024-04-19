@@ -6,7 +6,7 @@ import { Theme } from '../theme-picker/theme-picker.component';
 })
 export class MainService {
   showThemes: boolean = false;
-  showPopup: boolean = true;
+  showPopup: boolean = false;
   popupMessage: string | undefined = 'ich bin eine fehlermeldung!!!';
   popupIsError: boolean = true;
   loader: boolean = false;
