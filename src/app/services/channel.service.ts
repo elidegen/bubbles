@@ -69,7 +69,7 @@ export class ChannelService {
     let localStorageAsString = localStorage.getItem('currentChannel');
     this.currentChannel = JSON.parse(localStorageAsString as string);
     if (this.currentChannel) {
-      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id)){
+      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id)) {
         localStorage.removeItem('currentChannel');
       }
       this.messageService.getMessagesAndThread(this.currentChannel.id);
@@ -114,7 +114,7 @@ export class ChannelService {
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
     this.messageService.getMessagesAndThread(id);
-    this.messageService.threadOpen = false;
+    this.mainService.threadOpen = false;
     setTimeout(() => {
       this.scrollToBottom.emit();
       this.renderGroupMember.emit();
@@ -206,7 +206,7 @@ export class ChannelService {
 
   replacePreview(message: Message) {
     const index = this.chatPreviews.findIndex(obj => obj.source === message.source);
-    if(index == -1){
+    if (index == -1) {
       this.chatPreviews.push(message);
     } else {
       this.chatPreviews[index] = message;

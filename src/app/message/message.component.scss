@@ -21,6 +21,7 @@
             .reaction {
                 top: -35px;
                 opacity: 1;
+                z-index: 2;
             }
 
             .quick-thread {
@@ -43,6 +44,7 @@
         top: 0;
         left: 0;
         transition: 225ms all;
+        z-index: -1;
         @include d-flex();
 
         .img-wrapper {
@@ -83,6 +85,7 @@
 
             .quick-thread {
                 left: -35px;
+                z-index: 2;
             }
         }
     }
@@ -95,6 +98,7 @@
     .quick-thread {
         right: unset !important;
         left: 0;
+        z-index: -1;
     }
 
     .quick-thread-img {

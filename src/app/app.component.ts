@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MainService } from './services/main.service';
 import { PopupManagerComponent } from './popup-manager/popup-manager.component';
@@ -7,6 +7,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { AuthService } from './services/auth.service';
 import { ChannelService } from './services/channel.service';
 import { ThemePickerComponent } from './theme-picker/theme-picker.component';
+import { MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     public mainService: MainService,
     public authService: AuthService,
     public channelService: ChannelService,
+    private messageService: MessageService,
     private router: Router
   ) {
     mainService.setTheme();
@@ -33,6 +35,13 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth < 1260 && this.mainService.threadOpen === true) {
+      this.mainService.sideMenuOpen = false;
+    }
   }
 
   async handleLogin() {

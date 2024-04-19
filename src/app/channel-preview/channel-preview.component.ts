@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { CommonModule } from '@angular/common';
 import { Message, MessageService } from '../services/message.service';
@@ -23,7 +23,6 @@ export class ChannelPreviewComponent implements OnInit {
     public messageService: MessageService,
     public userService: UserService,
     public authService: AuthService,
-    private cdr: ChangeDetectorRef,
   ) {
     this.baseUrl = environment.baseUrl;
   }

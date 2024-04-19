@@ -5,29 +5,33 @@ import { Theme } from '../theme-picker/theme-picker.component';
   providedIn: 'root'
 })
 export class MainService {
-  showThemes: boolean = false;
+  loader: boolean = false;
+
   showPopup: boolean = false;
   popupMessage: string | undefined;
   popupIsError: boolean = true;
-  loader: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
   addMembersPopup: boolean = false;
   showMembersPopup: boolean = false;
   editChannelPopup: boolean = false;
+
+  showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
+  allEmojis: Array<any> = [];
+  categoryList: Array<any> = [];
+  emojiUrl: string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+  categoryUrl: string = 'https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+
   sideMenuOpen: boolean = true;
+  threadOpen: boolean = false;
+  mainChatOpen: boolean = true;
   showNewMessageSearch: boolean = false;
 
   userFetchingDone: boolean = false;
   chatsAndPreviewFetchingDone: boolean = false;
   messageAndThreadFetchingDone: boolean = false;
 
-  fetchingDone: number = 0;
-  showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
-  allEmojis: Array<any> = [];
-  categoryList: Array<any> = [];
-  emojiUrl: string = 'https://emoji-api.com/emojis?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
-  categoryUrl: string = 'https://emoji-api.com/categories?access_key=a3f490babea502cd547755934800ad65f1dd5f65';
+  showThemes: boolean = false;
   selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
   themes: Theme[] = [{
     name: 'purple',
@@ -121,7 +125,8 @@ export class MainService {
     this.showPopup = true;
   }
 
-  popupLog(message: string) {
+  popupLog(message: string, isError: boolean) {
+    this.popupIsError = isError;
     this.openPopup();
     this.popupMessage = message;
     setTimeout(() => {

@@ -42,7 +42,6 @@ export interface MessagesAndThread {
 export class MessageService {
   messagesFromChatUrl: string = environment.baseUrl + 'messages-and-thread-from-channel/';
   currentThread!: Message;
-  threadOpen: boolean = false;
   currentMessages: Message[] = [];
   threads: Message[] = [];
   showNewMessageComp: boolean = true;
@@ -144,7 +143,7 @@ export class MessageService {
 
   openThread(threadId: number) {
     this.currentThread = this.currentMessages.find(obj => obj.id === threadId) as Message;
-    this.threadOpen = true;
+    this.mainService.threadOpen = true;
   }
 
   async patchMessage(message: Message) {

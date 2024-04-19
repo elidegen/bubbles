@@ -1,7 +1,7 @@
 <div class="card chat-wrapper">
     <div class="header">
         <p>Thread</p>
-        <img class="img-button" (click)="closeThread()" src="assets/img/close_icon.svg" alt="">
+        <app-close class="img-button" (click)="closeThread()"></app-close>
     </div>
     <div class="chat-messages-wrapper" #chatWrapper>
         @if (threadToDisplay){

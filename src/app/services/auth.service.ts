@@ -93,12 +93,11 @@ export class AuthService {
             this.router.navigate(['/home']);
             this.mainService.loader = false;
           }
-          this.mainService.popupIsError = false;
-          this.mainService.popupLog('Welcome ' + response.user.username);
+          this.mainService.popupLog('Welcome ' + response.user.username, false);
           this.mainService.loader = false;
         },
         error: e => {
-          this.mainService.popupLog('Login failed..');
+          this.mainService.popupLog('Login failed..', true);
           console.log('Login Error:', e);
           this.mainService.loader = false;
         },

@@ -42,7 +42,7 @@ export class ForgotpasswordComponent {
       formData.append('email', this.forgotPasswordForm.get('email')?.value);
       this.resetPasswordRequest(url, formData);
     } else {
-      this.mainService.popupLog('Please fill the field with a valid email adress');
+      this.mainService.popupLog('Please fill the field with a valid email adress', true);
     }
   }
 
@@ -62,11 +62,11 @@ export class ForgotpasswordComponent {
       this.mainService.loader = true;
       this.http.post(url, formData).subscribe(res => {
         this.mainService.loader = false;
-        this.mainService.popupLog('Please check your mail! We`ve sended you a reset link');
+        this.mainService.popupLog('Please check your mail! We`ve sent you a reset link', false);
         this.forgotPasswordForm.reset();
       }, error => {
         this.mainService.loader = false;
-        this.mainService.popupLog('The request to reset your password failed');
+        this.mainService.popupLog('The request to reset your password failed', true);
       });
     }
   

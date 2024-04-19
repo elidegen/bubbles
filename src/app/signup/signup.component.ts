@@ -56,12 +56,11 @@ export class SignupComponent {
       this.http.post(url, formData).pipe(take(1)).subscribe(
         {
           next: (data) => {
-            console.log('success' ,data);
-            this.mainService.popupLog('You have signed up successfully, you can now log in');
+            this.mainService.popupLog('You have signed up successfully, you can now log in', false);
             this.signUpForm.reset();
           },
           error: e => {
-            this.mainService.popupLog('Something went wrong');
+            this.mainService.popupLog('Something went wrong', true);
           }
         }
       );

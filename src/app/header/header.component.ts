@@ -31,11 +31,10 @@ export class HeaderComponent {
     this.mainService.profilePopup = true;
   }
 
-  toggleMenu() {
-    this.openMenu = !this.openMenu;
-  }
-
   toggleSideMenu() {
+    if(window.innerWidth < 1260 && this.mainService.threadOpen === true){
+      this.mainService.threadOpen = false;
+    }
     this.mainService.sideMenuOpen = !this.mainService.sideMenuOpen;
   }
 

@@ -66,7 +66,7 @@ export class LoginComponent {
       this.mainService.loader = true;
       this.authService.logIn(formData);
     } else {
-      this.mainService.popupLog('Please fill the form with valid data!')
+      this.mainService.popupLog('Please fill the form with valid data!', true)
     }
   }
 
