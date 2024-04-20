@@ -76,9 +76,12 @@ export class SearchComponent implements OnInit {
 
   async search() {
     const url = environment.baseUrl + this.searchType;
+    const chats = this.channelService.chats;
+    
     const data = {
       search_value: this.searchValue.trim(),
-      current_user: this.currentUserId
+      current_user: this.currentUserId, 
+      chats: chats
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
