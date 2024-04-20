@@ -74,8 +74,10 @@ export class ChatWindowComponent implements OnInit {
   }
 
   startPollingIntervals() {
-    this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+    if (this.channelService.currentChannel.id) {
+      this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+    }
     this.channelService.startPolloingForChats();
   }
-  
+
 }
