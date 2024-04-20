@@ -33,6 +33,14 @@
     top: 55px;
     border: 1px solid var(--color5);
     @include d-flex($fd: column, $ai: flex-start, $jc: flex-start, $g: 5px);
+
+    @media(max-width: 485px){
+        position: fixed;
+        top: 70px;
+        left: 15px;
+        right: 15px;
+        width: unset;
+    }
 }
 
 .search-result::-webkit-scrollbar{

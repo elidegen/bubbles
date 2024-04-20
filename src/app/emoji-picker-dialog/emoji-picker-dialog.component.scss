@@ -5,8 +5,8 @@
     display: flex;
     flex-direction: column;
     height: 400px;
-    max-width: 348px;
-    min-width: 347px;
+    // max-width: 348px;
+    width: 347px;
     background-color: rgb(231, 231, 231);
     z-index: 9;
     @extend .border-radius;
@@ -18,6 +18,17 @@
         outline: none;
         color: black;
         margin: 5px;
+    }
+
+    @media(max-width: 400px) {
+        width: 300px;
+        .emoji-display{
+            gap: 6px;
+        }
+
+        .menu-point {
+            padding: 0 !important;
+        }
     }
 }
 

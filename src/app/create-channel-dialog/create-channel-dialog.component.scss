@@ -1,8 +1,14 @@
 @import "../library.scss";
 @import "../add-members-dialog/add-members-dialog.component.scss";
 
-.card {
+.channel-popup-wrapper {
+    @extend .card;
     @include d-flex($fd: column, $ai: flex-start, $g: 15px);
+    width: 630px;
+
+    @media(max-width: 660px) {
+        width: calc(100vw - 30px);
+    }
 }
 
 .content {

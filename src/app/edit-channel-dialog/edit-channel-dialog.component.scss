@@ -1,8 +1,13 @@
 @import "../create-channel-dialog/create-channel-dialog.component.scss";
 @import "../library.scss";
 
-.card {
-    min-width: 400px;
+.channel-popup-wrapper {
+    @extend .card;
+    width: 400px;
+
+    @media(max-width: 430px) {
+        width: calc(100vw - 30px);
+    }
 }
 
 .content,
@@ -40,4 +45,10 @@
         }
     }
 
+}
+
+.button2 {
+    @media(max-width:365px) {
+        content: 'Leave' !important;
+    }
 }

@@ -28,6 +28,7 @@ export class SideMenuComponent {
   }
 
   openNewMessage(){
+    this.mainService.sideMenuOpen = false;
     this.mainService.showNewMessageSearch = true;
     this.mainService.threadOpen = false;
   }

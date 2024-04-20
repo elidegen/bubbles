@@ -1,7 +1,12 @@
 @import "../library.scss";
 
-.card {
+.profile-wrapper {
+    @extend .card;
     width: 350px;
+
+    @media(max-width: 430px) {
+        width: calc(100vw - 30px);
+    }
 }
 
 .picture-wrapper {

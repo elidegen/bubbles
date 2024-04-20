@@ -60,10 +60,6 @@ export class ChatHeaderComponent implements OnInit {
     })
   }
 
-  // isChannel() {
-  //   return this.currentChat.is_channel === true;
-  // }
-
   getName() {
     if (this.currentChat.is_channel === true) {
       return this.currentChat.name;
@@ -94,13 +90,9 @@ export class ChatHeaderComponent implements OnInit {
     } else {
       this.userService.userToShow = this.userService.getInterlocutor(this.currentChat);
       this.mainService.profilePopup = true;
-      
     }
-    
-    
-    
   }
-
-
-
+  mobile() {
+    return window.innerWidth < 500;
+  }
 }

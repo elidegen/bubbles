@@ -11,7 +11,7 @@
 
     <div class="group-members-wrapper" *ngIf="this.currentChat.is_channel">
 
-        <div class="group-members" (click)="showMemberDialog()">
+        <div class="group-members" *ngIf="!mobile()" (click)="showMemberDialog()">
             <div class="member-pics">
                 <img src="{{member}}" *ngFor="let member of userImgArray">
             </div>

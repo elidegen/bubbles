@@ -1,6 +1,7 @@
 @import '../library.scss';
 
 .theme-picker {
+    @extend .card;
     height: 40px;
     overflow: hidden;
     padding: 0 !important;
@@ -57,4 +58,15 @@ input[type="radio"]#green {
 
 .invisible {
     opacity: 0;
+}
+
+.slide-in {
+    width: 190px !important;
+    margin-left: 15px;
+    transition: 500ms;
+}
+
+.slide-out {
+    width: 0 !important;
+    transition: 500ms;
 }

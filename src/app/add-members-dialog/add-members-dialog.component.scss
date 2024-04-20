@@ -1,12 +1,17 @@
 @import "../library.scss";
 
 .add-members-wrapper {
+    @extend .card;
     @include d-flex($ai: flex-start, $fd: column, $g: 15px);
     width: 400px;
     height: fit-content;
 
     .input {
         width: 100%;
+    }
+
+    @media(max-width: 430px){
+        width: calc(100vw - 30px);
     }
 }
 
