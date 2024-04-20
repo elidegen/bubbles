@@ -140,7 +140,10 @@ export class ChannelService {
       this.intervalIdMessages = setInterval(() => {
         this.pollMessages(id);
       }, this.pollingIntervalMessages);
+    } else {
+      return;
     }
+
   }
 
   pollMessages(id:number) {
