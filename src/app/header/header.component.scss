@@ -1,7 +1,7 @@
 @import '../library.scss';
 
 .header-wrapper {
-    @include center($jc: space-between);
+    @include d-flex($jc: space-between, $g: 15px);
     padding-bottom: 15px;
 
     .card {

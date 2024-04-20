@@ -1,4 +1,5 @@
 :root {
+    --transition: none;
     --color1: #4d426d;
     --color2: #5c4f82;
     --color3: #efa985;
@@ -219,4 +220,14 @@ app-add-member {
 
 .icon-component-wrapper{
     @include d-flex();
+}
+
+.slide-in {
+    width: 190px !important;
+    transition: 500ms;
+}
+
+.slide-out {
+    width: 0 !important;
+    transition: 500ms;
 }

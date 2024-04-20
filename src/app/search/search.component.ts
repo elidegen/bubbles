@@ -53,7 +53,7 @@ export class SearchComponent implements OnInit {
     public channelService: ChannelService,
     public messageService: MessageService,
     private authService: AuthService,
-    private mainService: MainService,
+    public mainService: MainService,
   ) {
     this.setupClickListener();
     this.currentUserId = this.authService.currentUser.id;

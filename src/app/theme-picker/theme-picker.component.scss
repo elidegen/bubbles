@@ -55,34 +55,6 @@ input[type="radio"]#green {
     --radio-color: green;
 }
 
-.slide-in {
-    animation: slide-in .5s forwards;
-}
-
-.slide-out {
-    animation: slide-out .5s forwards;
-}
-
-@keyframes slide-in {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 190px;
-    }
-}
-
-@keyframes slide-out {
-    0% {
-        width: 190px;
-    }
-
-    100% {
-        width: 0;
-    }
-}
-
 .invisible {
     opacity: 0;
 }

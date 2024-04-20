@@ -141,12 +141,6 @@ export class MainService {
       this.chatsAndPreviewFetchingDone = false;
       this.messageAndThreadFetchingDone = false;      
     }
-    // this.fetchingDone++;
-    // if (this.fetchingDone >= 3) {
-    //   console.log('fetch', this.fetchingDone);
-    //   this.loader = false;
-    //   this.fetchingDone = 0;
-    // }
   }
 
   setTheme() {
@@ -157,5 +151,8 @@ export class MainService {
     document.documentElement.style.setProperty('--color4', currentTheme[0].color4);
     document.documentElement.style.setProperty('--color5', currentTheme[0].color5);
     document.documentElement.style.setProperty('--color6', currentTheme[0].color6);
+    setTimeout(() => {
+      document.documentElement.style.setProperty('--transition', 'all 125ms ease-in-out');      
+    }, 200);
   }
 }

@@ -1,5 +1,6 @@
 <div class="search-wrapper" (click)="stopProp($event)">
-    <input (input)="showResults = true" (click)="showResults = true" placeholder="{{ placeholder }}" class="input"
+    <input (input)="showResults = true"
+        (click)="showResults = true" placeholder="{{ placeholder }}" class="input"
         [class.dark-input]="searchType === 'user-search'" type="text" (keyup)="triggerSearch()"
         [(ngModel)]="searchValue">
 
@@ -18,12 +19,12 @@
 
         <p class="seperator">Channels</p>
         @for (channel of searchSolution.channels; track $index) {
-            @if (channel.is_channel) {
-                <div class=" preview" (click)="openChannel(channel.id)">
-                    <img src="{{channelService.getImg(channel.picture)}}">
-                    <p>{{channel.name}}</p>
-                </div>
-            }
+        @if (channel.is_channel) {
+        <div class=" preview" (click)="openChannel(channel.id)">
+            <img src="{{channelService.getImg(channel.picture)}}">
+            <p>{{channel.name}}</p>
+        </div>
+        }
         }
 
         <p class="seperator">Messages</p>
