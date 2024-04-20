@@ -59,7 +59,7 @@ export class ChannelService {
   pollingIntervalMessages:number = 8000; // 8 sec
 
   intervalIdChats:any;
-  pollingIntervalChats:number = 15000; //15sec
+  pollingIntervalChats:number = 20000; //20sec
 
   constructor(
     private authService: AuthService,
