@@ -13,11 +13,11 @@ import { ThreadWindowComponent } from '../thread-window/thread-window.component'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ThreadWindowComponent, ChatWindowComponent, FormsModule, SideMenuComponent,CommonModule, HeaderComponent],
+  imports: [ThreadWindowComponent, ChatWindowComponent, FormsModule, SideMenuComponent, CommonModule, HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy {
   currentUser: CurrentUser;
   threadOpen: boolean = false;
 
@@ -31,13 +31,22 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-      this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+    this.startPollingIntervals();
   }
 
   ngOnDestroy(): void {
-    this.channelService.stopPollingForMessages();
+    this.stopPollingIntervals
   }
 
-  
+  startPollingIntervals() {
+    this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+    this.channelService.startPolloingForChats();
+  }
+
+  stopPollingIntervals(){
+    this.channelService.stopPollingForMessages();
+    this.channelService.stopPollingForChats();
+  }
+
 
 }

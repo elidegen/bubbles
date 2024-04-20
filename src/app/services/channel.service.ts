@@ -56,7 +56,10 @@ export class ChannelService {
   chats: Channel[] = [];
 
   intervalIdMessages: any;
-  pollingIntervalMessages:number = 10000;
+  pollingIntervalMessages:number = 8000; // 8 sec
+
+  intervalIdChats:any;
+  pollingIntervalChats:number = 15000; //15sec
 
   constructor(
     private authService: AuthService,
@@ -151,18 +154,25 @@ export class ChannelService {
   }
 
   startPolloingForChats(){
-    this.startPolloingForChats();
+    this.stopPollingForChats();
     this.getChatsForUser();
+    this.intervalIdChats = setInterval(() => {
+      this.pollChats();
+    }, this.pollingIntervalChats);
 
   }
 
 
-  stopPolloingForChats(){
-
+  stopPollingForChats(){
+    clearInterval(this.intervalIdChats);
+    console.log("Polling stopped (chats) ");
   }
 
-
-
+  pollChats(){
+    this.getChatsForUser();
+    console.log('polling chats...');
+    
+  }
 
 
   filterChats() {
