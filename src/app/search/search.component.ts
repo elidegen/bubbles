@@ -76,7 +76,7 @@ export class SearchComponent implements OnInit {
 
   async search() {
     const url = environment.baseUrl + this.searchType;
-    const chats = this.channelService.chats;
+    const chats = this.channelService.chats.map(chat => chat.id);
     
     const data = {
       search_value: this.searchValue.trim(),
