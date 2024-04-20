@@ -82,3 +82,8 @@
 .button-wrapper {
     margin-top: 15px;
 }
+
+.username {
+    @extend .white-space;
+    max-width: 90%;
+}

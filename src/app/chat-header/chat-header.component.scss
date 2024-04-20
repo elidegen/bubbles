@@ -1,9 +1,10 @@
 @import '../library.scss';
 
 .header-wrapper {
-    @include d-flex($jc: space-between);
+    @include d-flex($jc: space-between, $g: 15px);
     padding-right: 10px;
     min-height: 50px;
+    max-width: 100%;
 
     img {
         border-radius: 50%;
@@ -17,10 +18,16 @@
     border-radius: 25px;
     padding: 5px;
     padding-right: 15px;
+    max-width: 50%;
 
     img {
         height: 35px;
         width: 35px;
+    }
+
+    p{
+        @extend .white-space;
+        max-width: 100%;
     }
 }
 

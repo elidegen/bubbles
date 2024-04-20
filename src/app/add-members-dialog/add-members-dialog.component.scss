@@ -18,6 +18,8 @@
 .selected-users {
     @include d-flex($jc: flex-start, $g: 5px);
     flex-wrap: wrap;
+    max-height: 250px;
+    overflow: auto;
 
     .selected-user {
         @include d-flex($g: 5px);

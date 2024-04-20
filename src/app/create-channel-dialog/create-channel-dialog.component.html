@@ -12,7 +12,7 @@
         <div class="channel-picture-wrapper">
             <div class="input-wrapper">
                 <p>Channel Name</p>
-                <input tabindex="0" autofocus type="text" class="input" required placeholder="e.g. Development Team"
+                <input maxlength="100" tabindex="0" autofocus type="text" class="input" required placeholder="e.g. Development Team"
                     [(ngModel)]="newChannel.name">
             </div>
 
@@ -24,7 +24,7 @@
 
         <div class="input-wrapper">
             <p>Description</p>
-            <input tabindex="0" type="text" class="input" placeholder="Your description" [(ngModel)]="newChannel.description">
+            <input maxlength="100" tabindex="0" type="text" class="input" placeholder="Your description" [(ngModel)]="newChannel.description">
         </div>
     </div>
 

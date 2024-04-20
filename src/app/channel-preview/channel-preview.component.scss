@@ -24,6 +24,10 @@
 
         .name {
             @extend .white-space;
+            max-width: 250px;
+            @media(max-width: 430px){
+                max-width: 140px;
+            }
         }
     }
 
@@ -31,7 +35,10 @@
         @extend .small-font;
         @extend .white-space;
         max-width: 260px;
-        overflow: hidden;
+
+        @media(max-width: 430px){
+            max-width: 180px;
+        }
     }
 }
 

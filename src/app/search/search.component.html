@@ -1,6 +1,5 @@
 <div class="search-wrapper" (click)="stopProp($event)">
-    <input (input)="showResults = true"
-        (click)="showResults = true" placeholder="{{ placeholder }}" class="input"
+    <input (input)="showResults = true" (click)="showResults = true" placeholder="{{ placeholder }}" class="input"
         [class.dark-input]="searchType === 'user-search'" type="text" (keyup)="triggerSearch()"
         [(ngModel)]="searchValue">
 
@@ -13,7 +12,7 @@
                 <img src="{{channelService.getImg(user.picture)}}">
                 <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
             </div>
-            <p>{{user.username}}</p>
+            <p class="limit-digits">{{user.username}}</p>
         </div>
         }
 
@@ -22,7 +21,7 @@
         @if (channel.is_channel) {
         <div class=" preview" (click)="openChannel(channel.id)">
             <img src="{{channelService.getImg(channel.picture)}}">
-            <p>{{channel.name}}</p>
+            <p class="limit-digits">{{channel.name}}</p>
         </div>
         }
         }
@@ -37,9 +36,9 @@
             </div>
 
             <div class="details">
-                <p class="author">{{this.userService.getUser(message.author).username}}</p>
+                <p class="author limit-digits">{{this.userService.getUser(message.author).username}}</p>
                 <p>{{message.content}}</p>
-                <p *ngIf="isChannel(message)" class="source">in channel:
+                <p *ngIf="isChannel(message)" class="source limit-digits">in channel:
                     {{channelService.getChannel(message.source).name}}</p>
             </div>
         </div>
@@ -53,9 +52,9 @@
             </div>
 
             <div class="details">
-                <p class="author">{{this.userService.getUser(thread.author).username}}</p>
+                <p class="author limit-digits">{{this.userService.getUser(thread.author).username}}</p>
                 <p>{{thread.content}}</p>
-                <!-- <p class="source">in thread: {{getContent(thread)}}</p> -->
+                <p class="source">thread</p>
             </div>
         </div>
         }
@@ -66,7 +65,7 @@
                 <img src="{{channelService.getImg(user.picture)}}">
                 <div [ngClass]="user.is_online ? 'online' : 'offline'"></div>
             </div>
-            <p>{{user.username}}</p>
+            <p class="limit-digits">{{user.username}}</p>
         </div>
         }
         }

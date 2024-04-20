@@ -10,11 +10,12 @@ import { UserService } from '../services/user.service';
 import { ThemePickerComponent } from '../theme-picker/theme-picker.component';
 import { ProfileComponent } from '../svgs/profile/profile.component';
 import { windowWhen } from 'rxjs';
+import { BubbleComponent } from '../svgs/bubble/bubble.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ThemePickerComponent, CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent, ProfileComponent],
+  imports: [ThemePickerComponent, CommonModule, SearchComponent, FormsModule, SideMenuButtonComponent, ColorPickerComponent, ProfileComponent, BubbleComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

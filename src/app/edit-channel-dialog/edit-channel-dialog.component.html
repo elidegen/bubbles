@@ -13,7 +13,7 @@
 
                 <div class="mini-content">
                     <div class="card">
-                        <input autofocus tabindex="0" type="text" class="input" placeholder="e.g. Development Team"
+                        <input maxlength="100" autofocus tabindex="0" type="text" class="input" placeholder="e.g. Development Team"
                             [(ngModel)]="updatedChannel.name">
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 
             <div class="mini-content">
                 <div class="card">
-                    <input tabindex="0" type="text" class="input" placeholder="Your description"
+                    <input maxlength="100" tabindex="0" type="text" class="input" placeholder="Your description"
                         [(ngModel)]="updatedChannel.description">
                 </div>
             </div>

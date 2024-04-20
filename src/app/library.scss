@@ -133,6 +133,7 @@ $card-padding: 15px;
 .white-space {
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .img-button {
@@ -181,13 +182,13 @@ $card-padding: 15px;
     @include d-flex();
 
     .status {
-        height: 30%;
-        width: 30%;
+        height: 25%;
+        width: 25%;
         border-radius: 50%;
         position: absolute;
         bottom: 0;
         right: 0;
-        border: 2px solid var(--color2);
+        // border: 2px solid transparent;
     }
 
     .online {
@@ -214,10 +215,8 @@ app-like,
 app-rocket,
 app-color-picker,
 app-reply,
-app-add-member {
+app-add-member,
+app-profile,
+app-bubble {
     @include center();
-}
-
-.icon-component-wrapper {
-    @include d-flex();
 }

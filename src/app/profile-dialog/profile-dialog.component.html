@@ -13,7 +13,7 @@
 
     <div class="details">
 
-        <p>{{ user?.username }}</p>
+        <p class="username">{{ user?.username }}</p>
 
         <div class="online-status">
             <div [ngClass]="{'online-circle': user?.is_online, 'offline-circle': !user?.is_online }"

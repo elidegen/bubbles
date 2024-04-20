@@ -27,8 +27,9 @@ export class SideMenuComponent {
     this.mainService.addChannelPopup = true;
   }
 
-  openNewMessage(){
-    this.mainService.sideMenuOpen = false;
+  openNewMessage() {
+    if (window.innerWidth < 845)
+      this.mainService.sideMenuOpen = false;
     this.mainService.showNewMessageSearch = true;
     this.mainService.threadOpen = false;
   }

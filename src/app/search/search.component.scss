@@ -77,6 +77,7 @@
 
     .details {
         @include d-flex($fd: column, $g: 5px, $ai: flex-start);
+        width: 100%;
 
         .author {
             font-weight: bold;
@@ -92,4 +93,9 @@
 
 .selected-user{
     filter: brightness(.8);
+}
+
+.limit-digits{
+    @extend .white-space;
+    max-width: 85%;
 }

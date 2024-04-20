@@ -1,5 +1,5 @@
 <div class="header-wrapper">
-    <div class="left-side">
+    <div class="left-side" [ngClass]="mainService.showThemes ? 'give-margin' : 'remove-margin'">
         <div class="header-button" (click)="toggleSideMenu()">
             @if (mainService.sideMenuOpen) {
             <app-side-menu-button style="transform:rotate(180deg)"></app-side-menu-button>
@@ -8,6 +8,10 @@
             }
         </div>
         <app-search [searchType]="'search'"></app-search>
+        <div class="logo-wrapper">
+            <app-bubble></app-bubble>
+            <p>Bubbles</p>
+        </div>
     </div>
 
     <div class="right-side">
@@ -20,9 +24,9 @@
 
         <div class="chat-name" (click)="openProfile()">
             @if (getScreenWidth()) {
-                <p>{{ authService.currentUser.username }}</p>
+            <p>{{ authService.currentUser.username }}</p>
             } @else {
-                <app-profile></app-profile>
+            <app-profile></app-profile>
             }
         </div>
     </div>
