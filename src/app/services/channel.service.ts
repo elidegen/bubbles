@@ -19,6 +19,7 @@ export class Channel {
   picture?: string;
   read_by: number[];
   hash: string;
+  
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
@@ -53,6 +54,9 @@ export class ChannelService {
   currentChannel!: Channel;
   chatPreviews: Message[] = [];
   chats: Channel[] = [];
+
+  intervalIdMessages: any;
+  pollingIntervalMessages:number = 10000;
 
   constructor(
     private authService: AuthService,
@@ -113,7 +117,7 @@ export class ChannelService {
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
     this.setRead(id);
-    this.messageService.getMessagesAndThread(id);
+    this.startPollingForMessages(id);
     this.mainService.threadOpen = false;
     if(window.innerWidth < 845){
       this.mainService.sideMenuOpen = false;
@@ -124,6 +128,42 @@ export class ChannelService {
       this.updateHeader.emit();
     }, 100);
   }
+
+
+  startPollingForMessages(id:number){
+    this.stopPollingForMessages();
+    this.messageService.getMessagesAndThread(id);
+    if (id) {
+      this.intervalIdMessages = setInterval(() => {
+        this.pollMessages(id);
+      }, this.pollingIntervalMessages);
+    }
+  }
+
+  pollMessages(id:number) {
+    this.messageService.getMessagesAndThread(id);
+    console.log("Polling...");
+  }
+
+  stopPollingForMessages() {
+    clearInterval(this.intervalIdMessages);
+    console.log("Polling stopped.");
+  }
+
+  startPolloingForChats(){
+    this.startPolloingForChats();
+    this.getChatsForUser();
+
+  }
+
+
+  stopPolloingForChats(){
+
+  }
+
+
+
+
 
   filterChats() {
     this.channels = this.chats.filter(channel => channel.is_channel === true); //filters only channels that have currentuser as member

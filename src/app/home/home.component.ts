@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChatWindowComponent } from '../chat-window/chat-window.component';
 import { ChannelService } from '../services/channel.service';
 import { MessageService } from '../services/message.service';
@@ -17,7 +17,7 @@ import { ThreadWindowComponent } from '../thread-window/thread-window.component'
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy{
   currentUser: CurrentUser;
   threadOpen: boolean = false;
 
@@ -29,4 +29,15 @@ export class HomeComponent {
   ) {
     this.currentUser = authService.currentUser;
   }
+
+  ngOnInit(): void {
+      this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+  }
+
+  ngOnDestroy(): void {
+    this.channelService.stopPollingForMessages();
+  }
+
+  
+
 }
