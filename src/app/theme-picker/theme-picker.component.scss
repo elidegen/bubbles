@@ -2,10 +2,15 @@
 
 .theme-picker {
     @extend .card;
+    @include d-flex($jc: flex-start);
     height: 40px;
-    overflow: hidden;
-    padding: 0 !important;
-    @include d-flex();
+    overflow: auto;
+    padding: 0 10px;
+    width: fit-content;
+}
+
+.theme-picker::-webkit-scrollbar {
+    display: none;
 }
 
 .theme-picker fieldset {
@@ -37,23 +42,35 @@
 }
 
 input[type="radio"]#purple {
-    --radio-color: #5c4f82; // die hellere hauptfarbe farbe hier
+    --radio-color: #4d426d; // die dunklere hauptfarbe farbe hier
 }
 
 input[type="radio"]#dark {
-    --radio-color: #224780;
-}
-
-input[type="radio"]#pink {
-    --radio-color: #750052;
+    --radio-color: #173157;
 }
 
 input[type="radio"]#bright {
-    --radio-color: #f2fafe;
+    --radio-color: #c2dee9;
 }
 
-input[type="radio"]#green {
-    --radio-color: green;
+input[type="radio"]#pink {
+    --radio-color: #490033;
+}
+
+input[type="radio"]#brown {
+    --radio-color: #a64f3c;
+}
+
+input[type="radio"]#olive {
+    --radio-color: #38472b;
+}
+
+input[type="radio"]#yellow {
+    --radio-color: #e7f966;
+}
+
+input[type="radio"]#brown {
+    --radio-color: #a64f3c;
 }
 
 .invisible {
@@ -61,12 +78,15 @@ input[type="radio"]#green {
 }
 
 .slide-in {
-    width: 190px !important;
+    width: 365px;
     margin-left: 15px;
-    transition: 500ms;
+    opacity: 1;
+    transition: all 500ms;
 }
 
 .slide-out {
-    width: 0 !important;
-    transition: 500ms;
+    width: 0px;
+    padding: 0;
+    opacity: 1;
+    transition: all 500ms;
 }

@@ -53,18 +53,19 @@
 }
 
 app-search {
+    min-width: 202px;
     width: 100%;
 }
 
 .give-margin {
-    @media(max-width: 640px) {
-        margin-left: -190px;
+    @media(max-width: 820px) {
+        margin-left: -365px;
         transition: 500ms;
     }
 }
 
 .remove-margin {
-    @media(max-width: 640px) {
+    @media(max-width: 820px) {
         margin-left: 0;
         transition: 500ms;
     }
