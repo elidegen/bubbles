@@ -17,7 +17,7 @@ import { ThreadWindowComponent } from '../thread-window/thread-window.component'
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnDestroy {
   currentUser: CurrentUser;
   threadOpen: boolean = false;
 
@@ -30,17 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.currentUser = authService.currentUser;
   }
 
-  ngOnInit(): void {
-    this.startPollingIntervals();
-  }
-
   ngOnDestroy(): void {
     this.stopPollingIntervals
-  }
-
-  startPollingIntervals() {
-    this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
-    this.channelService.startPolloingForChats();
   }
 
   stopPollingIntervals(){

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -17,7 +17,7 @@ import { User } from '../services/user.service';
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })
-export class ChatWindowComponent {
+export class ChatWindowComponent implements OnInit {
   @Input() channelToDisplay!: Channel;
   @ViewChild('chatWrapper') chatWrapper!: any;
   messagesToDisplay: Message[] = [];
@@ -68,4 +68,14 @@ export class ChatWindowComponent {
   currentUserDmAlreadyExist() {
     return this.channelService.directMessages.some(obj => obj.members.length === 1 && obj.members.includes(this.authService.currentUser.id));
   }
+
+  ngOnInit(): void {
+    this.startPollingIntervals();
+  }
+
+  startPollingIntervals() {
+    this.channelService.startPollingForMessages(this.channelService.currentChannel.id);
+    this.channelService.startPolloingForChats();
+  }
+  
 }
