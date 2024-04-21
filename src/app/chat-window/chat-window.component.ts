@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Channel, ChannelService } from '../services/channel.service';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
@@ -17,7 +17,7 @@ import { User } from '../services/user.service';
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent implements OnInit, AfterViewInit {
   @Input() channelToDisplay!: Channel;
   @ViewChild('chatWrapper') chatWrapper!: any;
   messagesToDisplay: Message[] = [];
@@ -30,9 +30,12 @@ export class ChatWindowComponent implements OnInit {
   ) {
     this.getMessagesToDisplay();
     this.channelService.scrollToBottom.subscribe(() => {
-      // this.scrollToBottom();
+      this.scrollToBottom();
       // this.scrollToElement();
     })
+  }
+  ngAfterViewInit(): void {
+    // this.scrollToBottom();
   }
 
   // scrollToElement(){
@@ -40,7 +43,10 @@ export class ChatWindowComponent implements OnInit {
   // }
 
   scrollToBottom() {
-    this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+    if (this.chatWrapper) {
+      console.log('chatwrapper', this.chatWrapper.nativeElement.scrollHeight);
+      this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+    }
   }
 
   getMessagesToDisplay() {

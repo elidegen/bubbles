@@ -3,7 +3,7 @@
         [class.dark-input]="searchType === 'user-search'" type="text" (keyup)="triggerSearch()"
         [(ngModel)]="searchValue">
 
-    <div *ngIf="showResults" class="search-result card">
+    <div *ngIf="showResults" class="search-result">
         <p class="seperator">Users</p>
         @if (searchType === 'search') {
         @for (user of searchSolution.users; track $index) {

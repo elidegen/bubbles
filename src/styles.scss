@@ -19,7 +19,6 @@
     color: var(--color5);
     scroll-behavior: smooth;
     transform: translate3d(unset, unset, unset); // hardware accelleration for mobile
-    backface-visibility: hidden;
 }
 
 body {

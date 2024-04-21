@@ -1,4 +1,4 @@
-<div class="msg-preview card"
+<div class="msg-preview"
     [ngClass]="{'currentChannel': channelService.currentChannel && channel.id === channelService.currentChannel.id}"
     [class.unread]="!channel.read_by.includes(authService.currentUser.id)">
     @if (channel.is_channel === false) {

@@ -128,9 +128,11 @@ export class ChannelService {
     }
     setTimeout(() => {
       this.scrollToBottom.emit();
+      console.log('emitted!');
+      
       this.renderGroupMember.emit();
       this.updateHeader.emit();
-    }, 100);
+    }, 200);
   }
 
 

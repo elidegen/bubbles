@@ -2,6 +2,7 @@
 
 .show-members-wrapper {
     @include d-flex($fd: column, $g: 15px, $ai: flex-start);
+    @extend .card;
     width: 300px;
 
     .display-members {

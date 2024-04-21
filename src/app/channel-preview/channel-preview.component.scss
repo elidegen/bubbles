@@ -2,9 +2,10 @@
 
 .msg-preview {
     @include center();
+    @extend .hover;
+    @extend .card;
     gap: 10px;
     padding: 10px;
-    @extend .hover;
 
     img {
         height: 50px;

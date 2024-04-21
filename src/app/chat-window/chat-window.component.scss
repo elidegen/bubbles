@@ -2,6 +2,7 @@
 
 .chat-wrapper {
     @include d-flex($jc: space-between, $ai: unset, $fd: column);
+    @extend .card;
     height: 100%;
     padding-right: 5px;
 }
