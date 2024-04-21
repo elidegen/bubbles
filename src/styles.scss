@@ -13,12 +13,14 @@
 * {
     font-family: 'Roboto', 'noto-emoji', sans-serif !important;
     box-sizing: border-box;
-    // transition: none;
     transition: var(--transition);
     font-size: 16px;
     margin: 0;
     color: var(--color5);
     scroll-behavior: smooth;
+    transform: translate3d(unset, unset, unset); // hardware accelleration for mobile
+    opacity: 0.99;
+    backface-visibility: hidden;
 }
 
 body {
