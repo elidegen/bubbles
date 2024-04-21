@@ -16,10 +16,10 @@
 
     <div class="right-side">
 
-        <app-theme-picker></app-theme-picker>
 
-        <div class="header-button" (click)="showThemesPicker()">
-            <app-color-picker></app-color-picker>
+        <div class="header-button" (click)="showThemesPicker()" [class.cursor-default]="mainService.showThemes">
+            <app-theme-picker></app-theme-picker>
+            <app-color-picker *ngIf="mainService.showColorPalette"></app-color-picker>
         </div>
 
         <div class="chat-name" (click)="openProfile()">

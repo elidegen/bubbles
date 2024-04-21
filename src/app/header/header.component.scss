@@ -6,7 +6,7 @@
 }
 
 .header-wrapper {
-    @include d-flex($jc: space-between);
+    @include d-flex($jc: space-between, $g: 15px);
     padding-bottom: 15px;
 
     .card {
@@ -23,12 +23,18 @@
     @extend .card;
     @include center();
     @extend .hover;
+    padding: 0 !important;
+    height: 40px;
     min-width: 40px; // avoids twitch of search bar
     // margin-right: 15px;
 
     app-side-menu-button {
         @include center();
     }
+}
+
+.cursor-default {
+    cursor: default !important;
 }
 
 .logo-wrapper {
@@ -38,7 +44,7 @@
         font-size: 22px;
         font-family: 'bitcheese', 'Roboto', sans-serif !important;
 
-        @media(max-width: 390px){
+        @media(max-width: 390px) {
             display: none;
         }
     }
@@ -53,19 +59,18 @@
 }
 
 app-search {
-    min-width: 202px;
     width: 100%;
 }
 
 .give-margin {
-    @media(max-width: 820px) {
-        margin-left: -365px;
+    @media(max-width: 565px) {
+        margin-left: -205px;
         transition: 500ms;
     }
 }
 
 .remove-margin {
-    @media(max-width: 820px) {
+    @media(max-width: 565px) {
         margin-left: 0;
         transition: 500ms;
     }

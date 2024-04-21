@@ -32,6 +32,7 @@ export class MainService {
   messageAndThreadFetchingDone: boolean = false;
 
   showThemes: boolean = false;
+  showColorPalette: boolean = true;
   selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
   themes: Theme[] = [{
     name: 'purple',
@@ -77,42 +78,6 @@ export class MainService {
     color4: '#8abfa6',
     color5: '#262523',
     color6: '##4d4b4b',
-  },
-  {
-    name: 'olive',
-    color1: '#1e2717',
-    color2: '#2c3722',
-    color3: '#95a85c',
-    color4: '#5c496c',
-    color5: '#FFFFFF',
-    color6: '#adadad',
-  },
-  {
-    name: 'yellow',
-    color1: '#e7f966',
-    color2: '#f7fdc1',
-    color3: '#ffcd80',
-    color4: '#00c6e7',
-    color5: '#373D00',
-    color6: '#adadad',
-  },
-  {
-    name: 'pink',
-    color1: '#490033',
-    color2: '#750052',
-    color3: '#f79c3a',
-    color4: '#3af79c',
-    color5: '#FFFFFF',
-    color6: '#adadad',
-  },
-  {
-    name: 'pink',
-    color1: '#490033',
-    color2: '#750052',
-    color3: '#f79c3a',
-    color4: '#3af79c',
-    color5: '#FFFFFF',
-    color6: '#adadad',
   }];
 
   constructor() {
@@ -184,7 +149,7 @@ export class MainService {
       this.loader = false;
       this.userFetchingDone = false;
       this.chatsAndPreviewFetchingDone = false;
-      this.messageAndThreadFetchingDone = false;      
+      this.messageAndThreadFetchingDone = false;
     }
   }
 
@@ -197,7 +162,7 @@ export class MainService {
     document.documentElement.style.setProperty('--color5', currentTheme[0].color5);
     document.documentElement.style.setProperty('--color6', currentTheme[0].color6);
     setTimeout(() => {
-      document.documentElement.style.setProperty('--transition', 'all 125ms ease-in-out');      
+      document.documentElement.style.setProperty('--transition', 'all 125ms ease-in-out');
     }, 200);
   }
 }

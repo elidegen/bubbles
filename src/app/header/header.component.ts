@@ -43,6 +43,15 @@ export class HeaderComponent {
 
   showThemesPicker() {
     this.mainService.showThemes = !this.mainService.showThemes;
+    if(this.mainService.showThemes){
+      // setTimeout(() => {
+        this.mainService.showColorPalette = false;        
+      // }, 100);
+    } else {
+      setTimeout(() => {
+        this.mainService.showColorPalette = true;
+      }, 500);
+    }
   }
 
   getScreenWidth(){
