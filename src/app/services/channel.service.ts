@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { Message, MessageService } from './message.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, take } from 'rxjs';
 import { User, UserService } from './user.service';
 import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
@@ -105,15 +105,16 @@ export class ChannelService {
   }
 
   subscribeChatsAndPreview() {
-    this.$chatsAndPreview.subscribe(data => {
+    this.$chatsAndPreview.pipe(take(1)).subscribe(data => {
       this.chats = data.channels;
       this.chatPreviews = data.preview_messages;
-      console.log('previews:', this.chatPreviews);
-      console.log('chats: ', this.chats);
+      // console.log('previews:', this.chatPreviews);
+      // console.log('chats: ', this.chats);
       this.filterChats();
       this.userService.getUsers();
     });
   }
+
 
   openChannel(id: number) {
     this.mainService.showNewMessageSearch = false;
