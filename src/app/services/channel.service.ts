@@ -149,12 +149,10 @@ export class ChannelService {
 
   pollMessages(id:number) {
     this.messageService.getMessagesAndThread(id);
-    console.log("Polling...");
   }
 
   stopPollingForMessages() {
     clearInterval(this.intervalIdMessages);
-    console.log("Polling stopped.");
   }
 
   startPolloingForChats(){
@@ -169,12 +167,10 @@ export class ChannelService {
 
   stopPollingForChats(){
     clearInterval(this.intervalIdChats);
-    console.log("Polling stopped (chats) ");
   }
 
   pollChats(){
     this.getChatsForUser();
-    console.log('polling chats...');
     
   }
 
