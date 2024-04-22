@@ -74,6 +74,7 @@ export class MessageService {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
+      this.mainService.chatLoader = false;
     });
   }
 

@@ -117,6 +117,7 @@ export class ChannelService {
 
 
   openChannel(id: number) {
+    this.mainService.chatLoader = true;
     this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));

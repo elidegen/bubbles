@@ -9,11 +9,12 @@ import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.c
 import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-chat-window',
   standalone: true,
-  imports: [FormsModule, MessageBarComponent, ChatHeaderComponent, GroupedMessagesComponent, SearchComponent],
+  imports: [FormsModule, MessageBarComponent, ChatHeaderComponent, GroupedMessagesComponent, SearchComponent, LoaderComponent],
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })

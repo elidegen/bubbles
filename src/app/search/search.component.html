@@ -19,7 +19,7 @@
         <p class="seperator">Channels</p>
         @for (channel of searchSolution.channels; track $index) {
         @if (channel.is_channel) {
-        <div class=" preview" (click)="openChannel(channel.id)">
+        <div class="preview" (click)="openChannel(channel.id)">
             <img src="{{channelService.getImg(channel.picture)}}">
             <p class="limit-digits">{{channel.name}}</p>
         </div>

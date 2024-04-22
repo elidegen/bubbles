@@ -30,6 +30,10 @@ app-search {
     padding-right: 10px;
 }
 
+app-loader {
+    height: 100%;
+}
+
 .seperator {
     @extend .small-font;
     padding: 5px;
