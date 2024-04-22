@@ -9,7 +9,7 @@ import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from './data.service';
+import { mainService } from './data.service';
 
 export class Channel {
   id: number;
@@ -66,7 +66,6 @@ export class ChannelService {
     private userService: UserService,
     private mainService: MainService,
     private router: Router,
-    private dataService: DataService,
   ) {
     this.setCurrentChannel();
   }
@@ -117,7 +116,7 @@ export class ChannelService {
 
   openChannel(channelId: number) {
     // debugger;
-    this.dataService.chatLoader = true;
+    this.mainService.chatLoader = true;
     this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === channelId) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
@@ -127,7 +126,7 @@ export class ChannelService {
     if (window.innerWidth < 845) {
       this.mainService.sideMenuOpen = false;
     }
-    this.dataService.scrollEmitChat();
+    this.mainService.scrollEmitChat();
   }
 
   startPollingForMessages(id: number) {
@@ -244,7 +243,7 @@ export class ChannelService {
       this.messageService.currentMessages.push(response);
       this.replacePreview(response);
       setTimeout(() => {
-        this.dataService.scrollToBottomChat.emit();
+        this.mainService.scrollToBottomChat.emit();
       }, 100);
     } else {
       this.messageService.threads.push(response);

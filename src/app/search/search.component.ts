@@ -9,7 +9,7 @@ import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
-import { DataService } from '../services/data.service';
+import { mainService } from '../services/data.service';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -55,7 +55,6 @@ export class SearchComponent implements OnInit {
     public messageService: MessageService,
     private authService: AuthService,
     public mainService: MainService,
-    private dataService: DataService,
   ) {
     this.setupClickListener();
     this.currentUserId = this.authService.currentUser.id;
@@ -136,14 +135,14 @@ export class SearchComponent implements OnInit {
   }
 
   openMessage(channelId: number, messageId: number) {
-    this.dataService.messageToScroll = messageId;
+    this.mainService.messageToScroll = messageId;
     this.channelService.openChannel(channelId);
     this.showResults = false;
     this.searchValue = '';
   }
 
   async openThread(thread: Message) {
-    this.dataService.threadToScroll = thread.id;
+    this.mainService.threadToScroll = thread.id;
     const url = environment.baseUrl + 'messages/' + thread.source + '/';
     await firstValueFrom(this.http.get<Message>(url)).then((response) => {
       this.channelService.openChannel(response.source);

@@ -4,6 +4,7 @@ import { take } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MainService } from './main.service';
 import { Router } from '@angular/router';
+import { mainService } from './data.service';
 
 export interface CurrentUser {
   id: number,
@@ -34,8 +35,8 @@ export class AuthService {
   }
 
   constructor(
-    private http: HttpClient, 
-    private mainService: MainService, 
+    private http: HttpClient,
+    private mainService: MainService,
     private router: Router,
   ) {
     this.currentUser = this.getCurrentUser();

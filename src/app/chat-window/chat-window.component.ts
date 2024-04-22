@@ -10,7 +10,7 @@ import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
 import { LoaderComponent } from '../loader/loader.component';
-import { DataService } from '../services/data.service';
+import { mainService } from '../services/data.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -29,18 +29,17 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
-    public dataService: DataService,
   ) {
     this.getMessagesToDisplay();
-    this.dataService.scrollToBottomChat.subscribe(() => {
+    this.mainService.scrollToBottomChat.subscribe(() => {
       console.log('stb received');
       
       this.scrollToBottomChat();
     });
-    this.dataService.scrollToMessage.subscribe(() => {
+    this.mainService.scrollToMessage.subscribe(() => {
       console.log('scolltomsgSub');
-      if (this.dataService.messageToScroll)
-        this.scrollToMessage(this.dataService.messageToScroll.toString());
+      if (this.mainService.messageToScroll)
+        this.scrollToMessage(this.mainService.messageToScroll.toString());
     });
   }
 

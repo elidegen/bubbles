@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MainService } from './main.service';
 import { ChannelService } from './channel.service';
-import { DataService } from './data.service';
+import { mainService } from './data.service';
 
 export interface Reaction {
   user: number,
@@ -55,7 +55,6 @@ export class MessageService {
   constructor(
     private http: HttpClient,
     private mainService: MainService,
-    private dataService: DataService,
   ) { }
 
   async getMessagesAndThread(chatId: number) {
@@ -77,7 +76,7 @@ export class MessageService {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
-      this.dataService.chatLoader = false;
+      this.mainService.chatLoader = false;
     });
   }
 
@@ -150,7 +149,7 @@ export class MessageService {
     this.mainService.threadOpen = true;
     if (window.innerWidth < 1260)
       this.mainService.sideMenuOpen = false;
-    this.dataService.scrollEmitThread();
+    this.mainService.scrollEmitThread();
   }
 
   async patchMessage(message: Message) {

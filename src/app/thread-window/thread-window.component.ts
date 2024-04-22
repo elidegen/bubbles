@@ -6,10 +6,8 @@ import { MainService } from '../services/main.service';
 import { MessageBarComponent } from '../message-bar/message-bar.component';
 import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.component';
 import { SearchComponent } from '../search/search.component';
-import { MessageComponent } from '../message/message.component';
 import { CommonModule } from '@angular/common';
 import { CloseComponent } from '../svgs/close/close.component';
-import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-thread-window',
@@ -29,17 +27,16 @@ export class ThreadWindowComponent implements OnInit {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
-    public dataService: DataService,
   ) {
-    this.dataService.scrollToBottomThread.subscribe(() => {
+    this.mainService.scrollToBottomThread.subscribe(() => {
       console.log('stbThread received');
 
       this.scrollToBottomThread();
     });
-    this.dataService.scrollToMessage.subscribe(() => {
+    this.mainService.scrollToMessage.subscribe(() => {
       console.log('scolltothreadSub');
-      if (this.dataService.threadToScroll)
-        this.scrollToThread(this.dataService.threadToScroll.toString());
+      if (this.mainService.threadToScroll)
+        this.scrollToThread(this.mainService.threadToScroll.toString());
     });
   }
 

@@ -1,20 +1,33 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Theme } from '../theme-picker/theme-picker.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
-  loader: boolean = true;
+  @Output() scrollToBottomChat = new EventEmitter();
+  @Output() scrollToBottomThread = new EventEmitter();
+  @Output() scrollToMessage = new EventEmitter();
+  @Output() scrollToThread = new EventEmitter();
+  @Output() updateHeader = new EventEmitter();
+  @Output() renderGroupMember = new EventEmitter();
 
+  messageToScroll: number | undefined;
+  threadToScroll: number | undefined;
+
+  chatLoader: boolean = false;
+  loader: boolean = false;
+
+  
   showPopup: boolean = false;
-  popupMessage: string | undefined;
-  popupIsError: boolean = true;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
   addMembersPopup: boolean = false;
   showMembersPopup: boolean = false;
   editChannelPopup: boolean = false;
+  popupMessage: string | undefined;
+  popupIsError: boolean = true;
+
 
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
@@ -85,6 +98,53 @@ export class MainService {
     this.getEmojis();
   }
 
+  scrollEmitChat() {
+    setTimeout(() => {
+      if (this.messageToScroll) {
+        this.scrollToMessage.emit();
+      } else if (this.threadToScroll) {
+        this.scrollToThread.emit();
+      } else {
+        this.scrollToBottomChat.emit();
+      }
+      this.renderGroupMember.emit();
+      this.updateHeader.emit();
+    }, 500);
+  }
+
+  scrollEmitThread() {
+    setTimeout(() => {
+      if (this.threadToScroll) {
+        this.scrollToThread.emit();
+      } else {
+        this.scrollToBottomThread.emit();
+      }
+    }, 500);
+  }
+
+  popupLog(message: string, isError: boolean) {
+    this.popupIsError = isError;
+    this.openPopup();
+    this.popupMessage = message;
+    setTimeout(() => {
+      this.closePopups();
+    }, 3000);
+  }
+
+  openPopup() {
+    this.showPopup = true;
+  }
+
+  closePopups() {
+    this.showPopup = false;
+    this.popupMessage = undefined;
+    this.addChannelPopup = false;
+    this.profilePopup = false;
+    this.addMembersPopup = false;
+    this.showMembersPopup = false;
+    this.editChannelPopup = false;
+  }
+
   checkSelectedTheme() {
     if (!this.themes.some(theme => theme.name === this.selectedTheme)) {
       localStorage.setItem('selectedTheme', 'purple');
@@ -119,29 +179,6 @@ export class MainService {
     data.forEach(category => {
       this.categoryList.push(category);
     });
-  }
-
-  closePopups() {
-    this.showPopup = false;
-    this.popupMessage = undefined;
-    this.addChannelPopup = false;
-    this.profilePopup = false;
-    this.addMembersPopup = false;
-    this.showMembersPopup = false;
-    this.editChannelPopup = false;
-  }
-
-  openPopup() {
-    this.showPopup = true;
-  }
-
-  popupLog(message: string, isError: boolean) {
-    this.popupIsError = isError;
-    this.openPopup();
-    this.popupMessage = message;
-    setTimeout(() => {
-      this.closePopups();
-    }, 3000);
   }
 
   deactivateLoader() {
