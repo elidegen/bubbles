@@ -7,7 +7,7 @@
             </div>
         }
         @if (editState) {
-        <app-message-bar (messageContent)="editMessage($event)" [enableFilePicker]="false" [disabled]="false"></app-message-bar>
+        <app-message-bar [class.padding-top]="message.attachment" (messageContent)="editMessage($event)" [enableFilePicker]="false" [disabled]="false"></app-message-bar>
         } @else {
         <p class="message-content">{{message!.content}}</p>
         }
@@ -30,7 +30,7 @@
                 <app-add-reaction></app-add-reaction>
             </div>
             @if (myMessage) {
-            <div class="img-wrapper" (click)="editState = !editState">
+            <div class="img-wrapper" (click)="toggleEditState()">
                 <app-edit-document></app-edit-document>
             </div>
             <div class="img-wrapper" (click)="channelService.deleteMessage(message)">

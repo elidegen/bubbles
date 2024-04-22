@@ -130,22 +130,21 @@ export class ChannelService {
   }
 
   startPollingForMessages(id: number) {
+    console.log('start polling');
     this.stopPollingForMessages();
     this.messageService.getMessagesAndThread(id);
     if (id) {
       this.intervalIdMessages = setInterval(() => {
-        this.pollMessages(id);
+        this.messageService.getMessagesAndThread(id);
       }, this.pollingIntervalMessages);
     } else {
       return;
     }
   }
 
-  pollMessages(id: number) {
-    this.messageService.getMessagesAndThread(id);
-  }
-
   stopPollingForMessages() {
+    console.log('stop polling');
+    
     clearInterval(this.intervalIdMessages);
   }
 

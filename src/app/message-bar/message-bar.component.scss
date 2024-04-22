@@ -1,9 +1,9 @@
 @import '../library.scss';
 
 .input-wrapper {
-    @include center($jc: space-between, $ai: flex-end);
+    @include center($jc: space-between);
     gap: 15px;
-    min-height: 55px;
+    // min-height: 55px;
 
     .msg-input {
         @include d-flex($jc: space-between, $g: 5px);

@@ -18,7 +18,6 @@ export class MainService {
   chatLoader: boolean = false;
   loader: boolean = false;
 
-
   showPopup: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
@@ -27,7 +26,6 @@ export class MainService {
   editChannelPopup: boolean = false;
   popupMessage: string | undefined;
   popupIsError: boolean = true;
-
 
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
@@ -66,15 +64,6 @@ export class MainService {
     color6: '#adadad',
   },
   {
-    name: 'bright',
-    color1: '#bdbdbd',
-    color2: '#e0e0e0',
-    color3: '#eee',
-    color4: '#35b8bd',
-    color5: '#060606',
-    color6: '#000000',
-  },
-  {
     name: 'red',
     color1: '#602632',
     color2: '#823d44',
@@ -91,6 +80,15 @@ export class MainService {
     color4: '#35b8bd',
     color5: '#FFFFFF',
     color6: '#adadad',
+  },
+  {
+    name: 'light',
+    color1: '#bdbdbd',
+    color2: '#e0e0e0',
+    color3: '#eee',
+    color4: '#35b8bd',
+    color5: '#060606',
+    color6: '#000000',
   }];
 
   constructor() {

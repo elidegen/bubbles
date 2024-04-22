@@ -49,16 +49,16 @@ input[type="radio"]#blue {
     --radio-color: #263250;
 }
 
-input[type="radio"]#bright {
-    --radio-color: #c2dee9;
-}
-
 input[type="radio"]#red {
     --radio-color: #602632;
 }
 
 input[type="radio"]#green {
     --radio-color: #1e2717;
+}
+
+input[type="radio"]#light {
+    --radio-color: #bdbdbd;
 }
 
 .invisible {

@@ -5,7 +5,7 @@ import { CommonModule, ViewportScroller } from '@angular/common';
 import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
-import { Subject } from 'rxjs';
+import { Subject, firstValueFrom } from 'rxjs';
 import { MessageBarComponent, MessageContent } from '../message-bar/message-bar.component';
 import { ChannelService } from '../services/channel.service';
 import { MainService } from '../services/main.service';
@@ -16,6 +16,8 @@ import { HeartComponent } from '../svgs/heart/heart.component';
 import { LikeComponent } from '../svgs/like/like.component';
 import { RocketComponent } from '../svgs/rocket/rocket.component';
 import { ReplyComponent } from '../svgs/reply/reply.component';
+import { environment } from '../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-message',
@@ -43,7 +45,7 @@ export class MessageComponent {
     public messageService: MessageService,
     public userService: UserService,
     public channelService: ChannelService,
-    private mainService: MainService,
+    private http: HttpClient,
     public scroller: ViewportScroller,
   ) {
     this.currentUser = authService.currentUser;
@@ -101,7 +103,27 @@ export class MessageComponent {
 
   editMessage(messageContent: MessageContent) {
     this.message.content = messageContent.content;
-    this.messageService.updateMessage(this.message);
+    this.updateMessage(this.message);
     this.editState = false;
+  }
+
+
+  async updateMessage(message: Message) {
+    const url = environment.baseUrl + 'messages/' + message.id + '/';
+    const formData = new FormData();
+    formData.append('content', message.content);
+    const response = await firstValueFrom(this.http.patch(url, formData));
+    this.updateLocalArray(response as Message);
+    this.channelService.startPollingForMessages(this.message.source);
+  }
+
+  updateLocalArray(messageToUpdate: Message){
+    const index = this.messageService.currentMessages.findIndex(message => message.id === messageToUpdate.id);
+    this.messageService.currentMessages[index] = messageToUpdate;
+  }
+
+  toggleEditState(){
+    this.channelService.stopPollingForMessages();
+    this.editState = !this.editState;
   }
 }

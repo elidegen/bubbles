@@ -160,12 +160,4 @@ export class MessageService {
     }
     await firstValueFrom(this.http.patch(url, data));
   }
-
-
-  async updateMessage(message: Message) {
-    const url = environment.baseUrl + 'messages/' + message.id + '/';
-    const formData = new FormData();
-    formData.append('content', message.content);
-    await firstValueFrom(this.http.patch(url, formData));
-  }
 }
