@@ -4,7 +4,6 @@ import { take } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { MainService } from './main.service';
 import { Router } from '@angular/router';
-import { ChannelService } from './channel.service';
 
 export interface CurrentUser {
   id: number,

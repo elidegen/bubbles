@@ -11,6 +11,7 @@ import { User, UserService } from '../services/user.service';
 import { CloseComponent } from '../svgs/close/close.component';
 import { MailComponent } from '../svgs/mail/mail.component';
 import { ChannelService } from '../services/channel.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-profile-dialog',
@@ -29,6 +30,7 @@ export class ProfileDialogComponent implements OnDestroy {
     private http: HttpClient,
     public userService: UserService,
     public channelService: ChannelService,
+    private dataService: DataService,
   ) {
     this.user = userService.userToShow;    
   }
@@ -62,7 +64,7 @@ export class ProfileDialogComponent implements OnDestroy {
     this.authService.currentUser = response;
     this.authService.setUser(response);
     this.updateUsers(response as User);
-    this.channelService.renderGroupMember.emit();
+    this.dataService.renderGroupMember.emit();
   }
 
   updateUsers(response: User) {

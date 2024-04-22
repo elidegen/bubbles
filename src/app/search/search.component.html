@@ -28,7 +28,7 @@
 
         <p class="seperator">Messages</p>
         @for (message of searchSolution.messages; track $index) {
-        <div class=" message preview" (click)="openChannel(message.source)">
+        <div class=" message preview" (click)="openMessage(message.source, message.id)">
 
             <div class="online-wrapper">
                 <img src="{{channelService.getImg(this.userService.getUser(message.author).picture)}}">
@@ -37,7 +37,7 @@
 
             <div class="details">
                 <p class="author limit-digits">{{this.userService.getUser(message.author).username}}</p>
-                <p>{{message.content}}</p>
+                <p><span *ngIf="message.author === currentUserId">You: </span>{{message.content}}</p>
                 <p *ngIf="isChannel(message)" class="source limit-digits">in channel:
                     {{channelService.getChannel(message.source).name}}</p>
             </div>

@@ -10,6 +10,7 @@ import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -28,24 +29,38 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
+    public dataService: DataService,
   ) {
     this.getMessagesToDisplay();
-    this.channelService.scrollToBottom.subscribe(() => {
-      this.scrollToBottom();
-      // this.scrollToElement();
-    })
+    this.dataService.scrollToBottomChat.subscribe(() => {
+      console.log('stb received');
+      
+      this.scrollToBottomChat();
+    });
+    this.dataService.scrollToMessage.subscribe(() => {
+      console.log('scolltomsgSub');
+      if (this.dataService.messageToScroll)
+        this.scrollToMessage(this.dataService.messageToScroll.toString());
+    });
   }
+
+
   ngAfterViewInit(): void {
-    // this.scrollToBottom();
+    this.scrollToBottomChat();
   }
 
-  // scrollToElement(){
+  scrollToMessage(messageId: string): void {
+    console.log('scrollToMsg');
 
-  // }
+    const element = document.getElementById(messageId);
+    if (element) {
+      this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;
+    }
+  }
 
-  scrollToBottom() {
+  scrollToBottomChat() {
     if (this.chatWrapper) {
-      console.log('chatwrapper', this.chatWrapper.nativeElement.scrollHeight);
+      console.log('scrollToBottomChat', this.chatWrapper.nativeElement.scrollHeight);
       this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
     }
   }

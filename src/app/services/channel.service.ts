@@ -9,6 +9,7 @@ import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from './data.service';
 
 export class Channel {
   id: number;
@@ -19,7 +20,7 @@ export class Channel {
   picture?: string;
   read_by: number[];
   hash: string;
-  
+
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : null;
@@ -42,9 +43,6 @@ export interface ChatsAndPreview {
   providedIn: 'root'
 })
 export class ChannelService {
-  @Output() scrollToBottom = new EventEmitter<any>();
-  @Output() updateHeader = new EventEmitter<any>();
-  @Output() renderGroupMember = new EventEmitter<any>();
   $chatsAndPreview: BehaviorSubject<ChatsAndPreview> = new BehaviorSubject<ChatsAndPreview>({
     channels: [],
     preview_messages: [],
@@ -56,10 +54,10 @@ export class ChannelService {
   chats: Channel[] = [];
 
   intervalIdMessages: any;
-  pollingIntervalMessages:number = 8000; // 8 sec
+  pollingIntervalMessages: number = 8000; // 8 sec
 
-  intervalIdChats:any;
-  pollingIntervalChats:number = 20000; //20sec
+  intervalIdChats: any;
+  pollingIntervalChats: number = 20000; //20sec
 
   constructor(
     private authService: AuthService,
@@ -68,6 +66,7 @@ export class ChannelService {
     private userService: UserService,
     private mainService: MainService,
     private router: Router,
+    private dataService: DataService,
   ) {
     this.setCurrentChannel();
   }
@@ -116,28 +115,22 @@ export class ChannelService {
   }
 
 
-  openChannel(id: number) {
-    this.mainService.chatLoader = true;
+  openChannel(channelId: number) {
+    // debugger;
+    this.dataService.chatLoader = true;
     this.mainService.showNewMessageSearch = false;
-    this.currentChannel = this.chats.find(obj => obj.id === id) as Channel;
+    this.currentChannel = this.chats.find(obj => obj.id === channelId) as Channel;
     localStorage.setItem('currentChannel', JSON.stringify(this.currentChannel));
-    this.setRead(id);
-    this.startPollingForMessages(id);
+    this.setRead(channelId);
+    this.startPollingForMessages(channelId);
     this.mainService.threadOpen = false;
-    if(window.innerWidth < 845){
+    if (window.innerWidth < 845) {
       this.mainService.sideMenuOpen = false;
     }
-    setTimeout(() => {
-      this.scrollToBottom.emit();
-      console.log('emitted!');
-      
-      this.renderGroupMember.emit();
-      this.updateHeader.emit();
-    }, 200);
+    this.dataService.scrollEmitChat();
   }
 
-
-  startPollingForMessages(id:number){
+  startPollingForMessages(id: number) {
     this.stopPollingForMessages();
     this.messageService.getMessagesAndThread(id);
     if (id) {
@@ -147,10 +140,9 @@ export class ChannelService {
     } else {
       return;
     }
-
   }
 
-  pollMessages(id:number) {
+  pollMessages(id: number) {
     this.messageService.getMessagesAndThread(id);
   }
 
@@ -158,25 +150,21 @@ export class ChannelService {
     clearInterval(this.intervalIdMessages);
   }
 
-  startPolloingForChats(){
+  startPolloingForChats() {
     this.stopPollingForChats();
     this.getChatsForUser();
     this.intervalIdChats = setInterval(() => {
       this.pollChats();
     }, this.pollingIntervalChats);
-
   }
 
-
-  stopPollingForChats(){
+  stopPollingForChats() {
     clearInterval(this.intervalIdChats);
   }
 
-  pollChats(){
+  pollChats() {
     this.getChatsForUser();
-    
   }
-
 
   filterChats() {
     this.channels = this.chats.filter(channel => channel.is_channel === true); //filters only channels that have currentuser as member
@@ -255,6 +243,9 @@ export class ChannelService {
     if (endpoint === 'messages/') {
       this.messageService.currentMessages.push(response);
       this.replacePreview(response);
+      setTimeout(() => {
+        this.dataService.scrollToBottomChat.emit();
+      }, 100);
     } else {
       this.messageService.threads.push(response);
     }

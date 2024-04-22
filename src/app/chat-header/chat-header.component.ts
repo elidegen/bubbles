@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { MainService } from '../services/main.service';
 import { CloseComponent } from '../svgs/close/close.component';
 import { AddMemberComponent } from '../svgs/add-member/add-member.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-chat-header',
@@ -23,9 +24,10 @@ export class ChatHeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private mainService: MainService,
-    private channelService: ChannelService
+    private channelService: ChannelService,
+    private dataService: DataService,
   ) {
-    this.channelService.renderGroupMember.subscribe(() => {
+    this.dataService.renderGroupMember.subscribe(() => {
       this.renderGroupMember();
     })
   }

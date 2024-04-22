@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MainService } from './main.service';
 import { ChannelService } from './channel.service';
+import { DataService } from './data.service';
 
 export interface Reaction {
   user: number,
@@ -54,15 +55,17 @@ export class MessageService {
   constructor(
     private http: HttpClient,
     private mainService: MainService,
+    private dataService: DataService,
   ) { }
 
   async getMessagesAndThread(chatId: number) {
-    const data = await firstValueFrom(this.fetchMessagesAndThread(chatId));
-    this.$messagesAndThread.next(data);
-
-    this.subscribeMessagesAndThreads();
-    this.mainService.messageAndThreadFetchingDone = true;
-    this.mainService.deactivateLoader();
+    await firstValueFrom(this.fetchMessagesAndThread(chatId))
+      .then((data) => {
+        this.$messagesAndThread.next(data);
+        this.subscribeMessagesAndThreads();
+        this.mainService.messageAndThreadFetchingDone = true;
+        this.mainService.deactivateLoader();
+      });
   }
 
   fetchMessagesAndThread(chatId: number): Observable<MessagesAndThread> {
@@ -74,7 +77,7 @@ export class MessageService {
     this.$messagesAndThread.subscribe(data => {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
-      this.mainService.chatLoader = false;
+      this.dataService.chatLoader = false;
     });
   }
 
@@ -135,7 +138,7 @@ export class MessageService {
 
   async getMessage(messageId: number) {
     console.log('getMessage');
-    
+
     const url = environment.baseUrl + 'messages/' + messageId + '/';
     await firstValueFrom(this.http.get<Message>(url)).then((response) => {
       return response as Message;
@@ -145,8 +148,9 @@ export class MessageService {
   openThread(threadSource: number) {
     this.currentThread = this.currentMessages.find(obj => obj.id === threadSource) as Message;
     this.mainService.threadOpen = true;
-    if(window.innerWidth < 1260)
+    if (window.innerWidth < 1260)
       this.mainService.sideMenuOpen = false;
+    this.dataService.scrollEmitThread();
   }
 
   async patchMessage(message: Message) {

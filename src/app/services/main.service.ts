@@ -6,7 +6,6 @@ import { Theme } from '../theme-picker/theme-picker.component';
 })
 export class MainService {
   loader: boolean = true;
-  chatLoader: boolean = false;
 
   showPopup: boolean = false;
   popupMessage: string | undefined;

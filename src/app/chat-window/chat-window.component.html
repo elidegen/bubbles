@@ -9,7 +9,7 @@
     <app-chat-header [currentChat]="channelToDisplay"></app-chat-header>
 
     <div class="chat-messages-wrapper" #chatWrapper>
-        @if (mainService.chatLoader) {
+        @if (dataService.chatLoader) {
             <app-loader></app-loader>
         } @else {
             @if (channelToDisplay){

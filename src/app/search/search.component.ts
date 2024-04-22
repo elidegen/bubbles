@@ -9,6 +9,7 @@ import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
+import { DataService } from '../services/data.service';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -54,12 +55,13 @@ export class SearchComponent implements OnInit {
     public messageService: MessageService,
     private authService: AuthService,
     public mainService: MainService,
+    private dataService: DataService,
   ) {
     this.setupClickListener();
     this.currentUserId = this.authService.currentUser.id;
   }
 
-  private setupClickListener() {
+  setupClickListener() {
     document.addEventListener('click', () => {
       this.showResults = false;
     });
@@ -76,22 +78,20 @@ export class SearchComponent implements OnInit {
 
   async search() {
     const url = environment.baseUrl + this.searchType;
-    const chats = this.channelService.chats.map(chat => chat.id);
-    
+    const chats = this.channelService.chats.map(chat => chat.id);    
     const data = {
       search_value: this.searchValue.trim(),
       current_user: this.currentUserId, 
-      chats: chats
+      chats: chats,
     }
     if (this.searchType === 'search') {
       this.searchSolution = await firstValueFrom(this.http.post(url, data)) as SearchSolution;
-      console.log('searchSol', this.searchSolution);
+      // console.log('searchSol', this.searchSolution);
     } else {
       this.searchSolutionUser = await firstValueFrom(this.http.post(url, data)) as SearchSolutionUser;
-      console.log('searchSolUser', this.searchSolutionUser);
+      // console.log('searchSolUser', this.searchSolutionUser);
     }
   }
-
 
   searchIsValid() {
     return this.searchValue.trim().length > 0;
@@ -102,7 +102,6 @@ export class SearchComponent implements OnInit {
   }
 
   selectUser(user: User, event: Event) {
-
     if (this.userSelection.some(obj => obj.id === user.id)) {
       const index = this.userSelection.findIndex(obj => obj.id === user.id);
       this.userSelection.splice(index, 1);
@@ -130,20 +129,21 @@ export class SearchComponent implements OnInit {
     this.mainService.showPopup = true;
   }
 
-  openChannel(id: number) {
-    this.channelService.openChannel(id);
+  openChannel(channelId:number){
+    this.channelService.openChannel(channelId);
     this.showResults = false;
     this.searchValue = '';
   }
 
-  async getContent(thread: Message) {
-    // const message = await this.messageService.getMessage(thread.source);
-    // console.log('msg', message);
-    
-  //   return message.content;
+  openMessage(channelId: number, messageId: number) {
+    this.dataService.messageToScroll = messageId;
+    this.channelService.openChannel(channelId);
+    this.showResults = false;
+    this.searchValue = '';
   }
 
   async openThread(thread: Message) {
+    this.dataService.threadToScroll = thread.id;
     const url = environment.baseUrl + 'messages/' + thread.source + '/';
     await firstValueFrom(this.http.get<Message>(url)).then((response) => {
       this.channelService.openChannel(response.source);

@@ -9,6 +9,7 @@ import { SearchComponent } from '../search/search.component';
 import { MessageComponent } from '../message/message.component';
 import { CommonModule } from '@angular/common';
 import { CloseComponent } from '../svgs/close/close.component';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-thread-window',
@@ -28,7 +29,32 @@ export class ThreadWindowComponent implements OnInit {
     public messageService: MessageService,
     public authService: AuthService,
     public mainService: MainService,
-  ) { }
+    public dataService: DataService,
+  ) {
+    this.dataService.scrollToBottomThread.subscribe(() => {
+      console.log('stbThread received');
+
+      this.scrollToBottomThread();
+    });
+    this.dataService.scrollToMessage.subscribe(() => {
+      console.log('scolltothreadSub');
+      if (this.dataService.threadToScroll)
+        this.scrollToThread(this.dataService.threadToScroll.toString());
+    });
+  }
+
+  scrollToBottomThread() {
+    this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+  }
+
+  scrollToThread(threadId: string): void {
+    const element = document.getElementById(threadId);
+    console.log('element', element);
+    
+    if (element) {
+      this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;
+    }
+  }
 
   ngOnInit(): void {
     this.getMessagesToDisplay();

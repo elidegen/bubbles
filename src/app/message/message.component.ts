@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Message, MessageService } from '../services/message.service';
 import { AuthService, CurrentUser } from '../services/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
 import { EmojiPickerDialogComponent } from '../emoji-picker-dialog/emoji-picker-dialog.component';
 import { UserService } from '../services/user.service';
 import { ReactionsComponent } from '../reactions/reactions.component';
@@ -20,7 +20,7 @@ import { ReplyComponent } from '../svgs/reply/reply.component';
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent, 
+  imports: [CommonModule, EmojiPickerDialogComponent, ReactionsComponent, MessageBarComponent,
     // reaction components:
     AddReactionComponent, DeleteComponent, EditDocumentComponent, HeartComponent, LikeComponent, RocketComponent, ReplyComponent],
   templateUrl: './message.component.html',
@@ -44,6 +44,7 @@ export class MessageComponent {
     public userService: UserService,
     public channelService: ChannelService,
     private mainService: MainService,
+    public scroller: ViewportScroller,
   ) {
     this.currentUser = authService.currentUser;
     this.setupClickListener();
