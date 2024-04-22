@@ -77,9 +77,9 @@ $card-padding: 15px;
 
 .button1 {
     @extend .button;
-    background-color: var(--color3);
-    border: 2px solid var(--color3);
-    color: $text-color;
+    background-color: var(--color4);
+    border: 2px solid var(--color4);
+    color: white;
 }
 
 .button2 {

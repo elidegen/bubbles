@@ -41,24 +41,24 @@
     }
 }
 
-input[type="radio"]#purple {
-    --radio-color: #4d426d; // die dunklere hauptfarbe farbe hier
+input[type="radio"]#black {
+    --radio-color: #000000; // die dunklere hauptfarbe farbe hier
 }
 
-input[type="radio"]#dark {
-    --radio-color: #173157;
+input[type="radio"]#blue {
+    --radio-color: #263250;
 }
 
 input[type="radio"]#bright {
     --radio-color: #c2dee9;
 }
 
-input[type="radio"]#pink {
-    --radio-color: #490033;
+input[type="radio"]#red {
+    --radio-color: #602632;
 }
 
-input[type="radio"]#brown {
-    --radio-color: #a64f3c;
+input[type="radio"]#green {
+    --radio-color: #1e2717;
 }
 
 .invisible {
@@ -66,18 +66,14 @@ input[type="radio"]#brown {
 }
 
 .slide-in {
-    // @media(min-width: 345px) {
-        width: 205px;
-        opacity: 1;
-        transition: all 500ms;
-    // }
+    width: 205px;
+    opacity: 1;
+    transition: all 500ms;
 }
 
 .slide-out {
-    // @media(min-width: 345px) {
-        width: 0px;
-        opacity: 0;
-        padding: 0;
-        transition: all 500ms;
-    // }
+    width: 0px;
+    opacity: 0;
+    padding: 0;
+    transition: all 500ms;
 }

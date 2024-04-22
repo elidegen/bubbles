@@ -29,12 +29,12 @@ export class ThreadWindowComponent implements OnInit {
     public mainService: MainService,
   ) {
     this.mainService.scrollToBottomThread.subscribe(() => {
-      console.log('stbThread received');
+      // console.log('stbThread received');
 
       this.scrollToBottomThread();
     });
     this.mainService.scrollToMessage.subscribe(() => {
-      console.log('scolltothreadSub');
+      // console.log('scolltothreadSub');
       if (this.mainService.threadToScroll)
         this.scrollToThread(this.mainService.threadToScroll.toString());
     });
@@ -46,7 +46,7 @@ export class ThreadWindowComponent implements OnInit {
 
   scrollToThread(threadId: string): void {
     const element = document.getElementById(threadId);
-    console.log('element', element);
+    // console.log('element', element);
     
     if (element) {
       this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;

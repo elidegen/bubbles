@@ -1,7 +1,7 @@
 @import '../library.scss';
 
 .header-wrapper {
-    @include d-flex($jc: space-between, $g: 15px);
+    @include d-flex($jc: space-between, $g: 15px, $ai: flex-start);
     padding-right: 10px;
     min-height: 50px;
     max-width: 100%;

@@ -18,7 +18,7 @@ export class MainService {
   chatLoader: boolean = false;
   loader: boolean = false;
 
-  
+
   showPopup: boolean = false;
   addChannelPopup: boolean = false;
   profilePopup: boolean = false;
@@ -46,51 +46,51 @@ export class MainService {
 
   showThemes: boolean = false;
   showColorPalette: boolean = true;
-  selectedTheme: string = localStorage.getItem('selectedTheme') || 'purple';
+  selectedTheme: string = localStorage.getItem('selectedTheme') || 'black';
   themes: Theme[] = [{
-    name: 'purple',
-    color1: '#4d426d', //dunkle hauptfarbe
-    color2: '#5c4f82', //helle hauptfarbe
-    color3: '#efa985', //nachrichten/akzente
-    color4: '#3cc6b7', //buttons links (call to action) -> höherer kontrast
-    color5: '#FFFFFF', //textfarbe
-    color6: '#adadad', //schwarz
+    name: 'black',
+    color1: '#000000',
+    color2: '#202020',
+    color3: '#666',
+    color4: '#35b8bd',
+    color5: '#FFFFFF',
+    color6: '#adadad', //ausgegrauter text
   },
   {
-    name: 'dark',
-    color1: '#173157',
-    color2: '#224780',
-    color3: '#bd3c5d',
-    color4: '#52c2d8',
+    name: 'blue',
+    color1: '#263250',
+    color2: '#354c76',
+    color3: '#607599',
+    color4: '#35b8bd',
     color5: '#FFFFFF',
     color6: '#adadad',
   },
   {
     name: 'bright',
-    color1: '#c2dee9',
-    color2: '#f2fafe',
-    color3: '#f0d9d2',
-    color4: '#ff4e94',
+    color1: '#bdbdbd',
+    color2: '#e0e0e0',
+    color3: '#eee',
+    color4: '#35b8bd',
     color5: '#060606',
     color6: '#000000',
   },
   {
-    name: 'pink',
-    color1: '#490033',
-    color2: '#750052',
-    color3: '#f79c3a',
-    color4: '#3af79c',
+    name: 'red',
+    color1: '#602632',
+    color2: '#823d44',
+    color3: '#ba7c7e',
+    color4: '#35b8bd',
     color5: '#FFFFFF',
     color6: '#adadad',
   },
   {
-    name: 'brown',
-    color1: '#a64f3c',
-    color2: '#d98d62',
-    color3: '#bfd9c3',
-    color4: '#8abfa6',
-    color5: '#262523',
-    color6: '##4d4b4b',
+    name: 'green',
+    color1: '#1e2717',
+    color2: '#2c3722',
+    color3: '#727d69',
+    color4: '#35b8bd',
+    color5: '#FFFFFF',
+    color6: '#adadad',
   }];
 
   constructor() {
@@ -147,8 +147,8 @@ export class MainService {
 
   checkSelectedTheme() {
     if (!this.themes.some(theme => theme.name === this.selectedTheme)) {
-      localStorage.setItem('selectedTheme', 'purple');
-      this.selectedTheme = 'purple';
+      localStorage.setItem('selectedTheme', 'black');
+      this.selectedTheme = 'black';
     }
   }
 

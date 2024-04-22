@@ -32,12 +32,12 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
   ) {
     this.getMessagesToDisplay();
     this.mainService.scrollToBottomChat.subscribe(() => {
-      console.log('stb received');
+      // console.log('stb received');
       
       this.scrollToBottomChat();
     });
     this.mainService.scrollToMessage.subscribe(() => {
-      console.log('scolltomsgSub');
+      // console.log('scolltomsgSub');
       if (this.mainService.messageToScroll)
         this.scrollToMessage(this.mainService.messageToScroll.toString());
     });
@@ -49,7 +49,7 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
   }
 
   scrollToMessage(messageId: string): void {
-    console.log('scrollToMsg');
+    // console.log('scrollToMsg');
 
     const element = document.getElementById(messageId);
     if (element) {
@@ -59,7 +59,7 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
 
   scrollToBottomChat() {
     if (this.chatWrapper) {
-      console.log('scrollToBottomChat', this.chatWrapper.nativeElement.scrollHeight);
+      // console.log('scrollToBottomChat', this.chatWrapper.nativeElement.scrollHeight);
       this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
     }
   }
@@ -100,5 +100,4 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     }
     this.channelService.startPolloingForChats();
   }
-
 }

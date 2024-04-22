@@ -136,7 +136,7 @@ export class MessageService {
   }
 
   async getMessage(messageId: number) {
-    console.log('getMessage');
+    // console.log('getMessage');
 
     const url = environment.baseUrl + 'messages/' + messageId + '/';
     await firstValueFrom(this.http.get<Message>(url)).then((response) => {
