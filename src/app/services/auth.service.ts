@@ -27,7 +27,7 @@ export class AuthService {
   currentUser: CurrentUser;
   guestUser: CurrentUser = {
     id: 0,
-    username: 'guestuser',
+    username: 'Guest',
     password: 'TestUser123',
     email: 'guest@mailinator.com',
     is_online: false,
