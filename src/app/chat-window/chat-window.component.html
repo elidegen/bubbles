@@ -10,20 +10,18 @@
 
     <div class="chat-messages-wrapper" #chatWrapper>
         @if (mainService.chatLoader) {
-            <app-loader></app-loader>
+        <app-loader></app-loader>
+        } @else if (channelToDisplay){
+        @for (groupedMessages of messageService.groupMsgByAuthor(channelToDisplay.id, false); track $index) {
+        @if (channelService.isSeperator(groupedMessages)) {
+        <div class="seperator">{{channelService.createSeperator(groupedMessages)}}</div>
         } @else {
-            @if (channelToDisplay){
-            @for (groupedMessages of messageService.groupMsgByAuthor(channelToDisplay.id, false); track $index) {
-            @if (channelService.isSeperator(groupedMessages)) {
-            <div class="seperator">{{channelService.createSeperator(groupedMessages)}}</div>
-            } @else {
-            <app-grouped-messages
-                [groupedMessages]="channelService.checkGroupedMsg(groupedMessages)"></app-grouped-messages>
-            }
-            } @empty {
-            <span class="no-msg-to-display">No messages here</span>
-            }
-            }
+        <app-grouped-messages
+            [groupedMessages]="channelService.checkGroupedMsg(groupedMessages)"></app-grouped-messages>
+        }
+        } @empty {
+        <span class="no-msg-to-display">No messages here</span>
+        }
         }
     </div>
     } @else {

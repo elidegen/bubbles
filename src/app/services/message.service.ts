@@ -1,10 +1,8 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MainService } from './main.service';
-import { ChannelService } from './channel.service';
-import { mainService } from './data.service';
 
 export interface Reaction {
   user: number,
@@ -77,6 +75,7 @@ export class MessageService {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
       this.mainService.chatLoader = false;
+      this.mainService.threadLoader = false;
     });
   }
 
@@ -136,15 +135,13 @@ export class MessageService {
   }
 
   async getMessage(messageId: number) {
-    // console.log('getMessage');
-
     const url = environment.baseUrl + 'messages/' + messageId + '/';
-    await firstValueFrom(this.http.get<Message>(url)).then((response) => {
-      return response as Message;
-    })
+    const response = await firstValueFrom(this.http.get<Message>(url));
+    return response as Message;
   }
 
   openThread(threadSource: number) {
+    this.mainService.threadLoader = true;
     this.currentThread = this.currentMessages.find(obj => obj.id === threadSource) as Message;
     this.mainService.threadOpen = true;
     if (window.innerWidth < 1260)

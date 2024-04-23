@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
 import { mainService } from '../services/data.service';
+import { AttachmentComponent } from '../svgs/attachment/attachment.component';
 
 export interface SearchSolution {
   channels: Channel[],
@@ -25,7 +26,7 @@ export interface SearchSolutionUser {
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, AttachmentComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
@@ -71,16 +72,27 @@ export class SearchComponent implements OnInit {
   }
 
   triggerSearch() {
-    if (this.searchIsValid())
+    if (this.searchIsValid()) {
       this.search();
+    } else {
+      this.searchSolution = {
+        channels: [],
+        messages: [],
+        threads: [],
+        users: [],
+      };
+      this.searchSolutionUser = {
+        users: [],
+      }
+    }
   }
 
   async search() {
     const url = environment.baseUrl + this.searchType;
-    const chats = this.channelService.chats.map(chat => chat.id);    
+    const chats = this.channelService.chats.map(chat => chat.id);
     const data = {
       search_value: this.searchValue.trim(),
-      current_user: this.currentUserId, 
+      current_user: this.currentUserId,
       chats: chats,
     }
     if (this.searchType === 'search') {
@@ -128,15 +140,15 @@ export class SearchComponent implements OnInit {
     this.mainService.showPopup = true;
   }
 
-  openChannel(channelId:number){
+  openChannel(channelId: number) {
     this.channelService.openChannel(channelId);
     this.showResults = false;
     this.searchValue = '';
   }
 
-  openMessage(channelId: number, messageId: number) {
-    this.mainService.messageToScroll = messageId;
-    this.channelService.openChannel(channelId);
+  openMessage(message: Message) {
+    this.mainService.messageToScroll = message.id;
+    this.channelService.openChannel(message.source);
     this.showResults = false;
     this.searchValue = '';
   }
@@ -150,5 +162,20 @@ export class SearchComponent implements OnInit {
         this.messageService.openThread(thread.source);
       }, 100);
     });
+  }
+
+  getInterlocutor(message: Message, isThread: boolean) {
+    // if (isThread)
+    //   // message = await this.messageService.getMessage(message.source);
+    // if (this.channelService.channels.find(channel => channel.id === message.source))
+    //   return this.userService.getUser(message.author);
+    // const channel = this.channelService.directMessages.find(channel => channel.id === message.source);
+    // if (channel!.members.length > 1) {
+    //   const interlocId = channel!.members.find(memberId => memberId !== this.currentUserId);
+    //   const interloc = this.userService.getUser(interlocId!);
+    //   return interloc;
+    // }
+    const user = this.userService.getUser(this.currentUserId);
+    return user;
   }
 }

@@ -16,6 +16,7 @@ export class MainService {
   threadToScroll: number | undefined;
 
   chatLoader: boolean = false;
+  threadLoader: boolean = false;
   loader: boolean = false;
 
   showPopup: boolean = false;
@@ -100,6 +101,7 @@ export class MainService {
     setTimeout(() => {
       if (this.messageToScroll) {
         this.scrollToMessage.emit();
+        this.messageToScroll = undefined;
       } else if (this.threadToScroll) {
         this.scrollToThread.emit();
       } else {
@@ -114,6 +116,7 @@ export class MainService {
     setTimeout(() => {
       if (this.threadToScroll) {
         this.scrollToThread.emit();
+        this.threadToScroll = undefined;
       } else {
         this.scrollToBottomThread.emit();
       }

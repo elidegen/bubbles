@@ -27,8 +27,8 @@ label {
     z-index: 2;
 
     img {
-        height: 50%;
-        max-height: 50px;
+        @include img-size($size: 50%);
+        max-height: 50px !important;
     }
 }
 

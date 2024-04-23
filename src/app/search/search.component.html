@@ -28,34 +28,36 @@
 
         <p class="seperator">Messages</p>
         @for (message of searchSolution.messages; track $index) {
-        <div class=" message preview" (click)="openMessage(message.source, message.id)">
+        <div class=" message preview" (click)="openMessage(message)">
 
             <div class="online-wrapper">
-                <img src="{{channelService.getImg(this.userService.getUser(message.author).picture)}}">
+                <img src="{{channelService.getImg(getInterlocutor(message, false).picture)}}">
                 <div [ngClass]="this.userService.getUser(message.author).is_online ? 'online' : 'offline'"></div>
             </div>
 
             <div class="details">
-                <p class="author limit-digits">{{this.userService.getUser(message.author).username}}</p>
+                <p class="author limit-digits">{{getInterlocutor(message, false).username}}</p>
                 <p><span *ngIf="message.author === currentUserId">You: </span>{{message.content}}</p>
                 <p *ngIf="isChannel(message)" class="source limit-digits">in channel:
                     {{channelService.getChannel(message.source).name}}</p>
             </div>
+            <app-attachment *ngIf="message.attachment"></app-attachment>
         </div>
         }
         @for (thread of searchSolution.threads; track $index) {
         <div class=" message preview" (click)="this.openThread(thread)">
 
             <div class="online-wrapper">
-                <img src="{{channelService.getImg(this.userService.getUser(thread.author).picture)}}">
+                <img src="{{channelService.getImg(getInterlocutor(thread, true).picture)}}">
                 <div [ngClass]="this.userService.getUser(thread.author).is_online ? 'online' : 'offline'"></div>
             </div>
 
             <div class="details">
-                <p class="author limit-digits">{{this.userService.getUser(thread.author).username}}</p>
-                <p>{{thread.content}}</p>
-                <p class="source">thread</p>
+                <p class="author limit-digits">{{getInterlocutor(thread, true).username}}</p>
+                <p><span *ngIf="thread.author === currentUserId">You: </span>{{thread.content}}</p>
+                <p class="source">in thread</p>
             </div>
+            <app-attachment *ngIf="thread.attachment"></app-attachment>
         </div>
         }
         } @else {

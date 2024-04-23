@@ -19,10 +19,7 @@
         @include d-flex();
 
         img {
-            height: 150px;
-            width: 150px;
-            object-fit: cover;
-            border-radius: 50%;
+            @include img-size(150px);
         }
 
         app-file-picker {
@@ -65,7 +62,7 @@
     @include d-flex($jc: flex-start, $g: 15px);
 
     img {
-        width: 25px;
+        @include img-size(25px);
     }
 }
 

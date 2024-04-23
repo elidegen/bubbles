@@ -17,9 +17,7 @@
             max-width: 100%;
 
             img {
-                height: 40px;
-                width: 40px;
-                border-radius: 50%;
+                @include img-size(40px);
             }
 
             p {

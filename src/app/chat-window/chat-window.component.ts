@@ -10,7 +10,6 @@ import { MainService } from '../services/main.service';
 import { SearchComponent } from '../search/search.component';
 import { User } from '../services/user.service';
 import { LoaderComponent } from '../loader/loader.component';
-import { mainService } from '../services/data.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -59,7 +58,6 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
 
   scrollToBottomChat() {
     if (this.chatWrapper) {
-      // console.log('scrollToBottomChat', this.chatWrapper.nativeElement.scrollHeight);
       this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
     }
   }

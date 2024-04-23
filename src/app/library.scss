@@ -57,6 +57,15 @@ $card-padding: 15px;
     margin: $margin;
 }
 
+@mixin img-size($size: 50px){
+    width: $size;
+    max-width: $size;
+    min-width: $size;
+    height: $size;
+    min-height: $size;
+    max-height: $size;
+}
+
 .wrapper {
     @include position($pos: fixed);
     padding: $card-padding;
@@ -126,10 +135,6 @@ $card-padding: 15px;
     @include center($jc: center);
 }
 
-.img {
-    border-radius: 100%;
-}
-
 .white-space {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -167,10 +172,6 @@ $card-padding: 15px;
 .header {
     @include d-flex($jc: space-between);
     width: 100%;
-
-    img {
-        @extend .img-button;
-    }
 
     p {
         @extend .large-font
@@ -217,6 +218,7 @@ app-color-picker,
 app-reply,
 app-add-member,
 app-profile,
-app-bubble {
+app-bubble,
+app-attachment {
     @include center();
 }

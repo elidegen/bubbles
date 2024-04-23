@@ -44,12 +44,10 @@ export class HeaderComponent {
   showThemesPicker() {
     this.mainService.showThemes = !this.mainService.showThemes;
     if(this.mainService.showThemes){
-      // setTimeout(() => {
-        this.mainService.showColorPalette = false;        
-      // }, 100);
+        this.mainService.showColorPalette = !this.mainService.showThemes;  
     } else {
       setTimeout(() => {
-        this.mainService.showColorPalette = true;
+        this.mainService.showColorPalette = !this.mainService.showThemes;
       }, 500);
     }
   }

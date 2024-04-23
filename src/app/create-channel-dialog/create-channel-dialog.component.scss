@@ -24,10 +24,7 @@
         @include d-flex();
 
         img {
-            height: 90px;
-            width: 90px;
-            object-fit: cover;
-            border-radius: 50%;
+            @include img-size($size: 90px);
         }
 
         app-file-picker {
@@ -84,7 +81,7 @@ label {
         border-radius: 50%;
         transform: scale(0);
         transition: 120ms transform ease-in-out;
-        box-shadow: inset 1em 1em var(--color3);
+        box-shadow: inset 1em 1em var(--color4);
     }
 
     input:checked::before {

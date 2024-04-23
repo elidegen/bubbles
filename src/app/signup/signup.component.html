@@ -29,7 +29,7 @@
 
 
         <div class="input-container">
-            <input placeholder="set password" type="password" formControlName="password"
+            <input maxlength="30" placeholder="set password" type="password" formControlName="password"
                 [ngClass]="{'invalid': isInvalid('password'), 'valid': isValidInput('password') }">
             <div class="error-container">
                 <div *ngIf="requiredErrors('password')" class="errors">password is required</div>

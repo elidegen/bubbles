@@ -8,11 +8,12 @@ import { GroupedMessagesComponent } from '../grouped-messages/grouped-messages.c
 import { SearchComponent } from '../search/search.component';
 import { CommonModule } from '@angular/common';
 import { CloseComponent } from '../svgs/close/close.component';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-thread-window',
   standalone: true,
-  imports: [MessageBarComponent, GroupedMessagesComponent, SearchComponent, CommonModule, CloseComponent],
+  imports: [MessageBarComponent, LoaderComponent, GroupedMessagesComponent, SearchComponent, CommonModule, CloseComponent],
   templateUrl: './thread-window.component.html',
   styleUrl: './thread-window.component.scss'
 })
@@ -41,13 +42,15 @@ export class ThreadWindowComponent implements OnInit {
   }
 
   scrollToBottomThread() {
-    this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+    if (this.chatWrapper) {
+      this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+    }
   }
 
   scrollToThread(threadId: string): void {
     const element = document.getElementById(threadId);
     // console.log('element', element);
-    
+
     if (element) {
       this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;
     }

@@ -36,16 +36,14 @@
         img {
             filter: invert(1);
             margin-left: 3px;
-            max-height: 25px;
-            max-width: 25px;
+            @include img-size(25px);
         }
     }
 }
 
 .img-button {
     background-color: white;
-    height: 35px;
-    width: 35px;
+    @include img-size(35px);
     margin-right: -5px;
 }
 
@@ -71,10 +69,6 @@
 
     &:hover {
         filter: brightness(.9);
-    }
-
-    img {
-        margin: 0;
     }
 
     input[type=file]::-webkit-file-upload-button {

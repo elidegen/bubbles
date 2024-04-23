@@ -4,9 +4,11 @@
         <app-close class="img-button" (click)="closeThread()"></app-close>
     </div>
     <div class="chat-messages-wrapper" #chatWrapper>
-        @if (threadToDisplay){
+        @if (mainService.threadLoader) {
+        <app-loader></app-loader>
+        } @else if (threadToDisplay){
         <div class="thread-message">
-            <div *ngIf="getImg(threadToDisplay.attachment)"  class="attachment-wrapper">
+            <div *ngIf="getImg(threadToDisplay.attachment)" class="attachment-wrapper">
                 <img src="{{getImg(threadToDisplay.attachment)}}" alt="">
             </div>
             <p>{{this.threadToDisplay.content}}</p>

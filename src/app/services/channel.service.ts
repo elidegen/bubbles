@@ -1,15 +1,13 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Message, MessageService } from './message.service';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, firstValueFrom, take } from 'rxjs';
+import { BehaviorSubject, Observable, first, firstValueFrom, take } from 'rxjs';
 import { User, UserService } from './user.service';
 import { MainService } from './main.service';
 import { MessageContent } from '../message-bar/message-bar.component';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { mainService } from './data.service';
 
 export class Channel {
   id: number;
@@ -50,6 +48,7 @@ export class ChannelService {
   channels: Channel[] = [];
   directMessages: Channel[] = [];
   currentChannel!: Channel;
+  localStorageChannel: Channel | undefined;
   chatPreviews: Message[] = [];
   chats: Channel[] = [];
 
@@ -70,17 +69,29 @@ export class ChannelService {
     this.setCurrentChannel();
   }
 
-  setCurrentChannel() {
+  async setCurrentChannel() {
     let localStorageAsString = localStorage.getItem('currentChannel');
-    this.currentChannel = JSON.parse(localStorageAsString as string);
+    this.localStorageChannel = JSON.parse(localStorageAsString as string);
+    await this.checkCurrentChannel();
     if (this.currentChannel) {
-      if (!this.currentChannel.members.some(obj => obj === this.authService.currentUser.id)) {
-        localStorage.removeItem('currentChannel');
-      }
       this.messageService.getMessagesAndThread(this.currentChannel.id);
     } else {
       this.mainService.messageAndThreadFetchingDone = true;
       this.mainService.deactivateLoader();
+    }
+  }
+
+  async checkCurrentChannel() {
+    if (this.localStorageChannel) {
+      const url = environment.baseUrl + 'channels/' + this.localStorageChannel.id + '/';
+      await firstValueFrom(this.http.get(url))
+        .then((response) => {
+          this.localStorageChannel = response as Channel;
+          if (this.localStorageChannel.members.includes(this.authService.currentUser.id)) {
+            localStorage.setItem('currentChannel', JSON.stringify(response as Channel));
+            this.currentChannel = this.localStorageChannel;
+          }
+        });
     }
   }
 
@@ -106,8 +117,6 @@ export class ChannelService {
     this.$chatsAndPreview.pipe(take(1)).subscribe(data => {
       this.chats = data.channels;
       this.chatPreviews = data.preview_messages;
-      // console.log('previews:', this.chatPreviews);
-      // console.log('chats: ', this.chats);
       this.filterChats();
       this.userService.getUsers();
     });
@@ -115,7 +124,6 @@ export class ChannelService {
 
 
   openChannel(channelId: number) {
-    // debugger;
     this.mainService.chatLoader = true;
     this.mainService.showNewMessageSearch = false;
     this.currentChannel = this.chats.find(obj => obj.id === channelId) as Channel;
@@ -144,7 +152,7 @@ export class ChannelService {
 
   stopPollingForMessages() {
     console.log('stop polling');
-    
+
     clearInterval(this.intervalIdMessages);
   }
 

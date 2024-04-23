@@ -6,7 +6,7 @@
         <div class="row"><span class="large-font">LOGIN</span></div>
 
         <div class="input-container">
-            <input placeholder="username" type="username" formControlName="username"
+            <input maxlength="20" placeholder="username" type="username" formControlName="username"
                 [ngClass]="{'invalid': isInvalid('username'), 'valid': isValidInput('username') }">
             <div class="error-container">
                 <div *ngIf="requiredErrors('username')" class="errors">username is required</div>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="input-container">
-            <input placeholder="set password" type="password" formControlName="password"
+            <input maxlength="30" placeholder="set password" type="password" formControlName="password"
                 [ngClass]="{'invalid': isInvalid('password'), 'valid': isValidInput('password') }">
             <div class="error-container">
                 <div *ngIf="requiredErrors('password')" class="errors">password is required</div>

@@ -68,8 +68,7 @@
     width: 100%;
 
     img {
-        height: 30px;
-        width: 30px;
+        @include img-size(30px);
     }
 }
 
@@ -99,4 +98,8 @@
 .limit-digits{
     @extend .white-space;
     max-width: 85%;
+}
+
+app-attachment{
+    margin-top: 5px;
 }
