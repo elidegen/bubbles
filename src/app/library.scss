@@ -57,7 +57,7 @@ $card-padding: 15px;
     margin: $margin;
 }
 
-@mixin img-size($size: 50px){
+@mixin img-size($size: 50px) {
     width: $size;
     max-width: $size;
     min-width: $size;
@@ -221,4 +221,20 @@ app-profile,
 app-bubble,
 app-attachment {
     @include center();
+}
+
+.highlight {
+    .message {
+        animation: highlight 3s;
+    }
+}
+
+@keyframes highlight {
+    30% {
+        background-color: var(--color4);
+    }
+
+    70% {
+        background-color: var(--color4);
+    }
 }

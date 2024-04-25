@@ -32,7 +32,7 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     this.getMessagesToDisplay();
     this.mainService.scrollToBottomChat.subscribe(() => {
       // console.log('stb received');
-      
+
       this.scrollToBottomChat();
     });
     this.mainService.scrollToMessage.subscribe(() => {
@@ -47,18 +47,17 @@ export class ChatWindowComponent implements OnInit, AfterViewInit {
     this.scrollToBottomChat();
   }
 
-  scrollToMessage(messageId: string): void {
-    // console.log('scrollToMsg');
-
-    const element = document.getElementById(messageId);
-    if (element) {
-      this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;
-    }
-  }
-
   scrollToBottomChat() {
     if (this.chatWrapper) {
       this.chatWrapper.nativeElement.scrollTop = this.chatWrapper.nativeElement.scrollHeight;
+    }
+  }
+
+  scrollToMessage(messageId: string): void {
+    const element = document.getElementById(messageId);
+    if (element && this.chatWrapper) {
+      this.chatWrapper.nativeElement.scrollTop = element.offsetTop - this.chatWrapper.nativeElement.offsetTop;
+      element.classList.add('highlight');
     }
   }
 

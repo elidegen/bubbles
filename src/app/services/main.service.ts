@@ -16,7 +16,6 @@ export class MainService {
   threadToScroll: number | undefined;
 
   chatLoader: boolean = false;
-  threadLoader: boolean = false;
   loader: boolean = false;
 
   showPopup: boolean = false;

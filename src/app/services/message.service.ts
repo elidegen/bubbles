@@ -75,7 +75,6 @@ export class MessageService {
       this.currentMessages = data.messages;
       this.threads = data.thread_messages;
       this.mainService.chatLoader = false;
-      this.mainService.threadLoader = false;
     });
   }
 
@@ -141,7 +140,6 @@ export class MessageService {
   }
 
   openThread(threadSource: number) {
-    this.mainService.threadLoader = true;
     this.currentThread = this.currentMessages.find(obj => obj.id === threadSource) as Message;
     this.mainService.threadOpen = true;
     if (window.innerWidth < 1260)
