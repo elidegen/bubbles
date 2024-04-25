@@ -9,7 +9,6 @@ import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 import { MainService } from '../services/main.service';
-import { mainService } from '../services/data.service';
 import { AttachmentComponent } from '../svgs/attachment/attachment.component';
 
 export interface SearchSolution {
@@ -39,6 +38,7 @@ export class SearchComponent implements OnInit {
   placeholder!: string;
   showResults: boolean = false;
   currentUserId: number = 0;
+  messages: Message[] = [];
   searchSolution: SearchSolution = {
     channels: [],
     messages: [],
@@ -61,6 +61,27 @@ export class SearchComponent implements OnInit {
     this.currentUserId = this.authService.currentUser.id;
   }
 
+  async getMessages() {
+    // this.currentUserId = this.authService.currentUser.id;
+    // const url = environment.baseUrl + this.searchType + '/' + this.currentUserId + '/';
+    // const chats = this.channelService.chats.map(chat => chat.id);
+    // const data = {
+    //   search_value: '',
+    //   current_user: this.currentUserId,
+    //   chats: chats,
+    // }
+    // this.searchSolution = await firstValueFrom(this.http.get(url)) as SearchSolution;
+    // this.messages = this.searchSolution.messages;
+
+    const chats = this.channelService.chats.map(chat => chat.id);
+    this.messages = [];
+    chats.forEach((chatId) => {
+      firstValueFrom(this.messageService.fetchMessagesAndThread(chatId)).then((data) => {
+        this.messages = this.messages.concat(data.messages);
+      });
+    });
+  }
+
   setupClickListener() {
     document.addEventListener('click', () => {
       this.showResults = false;
@@ -69,6 +90,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.placeholder = this.searchType === 'search' ? 'Search' : 'Search members';
+    this.getMessages();
   }
 
   triggerSearch() {
@@ -165,16 +187,16 @@ export class SearchComponent implements OnInit {
   }
 
   getInterlocutor(message: Message, isThread: boolean) {
-    // if (isThread)
-    //   // message = await this.messageService.getMessage(message.source);
-    // if (this.channelService.channels.find(channel => channel.id === message.source))
-    //   return this.userService.getUser(message.author);
-    // const channel = this.channelService.directMessages.find(channel => channel.id === message.source);
-    // if (channel!.members.length > 1) {
-    //   const interlocId = channel!.members.find(memberId => memberId !== this.currentUserId);
-    //   const interloc = this.userService.getUser(interlocId!);
-    //   return interloc;
-    // }
+    if (isThread)
+      message = this.messages.find(msg => msg.id === message.source) as Message;
+    if (this.channelService.channels.find(channel => channel.id === message.source))
+      return this.userService.getUser(message.author);
+    const channel = this.channelService.directMessages.find(channel => channel.id === message.source);
+    if (channel!.members.length > 1) {
+      const interlocId = channel!.members.find(memberId => memberId !== this.currentUserId);
+      const interloc = this.userService.getUser(interlocId!);
+      return interloc;
+    }
     const user = this.userService.getUser(this.currentUserId);
     return user;
   }
