@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = this.router.url;
-        if (url.includes('/resetpassword') || url.includes('/forgotpassword') || url.includes('/success') || url.includes('/signup')) {
+        if (url.includes('/resetpassword') || url.includes('/forgotpassword') || url.includes('/success') || url.includes('/signup') || url.includes('/imprint') || url.includes('/privacypolicy')) {
           return
         } else {
           this.handleLogin();

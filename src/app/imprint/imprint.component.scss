@@ -1,0 +1,27 @@
+@import '../library.scss';
+
+.imprint-wrapper {
+    @extend .card;
+    @include d-flex($fd: column, $g: 15px, $ai: flex-start);
+    @include pos-center();
+    animation: slide-in 200ms ease-in-out;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color4);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translate(-50%, -200%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
