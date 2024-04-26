@@ -13,6 +13,7 @@
 
 .content {
     @include d-flex($fd: column, $ai: flex-start, $g: 15px);
+    width: 100%;
 }
 
 .channel-picture-wrapper {
