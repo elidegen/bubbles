@@ -71,7 +71,8 @@ export class ChannelService {
 
   async setCurrentChannel() {
     let localStorageAsString = localStorage.getItem('currentChannel');
-    this.localStorageChannel = JSON.parse(localStorageAsString as string);
+    if (localStorageAsString != 'undefined')
+      this.localStorageChannel = JSON.parse(localStorageAsString as string);
     await this.checkCurrentChannel();
     if (this.currentChannel) {
       this.messageService.getMessagesAndThread(this.currentChannel.id);

@@ -19,16 +19,6 @@
     }
 }
 
-@keyframes slide-in {
-    0% {
-        transform: translateY(-200%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
 .row {
     gap: 10px;
 }
@@ -45,10 +35,6 @@
 
 .large-font {
     text-align: center;
-}
-
-.hide {
-    transform: translateY(200%);
 }
 
 input {

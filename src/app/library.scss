@@ -225,16 +225,40 @@ app-attachment {
 
 .highlight {
     .message {
-        animation: highlight 3s;
+        animation: highlighted 3000ms ease-in-out;
     }
 }
 
-@keyframes highlight {
+@keyframes highlighted {
     30% {
         background-color: var(--color4);
     }
 
     70% {
         background-color: var(--color4);
+    }
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color4);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.hide {
+    transform: translateY(300%);
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(-200%);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }

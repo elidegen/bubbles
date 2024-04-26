@@ -1,11 +1,17 @@
 @import '../library.scss';
+// @import '../login/login.component.scss';
 
-.privacy-wrapper {
+.wrapper {
+    @include center();
+    overflow: hidden;
+}
+
+.privacy {
     @extend .card;
-    @include pos-center();
-    height: calc(100vh - 30px);
-    width: calc(100vw - 30px);
-    max-width: 800px;
+    animation: slide-in 200ms ease-in-out;
+    max-height: 100%;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .header {
@@ -14,7 +20,7 @@
 
 .content {
     @include d-flex($fd: column, $g: 15px, $jc: flex-start, $ai: flex-start);
-    height: calc(100% - 52px);
+    height: calc(100vh - 112px);
     overflow-y: scroll;
 }
 

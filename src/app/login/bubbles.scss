@@ -20,7 +20,7 @@
   .bubble {
     position: absolute;
     left: var(--bubble-left-offset);
-    bottom: -75%;
+    bottom: -15%;
     display: block;
     width: var(--bubble-radius);
     height: var(--bubble-radius);
@@ -503,7 +503,7 @@
   
   @keyframes float-up {
     to {
-      transform: translateY(-175vh);
+      transform: translateY(-125vh);
     }
   }
   @keyframes sway-left-to-right {

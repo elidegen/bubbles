@@ -47,18 +47,19 @@ export class AddMembersDialogComponent {
   }
 
   async addMembers() {
+    debugger;
+    const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
+
     for (const member of this.channelMembers) {
       if (member.id)
         this.channelMembersId.push(member.id);
     }
 
-    const formData = new FormData();
-    this.channelMembersId.forEach(memberId => {
-      formData.append('members', memberId.toString());
-    });
+    const data = {
+      members: this.channelMembers
+    }
 
-    const url = environment.baseUrl + 'channels/' + this.currentChannel.id + '/';
-    const response = await firstValueFrom(this.http.patch<Channel>(url, formData));
+    const response = await firstValueFrom(this.http.patch<Channel>(url, data));
 
     if (!response.members.some(obj => obj === this.authService.currentUser.id)) {
       localStorage.removeItem('currentChannel');
@@ -66,7 +67,9 @@ export class AddMembersDialogComponent {
       localStorage.setItem('currentChannel', JSON.stringify(response));
     }
     await this.channelService.getChatsForUser();
-    this.channelService.openChannel(this.currentChannel.id);
+    this.channelService.setCurrentChannel();
+    if (this.currentChannel.id)
+      this.channelService.openChannel(this.currentChannel.id);
     this.mainService.closePopups();
   }
 }

@@ -59,15 +59,23 @@ export class EditChannelDialogComponent {
   }
 
   async leaveChannel() {
+    // debugger;
+    console.log('members anfang', this.updatedChannel);
+    
     const index = this.updatedChannel.members.findIndex(obj => obj === this.authService.currentUser.id);
 
     this.updatedChannel.members.splice(index, 1);
+    console.log('members mitte', this.updatedChannel);
 
-    const formData = new FormData();
-    this.updatedChannel.members.forEach(memberId => {
-      formData.append('members', memberId.toString());
-    });
-    const response = await firstValueFrom(this.http.patch<Channel>(this.url, formData));
+    const data = {
+      members: this.updatedChannel.members
+    }
+    // const formData = new FormData();
+    // this.updatedChannel.members.forEach(memberId => {
+    //   formData.append('members', memberId.toString());
+    // });
+    const response = await firstValueFrom(this.http.patch<Channel>(this.url, data));
+    console.log('response', response);
     this.removeChannel();
   }
 
