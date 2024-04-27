@@ -31,8 +31,12 @@ export class UserService {
   ) { }
 
   async getUsers() {
-    this.users = await firstValueFrom(this.fetchUsers());
-    // console.log('users', this.users);
+    try {
+      this.users = await firstValueFrom(this.fetchUsers());
+    } catch (error) {
+      this.mainService.popupLog('Error by fetching users' ,true);
+    }
+    
     this.mainService.userFetchingDone = true;
     this.mainService.deactivateLoader();
   }

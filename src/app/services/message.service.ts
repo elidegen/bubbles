@@ -56,13 +56,17 @@ export class MessageService {
   ) { }
 
   async getMessagesAndThread(chatId: number) {
-    await firstValueFrom(this.fetchMessagesAndThread(chatId))
-      .then((data) => {
-        this.$messagesAndThread.next(data);
-        this.subscribeMessagesAndThreads();
-        this.mainService.messageAndThreadFetchingDone = true;
-        this.mainService.deactivateLoader();
-      });
+    try {
+      await firstValueFrom(this.fetchMessagesAndThread(chatId))
+        .then((data) => {
+          this.$messagesAndThread.next(data);
+          this.subscribeMessagesAndThreads();
+          this.mainService.messageAndThreadFetchingDone = true;
+          this.mainService.deactivateLoader();
+        });
+    } catch (error) {
+      this.mainService.popupLog('Error by fetching data for messages and thread', true)
+    }
   }
 
   fetchMessagesAndThread(chatId: number): Observable<MessagesAndThread> {
@@ -102,6 +106,7 @@ export class MessageService {
     return groupedArray;
   }
 
+
   seperateChannelByDay(channelId: number, isThread: boolean) {
     const sortedArray = this.filterByChannel(channelId, isThread);
     let seperatedArray = [];
@@ -133,6 +138,7 @@ export class MessageService {
     }
   }
 
+  /// Wo wird diese Funktion aufgerufen?? Ist sie überflüssig?
   async getMessage(messageId: number) {
     const url = environment.baseUrl + 'messages/' + messageId + '/';
     const response = await firstValueFrom(this.http.get<Message>(url));
@@ -153,6 +159,10 @@ export class MessageService {
     const data = {
       'reactions': message.reactions
     }
-    await firstValueFrom(this.http.patch(url, data));
+    try {
+      await firstValueFrom(this.http.patch(url, data));
+    } catch (error) {
+      this.mainService.popupLog('Error by updating message', true);
+    }
   }
 }

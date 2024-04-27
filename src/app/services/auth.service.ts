@@ -85,7 +85,6 @@ export class AuthService {
     this.http.post<LoginResponse>(url, formData).pipe(take(1)).subscribe(
       {
         next: (response) => {
-          console.log(response);
           if (response && response.token) {
             this.setToken(response.token);
             this.setUser(response.user);

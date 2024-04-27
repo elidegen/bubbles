@@ -26,6 +26,7 @@ export class MainService {
   editChannelPopup: boolean = false;
   popupMessage: string | undefined;
   popupIsError: boolean = true;
+  private popupTimeout: any;
 
   showEmojiPicker: 'thread' | 'chat' | 'reaction' | undefined;
   allEmojis: Array<any> = [];
@@ -126,10 +127,13 @@ export class MainService {
     this.popupIsError = isError;
     this.openPopup();
     this.popupMessage = message;
-    setTimeout(() => {
+    
+    // Setze den Timeout und speichere ihn in der Variable
+    this.popupTimeout = setTimeout(() => {
       this.closePopups();
     }, 3000);
   }
+  
 
   openPopup() {
     this.showPopup = true;
@@ -143,6 +147,11 @@ export class MainService {
     this.addMembersPopup = false;
     this.showMembersPopup = false;
     this.editChannelPopup = false;
+    this.stopPopupTimeout();
+  }
+
+  stopPopupTimeout() {
+    clearTimeout(this.popupTimeout);
   }
 
   checkSelectedTheme() {
