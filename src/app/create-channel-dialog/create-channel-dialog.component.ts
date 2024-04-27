@@ -95,7 +95,12 @@ export class CreateChannelDialogComponent {
     const url = environment.baseUrl + 'media/channel_pictures/' + file.name + '/';
     const formdata = new FormData();
     formdata.append('picture', file);
-    const response = await firstValueFrom(this.http.post<Channel>(url, formdata));
+    try {
+      const response = await firstValueFrom(this.http.post<Channel>(url, formdata));
+    } catch (error) {
+      this.mainService.popupLog('Error by uploading img' ,true);
+    }
+    
   }
 
   handleSelectedUsers(selectedUsers: User[]) {

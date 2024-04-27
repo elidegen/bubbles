@@ -58,7 +58,7 @@ export class AddMembersDialogComponent {
     const data = {
       members: this.channelMembers
     }
-
+    
     const response = await firstValueFrom(this.http.patch<Channel>(url, data));
 
     if (!response.members.some(obj => obj === this.authService.currentUser.id)) {
