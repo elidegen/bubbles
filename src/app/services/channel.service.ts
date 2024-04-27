@@ -83,16 +83,20 @@ export class ChannelService {
   }
 
   async checkCurrentChannel() {
-    if (this.localStorageChannel) {
-      const url = environment.baseUrl + 'channels/' + this.localStorageChannel.id + '/';
-      await firstValueFrom(this.http.get(url))
-        .then((response) => {
-          this.localStorageChannel = response as Channel;
-          if (this.localStorageChannel.members.includes(this.authService.currentUser.id)) {
-            localStorage.setItem('currentChannel', JSON.stringify(response as Channel));
-            this.currentChannel = this.localStorageChannel;
-          }
-        });
+    try {
+      if (this.localStorageChannel) {
+        const url = environment.baseUrl + 'channels/' + this.localStorageChannel.id + '/';
+        await firstValueFrom(this.http.get(url))
+          .then((response) => {
+            this.localStorageChannel = response as Channel;
+            if (this.localStorageChannel.members.includes(this.authService.currentUser.id)) {
+              localStorage.setItem('currentChannel', JSON.stringify(response as Channel));
+              this.currentChannel = this.localStorageChannel;
+            }
+          });
+      }
+    } catch (error) {
+      this.mainService.popupLog('Error by fetching channeldata.', true);
     }
   }
 
@@ -153,7 +157,6 @@ export class ChannelService {
 
   stopPollingForMessages() {
     console.log('stop polling');
-
     clearInterval(this.intervalIdMessages);
   }
 
@@ -241,22 +244,32 @@ export class ChannelService {
       this.messageService.threads.splice(index, 1);
       url = environment.baseUrl + 'threads/' + message.id + '/';
     }
-    await firstValueFrom(this.http.delete(url));
+    try {
+      await firstValueFrom(this.http.delete(url));
+    } catch (error) {
+      this.mainService.popupLog('Deleting message failed', true);
+    }
+
   }
 
   async postMessage(endpoint: string, message: FormData) {
     const url = environment.baseUrl + endpoint;
-    const response = await firstValueFrom(this.http.post(url, message)) as Message;
-    if (endpoint === 'messages/') {
-      this.messageService.currentMessages.push(response);
-      this.replacePreview(response);
-      setTimeout(() => {
-        this.mainService.scrollToBottomChat.emit();
-      }, 100);
-    } else {
-      this.messageService.threads.push(response);
+    try {
+      const response = await firstValueFrom(this.http.post(url, message)) as Message;
+      if (endpoint === 'messages/') {
+        this.messageService.currentMessages.push(response);
+        this.replacePreview(response);
+        setTimeout(() => {
+          this.mainService.scrollToBottomChat.emit();
+        }, 100);
+      } else {
+        this.messageService.threads.push(response);
+      }
+    } catch (error) {
+      this.mainService.popupLog('Error by sending message', true);
     }
   }
+
 
   replacePreview(message: Message) {
     const index = this.chatPreviews.findIndex(obj => obj.source === message.source);
@@ -280,6 +293,7 @@ export class ChannelService {
     }
     return formData;
   }
+
 
   getImg(imgUrl: string | undefined | null) {
     if (imgUrl != null) {
@@ -335,9 +349,13 @@ export class ChannelService {
       picture: undefined,
     }
     const url = environment.baseUrl + 'channels/';
-    const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
-    await this.getChatsForUser(); //remove
-    this.openChannel(response.id);
+    try {
+      const response = await firstValueFrom(this.http.post(url, newChannel)) as Channel;
+      await this.getChatsForUser(); //remove
+      this.openChannel(response.id);
+    } catch (error) {
+      this.mainService.popupLog('Error by creating direct message', true);
+    }
   }
 
   resetData() {
@@ -348,4 +366,4 @@ export class ChannelService {
     this.mainService.loader = false;
     this.setCurrentChannel();
   }
-}
+} 
